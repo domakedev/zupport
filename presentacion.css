@@ -1,3 +1,6 @@
+@import "./head-foot.css";
+@import "./globalStyles.css";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,7 +19,6 @@ body {
 
 header,
 footer {
-  height: 70px;
   background-color: rgb(102, 189, 240);
 }
 
@@ -112,6 +114,8 @@ main {
   font-size: 1.8rem;
   width: 100px;
   text-align: right;
+
+  font-family: var(--secondary-font);
 }
 
 .main__title {
@@ -119,6 +123,9 @@ main {
   margin-right: 27px;
 
   font-size: 3.6rem;
+
+  font-family: var(--principal-font);
+
 }
 
 .main__description {
@@ -127,6 +134,9 @@ main {
   margin-top: 10px;
 
   font-size: 1.8rem;
+
+  font-family: var(--secondary-font);
+
 }
 
 .main__button {
@@ -136,11 +146,14 @@ main {
   padding: 13px 22px;
   margin: 35px auto;
 
-  background-color: chocolate;
+  background-color: var(--principal-color);
   border-radius: 3px;
 
   font-weight: bold;
   font-size: 1.8rem;
+
+  font-family: var(--secondary-font);
+
 }
 
 .main__button__link{
@@ -161,6 +174,9 @@ main {
   margin-top: 70px;
   padding-right: 15px;
   padding-left: 15px;
+
+  font-family: var(--principal-font);
+
 }
 
 .comunidades__cards {
@@ -185,6 +201,9 @@ main {
 
   border: 2px solid black;
   border-radius: 3px;
+
+  font-family: var(--secondary-font);
+
 }
 
 .comunidad__card__img {
@@ -226,6 +245,11 @@ main {
 
 .card__stats__number {
   font-size: 1.4rem;
+
+  color: var(--light-color);
+
+  font-weight: bold;
+  letter-spacing: 2px;
 }
 
 .comunidad__card__cheks {
@@ -265,12 +289,14 @@ main {
   padding: 13px 22px;
   margin: 0 auto;
 
-  background-color: darkblue;
+  background-color: var(--secondary-color);
   color: white;
   border-radius: 3px;
 
   font-weight: bold;
   font-size: 1.8rem;
+
+  font-family: var(--secondary-font);
 }
 
 /* Caracteristicas */
@@ -294,6 +320,9 @@ main {
   flex-direction: column;
 
   max-width: 315px;
+
+  font-family: var(--secondary-font);
+
 }
 
 .caracteristica__card img{
