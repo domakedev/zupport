@@ -22,11 +22,13 @@ footer {
 
 main {
   flex-grow: 1;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .main__content{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
  flex-wrap: wrap;
  align-items: center;
 }
@@ -149,6 +151,7 @@ main {
 .main__comunidades {
   display: flex;
   flex-direction: column;
+  max-width: 1200px;
 
 }
 
