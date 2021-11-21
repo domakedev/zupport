@@ -1,0 +1,354 @@
+@import "./head-foot.css";
+@import "./globalStyles.css";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header,
+footer {
+  background-color: rgb(102, 189, 240);
+}
+
+main {
+  flex-grow: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main__content{
+  display: flex;
+  justify-content: space-around;
+ flex-wrap: wrap;
+ align-items: center;
+}
+
+.main__hero {
+  width: 483px;
+  height: 453px;
+  background-image: url("./assets/fondo-hero.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  position: relative;
+}
+
+.main__textandbutton{
+  width: 483px;
+
+  justify-items: flex-end;
+
+  align-self: end;
+}
+
+
+.hero__card {
+  display: inline-block;
+
+  position: absolute;
+
+  height: 133px;
+  width: 137px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.hero__card--TL {
+  background-image: url("./assets/scaled.jpg");
+
+  border-radius: 43px 3px 3px 3px;
+  top: 53px;
+  left: 15px;
+}
+
+.hero__card--TRC {
+  background-image: url("./assets/iron-man.jpg");
+
+  border-radius: 3px 43px 3px 3px;
+  right: 15px;
+  top: 79px;
+}
+
+.hero__card--BC {
+  background-image: url("./assets/capi.jfif");
+
+  border-radius: 3px 3px 3px 43px;
+  top: 240px;
+  left: 14%;
+}
+
+.hero__card__icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  background-color: white;
+  padding: 5px;
+
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.hero__description {
+  position: absolute;
+  bottom: 120px;
+  right: 10%;
+
+  font-size: 1.8rem;
+  width: 100px;
+  text-align: right;
+
+  font-family: var(--secondary-font);
+}
+
+.main__title {
+  margin-left: 27px;
+  margin-right: 27px;
+
+  font-size: 3.6rem;
+
+  font-family: var(--principal-font);
+
+}
+
+.main__description {
+  margin-left: 27px;
+  margin-right: 27px;
+  margin-top: 10px;
+
+  font-size: 1.8rem;
+
+  font-family: var(--secondary-font);
+
+}
+
+.main__button {
+  display: block;
+  border: none;
+
+  padding: 13px 22px;
+  margin: 35px auto;
+
+  background-color: var(--principal-color);
+  border-radius: 3px;
+
+  font-weight: bold;
+  font-size: 1.8rem;
+
+  font-family: var(--secondary-font);
+
+}
+
+.main__button__link{
+  text-decoration: none;
+  color: white
+}
+
+.main__comunidades {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+
+}
+
+.section__title {
+  font-size: 3.6rem;
+  text-align: center;
+  margin-top: 70px;
+  padding-right: 15px;
+  padding-left: 15px;
+
+  font-family: var(--principal-font);
+
+}
+
+.comunidades__cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  width: 80%;
+
+  margin: 20px auto 0px auto;
+
+  border-radius: 3px;
+
+}
+
+.comunidad__card {
+  height: 150px;
+  width: 240px;
+  margin: 20px;
+
+  position: relative;
+
+  border: 2px solid black;
+  border-radius: 3px;
+
+  font-family: var(--secondary-font);
+
+}
+
+.comunidad__card__img {
+  height: 100%;
+  width: 100%;
+
+  object-fit: cover;
+  object-position: center center;
+
+  border-radius: 3px;
+}
+
+.comunidad__card__stats {
+  position: absolute;
+
+  padding: 5px 5px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border: 2px solid black;
+}
+
+.comunidad__card__users {
+  top: 0px;
+
+  background-color: darkcyan;
+
+  border-bottom-right-radius: 3px;
+
+  border-top: none;
+  border-left: none;
+}
+
+.card__stats__icon {
+  margin-right: 5px;
+}
+
+.card__stats__number {
+  font-size: 1.4rem;
+
+  color: var(--light-color);
+
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.comunidad__card__cheks {
+  top: 0px;
+  right: 0;
+
+  background-color: steelblue;
+
+  border-bottom-left-radius: 3px;
+
+  border-top: none;
+  border-right: none;
+}
+
+.comunidad__card__name {
+  bottom: 0px;
+  right: 0;
+
+  width: 100%;
+
+  background-color: white;
+
+  border: none;
+
+  border-top: 2px solid black;
+
+  display: flex;
+  justify-content: center;
+
+  font-size: 1.8rem;
+}
+
+.comunidades__button {
+  display: block;
+  border: none;
+
+  padding: 13px 22px;
+  margin: 0 auto;
+
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 3px;
+
+  font-weight: bold;
+  font-size: 1.8rem;
+
+  font-family: var(--secondary-font);
+}
+
+/* Caracteristicas */
+
+.main__caracteristicas {
+  display: flex;
+  flex-direction: column;
+}
+
+.caracteristicas__cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.caracteristica__card{
+  margin: 30px;
+
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+
+  max-width: 315px;
+
+  font-family: var(--secondary-font);
+
+}
+
+.caracteristica__card img{
+  width: 200px;
+  height: 150px;
+
+}
+
+.caracteristica__card p{
+  font-size: 1.8rem;
+  text-align: center
+}
+
+
+/* Tablet Media Queri */
+@media screen and (min-width: 768px) {
+  .main__hero {
+    order: 1;
+  }
+  
+  .main__textandbutton{
+    order: 0;
+  }
+
+  .main__content{
+    display: flex;
+    flex-wrap: nowrap;
+  }
+}

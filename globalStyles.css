@@ -2,6 +2,7 @@
 Por ahora solo incluimos textos segun relevancia y colores para objetos segun relevancia */
 
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Fjalla+One&display=swap');
+
 :root{
     --principal-color : #29ABE0;
     --secondary-color : #325D88;
