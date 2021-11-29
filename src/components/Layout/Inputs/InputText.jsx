@@ -9,13 +9,5 @@ const InputStyle = styled.input`
   background: rgba(41, 171, 224, 0.08);
 `;
 export const Input = ({typeInput, textPlaceholder}) =>(
-  <InputStyle type = {typeInput} placeholder ={textPlaceholder} />  
+  <InputStyle type = {typeInput} placeholder ={textPlaceholder}/>  
 );
-
-/**
- * 
- * 
-  background: ${ props => props.typeInput ? "rgba(41, 171, 224, 0.08)" : "var(--principal-color)"};
-  color: ${ props => "text" ? "var(--boring-color);" : "var(--light-color);)"};
-  font-weight : ${ props => "text" ? "normal" : "bold"};
- */

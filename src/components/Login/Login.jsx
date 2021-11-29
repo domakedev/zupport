@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { WelcomeLogin } from "./SliceLogin/WelcomeLogin";
-import {InputsLogin} from "./SliceLogin/InputsLogin"
+import { WelcomeLogin } from "./LoginSlice/WelcomeLogin";
+import {InputsLogin} from "./LoginSlice/InputsLogin"
 import { BtnRss } from "../Layout/Inputs/BtnRss";
+import {SeparatorLine} from "./LoginSlice/SeparatorLine"
 
 const FormContainer = styled.div`
   display: grid;
@@ -9,29 +10,16 @@ const FormContainer = styled.div`
   text-align:center;
   margin: 2rem 0 3rem 0;
   padding: 0 3rem 0 3rem;
+`;
+const FormLogin = styled.form`
+  width: 100%;  
+  justify-self:center;
   @media (min-width: 768px) {
-  }
-`;
-
-  /*Estilos de separador linea*/
-const LineLeftLogin  = styled.div`
-  grid-area: lineleft;
-  background: #79777052;
-  height: 1px;
-  align-self : center;
-`;
-const LineRightLogin = styled(LineLeftLogin)`
-  grid-area: lineright;
-`;
-const ContainerLineLogin = styled.section`
-  display: grid;
-  grid-template-areas: "lineleft . lineright";
-`;
-const OtherLogin = styled.p`
-  font-family: var(--secondary-font);
-  font-size: var(--secondarey-font-size);
-  color: var(--dark-color);
-`;
+    width: 100%;
+    max-width: 55rem;
+    justify-self:center;
+}
+`; 
 const OptionRegister = styled.p`
   font-family: var(--secondary-font);
   color: var(--dark-color);
@@ -43,18 +31,16 @@ const LinkRegister = styled.a`
   color: var(--secondary-color);
   font-size: 1.6rem;
 `;
-export const Login = () => (
+export const Login = () => (  
   <FormContainer>
-    <WelcomeLogin/>
-    <InputsLogin/>    
-    <ContainerLineLogin>
-      <LineLeftLogin/>
-      <OtherLogin>o</OtherLogin>
-      <LineRightLogin/>
-    </ContainerLineLogin>
-    <BtnRss/>    
-    <OptionRegister>¿No tienes unacuenta? 
-      <LinkRegister>Regístrate aquí</LinkRegister>
-    </OptionRegister>  
-  </FormContainer>
+    <FormLogin>
+      <WelcomeLogin/>
+      <InputsLogin/>
+      <SeparatorLine/>
+      <BtnRss/>    
+      <OptionRegister>¿No tienes unacuenta? 
+        <LinkRegister>Regístrate aquí</LinkRegister>
+      </OptionRegister>
+    </FormLogin> 
+  </FormContainer>  
 );

@@ -10,7 +10,7 @@ const InputBtnStyle = styled.input`
   color: var(--light-color);
   font-weight: bold;
   &:hover{
-    background: var(--secondary-color);
+    background: var(--alert-color);
   }
 `;
 export const InputBtn = ({valueBtn}) =>(

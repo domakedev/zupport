@@ -8,6 +8,10 @@ const ContainerRRSS = styled.section`
   flex-direction: column;
   gap: 2rem;
   margin: 2rem 0 2rem 0;
+  @media screen and (min-width: 768px) {
+    display:grid;
+    grid-template-columns: repeat(3,1fr);    
+  }
 `;
 
 const ContainerBtn= styled.div`
@@ -15,6 +19,12 @@ const ContainerBtn= styled.div`
   border-radius: 3px;
   padding: 1rem;  
   display: flex;
+  @media screen and (min-width: 768px) {    
+    justify-content: center;
+  }
+  &:hover{    
+    border:2px solid rgba(41, 172, 224, 0.501);;
+  }
 `;
   const BtnGoogle = styled.input`
   font-family: var(--secondary-font);
@@ -23,17 +33,22 @@ const ContainerBtn= styled.div`
   color:var(--dark-color);
   border:0;
   background: #FFFFFF;
-  justify-self: start;
-  margin-left: 20px;
+  margin-left: 50px;
+  @media screen and (min-width: 768px) {    
+  margin-left: 1rem;
+  }
 `; 
 const Iconbtn = styled.img`
   height: 25px;
   margin-left: 50px;
+  @media screen and (min-width: 768px) {    
+  margin-left: 0;
+  }
 `;
 
 const ContainerBtnFacebook = styled(ContainerBtn)`
 background: var(--secondary-color);
-@media (min-width: 768px) {}
+border:2px solid var(--secondary-color);
 `;
 const IconbtnFacebook = styled(Iconbtn)`
 `;
@@ -43,7 +58,6 @@ background: var(--secondary-color);
 `;
 const ContainerBtnGitHub = styled(ContainerBtn)`
 background: var(--dark-color);
-@media (min-width: 768px) {}
 `;
 const IconbtnGithub = styled(Iconbtn)`
 `;

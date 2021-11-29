@@ -7,6 +7,7 @@ const ContainerInputsLogin = styled.section`
   grid-template-columns: 1fr;
   gap: 2rem;
   margin: 2rem 0 2rem 0;
+  justify-content: center;
 `;
 const ForgotPassword = styled.a`
   text-decoration: none;
