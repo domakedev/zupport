@@ -3,12 +3,12 @@ import styled from "styled-components";
 
 // import '../../main.css'
 
-import Cloud from '../../images/cloud.png'
-import I404 from '../../images/404.png'
-import CFail from '../../images/confail.png'
+import Cloud from '../../../images/cloud.png'
+import I404 from '../../../images/404.png'
+import CFail from '../../../images/confail.png'
 
-import Header from '../Layout/Header';
-import Footer from '../Layout/Footer';
+import Header from '../../Layout/Header';
+import Footer from '../../Layout/Footer';
 
 const MainContainer = styled.div`
     display: flex;

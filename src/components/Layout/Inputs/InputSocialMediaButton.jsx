@@ -55,22 +55,28 @@ const Iconbtn = styled.img`
 `;
 
 const ContainerBtnFacebook = styled(ContainerBtn)`
-background: var(--secondary-color);
-border:2px solid var(--secondary-color);
+  background: var(--secondary-color);
+  border:2px solid var(--secondary-color);
+  &:hover{
+      border:2px solid rgba(229, 235, 238, 0.85);
+    }
 `;
 
 const BtnFacebook = styled(BtnGoogle)`
-color:var(--light-color);
-background: var(--secondary-color);
+  color:var(--light-color);
+  background: var(--secondary-color);
 `;
 const ContainerBtnGitHub = styled(ContainerBtn)`
-background: var(--dark-color);
+  background: var(--dark-color);
+  &:hover{
+      border:2px solid rgba(229, 235, 238, 0.85)
+    }
 `;
 
 const BtnGithub = styled(BtnFacebook)`
-background: var(--dark-color);
+  background: var(--dark-color);
 `;
-export const BtnRss = () => (
+export const SocialMediaButton = () => (
   <ContainerRRSS>
 
     <ContainerBtn>

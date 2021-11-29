@@ -6,8 +6,8 @@ import Hero from "./MainContent/Hero/Hero";
 import TextAndButton from "./MainContent/TextAndButton/TextAndButton";
 import TopComunidades from "./TopComunidades/TopComunidades";
 import Caracteristicas from "./Caracteristicas/Caracteristicas";
-import Header from "../Layout/Header";
-import Footer from "../Layout/Footer";
+import Header from "../../Layout/Header";
+import Footer from "../../Layout/Footer";
 
 const ContainerContent = styled.div`
   display: flex;

@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 //Images
-import IconoPerfil from "../../../../images/perfil.svg";
-import Scaled from "../../../../images/scaled.jpg";
-import IronMan from "../../../../images/iron-man.jpg";
-import Capitan from "../../../../images/capi.jfif";
-import MainHeroIMG from "../../../../images/fondo-hero.svg";
+import IconoPerfil from "../../../../../images/perfil.svg";
+import Scaled from "../../../../../images/scaled.jpg";
+import IronMan from "../../../../../images/iron-man.jpg";
+import Capitan from "../../../../../images/capi.jfif";
+import MainHeroIMG from "../../../../../images/fondo-hero.svg";
 
 const Container = styled.div`
   max-width: 483px;

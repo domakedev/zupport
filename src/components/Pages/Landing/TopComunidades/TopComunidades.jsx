@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 //Componentes
-import CardComunidad from "../../Layout/CardComunidad/CardComunidad";
+import CardComunidad from "../../../../components/Layout/CardComunidad/CardComunidad";
 
 const Container = styled.div`
   display: flex;

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { InputsRegister } from "./RegisterSlice/InputsRegister";
 import { WelcomeRegister } from "./RegisterSlice/WelcomeRegister";
-import { BtnRss } from "../Layout/Inputs/BtnRss";
+import { SocialMediaButton } from "../../Layout/Inputs/InputSocialMediaButton";
 import { SeparatorLine } from "../Login/LoginSlice/SeparatorLine";
 
 //Import layouts
-import Header from "../Layout/Header";
-import Footer from "../Layout/Footer";
+import Header from "../../Layout/Header";
+import Footer from "../../Layout/Footer";
 
 const ContainerRegister = styled.div`
   display: grid;
@@ -37,17 +37,17 @@ const SuperContainer  = styled.div`
 
 export const Register = () => (
   <SuperContainer>
-    <Header></Header>
-
+    <Header/>
+    
     <ContainerRegister>
       <FormRegister action="">
         <WelcomeRegister />
         <InputsRegister />
         <SeparatorLine />
-        <BtnRss />
+        <SocialMediaButton />
       </FormRegister>
     </ContainerRegister>
 
-    <Footer></Footer>
+    <Footer/>
   </SuperContainer>
 );

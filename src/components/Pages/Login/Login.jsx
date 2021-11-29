@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { WelcomeLogin } from "./LoginSlice/WelcomeLogin";
 import { InputsLogin } from "./LoginSlice/InputsLogin";
-import { BtnRss } from "../Layout/Inputs/BtnRss";
+import { SocialMediaButton } from "../../Layout/Inputs/InputSocialMediaButton";
 import { SeparatorLine } from "./LoginSlice/SeparatorLine";
 
 //Import layouts
-import Header from "../Layout/Header";
-import Footer from "../Layout/Footer";
+import Header from "../../Layout/Header";
+import Footer from "../../Layout/Footer";
 
 const FormContainer = styled.div`
   display: grid;
@@ -36,6 +36,7 @@ const LinkRegister = styled.a`
   text-decoration: none;
   color: var(--secondary-color);
   font-size: 1.6rem;
+  margin-left: 1rem;
 `;
 
 const SuperContainer = styled.div`
@@ -54,9 +55,9 @@ export const Login = () => (
         <WelcomeLogin />
         <InputsLogin />
         <SeparatorLine />
-        <BtnRss />
+        <SocialMediaButton/>
         <OptionRegister>
-          ¿No tienes unacuenta?
+          ¿No tienes una cuenta? 
           <LinkRegister>Regístrate aquí</LinkRegister>
         </OptionRegister>
       </FormLogin>

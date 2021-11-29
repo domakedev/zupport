@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Input } from "../../Layout/Inputs/InputText";
-import { InputBtn } from "../../Layout/Inputs/InputBtn"
+import { Input } from "../../../Layout/Inputs/InputText";
+import { InputBtn } from "../../../Layout/Inputs/InputBtn"
 
 const ContainerInputsRegister = styled.section`
   display: grid;

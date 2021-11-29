@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import Caracteristica from "./Caracteristica";
 
-import ImageVoice from "../../../images/voice.svg";
-import ImageChat from "../../../images/Chat.svg";
-import ImagePoints from "../../../images/points.svg";
+import ImageVoice from "../../../../images/voice.svg";
+import ImageChat from "../../../../images/Chat.svg";
+import ImagePoints from "../../../../images/points.svg";
 
 const Container = styled.div`
   display: flex;
