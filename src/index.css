@@ -1,13 +1,34 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Fjalla+One&display=swap');
+
+:root{
+    --principal-color : #29ABE0;
+    --secondary-color : #325D88;
+    --sucess-color : #93C54B;
+    --alert-color : #D9534F;
+    --boring-color : #797770;
+    --dark-color : #3E3F3A;
+    --light-color : #EFEFEF;
+    --warning-color : #F47C3C;
+    --principal-font : 'Fjalla One';
+    --secondary-font : 'Archivo Narrow';
+    --principal-font-size : 3.6rem;
+    --secondarey-font-size : 1.8rem;
+
+    --varxyz: 768px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  min-height: 100vh;
+
+}
+
+#root{
+  min-height: 100vh;
 }
