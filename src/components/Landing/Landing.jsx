@@ -6,6 +6,8 @@ import Hero from "./MainContent/Hero/Hero";
 import TextAndButton from "./MainContent/TextAndButton/TextAndButton";
 import TopComunidades from "./TopComunidades/TopComunidades";
 import Caracteristicas from "./Caracteristicas/Caracteristicas";
+import Header from "../Layout/Header";
+import Footer from "../Layout/Footer";
 
 const ContainerContent = styled.div`
   display: flex;
@@ -27,17 +29,19 @@ const Container = styled.div`
 
 const Landing = () => {
   return (
-    <Container>
+    <>
+      <Header />
+      <Container>
+        <ContainerContent>
+          <Hero></Hero>
+          <TextAndButton></TextAndButton>
+        </ContainerContent>
 
-      <ContainerContent>
-        <Hero></Hero>
-        <TextAndButton></TextAndButton>
-      </ContainerContent>
-
-      <TopComunidades></TopComunidades>
-      <Caracteristicas></Caracteristicas>
-
-    </Container>
+        <TopComunidades></TopComunidades>
+        <Caracteristicas></Caracteristicas>
+      </Container>
+      <Footer />
+    </>
   );
 };
 

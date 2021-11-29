@@ -8,7 +8,7 @@
     --boring-color : #797770;
     --dark-color : #3E3F3A;
     --light-color : #EFEFEF;
-    --warning-color : #F47C3C; 
+    --warning-color : #F47C3C;
     --principal-font : 'Fjalla One';
     --secondary-font : 'Archivo Narrow';
     --principal-font-size : 3.6rem;
@@ -25,4 +25,10 @@
 
 html {
   font-size: 62.5%;
+  min-height: 100vh;
+
+}
+
+#root{
+  min-height: 100vh;
 }
