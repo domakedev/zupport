@@ -13,6 +13,12 @@ const NavContainer = styled.div`
     align-content: center;
     align-items: center;
     padding: 20px;
+
+    @media screen and (max-width: 375px) {
+      img {
+        width: 100px;
+      }
+    }
 `;
 
 const Line = styled.hr`
@@ -28,13 +34,13 @@ const Navigation = () => {
             <NavContainer>
                 <a href="https://github.com/domakedev/zupport-cliente">
                     <img
-                    src={Logo} 
-                    alt="Imagen Logo" 
+                    src={Logo}
+                    alt="Imagen Logo"
                     />
                 </a>
                 <NavButton titulo='registrate' />
             </NavContainer>
-            
+
             <Line />
         </nav>
     )

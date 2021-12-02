@@ -1,8 +1,16 @@
-import React from "react";
+import axios from 'axios'
+import React, {useEffect, useState} from 'react'
 import styled from "styled-components";
 
+
 //Componentes
-import CardComunidad from "../../../../components/Layout/CardComunidad/CardComunidad";
+import CardComunidadShow from "../../../../components/Layout/CardComunidadShow/CardComunidadShow";
+
+//Mock, NO BORRAR AUNQUE NO SE USE!
+//import mock from "./mock"
+
+
+
 
 const Container = styled.div`
   display: flex;
@@ -55,31 +63,29 @@ const Link = styled.a`
   cursor: pointer;
 `;
 
-const fakeData = [
-  {
-    title: "Javascript",
-    users: 11000,
-    cheks: 232,
-    image:
-      "https://midu.dev/images/wallpapers/javascript-grande-horizontal-4k.png",
-  },
-  {
-    title: "NodeJs",
-    users: 700,
-    cheks: 87,
-    image:
-    "https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg",
-  },
-];
+
 
 const TopComunidades = () => {
+
+  const [comunidades, setComunidades] = useState([])
+
+
+  useEffect(()=>{
+    axios.get("/comunidades").then(function (response) {
+      console.log("dataaa",response.data.comunidades)
+      setComunidades(response.data.comunidades)
+    }).catch(error=> console.log("Errorrrrrr",error))
+  },[])
+
+
+
   return (
     <Container>
       <Titulo>TOP COMUNIDADES</Titulo>
 
       <Cards>
-        {fakeData.map((card, index) => (
-          <CardComunidad
+        {comunidades.map((card, index) => (
+          <CardComunidadShow
             key={index}
             users={card.users}
             checks={card.cheks}
