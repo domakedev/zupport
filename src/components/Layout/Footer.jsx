@@ -17,7 +17,7 @@ const Footerf = styled.div`
 const FooterMainContainer = styled.div`
     display: flex;
     justify-content: space-around;
-    padding-top: 30px;
+    padding-top: 20px;
     @media screen and (min-width:768px) {
     display: block;
     justify-content: center;
@@ -28,14 +28,10 @@ const FooterMainContainer = styled.div`
 const FooterMainDataContainer = styled.div`
     display: flex;
     flex-direction: column;
-    /* @media screen and (min-width:768px) {
-    display: block;
-    justify-content: center;
-    } */
 `
 
 const FooterDataContainer = styled.div`
-    
+
     line-height: 1;
     font-family: var(--secondary-font);
     color: var(--light-color);
@@ -45,7 +41,7 @@ const FooterDataContainer = styled.div`
     @media screen and (min-width:768px) {
     display: block;
     justify-content: center;
-    padding-top: 1rem;
+    padding-top: 20px;
     }
 `
 
@@ -54,16 +50,17 @@ const FooterDescriptionContainer = styled.div`
     color: var(--light-color);
     font-size: 18px;
     width: 30%;
-    
+
     @media screen and (min-width:768px) {
     width: 100%;
     text-align: center;
-    padding-top: 2rem;
+    padding-top: 20px;
     }
 `
 
 const FooterTitle = styled.span `
-    font-size: 20px;
+    font-family: var(--secondary-font);
+    font-size: 2rem;
     font-weight: bold;
     color: var(--light-color);
 `
@@ -75,29 +72,29 @@ const FooterLink = styled.a `
     @media screen and (min-width:768px) {
     padding: 0px 20px;
     }
-    
+
 `
 
 const FooterDescription = styled.p `
     line-height: 1.5;
     font-family: var(--secondary-font);
     color: var(--light-color);
-    font-size: 18px;
+    font-size: 1.8rem;
 `
 
 const FooterCopyright = styled.div`
     font-family: var(--secondary-font);
-    font-size: 12px;
+    font-size: 1.2rem;
     color: var(--light-color);
     text-align: center;
     bottom:0;
-    padding: 5px 0 10px 0;
+    margin: 20px 0;
 `
 
 
 
 function Footer() {
-    
+
     return (
         <Footerf>
             <FooterMainContainer>
@@ -120,7 +117,7 @@ function Footer() {
                         value={{ color: 'red', size: '12px' }}
                         >
                             <FaHeart />
-                    </IconContext.Provider> 
+                    </IconContext.Provider>
             </FooterCopyright>
         </Footerf>
     )
