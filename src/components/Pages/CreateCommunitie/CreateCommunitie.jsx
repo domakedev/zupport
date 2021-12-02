@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 
 //Components

@@ -9,7 +9,7 @@ import CardComunidadShow from "../../../../components/Layout/CardComunidadShow/C
 //Mock, NO BORRAR AUNQUE NO SE USE!
 import mock from "./mock"
 
-
+console.log(mock);
 
 
 const Container = styled.div`
