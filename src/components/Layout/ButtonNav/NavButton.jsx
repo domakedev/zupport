@@ -7,7 +7,7 @@ const ButtonContainer = styled.button`
     margin-left: auto;
     width: 170px;
     height: 48px;
-    border: 2px solid var(--boring-color);
+    border: 2px solid var(--principal-color);
     border-radius: 3px;
     background-color: transparent;
     &:hover{
@@ -17,7 +17,7 @@ const ButtonContainer = styled.button`
 
 const ButtonText= styled.a`
     text-align: center;
-    color: var(--boring-color);
+    color: var(--principal-color);
     text-transform: uppercase;
     text-decoration: none;
     font-family: var(--secondary-font);
