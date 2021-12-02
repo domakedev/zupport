@@ -1,5 +1,7 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import styled from "styled-components";
+import axios from 'axios'
+
 
 //Components
 import Header from "../../Layout/Header";
@@ -10,6 +12,12 @@ import CommunitieAddCard from "../../Layout/CommunitieAddCard/CommunitieAddCard"
 
 //General Styled
 import { SubTitle, TitleOrange, PageContainer } from "../../../css/generalStyled";
+
+//Mock, NO BORRAR AUNQUE NO SE USE!
+import mock from "../../../mocks/generalMock"
+
+console.log(mock);
+
 
 // const PageContainer = styled.div`
 //   display: flex;
@@ -34,66 +42,18 @@ const Comunidades = styled.div`
 
 `
 
-const FakeData = [
-  {
-    title: "Javascript",
-    users: 11000,
-    cheks: 232,
-    image:
-      "https://midu.dev/images/wallpapers/javascript-grande-horizontal-4k.png",
-  },
-  {
-    title: "NodeJs",
-    users: 700,
-    cheks: 87,
-    image:
-      "https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg",
-  },
-  {
-    title: "NodeJs",
-    users: 700,
-    cheks: 87,
-    image:
-      "https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg",
-  },
-  {
-    title: "NodeJs",
-    users: 700,
-    cheks: 87,
-    image:
-      "https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg",
-  },
-  {
-    title: "NodeJs",
-    users: 700,
-    cheks: 87,
-    image:
-      "https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg",
-  },
-  {
-    title: "NodeJs",
-    users: 700,
-    cheks: 87,
-    image:
-      "https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg",
-  },
-  {
-    title: "NodeJs",
-    users: 700,
-    cheks: 87,
-    image:
-      "https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg",
-  },
-  {
-    title: "NodeJs",
-    users: 700,
-    cheks: 87,
-    image:
-      "https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg",
-  },
-];
 
 const Communities = () => {
+
+  const [comunidades, setComunidades] = useState([])
+
+  useEffect(()=>{
+    axios.get("/comunidades").then(function (response) {
+      console.log("dataaa",response.data.comunidades)
+      setComunidades(response.data.comunidades)
+    }).catch(error=> console.log("Errorrrrrr",error))
+  },[])
+
   return (
     <PageContainer>
       <Header />
@@ -108,7 +68,7 @@ const Communities = () => {
         <hr style={{ marginTop: "100px" }} />
 
         <Comunidades>
-          {FakeData.map((e, ind) => {
+          {comunidades.map((e, ind) => {
             return (
               <CommunitieAddCard
                 key={ind}
