@@ -9,8 +9,8 @@ const ContainerRRSS = styled.section`
   gap: 2rem;
   margin: 2rem 0 2rem 0;
   @media screen and (min-width: 768px) {
-    display:grid;
-    grid-template-columns: repeat(3,1fr);
+    flex-direction: row;
+    justify-content: space-between;
   }
 `;
 
@@ -35,7 +35,7 @@ const ContainerBtn= styled.div`
   border:0;
   background: #FFFFFF;
   margin-left: 10px;
-  
+
   min-width: 100px;
 
   text-align: center;
