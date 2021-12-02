@@ -166,8 +166,8 @@ const CreateCommunitie = () => {
 
           {/* Botones */}
           <Buttons>
-            <Button danger>CANCELAR</Button>
-            <Button primary>CREAR</Button>
+            <Button type="button" danger>CANCELAR</Button>
+            <Button type="button"  primary>CREAR</Button>
           </Buttons>
         </Form>
       </MainContainer>
