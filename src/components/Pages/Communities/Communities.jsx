@@ -9,20 +9,20 @@ import GOFData from "./GOFData/GOFData";
 import CommunitieAddCard from "../../Layout/CommunitieAddCard/CommunitieAddCard";
 
 //General Styled
-import { SubTitle, TitleOrange } from "../../../css/generalStyled";
+import { SubTitle, TitleOrange, PageContainer } from "../../../css/generalStyled";
 
-const PageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-`;
+// const PageContainer = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   min-height: 100vh;
+// `;
 
 const Container = styled.div`
   max-width: 1200px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* margin: 30px auto; */
+  margin: 30px auto;
   margin-top: 30px;
   flex-grow: 1;
 `;
