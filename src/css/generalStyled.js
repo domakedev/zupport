@@ -14,7 +14,7 @@ export const SubTitle = styled.p`
 font-family: var(--secondary-font);;
 font-style: normal;
 font-weight: normal;
-font-size: 1.8rem;
+font-size: var(--secondarey-font-size);
 line-height: 24px;
 color: #3E3F3A;
 `
@@ -29,6 +29,7 @@ export const Label = styled.label`
   display: block;
   font-family: var(--secondary-font);;
   font-size: 1.8rem;
+  margin-top: 20px;
 
 `
 

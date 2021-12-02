@@ -7,7 +7,7 @@ import styled from "styled-components";
 import CardComunidadShow from "../../../../components/Layout/CardComunidadShow/CardComunidadShow";
 
 //Mock, NO BORRAR AUNQUE NO SE USE!
-//import mock from "./mock"
+import mock from "./mock"
 
 
 

@@ -1,3 +1,5 @@
+import React, {useState} from "react";
+
 import styled from "styled-components";
 
 const InputStyle = styled.input`
@@ -9,6 +11,18 @@ const InputStyle = styled.input`
   background: rgba(41, 171, 224, 0.08);
   width: 100%;
 `;
-export const Input = ({typeInput, textPlaceholder}) =>(
-  <InputStyle type = {typeInput} placeholder ={textPlaceholder}/>
-);
+export const Input = ({typeInput, textPlaceholder, onChange, name}) =>{
+
+  const onChangeInput = (e) =>{
+    onChange(e)
+  }
+
+  return(
+  <InputStyle
+  name={name}
+  type = {typeInput}
+  placeholder ={textPlaceholder}
+  onChange={onChangeInput}
+  />
+  )
+};

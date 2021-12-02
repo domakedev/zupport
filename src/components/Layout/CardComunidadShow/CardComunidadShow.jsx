@@ -18,6 +18,8 @@ const Container = styled.div`
   border-radius: 3px;
 
   font-family: var(--secondary-font);
+
+  margin: 20px auto;
 `;
 
 const CardComunidadShowIMG = styled.img`
