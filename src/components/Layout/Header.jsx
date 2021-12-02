@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // import '../../main.css'
 
-import NavButton from "./ButtonNav/NavButton";
+// import NavButton from "./ButtonNav/NavButton";
 import ProfileButton from "./ButtonProfile/ProfileButton"
 
 import Logo from '../../images/Logo.png';
