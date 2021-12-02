@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import PropTypes from 'prop-types';
+
 
 //Components
 import Header from "../../Layout/Header";
@@ -24,7 +26,6 @@ const MainContainer = styled.div`
   max-width: 1200px;
   margin: 50px auto;
 
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,7 +44,10 @@ const TextArea = styled.textarea`
   font-size: var(--secondarey-font-size);
   background: rgba(41, 171, 224, 0.08);
   width: 100%;
-  color: var(--boring-color);
+
+  ::placeholder{
+    color: var(--boring-color);
+  }
 `;
 
 const AddImage = styled.p`
@@ -93,7 +97,7 @@ const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 50px;
-`
+`;
 
 const CreateCommunitie = () => {
   const [comu, setComu] = useState({});
@@ -156,23 +160,24 @@ const CreateCommunitie = () => {
             Añadir imagen
           </AddImage>
 
-
           {/* Vista Previa */}
           <VistaPrevia>Vista Previa</VistaPrevia>
           <CardComunidadShow image={comu.imagen} title={comu.nombre} />
-
 
           {/* Botones */}
           <Buttons>
             <Button danger>CANCELAR</Button>
             <Button primary>CREAR</Button>
           </Buttons>
-
         </Form>
       </MainContainer>
       <Footer />
     </PageContainer>
   );
 };
+
+CreateCommunitie.propTypes={
+
+}
 
 export default CreateCommunitie;
