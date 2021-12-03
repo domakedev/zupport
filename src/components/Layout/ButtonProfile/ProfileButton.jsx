@@ -16,7 +16,7 @@ const MainContainer = styled.div `
     margin-left: auto;
 `
 const MainButton = styled.button `
-    background-color: transparent;
+    background-color: white;
     border-radius: 5px;
     cursor: pointer;
     display: flex;
@@ -48,7 +48,7 @@ const MainButton = styled.button `
         color: var(--boring-color);
     }
     @media screen and (min-width:768px) {
-    width: 170px;
+        width: 170px;
     }
 `
 
@@ -66,7 +66,7 @@ const Deploy = styled.nav `
     opacity: ${props => (props.isActive ? "1" : "0")};
     visibility: ${props => (props.isActive ? "visible" : "hidden")};
     transform: ${props => (props.isActive ? "translateY(40px)" : "translateY(-40)")};
-
+    z-index: 200;
     @media screen and (min-width:768px) {
     width: 300px;
     right: 20px;

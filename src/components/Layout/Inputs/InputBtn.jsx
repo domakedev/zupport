@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-const InputBtnStyle = styled.input`
+const InputBtnStyle = styled.button`
   padding: 1rem;
   border-radius: 3px;
   border: 0;
+  height: 45px;
   font-family: var(--secondary-font);
   font-size: var(--secondarey-font-size);
   background: var(--principal-color);
@@ -13,6 +14,9 @@ const InputBtnStyle = styled.input`
     background: var(--sucess-color);
   }
 `;
-export const InputBtn = ({valueBtn}) =>(
-  <InputBtnStyle type = "Button" value ={valueBtn} />
-);
+const InputBtn = ({valueBtn}) =>{
+  return(
+  <InputBtnStyle>{valueBtn}</InputBtnStyle>
+)};
+
+export default InputBtn

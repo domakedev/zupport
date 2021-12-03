@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { InputsRegister } from "./RegisterSlice/InputsRegister";
+import InputsRegister from "./RegisterSlice/InputsRegister";
 import { WelcomeRegister } from "./RegisterSlice/WelcomeRegister";
 import { BtnRss } from "../Layout/Inputs/BtnRss";
 import { SeparatorLine } from "../Login/LoginSlice/SeparatorLine";
@@ -18,7 +18,7 @@ const ContainerRegister = styled.div`
   flex-grow: 1;
 
 `;
-const FormRegister = styled.form`
+const ContainerForm = styled.div`
   width: 100%;
   justify-self: center;
   @media (min-width: 768px) {
@@ -35,19 +35,21 @@ const SuperContainer  = styled.div`
   min-height: 100vh;
 `;
 
-export const Register = () => (
+const Register = () => (
   <SuperContainer>
     <Header></Header>
 
     <ContainerRegister>
-      <FormRegister action="">
+      <ContainerForm>
         <WelcomeRegister />
         <InputsRegister />
         <SeparatorLine />
         <BtnRss />
-      </FormRegister>
+      </ContainerForm>
     </ContainerRegister>
 
     <Footer></Footer>
   </SuperContainer>
 );
+
+export default Register
