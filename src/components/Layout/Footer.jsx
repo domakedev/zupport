@@ -88,7 +88,7 @@ const FooterCopyright = styled.div`
     color: var(--light-color);
     text-align: center;
     bottom:0;
-    margin: 20px 0;
+    padding: 20px 0;
 `
 
 

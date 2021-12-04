@@ -1,22 +1,23 @@
+import React from 'react';
 import styled from "styled-components";
-import { WelcomeLogin } from "./LoginSlice/WelcomeLogin";
+import WelcomeLogin from "./LoginSlice/WelcomeLogin";
 import { InputsLogin } from "./LoginSlice/InputsLogin";
-import { BtnRss } from "../Layout/Inputs/BtnRss";
-import { SeparatorLine } from "./LoginSlice/SeparatorLine";
+import BtnRss from "../Layout/Inputs/BtnRss";
+import SeparatorLine from "./LoginSlice/SeparatorLine";
 
 //Import layouts
 import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
 
 const FormContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
   text-align: center;
-  margin: 2rem 0 3rem 0;
-  padding: 0 3rem 0 3rem;
-
-  flex-grow: 1;
+  padding: 3rem 0;
 `;
+
 const FormLogin = styled.form`
   width: 100%;
   justify-self: center;
@@ -26,6 +27,7 @@ const FormLogin = styled.form`
     justify-self: center;
   }
 `;
+
 const OptionRegister = styled.p`
   font-family: var(--secondary-font);
   color: var(--dark-color);
@@ -35,7 +37,7 @@ const OptionRegister = styled.p`
 const LinkRegister = styled.a`
   text-decoration: none;
   color: var(--secondary-color);
-  font-size: 1.6rem;
+  /* font-size: 1.6rem; */
 `;
 
 const SuperContainer = styled.div`
@@ -45,23 +47,29 @@ const SuperContainer = styled.div`
   min-height: 100vh;
 `;
 
-export const Login = () => (
+const Login = () => (
   <SuperContainer>
     <Header></Header>
 
     <FormContainer>
       <FormLogin>
         <WelcomeLogin />
+
         <InputsLogin />
+
         <SeparatorLine />
         <BtnRss />
+
         <OptionRegister>
-          ¿No tienes unacuenta?
-          <LinkRegister>Regístrate aquí</LinkRegister>
+          ¿No tienes una cuenta?
+          <LinkRegister href="#"> Regístrate aquí</LinkRegister>
         </OptionRegister>
+
       </FormLogin>
     </FormContainer>
 
     <Footer></Footer>
   </SuperContainer>
 );
+
+export default Login;

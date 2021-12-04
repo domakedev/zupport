@@ -10,16 +10,11 @@ import "../../../index.css"
 const ContainerInputsRegister = styled.form`
 	display: flex;
 	flex-direction: column;
+  justify-content: center;
 	gap: 20px;
 	width: 100%;
 	margin: auto;
 	padding: 30px 0px;
-
-	@media (min-width: 768px) {
-    width: 90%;
-    max-width: 550px;
-    justify-self: center;
-  }
 `;
 
 const Label = styled.label`

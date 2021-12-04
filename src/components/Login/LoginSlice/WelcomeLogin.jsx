@@ -1,7 +1,11 @@
+import React from 'react';
 import styled from "styled-components";
 
-const WelcomeContainer = styled.section`    
+const WelcomeContainer = styled.section`
+  width: 27rem;
+  margin: auto;
 `;
+
 const TitleLogin = styled.h2`
   color: var(--sucess-color);
   font-family: var(--principal-font);
@@ -9,28 +13,32 @@ const TitleLogin = styled.h2`
   font-weight: normal;
   margin-top: 2.6rem;
 `;
+
 const QuoteContainer = styled.blockquote`
   color: var(--boring-color);
   font-size: 1.6rem;
   font-family: var(--secondary-font);
   display: flex;
   flex-direction: column;
+  padding: 1rem 0;
+  text-align: start;
+  margin-left: 4rem;
 `;
-const Quote = styled.p`
-  margin: 0 0 7px 0;
-`;
+
 const QuoteAuthor = styled.cite`
-  justify-self: start;
+  text-align: end;
+  margin-right: 5px;
 `;
-export const WelcomeLogin = ()=>(
+
+const WelcomeLogin = ()=>(
   <WelcomeContainer>
     <TitleLogin>Es bueno volver a verte</TitleLogin>
     <QuoteContainer>
-      <Quote>
         “¿Cuál es la esencia de la vida? <br/>
         Servir a otros y hacer el bien”
-      </Quote>
       <QuoteAuthor>- Aristóteles</QuoteAuthor>
     </QuoteContainer>
   </WelcomeContainer>
 );
+
+export default WelcomeLogin;

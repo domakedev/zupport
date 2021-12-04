@@ -4,13 +4,14 @@ import "./App.css";
 import "./index.css"
 
 import Register from "./components/Register/Register";
+import Login from "./components/Login/Login"
 
 function App() {
 
 
   return (
     <Fragment>
-      <Register/>
+      <Login/>
     </Fragment>
   );
 }

@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from "styled-components";
 
 /*Estilos de separador linea*/
@@ -7,22 +8,28 @@ import styled from "styled-components";
  height: 1px;
  align-self : center;
 `;
+
 const LineRightLogin = styled(LineLeftLogin)`
  grid-area: lineright;
 `;
+
 const ContainerLineLogin = styled.section`
  display: grid;
  grid-template-areas: "lineleft . lineright";
-`;
-const OtherLogin = styled.p`
  font-family: var(--secondary-font);
  font-size: var(--secondarey-font-size);
  color: var(--dark-color);
+ text-align: center;
 `;
-export const SeparatorLine = () =>(     
+
+const SeparatorLine = () =>{
+  return(
   <ContainerLineLogin>
     <LineLeftLogin/>
-    <OtherLogin>o</OtherLogin>
+    O
     <LineRightLogin/>
 </ContainerLineLogin>
-);
+)
+};
+
+export default SeparatorLine;

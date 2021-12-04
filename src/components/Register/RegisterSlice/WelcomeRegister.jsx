@@ -1,16 +1,20 @@
+import React from 'react';
 import styled from "styled-components";
 
-const WelcomeContainer = styled.section`
-`;
-const TitleLogin = styled.h2`
+
+const TitleLogin = styled.h1`
   color: var(--sucess-color);
   font-family: var(--principal-font);
   font-size: 3.6rem;
   font-weight: normal;
+  text-align: center;
 
 `;
-export const WelcomeRegister = ()=>(
-  <WelcomeContainer>
+
+const WelcomeRegister = ()=>(
+
     <TitleLogin>¡Unete!</TitleLogin>
-  </WelcomeContainer>
+
 );
+
+export default WelcomeRegister;
