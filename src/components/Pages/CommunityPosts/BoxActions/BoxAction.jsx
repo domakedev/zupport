@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { DividingLine } from "../../../Layout/LineStyle/DividingLine";
-//GOF = GET, ORDER AND FILTER DATA
 
-//Import General Styled
-//import { SubTitle } from "../../../../css/generalStyled";
-
-//Icons
 import { FaSearch, FaChevronDown } from "react-icons/fa";
 
 const BoxActionConatiner = styled.section`

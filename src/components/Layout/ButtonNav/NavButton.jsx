@@ -1,8 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-
-// import '../../../main.css'
 
 const ButtonContainer = styled.button`
     margin-left: auto;
