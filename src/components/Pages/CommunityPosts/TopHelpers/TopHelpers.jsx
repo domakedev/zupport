@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import {mock2} from "../__Mock__/DataUsersCommunity";
-import { getItems } from "../../../../controller/CommunityPostCtr/getItems";
+//import { getItems } from "../../../../controller/CommunityPostCtr/getItems";
 import {rankings} from "../../../../controller/CommunityPostCtr/utilities"
 import { communityIdUsers } from "../__Mock__/DataUsersCommunity";
 
@@ -23,9 +23,10 @@ const Helper = styled.img`
 `;
 export const TopHelpers = () =>{
   const [topHelper, setTopHelpers] = useState([]);
+  console.log(mock2);
 
   useEffect(()=>{
-    const dataRequests = async() =>{
+    /*const dataRequests = async() =>{
       try{
         const response = await getItems("/comunidades/:comudidadId/users",'get');
         const res = response.data.users;
@@ -37,7 +38,7 @@ export const TopHelpers = () =>{
         //console.error('404 Error en la petición /comunidades/:comudidadId/users');
       }
    } 
-   dataRequests();
+   dataRequests();*/
    setTopHelpers(rankings(communityIdUsers,5))
   },[])
   return(

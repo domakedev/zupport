@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled, {css} from "styled-components";
 import { IconContext } from "react-icons";
 import {IoHeartCircle} from "react-icons/io5";

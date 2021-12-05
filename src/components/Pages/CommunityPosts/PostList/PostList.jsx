@@ -15,11 +15,12 @@ const PostListCont = styled.div`
   } 
 `;
 
-export const PostList = () => {
+export const PostList = () => {  
   
   const [posts, setPosts] = useState([]);
       useEffect(()=>{            
          const dataRequests = async() =>{
+           console.log(mock);
            try{
              const response = await getItems("/comunidades/:comudidadId/posts",'get');
              const res = response.data.posts;    

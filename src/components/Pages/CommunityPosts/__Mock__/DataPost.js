@@ -4,7 +4,6 @@ import faker from 'faker';
 
 export const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 export  const dataPost = [];
-export  const communityIdUsers = [];
 
 for(let i =0; i< 50; i++){
       dataPost.push({
