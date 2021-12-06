@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from "styled-components";
 import iconGoogle from "../../../images/Icon/flat-icon-google-login.svg"
 import iconFacebook from "../../../images/Icon/flat-icon-facebook-login.svg"
@@ -7,17 +8,16 @@ const ContainerRRSS = styled.section`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  margin: 2rem 0 2rem 0;
+  margin: 3rem 0 2rem 0;
   @media screen and (min-width: 768px) {
-    display:grid;
-    grid-template-columns: repeat(3,1fr);
+    flex-direction: row;
+    justify-content: space-between;
   }
 `;
 
 const ContainerBtn= styled.div`
   justify-content: center;
   border:2px solid var(--boring-color);
-  border-radius: 3px;
   padding: 1rem;
   display: flex;
   @media screen and (min-width: 768px) {
@@ -27,7 +27,8 @@ const ContainerBtn= styled.div`
     border:2px solid rgba(41, 172, 224, 0.501);;
   }
 `;
-  const BtnGoogle = styled.input`
+
+const BtnGoogle = styled.input`
   font-family: var(--secondary-font);
   font-size: var(--secondarey-font-size);
   font-weight: bold;
@@ -35,7 +36,7 @@ const ContainerBtn= styled.div`
   border:0;
   background: #FFFFFF;
   margin-left: 10px;
-  
+
   min-width: 100px;
 
   text-align: center;
@@ -46,6 +47,7 @@ const ContainerBtn= styled.div`
 
   }
 `;
+
 const Iconbtn = styled.img`
   height: 25px;
   max-width: 25px;
@@ -66,6 +68,7 @@ const BtnFacebook = styled(BtnGoogle)`
   color:var(--light-color);
   background: var(--secondary-color);
 `;
+
 const ContainerBtnGitHub = styled(ContainerBtn)`
   background: var(--dark-color);
   &:hover{
@@ -76,7 +79,8 @@ const ContainerBtnGitHub = styled(ContainerBtn)`
 const BtnGithub = styled(BtnFacebook)`
   background: var(--dark-color);
 `;
-export const SocialMediaButton = () => (
+
+const BtnRss = () => (
   <ContainerRRSS>
 
     <ContainerBtn>
@@ -96,3 +100,5 @@ export const SocialMediaButton = () => (
 
   </ContainerRRSS>
 );
+
+export default BtnRss;

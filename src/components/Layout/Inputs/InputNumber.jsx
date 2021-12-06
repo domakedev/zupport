@@ -6,7 +6,7 @@ import styled, {css} from "styled-components";
 import "../../../css/index.css"
 
 
-const Input = ({state, changeState, inputType, label, textPlaceholder, inputName, errorText, inputParameters, functionx}) =>{
+const InputNumber = ({state, changeState, inputType, label, textPlaceholder, inputName, errorText, inputParameters, functionx}) =>{
 
   const onChange = (e) => {
     changeState({...state, field: e.target.value});
@@ -66,13 +66,14 @@ const InputGroup = styled.div`
 const InputBox = styled.input`
 	font-family: var(--secondary-font);
   font-size: 1.8rem;
-  width: 100%;
+  width: 80px;
 	background: rgba(41, 171, 224, 0.08);
 	border-radius: 3px;
 	height: 45px;
 	line-height: 45px;
-	padding-left: 20px;
-  padding-right: 40px;
+	padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 10px;
 	transition: .3s ease all;
 	border: 3px solid transparent;
 	&:focus {
@@ -104,7 +105,7 @@ const ErrorText = styled.p`
 
 const IconChecking = styled.div`
 	position: absolute;
-	right: 10px;
+	right: 40px;
 	bottom: 7.5px;
 	z-index: 100;
 	font-size: 20px;
@@ -119,4 +120,4 @@ const IconChecking = styled.div`
 	`}
 `;
 
-export default Input;
+export default InputNumber;

@@ -6,7 +6,7 @@ import styled, {css} from "styled-components";
 import "../../../css/index.css"
 
 
-const Input = ({state, changeState, inputType, label, textPlaceholder, inputName, errorText, inputParameters, functionx}) =>{
+const InputArea = ({state, changeState, inputType, label, textPlaceholder, inputName, errorText, inputParameters, functionx}) =>{
 
   const onChange = (e) => {
     changeState({...state, field: e.target.value});
@@ -63,16 +63,18 @@ const InputGroup = styled.div`
   z-index: 90;
 `;
 
-const InputBox = styled.input`
+const InputBox = styled.textarea`
 	font-family: var(--secondary-font);
   font-size: 1.8rem;
   width: 100%;
+  max-width: 100%;
+  max-height: 300px;
 	background: rgba(41, 171, 224, 0.08);
 	border-radius: 3px;
-	height: 45px;
-	line-height: 45px;
-	padding-left: 20px;
-  padding-right: 40px;
+	height: 300px;
+  resize: none;
+	line-height: 22px;
+	padding: 10px 20px;
 	transition: .3s ease all;
 	border: 3px solid transparent;
 	&:focus {
@@ -104,7 +106,7 @@ const ErrorText = styled.p`
 
 const IconChecking = styled.div`
 	position: absolute;
-	right: 10px;
+	right: 25px;
 	bottom: 7.5px;
 	z-index: 100;
 	font-size: 20px;
@@ -119,4 +121,4 @@ const IconChecking = styled.div`
 	`}
 `;
 
-export default Input;
+export default InputArea;

@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 // import '../../main.css'
 
-import NavButton from "./ButtonNav/NavButton";
+// import NavButton from "./ButtonNav/NavButton";
+import ProfileButton from "./ButtonProfile/ProfileButton"
 
 import Logo from '../../images/Logo.png';
 
@@ -32,13 +33,14 @@ const Navigation = () => {
     return (
         <nav>
             <NavContainer>
-                <a href="https://github.com/domakedev/zupport-cliente">
+                <a href="home">
                     <img
                     src={Logo}
                     alt="Imagen Logo"
                     />
                 </a>
-                <NavButton titulo='registrate' />
+                {/* <NavButton titulo='registrate' /> */}
+                <ProfileButton />
             </NavContainer>
 
             <Line />
