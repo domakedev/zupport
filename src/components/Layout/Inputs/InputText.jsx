@@ -6,10 +6,21 @@ import styled, {css} from "styled-components";
 import "../../../css/index.css"
 
 
-const Input = ({state, changeState, inputType, label, textPlaceholder, inputName, errorText, inputParameters, functionx}) =>{
+const Input = ({state,
+  changeState,
+  inputType,
+  label,
+  textPlaceholder,
+  inputName,
+  errorText,
+  inputParameters,
+  functionx,
+  onChangeCe=()=>{},
+  name}) =>{
 
   const onChange = (e) => {
     changeState({...state, field: e.target.value});
+    onChangeCe(e)
   }
 
   const checking = () => {
@@ -31,6 +42,7 @@ const Input = ({state, changeState, inputType, label, textPlaceholder, inputName
       <Label htmlFor={inputName} check={state.check}>{label}</Label>
       <InputGroup>
         <InputBox
+          name = {name}
           type = {inputType}
           placeholder = {textPlaceholder}
           id = {inputName}

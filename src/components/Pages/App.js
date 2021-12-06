@@ -7,13 +7,13 @@ import "../../css/App.css";
 // import Login from "./Login/Login";
 // import Register from "./Register/Register";
 // import Communities from "./Communities/Communities";
-import CreateCommunitie from "./CreateCommunitie/CreateCommunitie"
-// import HelpPost from "./NewPost/HelpPost"
+// import CreateCommunitie from "./CreateCommunitie/CreateCommunitie"
+import HelpPost from "./NewPost/HelpPost"
 
 function App() {
   return (
     <Fragment>
-      <CreateCommunitie/>
+      <HelpPost/>
     </Fragment>
   );
 }
