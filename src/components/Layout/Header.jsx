@@ -14,6 +14,12 @@ const NavContainer = styled.div`
     align-content: center;
     align-items: center;
     padding: 20px;
+
+    @media screen and (max-width: 375px) {
+      img {
+        width: 100px;
+      }
+    }
 `;
 
 const Line = styled.hr`
@@ -43,4 +49,3 @@ const Navigation = () => {
 }
 
 export default Navigation;
-

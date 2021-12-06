@@ -63,6 +63,7 @@ const FooterTitle = styled.span `
     font-size: 2rem;
     font-weight: bold;
     color: var(--light-color);
+    font-family: var(--secondary-font);
 `
 
 const FooterLink = styled.a `

@@ -11,6 +11,7 @@ const InputBtnStyle = styled.button`
   background: var(--principal-color);
   color: var(--light-color);
   font-weight: bold;
+  box-shadow: 0 4px 2px 0 var(--boring-color);
   &:hover{
     background: var(--sucess-color);
   }

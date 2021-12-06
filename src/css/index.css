@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Fjalla+One&display=swap');
+
+:root{
+    --principal-color : #29ABE0;
+    --secondary-color : #325D88;
+    --sucess-color : #93C54B;
+    --alert-color : #D9534F;
+    --boring-color : #797770;
+    --dark-color : #3E3F3A;
+    --light-color : #EFEFEF;
+    --warning-color : #F47C3C;
+    --light-blue: rgba(41, 171, 224, 0.08);
+
+    --principal-font : 'Fjalla One';
+    --secondary-font : 'Archivo Narrow';
+
+    --principal-font-size : 3.6rem;
+    --secondarey-font-size : 1.8rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  min-height: 100vh;
+
+}
+
+#root{
+  min-height: 100vh;
+}
