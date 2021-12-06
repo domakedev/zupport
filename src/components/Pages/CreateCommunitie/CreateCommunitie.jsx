@@ -107,7 +107,7 @@ const CreateCommunitie = () => {
     console.log("Añadir imageeeen");
   };
 
-  const onChange = (e) => {
+  const onChangeCe = (e) => {
     let title = e.target.value;
     let name = e.target.name;
 
@@ -121,7 +121,6 @@ const CreateCommunitie = () => {
 
 
   const [name, changeName] = useState({field : '',check : null});
-  const [description, changeDescription] = useState({field : '',check : null});
   const [image, changeImage] = useState({field : '',check : null});
 
   return (
@@ -136,24 +135,22 @@ const CreateCommunitie = () => {
           <Label htmlFor="Nombre">Nombre</Label>
           <Input
             state = {name}
+            name = "nombre"
             changeState = {changeName}
             inputType="text"
             inputName="nombre"
             label="Nombre"
             textPlaceholder="Comida Latina..."
-            onChange={onChange}
-            //value={comu.name}
+            onChangeCe={onChangeCe}
+            value={comu.name}
           />
 
           <Label htmlFor="Descripcion">Descripcion</Label>
           <TextArea
-            state = {description}
-            changeState = {changeDescription}
-            inputType="text"
-            inputName="descripcion"
+            name = "descripcion"
             rows="3"
             placeholder="Recetas y tips..."
-            onChange={onChange}
+            onChange={onChangeCe}
           />
 
           {/* Añadir imagen */}
@@ -161,12 +158,13 @@ const CreateCommunitie = () => {
           <Label htmlFor="imagen">Imagen URL</Label>
           <Input
             state = {image}
+            name = "imagen"
             changeState = {changeImage}
             inputType="text"
             inputName="imagen"
             label="imagen"
             textPlaceholder="Añade la URL de la imagen: http://..."
-            onChange={onChange}
+            onChangeCe={onChangeCe}
           />
           <AddImage onClick={addImage}>
             <BiImageAdd />
