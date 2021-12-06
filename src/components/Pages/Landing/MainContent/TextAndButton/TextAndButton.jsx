@@ -19,7 +19,7 @@ const Title = styled.h1`
   font-family: var(--principal-font);
 
   @media screen and (min-width:768px){
-    
+
   }
 `;
 

@@ -9,12 +9,13 @@
     --dark-color : #3E3F3A;
     --light-color : #EFEFEF;
     --warning-color : #F47C3C;
+    --light-blue: rgba(41, 171, 224, 0.08);
+
     --principal-font : 'Fjalla One';
     --secondary-font : 'Archivo Narrow';
+
     --principal-font-size : 3.6rem;
     --secondarey-font-size : 1.8rem;
-
-    --varxyz: 768px;
 }
 
 * {

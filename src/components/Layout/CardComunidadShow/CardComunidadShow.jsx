@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from 'prop-types';
+
 
 //Images and Icons
 import IconUsers from "../../../images/users.svg"
@@ -16,9 +18,11 @@ const Container = styled.div`
   border-radius: 3px;
 
   font-family: var(--secondary-font);
+
+  margin: 20px auto;
 `;
 
-const CardComunidadIMG = styled.img`
+const CardComunidadShowIMG = styled.img`
   height: 100%;
   width: 100%;
 
@@ -112,10 +116,10 @@ const CardName = styled.h3`
   font-size: 1.8rem;
 `;
 
-const CardComunidad = ({image, users, checks, title}) => {
+const CardComunidadShow = ({image, users, checks, title}) => {
   return (
     <Container>
-      <CardComunidadIMG src={image} alt="" />
+      <CardComunidadShowIMG src={image} alt="" />
 
       <CardStatsUsers>
         <CardIcon src={IconUsers} alt="cantidad de usuarios en la comunidad" />
@@ -132,4 +136,15 @@ const CardComunidad = ({image, users, checks, title}) => {
   );
 };
 
-export default CardComunidad;
+
+
+//PropTypes
+CardComunidadShow.propTypes = {
+  title:PropTypes.string,
+  users: PropTypes.number,
+  cheks: PropTypes.number,
+  image: PropTypes.string,
+};
+
+
+export default CardComunidadShow;
