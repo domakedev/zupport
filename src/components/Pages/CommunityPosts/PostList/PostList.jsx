@@ -9,7 +9,7 @@ import {
   getPostTime,
   softNumber,
 } from "../../../../controller/CommunityPostCtr/utilities";
-import { getItems } from "../../../../controller/CommunityPostCtr/getItems";
+//import { getItems } from "../../../../controller/CommunityPostCtr/getItems";
 
 const PostListCont = styled.div`
   background: rgba(41, 171, 224, 0.08);

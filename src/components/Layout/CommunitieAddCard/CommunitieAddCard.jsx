@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-import { Link, Outlet } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+//import { useParams } from "react-router-dom";
 
 //General Styled
 //import { SubTitle, TitleOrange } from "../../../css/generalStyled";
@@ -156,7 +156,7 @@ const LineaD = styled(Linea)`
 `;
 
 const CommunitieAddCard = ({ image, users, checks, title, i }) => {
-  let params = useParams();
+  //let params = useParams();
 
   console.log("iiiiiiiii",title);
 

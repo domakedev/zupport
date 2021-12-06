@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // import NavButton from "./ButtonNav/NavButton";
 import ProfileButton from "./ButtonProfile/ProfileButton"

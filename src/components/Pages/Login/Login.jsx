@@ -4,7 +4,7 @@ import WelcomeLogin from "./LoginSlice/WelcomeLogin";
 import InputsLogin from "./LoginSlice/InputsLogin";
 import BtnRss from "../../Layout/Inputs/InputSocialMediaButton";
 import SeparatorLine from "./LoginSlice/SeparatorLine";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 //Import layouts

@@ -1,8 +1,9 @@
 import React from "react";
-import ReactDOM, { render } from "react-dom";
+import ReactDOM, {  } from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./css/index.css";
-import App from "./components/Pages/App";
+//import App from "./components/Pages/App";
+import "./mocks"
 //import reportWebVitals from './reportWebVitals';
 
 //Elements

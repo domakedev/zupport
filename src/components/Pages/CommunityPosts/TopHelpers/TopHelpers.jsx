@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 // import {mock2} from "../../../../utils/__Mock__/DataUsersCommunity";
 //import { getItems } from "../../../../controller/CommunityPostCtr/getItems";
-import {rankings} from "../../../../controller/CommunityPostCtr/utilities"
+//import {rankings} from "../../../../controller/CommunityPostCtr/utilities"
 //import axios from "utils/axios"
 
 const TopHelpersCont = styled.section`
@@ -22,7 +22,9 @@ const Helper = styled.img`
   border-radius: 50%;
 `;
 export const TopHelpers = () =>{
-  const [topHelper, setTopHelpers] = useState([]);
+  const [topHelper,
+    // setTopHelpers
+  ] = useState([]);
   //console.log(mock2);
 
   useEffect(()=>{
