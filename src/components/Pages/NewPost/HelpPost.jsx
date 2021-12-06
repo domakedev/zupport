@@ -1,15 +1,15 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 
-import Input from '../Layout/Inputs/InputText'
-import InputArea from '../Layout/Inputs/InputTextArea'
-import InputNumber from '../Layout/Inputs/InputNumber'
-import Header from '../Layout/Header'
-import Footer from '../Layout/Footer'
+import Input from '../../Layout/Inputs/InputText'
+import InputArea from '../../Layout/Inputs/InputTextArea'
+import InputNumber from '../../Layout/Inputs/InputNumber'
+import Header from '../../Layout/Header'
+import Footer from '../../Layout/Footer'
 
-import Chris from '../../images/Chris.jpg'
-import Tony from '../../images/Tony.jpg'
-import Scarlet from '../../images/Scarlet.jpg'
+import Chris from '../../../images/Chris.jpg'
+import Tony from '../../../images/Tony.jpg'
+import Scarlet from '../../../images/Scarlet.jpg'
 
 import { BsImages, BsFolder2Open, BsFillPersonPlusFill, BsX, BsListOl, BsListUl, BsJustifyLeft, BsJustifyRight, BsJustify, BsTextCenter, BsTextIndentLeft, BsTextIndentRight, BsTypeBold, BsTypeUnderline, BsTypeItalic, BsCode, BsEmojiSmile, BsLink45Deg, BsTable } from "react-icons/bs";
 

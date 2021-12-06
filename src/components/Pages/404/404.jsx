@@ -79,7 +79,7 @@ function P404() {
                     <SecondaryContainerTitulo>
                         PAGE NOT FOUND
                     </SecondaryContainerTitulo>
-                    <SecondaryContainerButton href="http://google.com.co">
+                    <SecondaryContainerButton href="#">
                         VOLVER
                     </SecondaryContainerButton>
                 </SecondaryContainer>

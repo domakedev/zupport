@@ -3,7 +3,7 @@ import React from 'react';
 import { BsCheckCircleFill, BsFillXCircleFill } from "react-icons/bs";
 
 import styled, {css} from "styled-components";
-import "../../../index.css"
+import "../../../css/index.css"
 
 
 const Input = ({state, changeState, inputType, label, textPlaceholder, inputName, errorText, inputParameters, functionx}) =>{

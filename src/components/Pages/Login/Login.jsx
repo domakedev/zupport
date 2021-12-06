@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import WelcomeLogin from "./LoginSlice/WelcomeLogin";
-import { InputsLogin } from "./LoginSlice/InputsLogin";
-import BtnRss from "../Layout/Inputs/BtnRss";
+import InputsLogin from "./LoginSlice/InputsLogin";
+import BtnRss from "../../Layout/Inputs/InputSocialMediaButton";
 import SeparatorLine from "./LoginSlice/SeparatorLine";
 
 //Import layouts

@@ -6,7 +6,7 @@ import styled, { css } from "styled-components";
 //Components
 import Header from "../../Layout/Header";
 import Footer from "../../Layout/Footer";
-import { Input } from "../../Layout/Inputs/InputText";
+import Input from "../../Layout/Inputs/InputText";
 import CardComunidadShow from "../../Layout/CardComunidadShow/CardComunidadShow";
 
 //icons
@@ -37,13 +37,14 @@ const Form = styled.form`
 `;
 
 const TextArea = styled.textarea`
-  padding: 1rem;
+  padding: 1rem 0 0 2rem;
   border-radius: 3px;
   border: 0;
   font-family: var(--secondary-font);
   font-size: var(--secondarey-font-size);
   background: rgba(41, 171, 224, 0.08);
   width: 100%;
+  resize: none;
 
   ::placeholder{
     color: var(--boring-color);
@@ -118,6 +119,11 @@ const CreateCommunitie = () => {
     });
   };
 
+
+  const [name, changeName] = useState({field : '',check : null});
+  const [description, changeDescription] = useState({field : '',check : null});
+  const [image, changeImage] = useState({field : '',check : null});
+
   return (
     <PageContainer>
       <Header />
@@ -129,9 +135,11 @@ const CreateCommunitie = () => {
           {/* Inputs */}
           <Label htmlFor="Nombre">Nombre</Label>
           <Input
-            typeInput="text"
-            name="nombre"
-            id="Nombre"
+            state = {name}
+            changeState = {changeName}
+            inputType="text"
+            inputName="nombre"
+            label="Nombre"
             textPlaceholder="Comida Latina..."
             onChange={onChange}
             //value={comu.name}
@@ -139,7 +147,10 @@ const CreateCommunitie = () => {
 
           <Label htmlFor="Descripcion">Descripcion</Label>
           <TextArea
-            name="descripcion"
+            state = {description}
+            changeState = {changeDescription}
+            inputType="text"
+            inputName="descripcion"
             rows="3"
             placeholder="Recetas y tips..."
             onChange={onChange}
@@ -149,10 +160,12 @@ const CreateCommunitie = () => {
 
           <Label htmlFor="imagen">Imagen URL</Label>
           <Input
-            typeInput="text"
-            name="imagen"
-            id="imagen"
-            textPlaceholder="URL de imagen: http://..."
+            state = {image}
+            changeState = {changeImage}
+            inputType="text"
+            inputName="imagen"
+            label="imagen"
+            textPlaceholder="Añade la URL de la imagen: http://..."
             onChange={onChange}
           />
           <AddImage onClick={addImage}>

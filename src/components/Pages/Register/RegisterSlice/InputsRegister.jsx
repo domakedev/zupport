@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import styled, {css} from "styled-components";
-import Input from "../../Layout/Inputs/InputText";
-import InputBtn from "../../Layout/Inputs/InputBtn"
+import Input from "../../../Layout/Inputs/InputText";
+import InputBtn from "../../../Layout/Inputs/InputBtn"
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
 
 
-import "../../../index.css"
+import "../../../../css/index.css"
 
 const ContainerInputsRegister = styled.form`
 	display: flex;

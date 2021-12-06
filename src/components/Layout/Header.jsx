@@ -33,7 +33,7 @@ const Navigation = () => {
     return (
         <nav>
             <NavContainer>
-                <a href="https://github.com/domakedev/zupport-cliente">
+                <a href="home">
                     <img
                     src={Logo}
                     alt="Imagen Logo"

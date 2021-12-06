@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import Input from "../../Layout/Inputs/InputText";
-import InputBtn from "../../Layout/Inputs/InputBtn"
+import Input from "../../../Layout/Inputs/InputText";
+import InputBtn from "../../../Layout/Inputs/InputBtn"
 
 const ContainerInputsLogin = styled.section`
   display: flex;
@@ -17,7 +17,8 @@ const ForgotPassword = styled.a`
   color: #325D88;
   text-align: end;
 `;
-export const InputsLogin = () =>{
+
+const InputsLogin = () =>{
 
   const [password, changePassword] = useState({field : '',check : null});
   const [email, changeEmail] = useState({field : '',check : null});
@@ -55,3 +56,4 @@ export const InputsLogin = () =>{
   )
 };
 
+export default InputsLogin;

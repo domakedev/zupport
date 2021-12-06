@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import InputsRegister from "./RegisterSlice/InputsRegister";
 import WelcomeRegister from "./RegisterSlice/WelcomeRegister";
-import BtnRss from "../Layout/Inputs/BtnRss";
+import BtnRss from "../../Layout/Inputs/InputSocialMediaButton";
 import SeparatorLine from "../Login/LoginSlice/SeparatorLine";
 
 //Import layouts
