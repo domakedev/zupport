@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import styled from "styled-components";
+import { Link, Outlet } from "react-router-dom";
 //import PropTypes from 'prop-types';
 
 //Icons
@@ -19,7 +20,7 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const Plus = styled.button`
+const LinkTo = styled(Link)`
   width: 100px;
   height: 100px;
   border: none;
@@ -45,12 +46,16 @@ const NewCommunitie = () => {
   }
 
   return (
+    <>
     <Container>
-      <Plus onClick={AddNewComu}>
+      <LinkTo to="create-communitie" onClick={AddNewComu}>
         <FaPlus size="6rem" color="white" />
-      </Plus>
+      </LinkTo>
       <SubTitle>Crear nueva Comunidad</SubTitle>
+
+
     </Container>
+    </>
   );
 };
 

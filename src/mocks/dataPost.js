@@ -1,8 +1,7 @@
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 import faker from 'faker';
 
-export const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
+import mock from "../utils/mock"
+
 export  const dataPost = [];
 
 for(let i =0; i< 50; i++){
@@ -18,7 +17,7 @@ for(let i =0; i< 50; i++){
       archive: faker.image.technics(),
       likes: faker.datatype.number(),
       points: faker.datatype.number(),
-      resolved: faker.datatype.boolean()      
+      resolved: faker.datatype.boolean()
     });
   };
 

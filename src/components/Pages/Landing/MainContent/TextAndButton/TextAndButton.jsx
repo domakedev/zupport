@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link, Outlet } from "react-router-dom";
 
 const Container = styled.div`
   justify-items: flex-end;
@@ -18,8 +19,7 @@ const Title = styled.h1`
 
   font-family: var(--principal-font);
 
-  @media screen and (min-width:768px){
-
+  @media screen and (min-width: 768px) {
   }
 `;
 
@@ -33,7 +33,10 @@ const Description = styled.p`
   font-family: var(--secondary-font);
 `;
 
-const Button = styled.button`
+const LinkTo = styled(Link)`
+  text-decoration: none;
+  color: white;
+
   display: block;
   border: none;
 
@@ -47,11 +50,7 @@ const Button = styled.button`
   font-size: 1.8rem;
 
   font-family: var(--secondary-font);
-`;
-
-const Link = styled.a`
-  text-decoration: none;
-  color: white;
+  width: fit-content;
 `;
 
 const TextAndButton = () => {
@@ -67,9 +66,7 @@ const TextAndButton = () => {
         dispuestas a ayudarte al instante.
       </Description>
 
-      <Button>
-        <Link>REGISTRARME</Link>
-      </Button>
+      <LinkTo to="/register">REGISTRARME</LinkTo>
     </Container>
   );
 };

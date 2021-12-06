@@ -1,18 +1,49 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './css/index.css';
-import App from './components/Pages/App';
-import { BrowserRouter } from "react-router-dom";
+import React from "react";
+import ReactDOM, { render } from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./css/index.css";
+import App from "./components/Pages/App";
 //import reportWebVitals from './reportWebVitals';
+
+//Elements
+import Landing from "./components/Pages/Landing/Landing";
+import Communities from "./components/Pages/Communities/Communities";
+import CreateCommunitie from "./components/Pages/CreateCommunitie/CreateCommunitie";
+import { CommunityPosts } from "./components/Pages/CommunityPosts/CommunityPosts";
+import HelpPost from "./components/Pages/NewPost/HelpPost";
+import Login from "./components/Pages/Login/Login";
+import Register from "./components/Pages/Register/Register";
+import P404 from "./components/Pages/404/P404";
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById('root')
-);
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="communities/" element={<Communities />}>
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-//reportWebVitals();
+      </Route>
+
+      <Route
+        path="communities/create-communitie"
+        element={<CreateCommunitie />}
+      />
+
+      <Route path="communities/community-posts"
+      element={<CommunityPosts />} />
+
+      <Route
+        path="/communities/:comuTitle/posts"
+        element={<CommunityPosts />}
+      />
+
+      <Route path="communities/help-post"
+      element={<HelpPost />} />
+
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+
+      <Route path="*" element={<P404 />} />
+    </Routes>
+  </BrowserRouter>,
+  document.getElementById("root")
+);

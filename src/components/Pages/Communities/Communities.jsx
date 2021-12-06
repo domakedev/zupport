@@ -1,6 +1,8 @@
 import React,{useEffect, useState} from "react";
 import styled from "styled-components";
 import axios from 'axios'
+import { Link, Outlet } from "react-router-dom";
+
 
 
 //Components
@@ -68,10 +70,11 @@ const Communities = () => {
         <hr style={{ marginTop: "100px" }} />
 
         <Comunidades>
-          {comunidades.map((e, ind) => {
+          {comunidades.map((e, i) => {
             return (
               <CommunitieAddCard
-                key={ind}
+                key={i}
+                id={i}
                 image={e.image}
                 users={e.users}
                 checks={e.cheks}
@@ -84,6 +87,8 @@ const Communities = () => {
       </Container>
 
       <Footer />
+
+
     </PageContainer>
   );
 };

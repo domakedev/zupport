@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
+import { Link, Outlet } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 //General Styled
 //import { SubTitle, TitleOrange } from "../../../css/generalStyled";
-
 
 //Icons
 import {
@@ -112,7 +113,7 @@ const DataContainer = styled.div`
   padding-bottom: 30px;
 `;
 
-const AddButton = styled.button`
+const LinkTo = styled(Link)`
   position: absolute;
   bottom: 5px;
   width: 200px;
@@ -154,11 +155,14 @@ const LineaD = styled(Linea)`
   right: 0;
 `;
 
-const CommunitieAddCard = ({ image, users, checks, title }) => {
+const CommunitieAddCard = ({ image, users, checks, title, i }) => {
+  let params = useParams();
 
-  const unirmeA = () =>{
+  console.log("iiiiiiiii",title);
+
+  const unirmeA = () => {
     console.log("Me uni a la comunidad de:", title);
-  }
+  };
 
   return (
     <Container>
@@ -177,10 +181,10 @@ const CommunitieAddCard = ({ image, users, checks, title }) => {
         <Number>{checks}</Number>
       </ContainerChecks>
 
-      <AddButton onClick={unirmeA}>
-        <AddPerson size="40px" />
-        UNIRME
-      </AddButton>
+        <LinkTo to={`${title}/posts`} onClick={unirmeA}>
+          <AddPerson size="40px" />
+          UNIRME
+        </LinkTo>
 
       <LineaI />
       <LineaD />
@@ -189,11 +193,10 @@ const CommunitieAddCard = ({ image, users, checks, title }) => {
 };
 
 CommunitieAddCard.propTypes = {
-  title:PropTypes.string,
+  title: PropTypes.string,
   users: PropTypes.number,
   cheks: PropTypes.number,
   image: PropTypes.string,
-
-}
+};
 
 export default CommunitieAddCard;

@@ -41,6 +41,8 @@ const Landing = () => {
         <Caracteristicas></Caracteristicas>
       </Container>
       <Footer />
+
+
     </>
   );
 };
