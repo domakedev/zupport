@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-// import '../../main.css'
+import { Link } from "react-router-dom";
 
 // import NavButton from "./ButtonNav/NavButton";
 import ProfileButton from "./ButtonProfile/ProfileButton"
@@ -33,12 +32,12 @@ const Navigation = () => {
     return (
         <nav>
             <NavContainer>
-                <a href="home">
+                <Link to="/">
                     <img
                     src={Logo}
                     alt="Imagen Logo"
                     />
-                </a>
+                </Link>
                 {/* <NavButton titulo='registrate' /> */}
                 <ProfileButton />
             </NavContainer>

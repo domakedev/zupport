@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
+import { Link } from "react-router-dom";
+
 
 import Input from '../../Layout/Inputs/InputText'
 import InputArea from '../../Layout/Inputs/InputTextArea'
@@ -32,7 +34,7 @@ function HelpPost() {
         <MainTitle>
           Crear Pregunta
         </MainTitle>
-        <MainTitleIcon href="#">
+        <MainTitleIcon to="/communities/community-posts">
           <BsX />
         </MainTitleIcon>
       </MainTitleContainer>
@@ -141,9 +143,9 @@ function HelpPost() {
           <hr />
         </LineTitle>
 
-        <AskButton href="#">
+        <LinkTo to="/communities/community-posts">
           PEDIR AYUDA
-        </AskButton>
+        </LinkTo>
 
       </PageContainer>
 
@@ -168,7 +170,7 @@ const MainTitle = styled.h1 `
   font-size: 2.5rem;
 `
 
-const MainTitleIcon = styled.a `
+const MainTitleIcon = styled(Link) `
   font-family: var(--principal-font);
   color: var(--boring-color);
   padding-left: 10rem;
@@ -294,7 +296,7 @@ const OfferPointsText = styled.div `
   font-size: 1.8rem;
 `
 
-const AskButton = styled.a `
+const LinkTo = styled(Link) `
     width: 165px;
     height: 50px;
     background-color: var(--principal-color);

@@ -1,8 +1,5 @@
-var axios = require("axios");
-var MockAdapter = require("axios-mock-adapter");
+import mock from "../utils/mock"
 
-// This sets the mock adapter on the default instance
-let mock = new MockAdapter(axios);
 
 //Data falsa
 const comunidades = [
@@ -38,8 +35,7 @@ const comunidades = [
 
 // Mock any GET request to /users
 // arguments for reply are (status, data, headers)
-mock.onGet("/comunidades").reply(200, {
+mock.onGet("/comunidadesxy").reply(200, {
   comunidades
 });
 
-export default mock;

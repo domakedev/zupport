@@ -4,6 +4,8 @@ import WelcomeLogin from "./LoginSlice/WelcomeLogin";
 import InputsLogin from "./LoginSlice/InputsLogin";
 import BtnRss from "../../Layout/Inputs/InputSocialMediaButton";
 import SeparatorLine from "./LoginSlice/SeparatorLine";
+import { Link } from "react-router-dom";
+
 
 //Import layouts
 import Header from "../../Layout/Header";
@@ -34,7 +36,7 @@ const OptionRegister = styled.p`
   font-size: 1.6rem;
   text-align: end;
 `;
-const LinkRegister = styled.a`
+const LinkTo = styled(Link)`
   text-decoration: none;
   color: var(--secondary-color);
   /* font-size: 1.6rem; */
@@ -62,7 +64,7 @@ const Login = () => (
 
         <OptionRegister>
           ¿No tienes una cuenta?
-          <LinkRegister href="#"> Regístrate aquí</LinkRegister>
+          <LinkTo to="/register"> Regístrate aquí</LinkTo>
         </OptionRegister>
 
       </FormLogin>

@@ -1,15 +1,14 @@
-import axios from 'axios'
+import axios from '../../../../utils/axios'
 import React, {useEffect, useState} from 'react'
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 
 //Componentes
 import CardComunidadShow from "../../../../components/Layout/CardComunidadShow/CardComunidadShow";
 
 //Mock, NO BORRAR AUNQUE NO SE USE!
-import mock from "./mock"
 
-console.log(mock);
 
 
 const Container = styled.div`
@@ -40,27 +39,26 @@ const Cards = styled.div`
   border-radius: 3px;
 `;
 
-const Button = styled.button`
-  display: block;
-  border: none;
 
-  padding: 13px 22px;
-  margin: 0 auto;
-
-  background-color: var(--secondary-color);
-  color: white;
-  border-radius: 3px;
-
-  font-weight: bold;
-  font-size: 1.8rem;
-
-  font-family: var(--secondary-font);
-`;
-
-const Link = styled.a`
+const LinkTo = styled(Link)`
   text-decoration: none;
   color: white;
   cursor: pointer;
+
+  display: block;
+border: none;
+
+padding: 13px 22px;
+margin: 0 auto;
+
+background-color: var(--secondary-color);
+color: white;
+border-radius: 3px;
+
+font-weight: bold;
+font-size: 1.8rem;
+
+font-family: var(--secondary-font);
 `;
 
 
@@ -71,10 +69,10 @@ const TopComunidades = () => {
 
 
   useEffect(()=>{
-    axios.get("/comunidades").then(function (response) {
-      console.log("dataaa",response.data.comunidades)
+    axios.get("/comunidadesxy").then(function (response) {
+      console.log("Data:",response.data.comunidades)
       setComunidades(response.data.comunidades)
-    }).catch(error=> console.log("Errorrrrrr",error))
+    }).catch(error=> console.log("Error:",error))
   },[])
 
 
@@ -95,9 +93,7 @@ const TopComunidades = () => {
         ))}
       </Cards>
 
-      <Button>
-        <Link>VER MAS COMUNIDADES</Link>
-      </Button>
+        <LinkTo to="/communities">VER MAS COMUNIDADES</LinkTo>
     </Container>
   );
 };

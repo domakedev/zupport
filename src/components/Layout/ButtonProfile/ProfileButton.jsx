@@ -77,6 +77,7 @@ const Deploy = styled.nav `
 const DropdownMenu = () => {
     const dropdownRef = useRef(null);
     const [isActive, setIsActive] = useState(false);
+    
     const onClick = () => setIsActive(!isActive);
 
     return (
