@@ -14,13 +14,10 @@ import HelpPost from "./NewPost/HelpPost"
  import { Login } from "./Login/Login";
  import { Register } from "./Register/Register";*/ 
  import {CommunityPosts} from "./CommunityPosts/CommunityPosts"
-
+ import { Profile } from "./Profile/Profile";
 function App() {
   return (
-    <Fragment>
-      <HelpPost/>
-      <CommunityPosts />
-    </Fragment>
+    <Profile></Profile>
   );
 }
 
