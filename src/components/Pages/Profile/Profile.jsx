@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Header from "../../Layout/Header";
+import Footer from "../../Layout/Footer";
 import imgProfile from "../../../images/ProfileP.png";
 import styled from "styled-components";
 
@@ -30,10 +31,11 @@ const ImgProfile = styled.div `
 function Profile() {
 	return (
 		<>
-		<Header></Header>
+		<Header/>
 		<ImgProfile>
 		    <img src={imgProfile} alt="Main image Profile" />
 		</ImgProfile>
+		<Footer/>
 		</>
 	);
 };
