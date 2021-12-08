@@ -5,12 +5,14 @@ import { IconHeart } from "./IconHeart";
 import { PostFooter } from "./PostFooter";
 import { PostHeader } from "./PostHeader";
 import { PostImage } from "./PostImage";
+import { Answers}  from "./Answers/Answers";
 
 const PostTemplteCont = styled.article`
   background: #fff;
   display: flex;
   flex-direction: column;
-  margin-top: 3rem;  
+  margin-top: 3rem;
+  max-width: 625px;
   @media screen and (min-width: 1024px) {
     border: 1px solid #79777052;  //--dark-color
     border-radius: 2rem;
@@ -25,7 +27,7 @@ const PostTitle = styled.h3`
   color: var(--dark-color);
   font-size: 2.5rem;
   font-family: var(--secondary-font);
-  font-weight: normal;  
+  font-weight: normal;
 `;
 const PostDescription = styled.p`
   color: rgba(0, 0, 0, 0.55);;
@@ -39,11 +41,11 @@ const ReactionContainer = styled.div`
   margin: 0 0 0.5rem 1.3rem;
   padding: 0 3rem 0 3rem;
 `;
- 
+
 
 export const PostTemplate = ({ ban, userPhoto, userName, timePost, postTitle, postDescription, points, resolved, likes, urlPost}) => (
   <PostTemplteCont>
-    <PostHeader userPhoto = {userPhoto} userName = {userName} timePost = {timePost} points= {points} resolved ={resolved}/>
+    <PostHeader userPhoto = {userPhoto} userName = {userName} timePost = {timePost} points= {points.toString()} resolved ={resolved}/>
     <DividingLine/>
     <PostContainer>
       <PostTitle>{postTitle}</PostTitle>
@@ -51,10 +53,11 @@ export const PostTemplate = ({ ban, userPhoto, userName, timePost, postTitle, po
     </PostContainer>
     <PostImage ban = {ban} urlPost={urlPost}/>
     <ReactionContainer>
-      <IconHeart likes = {likes}/>      
-    </ReactionContainer>    
+      <IconHeart likes = {likes}/>
+    </ReactionContainer>
     <DividingLine/>
     <PostFooter/>
+    <Answers/>
   </PostTemplteCont>
 );
 

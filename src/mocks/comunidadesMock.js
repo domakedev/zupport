@@ -35,7 +35,7 @@ const comunidades = [
 
 // Mock any GET request to /users
 // arguments for reply are (status, data, headers)
-mock.onGet("/comunidadesxy").reply(200, {
+mock.onGet("/comunidades").reply(200, {
   comunidades
 });
 

@@ -6,17 +6,19 @@ import styled, {css} from "styled-components";
 import "../../../css/index.css"
 
 
-const Input = ({state,
-  changeState,
-  inputType,
-  label,
-  textPlaceholder,
-  inputName,
-  errorText,
+const Input = ({state={},
+  changeState=()=>{},
+  inputType="text",
+  label="",
+  textPlaceholder="",
+  inputName="",
+  errorText="",
   inputParameters,
-  functionx,
+  functionx=()=>{},
   onChangeCe=()=>{},
-  name}) =>{
+  name="",
+  disabled=false
+}) =>{
 
   const onChange = (e) => {
     changeState({...state, field: e.target.value});
@@ -51,6 +53,7 @@ const Input = ({state,
           onKeyUp = {checking}
           onBlur = {checking}
           check = {state.check}
+          disabled = {disabled}
         />
         <IconChecking check={state.check}>
         {state.check === 'true' ? <BsCheckCircleFill/> : <BsFillXCircleFill/>}
