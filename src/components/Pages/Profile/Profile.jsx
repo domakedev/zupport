@@ -40,16 +40,46 @@ const ContNameUser = styled.div `
 
 const ContAboutUser = styled.div `
     margin: auto;
-    margin-bottom: 10px;
+    margin-bottom: 100px;
     background-color: #cbfbfa;
     width: 500px;
     border-radius: 5px;
 
 `;
 
+const ContNetworks = styled.div `
+    margin: auto;
+    margin-bottom: 100px;
+    width: 500px;
+    border-radius: 5px;
+    
+    
+
+`;
+
+const ContSocialNetworks = styled.div `
+   
+   margin-bottom: 10px;
+   margin: 5px;
+   
+   background-color: #cbfbfa;
+   width: 200px;
+   border-radius: 5px;
+`;
+
+const ContDivNetwork = styled.div `
+   width: 400px;
+   
+   & span {
+      float: right;
+      border: solid 2px red;
+   }
+
+`;
+
 const Description = styled.div `
     
-    margin: 5px;
+    margin: 10px;
     padding: 10px;
     font-size: 15px;
     
@@ -76,6 +106,8 @@ const NameUser = () => {
 
 const description_user = 'Soy un gato, que se cree loro, Sin emoji';
 
+const name_social_networks = ['GitHub', '-Seleccionar--'];
+
 
 const Profile= () => {
 	return (
@@ -96,9 +128,25 @@ const Profile= () => {
 		<Description>{description_user}</Description>
 		</ContAboutUser>
 
+		<About_text>Mis Redes</About_text>
+		<ContNetworks>
+
+		<ContDivNetwork>
+		<ContSocialNetworks>
+		<Description>{name_social_networks[0]}</Description>
+		</ContSocialNetworks>
+		
+		</ContDivNetwork>
+
+		<ContSocialNetworks>
+		<Description>{name_social_networks[1]}</Description>
+		</ContSocialNetworks>
+
+		</ContNetworks>
+
 		<Footer/>
 		</>
-	);
+	)
 };
 
 export default Profile;
