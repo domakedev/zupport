@@ -12,6 +12,8 @@ const Comment = styled.div`
   padding: 0 32px;
 
   margin-top: 10px;
+
+  
 `;
 
 const Helper = styled.div`

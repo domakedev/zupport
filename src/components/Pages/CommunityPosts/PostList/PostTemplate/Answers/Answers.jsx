@@ -70,6 +70,11 @@ const  SupportAnswer = styled(ValidatedMessage)`
   cursor: pointer;
 `;
 
+const AnswersContainer = styled.div`
+  margin-bottom: 30px;
+  overflow-x: hidden;
+`
+
 //FakeData
 const FakeData = [
   {
@@ -144,7 +149,7 @@ export const Answers = () => {
   }
 
   return (
-    <div style={{ marginBottom: "30px" }}>
+    <AnswersContainer>
       {/* Answers checked */}
       {fakeDataValidated.map((e, i) => (
         <div key={i}>
@@ -175,6 +180,6 @@ export const Answers = () => {
           ))}
         </MoreAnswersList>
       ) : null}
-    </div>
+    </AnswersContainer>
   );
 };
