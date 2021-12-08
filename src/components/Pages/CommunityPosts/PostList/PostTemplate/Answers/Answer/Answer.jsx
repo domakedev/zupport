@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import InputText from "../../../../../../Layout/Inputs/InputText";
 import { AiFillCheckSquare } from "react-icons/ai";
+import PropTypes from 'prop-types';
+
 
 const Comment = styled.div`
   display: flex;
@@ -13,7 +15,7 @@ const Comment = styled.div`
 
   margin-top: 10px;
 
-  
+
 `;
 
 const Helper = styled.div`
@@ -65,5 +67,10 @@ const Answer = ({ state = {}, textPlaceholder = "" }) => {
     </Comment>
   );
 };
+
+Answer.propTypes = {
+  state: PropTypes.object,
+  textPlaceholder: PropTypes.string
+}
 
 export default Answer;
