@@ -28,7 +28,7 @@ const ImgProfile = styled.div `
 const ContNameUser = styled.div `
     margin: auto;
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 100px;
     background-color: gray;
     width: 250px;
     height: 40px;
@@ -40,16 +40,28 @@ const ContNameUser = styled.div `
 
 const ContAboutUser = styled.div `
     margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: solid 2px green;
+    margin-bottom: 10px;
+    background-color: #cbfbfa;
     width: 500px;
+    border-radius: 5px;
 
 `;
 
 const Description = styled.div `
-    border: solid 2px black;
+    
+    margin: 5px;
+    padding: 10px;
+    font-size: 15px;
+    
+    
+`;
+
+const About_text = styled.div `
+    margin: auto;
+    margin-bottom: 10px;
+    width: 500px;
+    padding: 5px;
+    font-size: 17px;
 `;
 
 const NameUs = 'Lionel Messi';
@@ -59,6 +71,8 @@ const NameUser = () => {
 		<h2>{NameUs}</h2>
 	);
 };
+
+
 
 const description_user = 'Soy un gato, que se cree loro, Sin emoji';
 
@@ -76,8 +90,9 @@ const Profile= () => {
 		    <NameUser/>
 		</ContNameUser>
 
+		
+		<About_text>Algo sobre mi</About_text>
 		<ContAboutUser>
-		<h3>Algo sobre mi</h3>
 		<Description>{description_user}</Description>
 		</ContAboutUser>
 
