@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Answer from "./Answer/Answer";
 import styled from "styled-components";
-import { FaAngleDown } from "react-icons/fa";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { GrLike } from "react-icons/gr";
 
 //Styleds
@@ -63,7 +63,7 @@ const ValidatedMessage = styled.p`
   color: rgba(0, 0, 0, 0.55);
 `;
 
-const  SupportAnswer = styled(ValidatedMessage)`
+const SupportAnswer = styled(ValidatedMessage)`
   width: 58%;
   margin: 0 auto;
   text-align: left;
@@ -73,7 +73,7 @@ const  SupportAnswer = styled(ValidatedMessage)`
 const AnswersContainer = styled.div`
   margin-bottom: 30px;
   overflow-x: hidden;
-`
+`;
 
 //FakeData
 const FakeData = [
@@ -144,9 +144,9 @@ export const Answers = () => {
   const [fakeDataValidated, setV] = useState(answersValidated);
   const [fakeDataNoValidated] = useState(answersNoValidated);
 
-  const supportAnswer = (comment) =>{
+  const supportAnswer = (comment) => {
     //console.log("Me gusta:", comment);
-  }
+  };
 
   return (
     <AnswersContainer>
@@ -161,7 +161,17 @@ export const Answers = () => {
       ))}
 
       <MoreAnswers onClick={() => setViewMore(!viewMore)}>
-        <FaAngleDown /> <span>Ver más respuestas</span>
+        {viewMore ? (
+          <>
+            <FaAngleUp />
+            <span>Ocultar respuestas</span>
+          </>
+        ) : (
+          <>
+            <FaAngleDown />
+            <span>Ver más respuestas</span>
+          </>
+        )}
       </MoreAnswers>
 
       {/* Answers no checked */}
@@ -169,12 +179,9 @@ export const Answers = () => {
         <MoreAnswersList>
           {fakeDataNoValidated.map((e, i) => (
             <div key={i}>
-              <Answer  state={e} />
-              <SupportAnswer
-                onClick={()=>(
-                  supportAnswer(e.field)
-                )}>
-                Apoyar <GrLike/>
+              <Answer state={e} />
+              <SupportAnswer onClick={() => supportAnswer(e.field)}>
+                Apoyar <GrLike />
               </SupportAnswer>
             </div>
           ))}
