@@ -31,5 +31,5 @@ export const IconHeart = ({likes}) =>(
   </IconHeartContainer>
 );
 IconHeart.propTypes = {
-  likes : PropTypes.string.isRequired,
+  likes : PropTypes.string.isRequired
 };

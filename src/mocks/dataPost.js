@@ -4,7 +4,7 @@ import mock from "../utils/mock"
 
 export  const dataPost = [];
 
-for(let i =0; i< 50; i++){
+for(let i =0; i< 10; i++){
       dataPost.push({
       post_id:faker.datatype.uuid(),
       user_id:faker.datatype.uuid(),
@@ -25,6 +25,7 @@ for(let i =0; i< 50; i++){
     posts: dataPost.sort((dateA, dateB) =>  dateB.timePost - dateA.timePost)
   });
 
+ 
 /**
  * códigos de respuesta
  * Get:

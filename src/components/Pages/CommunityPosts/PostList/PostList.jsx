@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { PostTemplate } from "./PostTemplate/PostTemplate";
-import axios from "../../../../utils/axios.js"
+import axios from "../../../../utils/axios.js";
 
 
 //import { dataPost } from "../__Mock__/DataPost";
@@ -66,6 +66,7 @@ export const PostList = () => {
             postTitle={postTitle}
             postDescription={postDescription}
             points={softNumber(points)}
+            crown = {points}
             resolved={resolved}
             likes={softNumber(likes)}
             urlPost={image}

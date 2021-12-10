@@ -1,8 +1,9 @@
 import styled,{css} from "styled-components";
 import PropTypes from "prop-types";
+import UserPhoto from "../../../../Layout/UserPhoto/UserPhoto";
 
 
-const PostHeaderCont = styled.div`
+const PostHeaderCont = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 1.5rem 2rem 0 2rem;
@@ -19,12 +20,7 @@ const UserProfileCont = styled.div`
   gap: 0.5rem;
   align-items: center;
 `;
-const Helper = styled.div`
-  background: #d6d1d1;
-  height: 46.36px;
-  width: 47.67px;
-  border-radius: 50%;
-`;
+
 const PostDateCont = styled.div`
 `;
 const PostUserName = styled.h3` 
@@ -57,12 +53,6 @@ const PostPoints = styled(PostUserName)`
 const TextPoints = styled(PostTime)`
   color: var(--warning-color);
 `;
-const Imag = styled('img')(
-  ({url})=> css`    
-  height: 46.36px;
-  width: 47.67px;
-  border-radius: 50%;
-`);
 const LineCont = styled.div`
   background: #79777052;
   height: 3px;
@@ -72,15 +62,13 @@ const LineCont = styled.div`
   z-index:2;
 `;
 
-export const PostHeader = ({userPhoto, userName,timePost,points, resolved}) =>{
+export const PostHeader = ({userPhoto, userName,timePost,points, crown, resolved}) =>{
 
   return(
     <PostHeaderCont resolved = {resolved}>
   
       <UserProfileCont>
-        <Helper>
-          <Imag src ={userPhoto}/>        
-        </Helper>
+        <UserPhoto userPhoto = {userPhoto} crown = {crown} />
         <PostDateCont>
           <PostUserName>{userName}</PostUserName>          
           <PostTime>{timePost}</PostTime>  

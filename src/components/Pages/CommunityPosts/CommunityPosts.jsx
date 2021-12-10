@@ -6,6 +6,8 @@ import { TopHelpers } from "./TopHelpers/TopHelpers";
 import { CreatePost } from "./CreatePost/CreatePost";
 import { GOFData } from "./BoxActions/BoxAction";
 import { PostList } from "./PostList/PostList";
+import axios from "../../../utils/axios";
+import { rankings } from "../../../controller/CommunityPostCtr/utilities";
 
 const CommunityPostCont = styled.div`
   display: grid;
@@ -30,18 +32,21 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-export const CommunityPosts = () =>(
-  <>
-    <Header/>
-    <Container>
-    <CommunityPostCont>
-      <WelcomeCommunity title = "Javascript"/>
-      <DividingLine/>
-      <TopHelpers/>
-      <CreatePost/>
-      <GOFData/>
-      <PostList/>
-    </CommunityPostCont>
-    </Container>   
-  </>
-);
+export const CommunityPosts = () => {
+
+  return (
+    <>
+      <Header/>
+      <Container>
+      <CommunityPostCont>
+        <WelcomeCommunity title = "Javascript"/>
+        <DividingLine/>
+        <TopHelpers />
+        <CreatePost/>
+        <GOFData/>
+        <PostList/>
+      </CommunityPostCont>
+      </Container>   
+    </>
+  );
+}
