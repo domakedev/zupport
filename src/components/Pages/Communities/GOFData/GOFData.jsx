@@ -1,6 +1,6 @@
 //GOF = GET, ORDER AND FILTER DATA
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 //Import General Styled
@@ -68,7 +68,6 @@ const OFBtn = styled.div`
   position: relative;
   user-select: none;
 
-
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
   svg {
@@ -112,19 +111,58 @@ const SubMenu = styled.div`
   }
 `;
 
-const GOFData = () => {
+// const FakeData = [
+//   {
+//     name: "Javascript",
+//   },
+//   {
+//     name: "Node",
+//   },
+//   {
+//     name: "Cocina",
+//   },
+//   {
+//     name: "Natacion olimpica",
+//   },
+//   {
+//     name: "Java",
+//   },
+//   {
+//     name: "MongoDb",
+//   },
+//   {
+//     name: "Enfermedades comunes",
+//   },
+// ];
+
+const GOFData = ({setResults, comunidades}) => {
   const [search, setSearch] = useState("");
 
+
+  useEffect(() => {
+
+    //Ir a la base de datos y buscar en los nombres de comunidades, de forma asincrona
+    let filteredComu = comunidades.filter((comu) => comu.title?.toLowerCase().includes(search.trim()));
+    console.log(filteredComu);
+
+    //Enviar resultados a estado de resultados
+    setResults(filteredComu)
+
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+
   const onChange = (e) => {
+    e.preventDefault();
     const text = e.target.value;
+    console.log("Buscando:", text);
     setSearch(text);
-    console.log("text", text);
   };
 
-  const onClickSearch = () => {
-    //Buscar y actualizar lista de comunidades
-    console.log("Buscando...");
-  };
+  // const onClickSearch = () => {
+  //   //Buscar y actualizar lista de comunidades
+  //   console.log("Buscando...");
+  // };
 
   const onOrder = () => {
     console.log("Ordename!");
@@ -146,10 +184,10 @@ const GOFData = () => {
           name="searcher"
           placeholder="Buscar comunidad..."
           onChange={onChange}
-          onKeyUp={onClickSearch}
+          //onKeyUp={onClickSearch}
           value={search}
         />
-        <SearchIcon onClick={onClickSearch}>
+        <SearchIcon onClick={onChange}>
           <FaSearch color="white" size="2rem" />
         </SearchIcon>
       </SearcherContainer>
