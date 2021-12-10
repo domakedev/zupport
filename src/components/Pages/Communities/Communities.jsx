@@ -1,9 +1,6 @@
 import React,{useEffect, useState} from "react";
 import styled from "styled-components";
-import axios from 'axios'
-//import { Link, Outlet } from "react-router-dom";
-
-
+//import axios from 'axios'
 
 //Components
 import Header from "../../Layout/Header";
@@ -16,9 +13,10 @@ import CommunitieAddCard from "../../Layout/CommunitieAddCard/CommunitieAddCard"
 import { SubTitle, TitleOrange, PageContainer } from "../../../css/generalStyled";
 
 //Mock, NO BORRAR AUNQUE NO SE USE!
-import mock from "../../../mocks/generalMock"
+//import mock from "../../../mocks/generalMock"
+import axios from "../../../utils/axios.js"
 
-console.log(mock);
+//console.log(mock);
 
 
 // const PageContainer = styled.div`
