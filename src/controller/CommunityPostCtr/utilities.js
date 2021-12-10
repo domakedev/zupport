@@ -2,9 +2,10 @@ export const getPostTime = (fecha) =>{
 
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     const dnow = new Date();
-    const dpost = new Date(fecha);  
+    const dpost = new Date(fecha);
     // dividimos por mil porque son milisegundos
-    const seconds = (dnow - dpost) / 1000;  
+    const seconds = (dnow - dpost) / 1000;
+    //console.log("eeeeeeeeeeeeeea",seconds);
     // aquí pongo algunos ejemplos, puedes añadir más `if else` para hacer los tiempos más específicos
     if (seconds <= 10) {
       return "Ahora mismo";
@@ -42,12 +43,12 @@ export const getPostTime = (fecha) =>{
       return number
     }
   }
-  
+
   export const sortedDates = arr => {
     const sorted = [...arr].sort((dateA, dateB) =>  dateB.timePost - dateA.timePost);
     return sorted
   };
-  
+
   export const rankings = (arr,number) => {
     const sorted = [...arr].sort((a, b) => b.userPts - a.userPts);
     let fifth = sorted.slice(0,number)

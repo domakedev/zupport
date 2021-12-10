@@ -71,6 +71,7 @@ const Communities = () => {
 
         <GOFData
           setResults={setResults}
+          results={results}
           comunidades={comunidades}
         />
         <hr style={{ marginTop: "100px" }} />
