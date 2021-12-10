@@ -6,8 +6,6 @@ import { TopHelpers } from "./TopHelpers/TopHelpers";
 import { CreatePost } from "./CreatePost/CreatePost";
 import { GOFData } from "./BoxActions/BoxAction";
 import { PostList } from "./PostList/PostList";
-import axios from "../../../utils/axios";
-import { rankings } from "../../../controller/CommunityPostCtr/utilities";
 
 const CommunityPostCont = styled.div`
   display: grid;

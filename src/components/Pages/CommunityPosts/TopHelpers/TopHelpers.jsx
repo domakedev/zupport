@@ -14,12 +14,6 @@ const TopHelpersCont = styled.section`
     grid-area: topHelpers;
   }
 `;
-const Helper = styled.img`
-  background: #d6d1d1;
-  height: 46.36px;
-  width: 47.67px;
-  border-radius: 50%;
-`;
 export const TopHelpers = (userPhoto) =>{
   const [topHelper, setTopHelpers ] = useState([]);
   useEffect(()=>{
