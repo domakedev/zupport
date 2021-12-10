@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
+
 import styled from "styled-components";
 
 import { FaSearch, FaChevronDown } from "react-icons/fa";
@@ -134,7 +136,7 @@ export const GOFData = ({ comuPosts=[], results=[], setResults }) => {
     const obtMilis = (fecha) => {
       const dnow = new Date();
       const dpost = new Date(fecha);
-      // dividimos por mil porque son milisegundos
+      // Dividimos por mil porque son milisegundos
       const seconds = (dnow - dpost) / 1000;
       return seconds;
     };
@@ -213,5 +215,15 @@ export const GOFData = ({ comuPosts=[], results=[], setResults }) => {
         </FilterBtn>
       </OrderFilterContainer>
     </BoxActionConatiner>
-  );
-};
+  )
+}
+
+
+
+GOFData.propTypes = {
+  comuPosts: PropTypes.array,
+  results: PropTypes.array,
+  setResults: PropTypes.func
+}
+
+
