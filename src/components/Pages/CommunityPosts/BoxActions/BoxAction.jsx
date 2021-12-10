@@ -109,7 +109,7 @@ const SubMenu = styled.div`
   }
 `;
 
-export const GOFData = ({ comuPosts, results, setResults }) => {
+export const GOFData = ({ comuPosts=[], results=[], setResults }) => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -180,7 +180,7 @@ export const GOFData = ({ comuPosts, results, setResults }) => {
         <SearchInput
           type="search"
           name="searcher"
-          placeholder="Buscar comunidad..."
+          placeholder="Buscar post..."
           onChange={onChange}
           //onKeyUp={onChange}
           value={search}
