@@ -4,7 +4,7 @@ import mock from "../utils/mock"
 
 export  const dataPost = [];
 
-for(let i =0; i< 10; i++){
+for(let i =0; i< 20; i++){
       dataPost.push({
       post_id:faker.datatype.uuid(),
       user_id:faker.datatype.uuid(),
@@ -17,7 +17,8 @@ for(let i =0; i< 10; i++){
       archive: faker.image.technics(),
       likes: faker.datatype.number(),
       points: faker.datatype.number(),
-      resolved: faker.datatype.boolean()
+      resolved: faker.datatype.boolean(),
+      userPoints : faker.datatype.number()
     });
   };
 

@@ -31,7 +31,7 @@ export const TopHelpers = (userPhoto) =>{
   return(
     <TopHelpersCont>
       {topHelper.map(({userPhoto, userPts},index)=>
-      <UserPhoto key ={index} userPhoto= {userPhoto} crown = {userPts}/>)}
+      <UserPhoto key ={index} userPhoto= {userPhoto} userPoints = {userPts}/>)}
     </TopHelpersCont>
   );
 }

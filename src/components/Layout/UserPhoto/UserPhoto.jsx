@@ -7,10 +7,20 @@ import defaultPhoto from "../../../images/Icon/user.png";
 
     //--alert-color : #D9534F; FaUserCircle
     //oro #FFC107; bronce : #CD7F32; plata: #C0C0C
+const crownColor = (points) =>{
+  if(points > 30000){
+    return '#FFC107'
+  }else if(points > 15000){
+    return '#C0C0C0'
+  }else{
+    return '#CD7F32'
+  }
+}
+
 const Container = styled('div')(
-  () => css`
+  ({userPoints}) => css`
     .icon-crow{
-      color:#FFC107;
+      color:${crownColor(userPoints)};
       height: 2rem;
       width: 2rem;      
       stroke-width: 1rem;
@@ -45,12 +55,12 @@ const PhotoContainer = styled('div')(
     object-position: center center;
   `);
 
-const UserPhoto = ({userPhoto, crown}) => {
+const UserPhoto = ({userPhoto, userPoints}) => {
 
   return (
-    <Container>
-      <IconContext.Provider value={{className: "icon-crow"}}>
-          {crown > 30000 ? <AiTwotoneCrown/> : null}   
+    <Container userPoints = {userPoints}>
+      <IconContext.Provider userPoints = {userPoints} value={{className: "icon-crow"}}>
+          <AiTwotoneCrown/>
         </IconContext.Provider>        
       <PhotoContainer>      
         <Photo src ={!userPhoto?defaultPhoto:userPhoto}/>                  

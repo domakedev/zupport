@@ -54,6 +54,7 @@ export const PostList = () => {
             resolved,
             likes,
             image,
+            userPoints
           },
           index
         ) => (
@@ -66,7 +67,7 @@ export const PostList = () => {
             postTitle={postTitle}
             postDescription={postDescription}
             points={softNumber(points)}
-            crown = {points}
+            userPoints = {userPoints}
             resolved={resolved}
             likes={softNumber(likes)}
             urlPost={image}

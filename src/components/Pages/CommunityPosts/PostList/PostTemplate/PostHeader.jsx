@@ -62,13 +62,13 @@ const LineCont = styled.div`
   z-index:2;
 `;
 
-export const PostHeader = ({userPhoto, userName,timePost,points, crown, resolved}) =>{
+export const PostHeader = ({userPhoto, userName,timePost,points, userPoints, resolved}) =>{
 
   return(
     <PostHeaderCont resolved = {resolved}>
   
       <UserProfileCont>
-        <UserPhoto userPhoto = {userPhoto} crown = {crown} />
+        <UserPhoto userPhoto = {userPhoto} userPoints = {userPoints} />
         <PostDateCont>
           <PostUserName>{userName}</PostUserName>          
           <PostTime>{timePost}</PostTime>  
