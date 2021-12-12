@@ -16,9 +16,9 @@ const InputBtnStyle = styled.button`
     background: var(--sucess-color);
   }
 `;
-const InputBtn = ({valueBtn}) =>{
+const InputBtn = ({valueBtn, EnviarDataLogin}) =>{
   return(
-  <InputBtnStyle>{valueBtn}</InputBtnStyle>
+  <InputBtnStyle onClick={EnviarDataLogin}>{valueBtn}</InputBtnStyle>
 )};
 
 export default InputBtn
