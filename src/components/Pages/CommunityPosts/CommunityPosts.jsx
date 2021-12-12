@@ -30,18 +30,21 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-export const CommunityPosts = () =>(
-  <>
-    <Header/>
-    <Container>
-    <CommunityPostCont>
-      <WelcomeCommunity title = "Javascript"/>
-      <DividingLine/>
-      <TopHelpers/>
-      <CreatePost/>
-      <GOFData/>
-      <PostList/>
-    </CommunityPostCont>
-    </Container>   
-  </>
-);
+export const CommunityPosts = () => {
+
+  return (
+    <>
+      <Header/>
+      <Container>
+      <CommunityPostCont>
+        <WelcomeCommunity title = "Javascript"/>
+        <DividingLine/>
+        <TopHelpers />
+        <CreatePost/>
+        <GOFData/>
+        <PostList/>
+      </CommunityPostCont>
+      </Container>   
+    </>
+  );
+}

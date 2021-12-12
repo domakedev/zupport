@@ -15,8 +15,7 @@ const Image = styled('img')(
   ()=> css`
     max-width: 100%;
     height: auto;  
-    @media screen and (min-width: 1024px) {
-    max-width: 70%;
+    @media screen and (min-width: 1024px) {    
   }   
   `);
   //ban solo es una variable para probar los posts que no tengan imagenes del mock

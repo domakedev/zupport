@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-// import {mock2} from "../../../../utils/__Mock__/DataUsersCommunity";
-//import { getItems } from "../../../../controller/CommunityPostCtr/getItems";
-//import {rankings} from "../../../../controller/CommunityPostCtr/utilities"
-//import axios from "utils/axios"
+import {rankings} from "../../../../controller/CommunityPostCtr/utilities";
+import  UserPhoto from "../../../Layout/UserPhoto/UserPhoto";
+import axios from "../../../../utils/axios.js";
 
 const TopHelpersCont = styled.section`
   display: flex;
@@ -15,38 +14,24 @@ const TopHelpersCont = styled.section`
     grid-area: topHelpers;
   }
 `;
-const Helper = styled.img`
-  background: #d6d1d1;
-  height: 46.36px;
-  width: 47.67px;
-  border-radius: 50%;
-`;
-export const TopHelpers = () =>{
-  const [topHelper,
-    // setTopHelpers
-  ] = useState([]);
-  //console.log(mock2);
-
+export const TopHelpers = (userPhoto) =>{
+  const [topHelper, setTopHelpers ] = useState([]);
   useEffect(()=>{
     const dataRequests = async() =>{
-      // try{
-      //   const response = await getItems("/comunidades/:comudidadId/users",'get');
-      //   const res = response.data.users;
-      //   console.log(response)
-      //   //mock2.resetHandlers();
-      //   setTopHelpers(rankings(res,5))
-      //  //mock.restore();
-      // }catch(err){
-      //   console.error('404 Error en la petición /comunidades/:comudidadId/users');
-      // }
-   }
+       try{
+         const response = await axios.get("/comunidades/:comudidadId/users");
+         const res = response.data.users;
+         console.log(response)         
+         setTopHelpers(rankings(res,5))
+       }catch(err){
+         console.error('404 Error en la petición /comunidades/:comudidadId/users');
+   }}
    dataRequests();
-   //setTopHelpers(rankings(communityIdUsers,5))
-  },[])
+  },[]);
   return(
     <TopHelpersCont>
-      {topHelper.map(({userPhoto},index)=>
-      <Helper key ={index} src={userPhoto}/>)}
+      {topHelper.map(({userPhoto, userPts},index)=>
+      <UserPhoto key ={index} userPhoto= {userPhoto} userPoints = {userPts}/>)}
     </TopHelpersCont>
   );
 }
