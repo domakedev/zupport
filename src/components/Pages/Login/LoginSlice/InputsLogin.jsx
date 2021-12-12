@@ -18,7 +18,7 @@ const ForgotPassword = styled.a`
   text-align: end;
 `;
 
-const InputsLogin = () =>{
+const InputsLogin = ({Login, setSpinning}) =>{
 
   const [password, changePassword] = useState({field : '',check : null});
   const [email, changeEmail] = useState({field : '',check : null});
@@ -26,6 +26,17 @@ const InputsLogin = () =>{
   const parameters = {
 		password: /^.{4,12}$/, // 4 a 12 digitos.
 		email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+  }
+
+  const EnviarDataLogin = (e) =>{
+    e.preventDefault()
+    setSpinning(true)
+    const data = {
+      email: email.field,
+      password: password.field
+    }
+
+    Login(data)
   }
 
   return(
@@ -50,7 +61,10 @@ const InputsLogin = () =>{
         errorText = "La contraseña debe poseer de 4 a 12 digitos."
         inputParameters = {parameters.password}
       />
-      <InputBtn valueBtn = "INICIAR SESIÓN"/>
+      <InputBtn
+        EnviarDataLogin = {EnviarDataLogin}
+        valueBtn = "INICIAR SESIÓN"
+      />
       <ForgotPassword>¿Olvidaste tu contraseña?</ForgotPassword>
     </ContainerInputsLogin>
   )

@@ -1,5 +1,5 @@
 import "../../css/App.css";
-import "../../mocks"
+//import "../../mocks"
 
 // import Landing from "./Landing/Landing";
 // import P404 from "./404/404";
@@ -16,7 +16,7 @@ import Landing from "./Landing/Landing";
 function App() {
   return (
     <>
-      <Landing/>
+      {/* <Landing/> */}
     </>
   );
 }

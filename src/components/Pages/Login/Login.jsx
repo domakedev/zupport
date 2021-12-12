@@ -1,15 +1,18 @@
-import React from 'react';
-import styled from "styled-components";
+import React, {useState} from "react";
+import styled, { css } from "styled-components";
 import WelcomeLogin from "./LoginSlice/WelcomeLogin";
 import InputsLogin from "./LoginSlice/InputsLogin";
 import BtnRss from "../../Layout/Inputs/InputSocialMediaButton";
 import SeparatorLine from "./LoginSlice/SeparatorLine";
 import { Link } from "react-router-dom";
 
-
 //Import layouts
 import Header from "../../Layout/Header";
 import Footer from "../../Layout/Footer";
+import Loading from "../../Layout/Loading/Loading"
+
+//Import Context
+import {useStateAuth} from "../../../context/Auth/AuthContext"
 
 const FormContainer = styled.div`
   display: flex;
@@ -49,29 +52,58 @@ const SuperContainer = styled.div`
   min-height: 100vh;
 `;
 
-const Login = () => (
-  <SuperContainer>
-    <Header></Header>
-
-    <FormContainer>
-      <FormLogin>
-        <WelcomeLogin />
-
-        <InputsLogin />
-
-        <SeparatorLine />
-        <BtnRss />
-
-        <OptionRegister>
-          ¿No tienes una cuenta?
-          <LinkTo to="/register"> Regístrate aquí</LinkTo>
-        </OptionRegister>
-
-      </FormLogin>
-    </FormContainer>
-
-    <Footer></Footer>
-  </SuperContainer>
+const AlertAuth = styled("p")(
+  () => css`
+    font-family: var(--secondary-font);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.5rem;
+    line-height: 20px;
+    color: var(--alert-color);
+  `
 );
+
+const Login = () => {
+
+  const {errorAuth, Login, setSpinning, spinning} = useStateAuth()
+
+
+  return (
+    <SuperContainer>
+      <Header></Header>
+
+      <FormContainer>
+        <FormLogin>
+          <WelcomeLogin />
+
+          <InputsLogin
+            setSpinning={setSpinning}
+            Login={Login}
+          />
+          {errorAuth?
+          <AlertAuth>Error al iniciar sesión</AlertAuth>
+          :
+           null
+          }
+          {spinning?
+          <Loading/>
+          :
+           null
+          }
+
+          <SeparatorLine />
+          <BtnRss />
+
+          <OptionRegister>
+            ¿No tienes una cuenta?
+            <LinkTo to="/register"> Regístrate aquí</LinkTo>
+          </OptionRegister>
+        </FormLogin>
+      </FormContainer>
+
+      <Footer></Footer>
+    </SuperContainer>
+  )
+};
 
 export default Login;
