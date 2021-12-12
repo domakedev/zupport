@@ -17,13 +17,15 @@ const CommentButton = styled.button`
   padding: 0.3rem 1rem 0.5rem 1rem;
   margin-top: 0.5rem;
   border-radius: 3px;
+  cursor: pointer;
   :hover{
     background:#d3d2ce5b;
   }
 `;
 
-export const CommentButtonPost = () =>(
-  <CommentButton type = "button">  
+export const CommentButtonPost = ({responderFn}) =>(
+
+  <CommentButton type = "button" onClick={responderFn}>
     <IconContext.Provider value ={{className: "icon-comments"}}>
      <IoChatbubbleEllipsesOutline/>
      </IconContext.Provider>

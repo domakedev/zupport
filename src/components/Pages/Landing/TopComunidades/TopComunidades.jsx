@@ -1,15 +1,12 @@
-import axios from '../../../../utils/axios'
-import React, {useEffect, useState} from 'react'
+import axios from "../../../../utils/axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
 
 //Componentes
 import CardComunidadShow from "../../../../components/Layout/CardComunidadShow/CardComunidadShow";
 
 //Mock, NO BORRAR AUNQUE NO SE USE!
-
-
 
 const Container = styled.div`
   display: flex;
@@ -37,8 +34,8 @@ const Cards = styled.div`
   margin: 20px auto 0px auto;
 
   border-radius: 3px;
+  gap:1px;
 `;
-
 
 const LinkTo = styled(Link)`
   text-decoration: none;
@@ -46,36 +43,33 @@ const LinkTo = styled(Link)`
   cursor: pointer;
 
   display: block;
-border: none;
+  border: none;
 
-padding: 13px 22px;
-margin: 0 auto;
+  padding: 13px 22px;
+  margin: 0 auto;
 
-background-color: var(--secondary-color);
-color: white;
-border-radius: 3px;
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 3px;
 
-font-weight: bold;
-font-size: 1.8rem;
+  font-weight: bold;
+  font-size: 1.8rem;
 
-font-family: var(--secondary-font);
+  font-family: var(--secondary-font);
 `;
 
-
-
 const TopComunidades = () => {
+  const [comunidades, setComunidades] = useState([]);
 
-  const [comunidades, setComunidades] = useState([])
-
-
-  useEffect(()=>{
-    axios.get("/comunidades").then(function (response) {
-      console.log("Data:",response.data.comunidades)
-      setComunidades(response.data.comunidades)
-    }).catch(error=> console.log("Error:",error))
-  },[])
-
-
+  useEffect(() => {
+    axios
+      .get("/comunidades")
+      .then(function (response) {
+        console.log("Data:", response.data.comunidades);
+        setComunidades(response.data.comunidades);
+      })
+      .catch((error) => console.log("Error:", error));
+  }, []);
 
   return (
     <Container>
@@ -93,7 +87,7 @@ const TopComunidades = () => {
         ))}
       </Cards>
 
-        <LinkTo to="/communities">VER MAS COMUNIDADES</LinkTo>
+      <LinkTo to="/communities">VER MAS COMUNIDADES</LinkTo>
     </Container>
   );
 };

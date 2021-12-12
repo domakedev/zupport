@@ -19,10 +19,11 @@ const crownColor = (points) =>{
 
 const Container = styled('div')(
   ({userPoints}) => css`
+    position: relative;
     .icon-crow{
       color:${crownColor(userPoints)};
       height: 2rem;
-      width: 2rem;      
+      width: 2rem;
       stroke-width: 1rem;
       stroke: var(--dark-color);
       position: absolute;
@@ -30,10 +31,10 @@ const Container = styled('div')(
     }
 
   `
-) 
+)
 const PhotoContainer = styled('div')(
   () => css`
-    display:flex;      
+    display:flex;
     justify-content: center;
     align-items: center;
     height: 40px;
@@ -45,9 +46,9 @@ const PhotoContainer = styled('div')(
     object-position: center center;
   `);
   const Photo = styled('img')(
-    ()=> css`    
+    ()=> css`
     height: 34px;
-    width: 34px;        
+    width: 34px;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
@@ -55,22 +56,27 @@ const PhotoContainer = styled('div')(
     object-position: center center;
   `);
 
-const UserPhoto = ({userPhoto, userPoints}) => {
+
+const UserPhoto = ({userPhoto=defaultPhoto, userPoints=0}) => {
 
   return (
     <Container userPoints = {userPoints}>
-      <IconContext.Provider userPoints = {userPoints} value={{className: "icon-crow"}}>
+      <IconContext.Provider
+        userPoints = {userPoints}
+        value={{className: "icon-crow"}}>
           <AiTwotoneCrown/>
-        </IconContext.Provider>        
-      <PhotoContainer>      
-        <Photo src ={!userPhoto?defaultPhoto:userPhoto}/>                  
+      </IconContext.Provider>
+
+      <PhotoContainer>
+        <Photo src ={userPhoto}/>
       </PhotoContainer>
     </Container>
   )
 }
 
 UserPhoto.propTypes = {
-  userPhoto : PropTypes.string
+  userPhoto : PropTypes.string,
+  userPoints : PropTypes.number
 }
 
 export default UserPhoto
