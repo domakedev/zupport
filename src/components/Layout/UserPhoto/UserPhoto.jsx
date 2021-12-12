@@ -19,6 +19,7 @@ const crownColor = (points) =>{
 
 const Container = styled('div')(
   ({userPoints}) => css`
+    position: relative;
     .icon-crow{
       color:${crownColor(userPoints)};
       height: 2rem;
