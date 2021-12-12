@@ -158,8 +158,6 @@ const LineaD = styled(Linea)`
 const CommunitieAddCard = ({ image, users, checks, title, i }) => {
   //let params = useParams();
 
-  console.log("iiiiiiiii",title);
-
   const unirmeA = () => {
     console.log("Me uni a la comunidad de:", title);
   };

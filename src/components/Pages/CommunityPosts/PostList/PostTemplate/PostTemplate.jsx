@@ -43,9 +43,9 @@ const ReactionContainer = styled.div`
 `;
 
 
-export const PostTemplate = ({ ban, userPhoto, userName, timePost, postTitle, postDescription, points, resolved, likes, urlPost}) => (
+export const PostTemplate = ({ ban, userPhoto, userName, timePost, postTitle, postDescription, points, userPoints, resolved, likes, urlPost}) => (
   <PostTemplteCont>
-    <PostHeader userPhoto = {userPhoto} userName = {userName} timePost = {timePost} points= {points.toString()} resolved ={resolved}/>
+    <PostHeader userPhoto = {userPhoto} userName = {userName} timePost = {timePost} points= {points} userPoints = {userPoints} resolved ={resolved}/>
     <DividingLine/>
     <PostContainer>
       <PostTitle>{postTitle}</PostTitle>

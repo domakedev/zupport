@@ -20,7 +20,6 @@ import { SubTitle, TitleOrange, PageContainer } from "../../../css/generalStyled
 //import mock from "../../../mocks/generalMock"
 
 
-
 // const PageContainer = styled.div`
 //   display: flex;
 //   flex-direction: column;
@@ -49,10 +48,13 @@ const Communities = () => {
 
   const [comunidades, setComunidades] = useState([])
 
+  const [results, setResults] = useState([]);
+
   useEffect(()=>{
     axios.get("/comunidades").then(function (response) {
       console.log("dataaa",response.data.comunidades)
       setComunidades(response.data.comunidades)
+      setResults(response.data.comunidades)
     }).catch(error=> console.log("Errorrrrrr",error))
   },[])
 
@@ -66,10 +68,14 @@ const Communities = () => {
 
         <NewCommunitie />
 
-        <GOFData />
+        <GOFData
+          setResults={setResults}
+          results={results}
+          comunidades={comunidades}
+        />
         <hr style={{ marginTop: "100px" }} />
 
-        <Comunidades>
+        {/* <Comunidades>
           {comunidades.map((e, i) => {
             return (
               <CommunitieAddCard
@@ -82,7 +88,25 @@ const Communities = () => {
               />
             );
           })}
+        </Comunidades> */}
+
+        {/* Impresion de resultados de busqueda */}
+        <Comunidades>
+          {results?.map((e, i) => {
+            return (
+              <CommunitieAddCard
+                key={i}
+                id={i}
+                image={e.image}
+                users={e.users}
+                checks={e.cheks}
+                title={e.title}
+              />
+            );
+          })}
         </Comunidades>
+
+
 
       </Container>
 

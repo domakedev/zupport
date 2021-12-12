@@ -1,10 +1,7 @@
 //GOF = GET, ORDER AND FILTER DATA
 
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-
-//Import General Styled
-//import { SubTitle } from "../../../../css/generalStyled";
 
 //Icons
 import { FaSearch, FaChevronDown } from "react-icons/fa";
@@ -68,7 +65,6 @@ const OFBtn = styled.div`
   position: relative;
   user-select: none;
 
-
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
   svg {
@@ -112,30 +108,92 @@ const SubMenu = styled.div`
   }
 `;
 
-const GOFData = () => {
+// const FakeData = [
+//   {
+//     name: "Javascript",
+//   },
+//   {
+//     name: "Node",
+//   },
+//   {
+//     name: "Cocina",
+//   },
+//   {
+//     name: "Natacion olimpica",
+//   },
+//   {
+//     name: "Java",
+//   },
+//   {
+//     name: "MongoDb",
+//   },
+//   {
+//     name: "Enfermedades comunes",
+//   },
+// ];
+
+const GOFData = ({ setResults, results, comunidades }) => {
   const [search, setSearch] = useState("");
 
+  useEffect(() => {
+    //Ir a la base de datos y buscar en los nombres de comunidades, de forma asincrona
+    let filteredComu = comunidades.filter((comu) =>
+      comu.title?.toLowerCase().includes(search.trim())
+    );
+
+    //Enviar resultados a estado de resultados
+    setResults(filteredComu);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+
   const onChange = (e) => {
+    e.preventDefault();
     const text = e.target.value;
     setSearch(text);
-    console.log("text", text);
   };
 
-  const onClickSearch = () => {
-    //Buscar y actualizar lista de comunidades
-    console.log("Buscando...");
+  const onOrderByUsers = () => {
+    const copyResults = [...results];
+    copyResults.sort(function (a, b) {
+      return b.users - a.users;
+    });
+    setResults(copyResults);
   };
 
-  const onOrder = () => {
-    console.log("Ordename!");
+  const onOrderByAnswers = () => {
+    const copyResults = [...results];
+    copyResults.sort(function (a, b) {
+      return b.cheks - a.cheks;
+    });
+    setResults(copyResults);
   };
 
-  const onFilter = () => {
-    console.log("Filtrameee!");
+  const onOrderByName = () => {
+    const copyResults = [...results];
+
+    copyResults.sort(function (a, b) {
+      if (a.title > b.title) {
+        return 1;
+      }
+      if (a.title < b.title) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+
+    setResults(copyResults);
   };
 
   const onClick500Users = () => {
-    console.log("Comunidades con mas de 500 usuarios");
+    const filtered = results.filter((c) => Number(c.users) >= 500);
+    setResults(filtered);
+  };
+
+  const onClick500Answer = () => {
+    const filtered = results.filter((c) => Number(c.cheks) >= 500);
+    setResults(filtered);
   };
 
   return (
@@ -146,33 +204,38 @@ const GOFData = () => {
           name="searcher"
           placeholder="Buscar comunidad..."
           onChange={onChange}
-          onKeyUp={onClickSearch}
+          //onKeyUp={onClickSearch}
           value={search}
         />
-        <SearchIcon onClick={onClickSearch}>
+        <SearchIcon onClick={onChange}>
           <FaSearch color="white" size="2rem" />
         </SearchIcon>
       </SearcherContainer>
 
       <OrderFilterContainer>
-        <OrderBtn onClick={onOrder}>
+        <OrderBtn>
           <span>
             <FaChevronDown /> Ordenar
           </span>
           <SubMenu>
-            <span>A-Z</span>
-            <span>Usuarios</span>
-            <span>Respuestas</span>
+            <span onClick={onOrderByName}>A-Z</span>
+            <span onClick={onOrderByUsers}>Usuarios</span>
+            <span onClick={onOrderByAnswers}>Respuestas</span>
           </SubMenu>
         </OrderBtn>
 
-        <FilterBtn onClick={onFilter}>
+        {/* Boton de reset no necesario
+        <OrderBtn onClick={()=>(window.location.reload())}>
+          <IoReloadOutline size={"15px"}/> Reset
+        </OrderBtn> */}
+
+        <FilterBtn>
           <span>
             <FaChevronDown /> Filtrar
           </span>
           <SubMenu>
             <span onClick={onClick500Users}>+500 usuarios</span>
-            <span>+500 respuestas</span>
+            <span onClick={onClick500Answer}>+500 respuestas</span>
           </SubMenu>
         </FilterBtn>
       </OrderFilterContainer>

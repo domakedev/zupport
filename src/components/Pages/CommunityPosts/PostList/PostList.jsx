@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+//import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { PostTemplate } from "./PostTemplate/PostTemplate";
-import axios from "../../../../utils/axios.js"
+//import axios from "../../../../utils/axios.js"
+
 
 
 //import { dataPost } from "../__Mock__/DataPost";
@@ -20,29 +21,30 @@ const PostListCont = styled.div`
   }
 `;
 
-export const PostList = () => {
-  const [posts, setPosts] = useState([]);
+export const PostList = ({results}) => {
 
-  useEffect(() => {
-    const dataRequests = async () => {
-      try {
-        const response = await axios.get("/comunidades/:comudidadId/posts");
-        const res = response.data.posts;
-        //console.log(sortedDates(res));
-        setPosts(res);
-        //mock.resetHandlers();
-      } catch (err) {
-        console.error(
-          "404 Error en la petición /comunidades/:comudidadId/posts"
-        );
-      }
-    };
-    dataRequests();
-  }, []);
+  //const [posts, setPosts] = useState([]);
+
+  // useEffect(() => {
+  //   const dataRequests = async () => {
+  //     try {
+  //       const response = await axios.get("/comunidades/:comudidadId/posts");
+  //       const res = response.data.posts;
+  //       //console.log(sortedDates(res));
+  //       setPosts(res);
+  //       //mock.resetHandlers();
+  //     } catch (err) {
+  //       console.error(
+  //         "404 Error en la petición /comunidades/:comudidadId/posts"
+  //       );
+  //     }
+  //   };
+  //   dataRequests();
+  // }, []);
 
   return (
     <PostListCont>
-      {posts.map(
+      {results?.map( //aqui estaba posts
         (
           {
             userPhoto,
@@ -54,6 +56,7 @@ export const PostList = () => {
             resolved,
             likes,
             image,
+            userPoints
           },
           index
         ) => (
@@ -66,6 +69,7 @@ export const PostList = () => {
             postTitle={postTitle}
             postDescription={postDescription}
             points={softNumber(points)}
+            userPoints = {userPoints}
             resolved={resolved}
             likes={softNumber(likes)}
             urlPost={image}
