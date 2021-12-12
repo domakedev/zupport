@@ -4,6 +4,7 @@ import { PostTemplate } from "./PostTemplate/PostTemplate";
 //import axios from "../../../../utils/axios.js"
 
 
+
 //import { dataPost } from "../__Mock__/DataPost";
 import {
   getPostTime,
@@ -55,6 +56,7 @@ export const PostList = ({results}) => {
             resolved,
             likes,
             image,
+            userPoints
           },
           index
         ) => (
@@ -67,6 +69,7 @@ export const PostList = ({results}) => {
             postTitle={postTitle}
             postDescription={postDescription}
             points={softNumber(points)}
+            userPoints = {userPoints}
             resolved={resolved}
             likes={softNumber(likes)}
             urlPost={image}
