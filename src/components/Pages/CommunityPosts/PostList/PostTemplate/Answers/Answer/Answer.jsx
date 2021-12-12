@@ -5,6 +5,9 @@ import InputText from "../../../../../../Layout/Inputs/InputText";
 import { AiFillCheckSquare } from "react-icons/ai";
 import PropTypes from 'prop-types';
 
+//User component
+import UserPhoto from "../../../../../../Layout/UserPhoto/UserPhoto"
+
 
 const Comment = styled.div`
   display: flex;
@@ -18,11 +21,6 @@ const Comment = styled.div`
 
 `;
 
-const Helper = styled.div`
-  width: 50px;
-  height: 50px;
-  background-color: grey;
-`;
 
 const Validated = styled.div`
   svg {
@@ -50,7 +48,9 @@ const Answer = ({ state = {}, textPlaceholder = "" }) => {
 
   return (
     <Comment>
-      <Helper />
+      <UserPhoto
+        userPoints
+      />
 
       <InputComment>
         <InputText
