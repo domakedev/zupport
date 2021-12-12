@@ -1,9 +1,6 @@
 import React,{useEffect, useState} from "react";
 import styled from "styled-components";
-import axios from 'axios'
-//import { Link, Outlet } from "react-router-dom";
-
-
+//import axios from 'axios'
 
 //Components
 import Header from "../../Layout/Header";
@@ -16,9 +13,10 @@ import CommunitieAddCard from "../../Layout/CommunitieAddCard/CommunitieAddCard"
 import { SubTitle, TitleOrange, PageContainer } from "../../../css/generalStyled";
 
 //Mock, NO BORRAR AUNQUE NO SE USE!
-import mock from "../../../mocks/generalMock"
+//import mock from "../../../mocks/generalMock"
+import axios from "../../../utils/axios.js"
 
-console.log(mock);
+//console.log(mock);
 
 
 // const PageContainer = styled.div`
@@ -49,10 +47,13 @@ const Communities = () => {
 
   const [comunidades, setComunidades] = useState([])
 
+  const [results, setResults] = useState([]);
+
   useEffect(()=>{
     axios.get("/comunidades").then(function (response) {
       console.log("dataaa",response.data.comunidades)
       setComunidades(response.data.comunidades)
+      setResults(response.data.comunidades)
     }).catch(error=> console.log("Errorrrrrr",error))
   },[])
 
@@ -66,10 +67,14 @@ const Communities = () => {
 
         <NewCommunitie />
 
-        <GOFData />
+        <GOFData
+          setResults={setResults}
+          results={results}
+          comunidades={comunidades}
+        />
         <hr style={{ marginTop: "100px" }} />
 
-        <Comunidades>
+        {/* <Comunidades>
           {comunidades.map((e, i) => {
             return (
               <CommunitieAddCard
@@ -82,7 +87,25 @@ const Communities = () => {
               />
             );
           })}
+        </Comunidades> */}
+
+        {/* Impresion de resultados de busqueda */}
+        <Comunidades>
+          {results?.map((e, i) => {
+            return (
+              <CommunitieAddCard
+                key={i}
+                id={i}
+                image={e.image}
+                users={e.users}
+                checks={e.cheks}
+                title={e.title}
+              />
+            );
+          })}
         </Comunidades>
+
+
 
       </Container>
 

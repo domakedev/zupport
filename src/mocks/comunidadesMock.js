@@ -5,7 +5,7 @@ import mock from "../utils/mock"
 const comunidades = [
   {
     title: "Javascript",
-    users: 11000,
+    users: 11001,
     cheks: 232,
     image:
       "https://midu.dev/images/wallpapers/javascript-grande-horizontal-4k.png",
@@ -18,14 +18,14 @@ const comunidades = [
     "https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg",
   },
   {
-    title: "Javascript",
+    title: "Natacion",
     users: 11000,
     cheks: 232,
     image:
       "https://midu.dev/images/wallpapers/javascript-grande-horizontal-4k.png",
   },
   {
-    title: "NodeJs",
+    title: "Cocina",
     users: 700,
     cheks: 87,
     image:
@@ -35,7 +35,7 @@ const comunidades = [
 
 // Mock any GET request to /users
 // arguments for reply are (status, data, headers)
-mock.onGet("/comunidadesxy").reply(200, {
+mock.onGet("/comunidades").reply(200, {
   comunidades
 });
 

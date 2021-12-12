@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
+
 import styled from "styled-components";
 
 import { FaSearch, FaChevronDown } from "react-icons/fa";
 
 const BoxActionConatiner = styled.section`
-  margin: 3rem 0 2rem 0;
-  display:flex;
+  margin: 3rem 0 2rem 4rem;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   max-width: 1200px;
@@ -15,7 +17,7 @@ const BoxActionConatiner = styled.section`
   @media screen and (min-width: 1024px) {
     grid-area: gofData;
     margin: 1rem 0 2rem 1rem;
-  } 
+  }
 `;
 
 const SearchInput = styled.input`
@@ -89,8 +91,7 @@ const OFBtn = styled.div`
 
 const OrderBtn = styled(OFBtn)``;
 
-const FilterBtn = styled(OFBtn)`
-`;
+const FilterBtn = styled(OFBtn)``;
 
 const SubMenu = styled.div`
   max-height: 0;
@@ -110,30 +111,69 @@ const SubMenu = styled.div`
   }
 `;
 
-export const GOFData = () => {
+export const GOFData = ({ comuPosts=[], results=[], setResults }) => {
   const [search, setSearch] = useState("");
 
+  useEffect(() => {
+    //Ir a la base de datos y buscar en los nombres de comunidades, de forma asincrona
+    let filteredPosts = comuPosts.filter((post) =>
+      post.postTitle?.toLowerCase().includes(search.trim())
+    );
+
+    //Enviar resultados a estado de resultados
+    setResults(filteredPosts);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+
   const onChange = (e) => {
+    e.preventDefault();
     const text = e.target.value;
     setSearch(text);
-    console.log("text", text);
   };
 
-  const onClickSearch = () => {
-    //Buscar y actualizar lista de comunidades
-    console.log("Buscando...");
+  const orderByTime = () => {
+    const obtMilis = (fecha) => {
+      const dnow = new Date();
+      const dpost = new Date(fecha);
+      // Dividimos por mil porque son milisegundos
+      const seconds = (dnow - dpost) / 1000;
+      return seconds;
+    };
+
+    const copyResults = [...results];
+    copyResults.sort(function (a, b) {
+      return obtMilis(b.timePost) - obtMilis(a.timePost);
+    });
+    setResults(copyResults);
   };
 
-  const onOrder = () => {
-    console.log("Ordename!");
+  const orderByLikes = () => {
+    const copyResults = [...results];
+    copyResults.sort(function (a, b) {
+      return b.likes - a.likes;
+    });
+    setResults(copyResults);
   };
 
-  const onFilter = () => {
-    console.log("Filtrameee!");
+  const orderByPoints = () => {
+    const copyResults = [...results];
+    copyResults.sort(function (a, b) {
+      return b.points - a.points;
+    });
+    setResults(copyResults);
   };
 
-  const onClick500Users = () => {
-    console.log("Comunidades con mas de 500 usuarios");
+  const filterNoResolved = () => {
+    const copyResults = [...results];
+    const filtered = copyResults.filter((post) => !post.resolved);
+    setResults(filtered);
+  };
+
+  const filterResolved = () => {
+    const copyResults = [...results];
+    const filtered = copyResults.filter((post) => post.resolved);
+    setResults(filtered);
   };
 
   return (
@@ -142,38 +182,48 @@ export const GOFData = () => {
         <SearchInput
           type="search"
           name="searcher"
-          placeholder="Buscar comunidad..."
+          placeholder="Buscar post..."
           onChange={onChange}
-          onKeyUp={onClickSearch}
+          //onKeyUp={onChange}
           value={search}
         />
-        <SearchIcon onClick={onClickSearch}>
+        <SearchIcon onClick={onChange}>
           <FaSearch color="white" size="2rem" />
         </SearchIcon>
       </SearcherContainer>
 
       <OrderFilterContainer>
-        <OrderBtn onClick={onOrder}>
+        <OrderBtn>
           <span>
             <FaChevronDown /> Ordenar
           </span>
           <SubMenu>
-            <span>A-Z</span>
-            <span>Usuarios</span>
-            <span>Respuestas</span>
+            <span onClick={orderByTime}>Fecha de publicacion</span>
+            <span onClick={orderByLikes}>Likes</span>
+            <span onClick={orderByPoints}>Puntos</span>
           </SubMenu>
         </OrderBtn>
 
-        <FilterBtn onClick={onFilter}>
+        <FilterBtn>
           <span>
             <FaChevronDown /> Filtrar
           </span>
           <SubMenu>
-            <span onClick={onClick500Users}>+500 usuarios</span>
-            <span>+500 respuestas</span>
+            <span onClick={filterNoResolved}>No Resueltos</span>
+            <span onClick={filterResolved}>Resueltos</span>
           </SubMenu>
         </FilterBtn>
       </OrderFilterContainer>
     </BoxActionConatiner>
-  );
-};
+  )
+}
+
+
+
+GOFData.propTypes = {
+  comuPosts: PropTypes.array,
+  results: PropTypes.array,
+  setResults: PropTypes.func
+}
+
+

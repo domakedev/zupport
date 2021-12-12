@@ -69,7 +69,7 @@ const TopComunidades = () => {
 
 
   useEffect(()=>{
-    axios.get("/comunidadesxy").then(function (response) {
+    axios.get("/comunidades").then(function (response) {
       console.log("Data:",response.data.comunidades)
       setComunidades(response.data.comunidades)
     }).catch(error=> console.log("Error:",error))
