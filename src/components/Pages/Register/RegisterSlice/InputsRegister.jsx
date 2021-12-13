@@ -100,8 +100,8 @@ const InputsRegister = () =>{
     changeTerms(e.target.checked);
   }
 
-  const onSubmit = (e) => {
-		e.preventDefault();
+  const onSubmit = async (e) => {
+		
 
     const CheckFields = () => {
 
@@ -124,23 +124,24 @@ const InputsRegister = () =>{
 
     if (CheckFields()) {
 
-	const userF = user.field;
-	const nameF = name.field;
-	const passwordF = password.field;
-	const emailF = email.field;	
-	       
-        axios.post(`http://localhost:5000/api/register/register`, {
-		fullname: userF,
-	       
-	})
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-        
+      e.preventDefault();
+      
+      
+      await axios.post('http://localhost:5000/api/register/register', 
+	    	{
+	    		fullname: user.field,
+	    		username: name.field,
+	    		email: email.field,
+	    		password: password.field
+	    	}
+	    ).then(res => {
+            const newUser = res.data;
+            console.log(newUser)
+        })
 
+      
     }
-		
+      
 	}
 
   return(
