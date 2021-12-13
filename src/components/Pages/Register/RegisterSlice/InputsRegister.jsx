@@ -3,6 +3,7 @@ import styled, {css} from "styled-components";
 import Input from "../../../Layout/Inputs/InputText";
 import InputBtn from "../../../Layout/Inputs/InputBtn"
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
+import axios from 'axios';
 
 
 import "../../../../css/index.css"
@@ -102,23 +103,44 @@ const InputsRegister = () =>{
   const onSubmit = (e) => {
 		e.preventDefault();
 
-		if(
-			user.check === 'true' &&
-			name.check === 'true' &&
-			password.check === 'true' &&
-			password2.check === 'true' &&
-			email.check === 'true' &&
-			terms
-		){
-			changeFormOk(true);
-			changeUser({field: '', check: ''});
-			changeName({field: '', check: null});
-			changePassword({field: '', check: null});
-			changePassword2({field: '', check: 'null'});
-			changeEmail({field: '', check: null});
-		} else {
-			changeFormOk(false);
-		}
+    const CheckFields = () => {
+
+      if(user.check === 'true' && name.check === 'true' && password.check === 'true' &&	password2.check === 'true' &&  email.check === 'true' && terms ) {
+        changeFormOk(true);
+        changeUser({field: '', check: ''});
+        changeName({field: '', check: null});
+        changePassword({field: '', check: null});
+        changePassword2({field: '', check: 'null'});
+        changeEmail({field: '', check: null});
+
+        return true 
+      } else {
+        changeFormOk(false);
+
+        return false
+      }
+
+    };
+
+    if (CheckFields()) {
+
+	const userF = user.field;
+	const nameF = name.field;
+	const passwordF = password.field;
+	const emailF = email.field;	
+	       
+        axios.post(`http://localhost:5000/api/register/register`, {
+		fullname: userF,
+	       
+	})
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+        
+
+    }
+		
 	}
 
   return(
