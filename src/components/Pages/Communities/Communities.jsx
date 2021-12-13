@@ -51,10 +51,10 @@ const Communities = () => {
   const [results, setResults] = useState([]);
 
   useEffect(()=>{
-    axios.get("/comunidades").then(function (response) {
-      console.log("dataaa",response.data.comunidades)
-      setComunidades(response.data.comunidades)
-      setResults(response.data.comunidades)
+    axios.get("/api/communities/").then(function (response) {
+     // console.log("dataaa",response.data)
+      setComunidades(response.data)
+      setResults(response.data)
     }).catch(error=> console.log("Errorrrrrr",error))
   },[])
 
