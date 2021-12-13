@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import {rankings} from "../../../../controller/CommunityPostCtr/utilities";
+//import {rankings} from "../../../../controller/CommunityPostCtr/utilities";
 import  UserPhoto from "../../../Layout/UserPhoto/UserPhoto";
-import axios from "../../../../utils/axios.js";
+//import axios from "../../../../utils/axios.js";
 
 const TopHelpersCont = styled.section`
   display: flex;
@@ -15,18 +15,18 @@ const TopHelpersCont = styled.section`
   }
 `;
 export const TopHelpers = (userPhoto) =>{
-  const [topHelper, setTopHelpers ] = useState([]);
+  const [topHelper ] = useState([]);
   useEffect(()=>{
-    const dataRequests = async() =>{
-       try{
-         const response = await axios.get("/comunidades/:comudidadId/users");
-         const res = response.data.users;
-         console.log(response)         
-         setTopHelpers(rankings(res,5))
-       }catch(err){
-         console.error('404 Error en la petición /comunidades/:comudidadId/users');
-   }}
-   dataRequests();
+   // const dataRequests = async() =>{
+  //      try{
+  //        const response = await axios.get("/comunidades/:comudidadId/users");
+  //        const res = response.data.users;
+  //        console.log(response)         
+  //        setTopHelpers(rankings(res,5))
+  //      }catch(err){
+  //        console.error('404 Error en la petición /comunidades/:comudidadId/users');
+  //  }}
+   //dataRequests();
   },[]);
   return(
     <TopHelpersCont>

@@ -57,7 +57,7 @@ const PhotoContainer = styled('div')(
   `);
 
 
-const UserPhoto = ({userPhoto=defaultPhoto, userPoints=0}) => {
+const UserPhoto = ({userPhoto=defaultPhoto, userPoints}) => {
 
   return (
     <Container userPoints = {userPoints}>
@@ -76,7 +76,7 @@ const UserPhoto = ({userPhoto=defaultPhoto, userPoints=0}) => {
 
 UserPhoto.propTypes = {
   userPhoto : PropTypes.string,
-  userPoints : PropTypes.number
+  //userPoints : PropTypes.number
 }
 
 export default UserPhoto

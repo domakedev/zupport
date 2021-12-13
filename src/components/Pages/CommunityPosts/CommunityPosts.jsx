@@ -46,13 +46,13 @@ export const CommunityPosts = () => {
 
     const postsRequest = async () => {
       try {
-        const response = await axios.get("/comunidades/:comudidadId/posts");
-        const res = response.data.posts;
+        const response = await axios.get("/api/communities/css");
+        const res = response.data;
         setComuPosts(res);
         setResults(res)
       } catch (err) {
         console.error(
-          "404 Error en la petición /comunidades/:comudidadId/posts"
+          "404 Error en la petición /api/communities/css"
         );
       }
     };
