@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import axios from "axios";
 //import PropTypes from 'prop-types';
 
 
@@ -122,12 +123,33 @@ const CreateCommunitie = () => {
 
   const [name, changeName] = useState({field : '',check : null});
   const [image, changeImage] = useState({field : '',check : null});
+  const [description, changeDescription] = useState({field : ''});
+
+  const onSubmit = async (e) => {
+    alert(description.field)
+    e.preventDefault();   
+
+    await axios.post('http://localhost:5001/api/communities/create', 
+
+      {
+        name: name.field,
+        description: description.field,
+        image: image.field
+      }
+
+    ).then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+
+
+  }
 
   return (
-    <PageContainer>
+    <PageContainer> 
       <Header />
       <MainContainer>
-        <Form>
+        <Form actio="" onSubmit={onSubmit}>
           {/* Titulo */}
           <TitleOrange>Crear Comunidad</TitleOrange>
 
@@ -140,14 +162,15 @@ const CreateCommunitie = () => {
             inputType="text"
             inputName="nombre"
             label="Nombre"
-            textPlaceholder="Comida Latina..."
+            textPlaceholder="Comida Latina .."
             onChangeCe={onChangeCe}
-            value={comu.name}
           />
 
-          <Label htmlFor="Descripcion">Descripcion</Label>
+          <Label htmlFor="Description">Descripcion</Label>
           <TextArea
-            name = "descripcion"
+            state = {description}
+            changeState = {changeDescription}
+            name = "description"
             rows="3"
             placeholder="Recetas y tips..."
             onChange={onChangeCe}
@@ -178,7 +201,7 @@ const CreateCommunitie = () => {
           {/* Botones */}
           <Buttons>
             <Button type="button" danger>CANCELAR</Button>
-            <Button type="button"  primary>CREAR</Button>
+            <Button type="submit"  primary>CREAR</Button>
           </Buttons>
         </Form>
       </MainContainer>
