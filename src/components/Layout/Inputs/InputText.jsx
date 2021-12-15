@@ -7,19 +7,21 @@ import "../../../css/index.css"
 
 
 const Input = (
-  {state={},
-  changeState=()=>{},
-  inputType="text",
-  label="",
-  textPlaceholder="",
-  inputName="",
-  errorText="",
-  inputParameters,
-  functionx=()=>{},
-  onChangeCe=()=>{},
-  name="",
-  disabled=false
-}
+
+  {
+    state={},
+    changeState=()=>{},
+    inputType="text",
+    label="",
+    textPlaceholder="",
+    inputName="",
+    errorText="",
+    inputParameters,
+    functionx=()=>{},
+    onChangeCe=()=>{},
+    name="",
+    disabled=false
+  }
 
 ) =>  {
 

@@ -7,19 +7,20 @@ import "../../../css/index.css"
 
 
 const InputArea = (
-  {state={}, 
-  changeState=()=>{}, 
-  inputType="text", 
-  label="", 
-  textPlaceholder="", 
-  inputName="", 
-  errorText="", 
-  inputParameters, 
-  functionx=()=>{},
-  onChangeCe=()=>{},
-  description="",
-  disabled=false
-}
+  {
+    state={}, 
+    changeState=()=>{}, 
+    inputType="text", 
+    label="", 
+    textPlaceholder="", 
+    inputName="", 
+    errorText="", 
+    inputParameters, 
+    functionx=()=>{},
+    onChangeCe=()=>{},
+    description="",
+    disabled=false
+  }
 ) => {
 
   const onChange = (e) => {

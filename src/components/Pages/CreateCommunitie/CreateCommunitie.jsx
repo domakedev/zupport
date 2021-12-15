@@ -39,22 +39,7 @@ const Form = styled.form`
   max-width: 350px;
 `;
 
-/*
-const TextArea = styled.textarea`
-  padding: 1rem 0 0 2rem;
-  border-radius: 3px;
-  border: 0;
-  font-family: var(--secondary-font);
-  font-size: var(--secondarey-font-size);
-  background: rgba(41, 171, 224, 0.08);
-  width: 100%;
-  resize: none;
 
-  ::placeholder{
-    color: var(--boring-color);
-  }
-`;
-*/
 
 const AddImage = styled.p`
   border: none;
@@ -131,7 +116,7 @@ const CreateCommunitie = () => {
   
 
   const onSubmit = async (e) => {
-    console.log('.................',comu);
+    
     e.preventDefault();   
 
     await axios.post('http://localhost:5002/api/communities/create', 
@@ -154,7 +139,7 @@ const CreateCommunitie = () => {
     <PageContainer> 
       <Header />
       <MainContainer>
-        <Form actio="" onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit}>
           {/* Titulo */}
           <TitleOrange>Crear Comunidad</TitleOrange>
 
@@ -175,8 +160,8 @@ const CreateCommunitie = () => {
           <InputTextArea
             state = {description}
             description = "description"
-            changeState = {changeDescription}
-            textPlaceholder="Recetas y tips..."
+            changeState = {changeDescription} 
+            textPlaceholder="Recetas y tips a tu alcanze"
             onChangeCe={onChangeCe}
           />
 
