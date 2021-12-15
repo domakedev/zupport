@@ -4,10 +4,12 @@ import axios from "axios";
 //import PropTypes from 'prop-types';
 
 
+
 //Components
 import Header from "../../Layout/Header";
 import Footer from "../../Layout/Footer";
 import Input from "../../Layout/Inputs/InputText";
+import InputTextArea from "../../Layout/Inputs/InputTextArea";
 import CardComunidadShow from "../../Layout/CardComunidadShow/CardComunidadShow";
 
 //icons
@@ -37,6 +39,7 @@ const Form = styled.form`
   max-width: 350px;
 `;
 
+/*
 const TextArea = styled.textarea`
   padding: 1rem 0 0 2rem;
   border-radius: 3px;
@@ -51,6 +54,7 @@ const TextArea = styled.textarea`
     color: var(--boring-color);
   }
 `;
+*/
 
 const AddImage = styled.p`
   border: none;
@@ -120,21 +124,22 @@ const CreateCommunitie = () => {
     });
   };
 
-
+  
   const [name, changeName] = useState({field : '',check : null});
   const [image, changeImage] = useState({field : '',check : null});
   const [description, changeDescription] = useState({field : ''});
+  
 
   const onSubmit = async (e) => {
-    alert(description.field)
+    console.log('.................',comu);
     e.preventDefault();   
 
-    await axios.post('http://localhost:5001/api/communities/create', 
+    await axios.post('http://localhost:5002/api/communities/create', 
 
       {
-        name: name.field,
-        description: description.field,
-        image: image.field
+        name: comu.nombre,
+        description: comu.description,
+        image: comu.imagen
       }
 
     ).then(res => {
@@ -167,13 +172,12 @@ const CreateCommunitie = () => {
           />
 
           <Label htmlFor="Description">Descripcion</Label>
-          <TextArea
+          <InputTextArea
             state = {description}
+            description = "description"
             changeState = {changeDescription}
-            name = "description"
-            rows="3"
-            placeholder="Recetas y tips..."
-            onChange={onChangeCe}
+            textPlaceholder="Recetas y tips..."
+            onChangeCe={onChangeCe}
           />
 
           {/* Añadir imagen */}

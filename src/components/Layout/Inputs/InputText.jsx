@@ -6,7 +6,8 @@ import styled, {css} from "styled-components";
 import "../../../css/index.css"
 
 
-const Input = ({state={},
+const Input = (
+  {state={},
   changeState=()=>{},
   inputType="text",
   label="",
@@ -18,7 +19,9 @@ const Input = ({state={},
   onChangeCe=()=>{},
   name="",
   disabled=false
-}) =>{
+}
+
+) =>  {
 
   const onChange = (e) => {
     changeState({...state, field: e.target.value});
