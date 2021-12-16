@@ -30,7 +30,7 @@ ReactDOM.render(
         />
 
         <Route
-          path="communities/community-posts"
+          path="  "
           element={<CommunityPosts />}
         />
 

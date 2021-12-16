@@ -75,7 +75,7 @@ const Communities = () => {
         />
         <hr style={{ marginTop: "100px" }} />
 
-        {/* <Comunidades>
+        <Comunidades>
           {comunidades.map((e, i) => {
             return (
               <CommunitieAddCard
@@ -88,7 +88,7 @@ const Communities = () => {
               />
             );
           })}
-        </Comunidades> */}
+        </Comunidades>
 
         {/* Impresion de resultados de busqueda */}
         <Comunidades>

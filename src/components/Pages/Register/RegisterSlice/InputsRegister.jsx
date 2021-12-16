@@ -102,7 +102,7 @@ const InputsRegister = () =>{
   const onSubmit = (e) => {
 		e.preventDefault();
 
-		if(
+		if( 
 			user.check === 'true' &&
 			name.check === 'true' &&
 			password.check === 'true' &&

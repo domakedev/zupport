@@ -91,7 +91,14 @@ const Buttons = styled.div`
 `;
 
 const CreateCommunitie = () => {
+
+
   const [comu, setComu] = useState({});
+  const [name, changeName] = useState({field : '',check : null});
+  const [image, changeImage] = useState({field : '',check : null});
+  const [description, changeDescription] = useState({field : ''});
+  const [formOk, changeFormOk] = useState(null)
+
 
   const addImage = () => {
     console.log("Añadir imageeeen");
@@ -103,35 +110,55 @@ const CreateCommunitie = () => {
 
     console.log(name, title);
 
-    setComu({
-      ...comu,
-      [name]: title,
-    });
+    setComu(
+      {
+        ...comu,
+        [name]: title,
+      }
+    );
+
+
+      
+
   };
 
   
-  const [name, changeName] = useState({field : '',check : null});
-  const [image, changeImage] = useState({field : '',check : null});
-  const [description, changeDescription] = useState({field : ''});
+  ;
   
 
   const onSubmit = async (e) => {
     
-    e.preventDefault();   
+    e.preventDefault();  
 
-    await axios.post('http://localhost:5002/api/communities/create', 
+    	if( 
+			name.check === 'true' &&
+			description.check === 'true' &&
+			image.check === 'true'
 
-      {
-        name: comu.nombre,
-        description: comu.description,
-        image: comu.imagen
-      }
+		){
+			changeFormOk(true);
+			changeUser({field: '', check: ''});
+			changeName({field: '', check: null});
+			changePassword({field: '', check: null});
+			changePassword2({field: '', check: 'null'});
+			changeEmail({field: '', check: null});
+		} else {
+			changeFormOk(false);
+		}
+
+    await axios.post('http://localhost:8081/api/communities/', 
+
+    {
+      name: comu.nombre,
+      description: comu.description,
+      image: comu.imagen
+    }
 
     ).then(res => {
-        console.log(res);
-        console.log(res.data);
-      });
-
+      console.log(res);
+      console.log(res.data);
+    });
+ 
 
   }
 

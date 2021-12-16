@@ -108,29 +108,29 @@ const SubMenu = styled.div`
   }
 `;
 
-// const FakeData = [
-//   {
-//     name: "Javascript",
-//   },
-//   {
-//     name: "Node",
-//   },
-//   {
-//     name: "Cocina",
-//   },
-//   {
-//     name: "Natacion olimpica",
-//   },
-//   {
-//     name: "Java",
-//   },
-//   {
-//     name: "MongoDb",
-//   },
-//   {
-//     name: "Enfermedades comunes",
-//   },
-// ];
+ /*const FakeData = [
+   {
+     name: "Javascript",
+   },
+   {
+     name: "Node",
+   },
+   {
+     name: "Cocina",
+   },
+   {
+     name: "Natacion olimpica",
+   },
+   {
+     name: "Java",
+   },
+   {
+     name: "MongoDb",
+  },
+   {
+     name: "Enfermedades comunes",
+   },
+ ];*/
 
 const GOFData = ({ setResults, results, comunidades }) => {
   const [search, setSearch] = useState("");
@@ -149,8 +149,10 @@ const GOFData = ({ setResults, results, comunidades }) => {
 
   const onChange = (e) => {
     e.preventDefault();
+    
     const text = e.target.value;
     setSearch(text);
+    
   };
 
   const onOrderByUsers = () => {
@@ -208,7 +210,7 @@ const GOFData = ({ setResults, results, comunidades }) => {
           value={search}
         />
         <SearchIcon onClick={onChange}>
-          <FaSearch color="white" size="2rem" />
+          <FaSearch color="white  " size="2rem" />
         </SearchIcon>
       </SearcherContainer>
 
