@@ -4,6 +4,9 @@ import Input from "../../../Layout/Inputs/InputText";
 import InputBtn from "../../../Layout/Inputs/InputBtn"
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
 
+//Import login function de context
+import { useStateAuth } from '../../../../context/Auth/AuthContext';
+
 
 import "../../../../css/index.css"
 
@@ -66,6 +69,8 @@ const ErrorMsg = styled.div`
 
 const InputsRegister = () =>{
 
+const {Register} = useStateAuth()
+
   const [user, changeUser] = useState({field : '',check : null});
   const [name, changeName] = useState({field : '',check : null});
   const [password, changePassword] = useState({field : '',check : null});
@@ -99,8 +104,11 @@ const InputsRegister = () =>{
     changeTerms(e.target.checked);
   }
 
+
+
   const onSubmit = (e) => {
 		e.preventDefault();
+    console.log();
 
 		if(
 			user.check === 'true' &&
@@ -110,6 +118,19 @@ const InputsRegister = () =>{
 			email.check === 'true' &&
 			terms
 		){
+      //Creacion de objeto usuario para enviar a base de datos
+      const newUser = {
+        fullname: name.field,
+        username: user.field,
+        email: email.field,
+        password: password.field,
+        photo: password2.field,
+        points: 0,
+      }
+      Register(newUser);
+      console.log(newUser);
+
+      //Reset de formulario
 			changeFormOk(true);
 			changeUser({field: '', check: ''});
 			changeName({field: '', check: null});

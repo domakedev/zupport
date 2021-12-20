@@ -17,14 +17,18 @@ export const AuthProvider = ({children}) => {
 
   const [spinning, setSpinning] = useState(false)
 
+
   const Login = async (datos) => {
 
     try {
 
+      //TODO: api/login aun no creado en el backend
+      console.log("Login en Context:",datos);
       const respuesta = await axios.post('/api/login', datos)
 
       setSpinning(false)
       setAuth(respuesta.data)
+      setErrorAuth(false)
 
     } catch (error) {
       setSpinning(false)
@@ -32,6 +36,31 @@ export const AuthProvider = ({children}) => {
       setErrorAuth(true)
     }
   }
+
+  const Register = async (datos) => {
+    try {
+
+      //TODO: api/register aun no creado en el backend
+      console.log("Register en Context:",datos);
+      //const res = await axios.post('/api/users', datos)
+      //console.log(res.data);
+
+    } catch (error) {
+      //TODO: Mostrar mensajes enviados desde el backend
+      const errorMessage = error.response.data;
+      console.log(errorMessage);
+    }
+  }
+
+  const bringUsers = async () => {
+    try {
+      const res = await axios.get("/api/users");
+      return res
+      //console.log("Res Res Res", res.data);
+    } catch (error) {
+      console.log("Error bringing users", error);
+    }
+  };
 
   return (
     <AuthContext.Provider value={{
@@ -42,7 +71,9 @@ export const AuthProvider = ({children}) => {
       //Funciones
       setAuth,
       Login,
-      setSpinning
+      setSpinning,
+      Register,
+      bringUsers
     }}>
       {children}
     </AuthContext.Provider>

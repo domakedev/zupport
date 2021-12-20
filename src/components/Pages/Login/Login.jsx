@@ -64,7 +64,12 @@ const AlertAuth = styled("p")(
 
 const Login = () => {
 
-  const {errorAuth, Login, setSpinning, spinning} = useStateAuth()
+  const {
+    errorAuth,
+    Login,
+    setSpinning,
+    spinning
+  } = useStateAuth()
 
 
   return (
@@ -93,7 +98,7 @@ const Login = () => {
           <SeparatorLine />
           <BtnRss />
 
-          <OptionRegister>
+            <OptionRegister>
             ¿No tienes una cuenta?
             <LinkTo to="/register"> Regístrate aquí</LinkTo>
           </OptionRegister>
