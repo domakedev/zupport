@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+
+
+/* ···········ImgProfile ·········  */
+
+.Main__content {
+    margin: auto;
+    margin-top: 60px;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--principal-font);
+}
+
+.ImgProfile__content {
+    position: absolute;
+}
+
+.ImgProfile__img img {
+    width: 200px;
+    height: 200px;
+    border: 15px solid #2EC74F;
+    border-radius: 50%;
+
+}
+
+.ImgProfile__changeImg {
+    background-color: #3E3F3A;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    width: 65px;
+    height: 65px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ImgProfile__changeImg > svg {
+    position: relative;
+    right: -3px;
+    bottom: 2px;
+}
+
+.Button__changeImg {
+    position: absolute;
+    right: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.Button__changeImg:active {
+    transform: scale(.9)
+}
+
+/* ················  ContNameUser ··········· */
+
+.ContNameUser {
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    background-color: #EFEFEF;
+    width: 400px;
+    height: 60px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.ContNameUser__Level {
+    position: absolute;
+    left: 20px;
+
+}
+
+.ContNameUser__ButtonLevel {
+    position: absolute;
+    border: none;
+    left: 0;
+    top: 10px;
+    cursor: pointer;
+}
+
+.ContNameUser__ButtonLevel:active {
+    transform: scale(.9);
+    top: 12px;
+    left: 5px;
+}
+
+
+
+.ContNameUser__NameUs {
+    font-family: Fjalla One;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 33px;
+    text-align: center;
+    position: absolute;
+    margin: auto;
+    left: 140px;
+
+}
+
+.ContNameUser__EditName {
+    position: absolute;
+    right: -12px;
+    top: -12px;
+}
+
+.ContNameUser__ButtonEditName {
+    position: absolute;
+    border: none;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.ContNameUser__ButtonEditName:active {
+    transform: scale(.9);
+}
+
+
+
+/* ············ AboutUser ············ */
+
+.AboutUser {
+    margin: auto;
+    position: relative;
+    width: 500px;
+    margin-bottom: 100px;
+    flex-direction: column;
+}
+
+.AboutUser__title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.AboutUser__titleText {
+    text-align: start;
+    margin-bottom: 10px;
+    font-family: Fjalla One;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 18px;
+    margin: 20px;
+}
+
+.AboutUser__titleButtonEdit {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.AboutUser__titleButtonEdit:active {
+    transform: scale(.9)
+}
+
+.AboutUser__paragraph {
+    margin-bottom: 10px;
+    width: 500px;
+    border-radius: 5px;
+    background-color: #cbfbfa;
+    width: 500px;
+    padding: 15px;
+    font-size: 20px;
+}
+
+/* ············ Networs ······ */
+
+

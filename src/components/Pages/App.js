@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 import "../../css/App.css";
 
@@ -14,6 +14,8 @@ import "../../css/App.css";
  import { Login } from "./Login/Login";
  import { Register } from "./Register/Register";*/ 
  //import {CommunityPosts} from "./CommunityPosts/CommunityPosts"
+
+ 
  import  Profile  from "./Profile/Profile";
 
 

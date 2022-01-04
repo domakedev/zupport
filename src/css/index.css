@@ -33,3 +33,7 @@ html {
 #root{
   min-height: 100vh;
 }
+
+body {
+  font-family: 'Fjalla One', sans-serif;
+}
