@@ -202,7 +202,10 @@ const Profile = () => {
     return (
         <>
             <Header />
-            <ImgProfile />
+            <ImgProfile>
+
+
+            </ImgProfile>
             <ContNameUser NameUS={NameUs} />
             <AboutUser />
             <ContNetworks>
