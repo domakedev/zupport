@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-//Componente
-import Hero from "./MainContent/Hero/Hero";
-import TextAndButton from "./MainContent/TextAndButton/TextAndButton";
-import TopComunidades from "./TopComunidades/TopComunidades";
-import Caracteristicas from "./Caracteristicas/Caracteristicas";
-import Header from "../../Layout/Header";
-import Footer from "../../Layout/Footer";
+// Componente
+import Hero from './MainContent/Hero/Hero';
+import TextAndButton from './MainContent/TextAndButton/TextAndButton';
+import TopComunidades from './TopComunidades/TopComunidades';
+import Caracteristicas from './Caracteristicas/Caracteristicas';
+import Header from '../../Layout/Header';
+import Footer from '../../Layout/Footer';
 
 const ContainerContent = styled.div`
   display: flex;
@@ -27,24 +27,22 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-const Landing = () => {
+function Landing() {
   return (
     <>
       <Header />
       <Container>
         <ContainerContent>
-          <Hero></Hero>
-          <TextAndButton></TextAndButton>
+          <Hero />
+          <TextAndButton />
         </ContainerContent>
 
-        <TopComunidades></TopComunidades>
-        <Caracteristicas></Caracteristicas>
+        <TopComunidades />
+        <Caracteristicas />
       </Container>
       <Footer />
-
-
     </>
   );
-};
+}
 
 export default Landing;

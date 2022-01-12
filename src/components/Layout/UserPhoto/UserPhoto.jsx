@@ -1,22 +1,23 @@
-import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
-import { AiTwotoneCrown, AiFillMinusCircle } from "react-icons/ai";
-import { IconContext } from "react-icons";
-import defaultPhoto from "../../../images/Icon/user.png";
+import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
+import { AiTwotoneCrown, AiFillMinusCircle } from 'react-icons/ai';
+import { IconContext } from 'react-icons';
+import defaultPhoto from '../../../images/Icon/user.png';
 
-//--alert-color : #D9534F; FaUserCircle
-//oro #FFC107; bronce : #CD7F32; plata: #C0C0C
+// --alert-color : #D9534F; FaUserCircle
+// oro #FFC107; bronce : #CD7F32; plata: #C0C0C
 const crownColor = (points) => {
   if (points > 30000) {
-    return "#FFC107";
-  } else if (points > 15000) {
-    return "#C0C0C0";
-  } else {
-    return "#CD7F32";
+    return '#FFC107';
   }
+  if (points > 15000) {
+    return '#C0C0C0';
+  }
+  return '#CD7F32';
 };
 
-const Container = styled("div")(
+const Container = styled('div')(
   ({ userPoints }) => css`
     position: relative;
     cursor: pointer;
@@ -31,7 +32,7 @@ const Container = styled("div")(
     }
   `
 );
-const PhotoContainer = styled("div")(
+const PhotoContainer = styled('div')(
   () => css`
     display: flex;
     justify-content: center;
@@ -48,7 +49,7 @@ const PhotoContainer = styled("div")(
   `
 );
 
-const Photo = styled("img")(
+const Photo = styled('img')(
   () => css`
     height: 34px;
     width: 34px;
@@ -74,21 +75,18 @@ const DeleteUser = styled.div`
   border-radius: 50%; ;
 `;
 
-const UserPhoto = ({
+function UserPhoto({
   userPhoto = defaultPhoto,
   userPoints,
   selectUser,
   user,
-  alt,
   selected = false,
-  deleteUserSelected
-}) => {
+  deleteUserSelected,
+}) {
+  const value = useMemo(() => ({ className: 'icon-crow' }));
   return (
     <Container userPoints={userPoints} onClick={() => selectUser(user)}>
-      <IconContext.Provider
-        userPoints={userPoints}
-        value={{ className: "icon-crow" }}
-      >
+      <IconContext.Provider userPoints={userPoints} value={value}>
         <AiTwotoneCrown />
       </IconContext.Provider>
 
@@ -96,17 +94,21 @@ const UserPhoto = ({
         <Photo src={userPhoto} alt={user?.fullname} />
       </PhotoContainer>
 
-      {selected ?
+      {selected ? (
         <DeleteUser onClick={() => deleteUserSelected(user)}>
           <AiFillMinusCircle />
         </DeleteUser>
-       : null}
+      ) : null}
     </Container>
   );
-};
+}
 
 UserPhoto.propTypes = {
   userPhoto: PropTypes.string,
+};
+
+UserPhoto.defaultProps = {
+  userPhoto: '',
 };
 
 export default UserPhoto;

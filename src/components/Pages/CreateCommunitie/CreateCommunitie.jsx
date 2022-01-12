@@ -1,24 +1,23 @@
-import React, { useState } from "react";
-import styled, { css } from "styled-components";
-//import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
+// import PropTypes from 'prop-types';
 
+// Components
+import { BiImageAdd } from 'react-icons/bi';
+import Header from '../../Layout/Header';
+import Footer from '../../Layout/Footer';
+import Input from '../../Layout/Inputs/InputText';
+import CardComunidadShow from '../../Layout/CardComunidadShow/CardComunidadShow';
 
-//Components
-import Header from "../../Layout/Header";
-import Footer from "../../Layout/Footer";
-import Input from "../../Layout/Inputs/InputText";
-import CardComunidadShow from "../../Layout/CardComunidadShow/CardComunidadShow";
+// icons
 
-//icons
-import { BiImageAdd } from "react-icons/bi";
-
-//Styled Components
+// Styled Components
 import {
   PageContainer,
   TitleOrange,
   Label,
   SubTitle,
-} from "../../../css/generalStyled";
+} from '../../../css/generalStyled';
 
 const MainContainer = styled.div`
   flex-grow: 1;
@@ -46,7 +45,7 @@ const TextArea = styled.textarea`
   width: 100%;
   resize: none;
 
-  ::placeholder{
+  ::placeholder {
     color: var(--boring-color);
   }
 `;
@@ -76,10 +75,10 @@ const VistaPrevia = styled(SubTitle)`
   margin-bottom: -20px;
 `;
 
-const Button = styled("button")(
+const Button = styled('button')(
   ({ primary, danger }) => css`
-    background: ${primary ? "var(--principal-color)" : null};
-    background: ${danger ? "var(--alert-color)" : null};
+    background: ${primary ? 'var(--principal-color)' : null};
+    background: ${danger ? 'var(--alert-color)' : null};
 
     border: none;
     color: var(--light-color);
@@ -100,17 +99,19 @@ const Buttons = styled.div`
   margin-top: 50px;
 `;
 
-const CreateCommunitie = () => {
+function CreateCommunitie() {
   const [comu, setComu] = useState({});
 
   const addImage = () => {
-    console.log("Añadir imageeeen");
+    // eslint-disable-next-line
+    console.log('Añadir imageeeen');
   };
 
   const onChangeCe = (e) => {
-    let title = e.target.value;
-    let name = e.target.name;
+    const title = e.target.value;
+    const { name } = e.target;
 
+    // eslint-disable-next-line
     console.log(name, title);
 
     setComu({
@@ -119,9 +120,8 @@ const CreateCommunitie = () => {
     });
   };
 
-
-  const [name, changeName] = useState({field : '',check : null});
-  const [image, changeImage] = useState({field : '',check : null});
+  const [name, changeName] = useState({ field: '', check: null });
+  const [image, changeImage] = useState({ field: '', check: null });
 
   return (
     <PageContainer>
@@ -134,9 +134,9 @@ const CreateCommunitie = () => {
           {/* Inputs */}
           <Label htmlFor="Nombre">Nombre</Label>
           <Input
-            state = {name}
-            name = "nombre"
-            changeState = {changeName}
+            state={name}
+            name="nombre"
+            changeState={changeName}
             inputType="text"
             inputName="nombre"
             label="Nombre"
@@ -147,7 +147,7 @@ const CreateCommunitie = () => {
 
           <Label htmlFor="Descripcion">Descripcion</Label>
           <TextArea
-            name = "descripcion"
+            name="descripcion"
             rows="3"
             placeholder="Recetas y tips..."
             onChange={onChangeCe}
@@ -157,9 +157,9 @@ const CreateCommunitie = () => {
 
           <Label htmlFor="imagen">Imagen URL</Label>
           <Input
-            state = {image}
-            name = "imagen"
-            changeState = {changeImage}
+            state={image}
+            name="imagen"
+            changeState={changeImage}
             inputType="text"
             inputName="imagen"
             label="imagen"
@@ -177,18 +177,20 @@ const CreateCommunitie = () => {
 
           {/* Botones */}
           <Buttons>
-            <Button type="button" danger>CANCELAR</Button>
-            <Button type="button"  primary>CREAR</Button>
+            <Button type="button" danger>
+              CANCELAR
+            </Button>
+            <Button type="button" primary>
+              CREAR
+            </Button>
           </Buttons>
         </Form>
       </MainContainer>
       <Footer />
     </PageContainer>
   );
-};
-
-CreateCommunitie.propTypes={
-
 }
+
+CreateCommunitie.propTypes = {};
 
 export default CreateCommunitie;

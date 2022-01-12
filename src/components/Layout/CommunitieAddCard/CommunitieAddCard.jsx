@@ -1,19 +1,19 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-import { Link } from "react-router-dom";
-//import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
+// import { useParams } from "react-router-dom";
 
-//General Styled
-//import { SubTitle, TitleOrange } from "../../../css/generalStyled";
+// General Styled
+// import { SubTitle, TitleOrange } from "../../../css/generalStyled";
 
-//Icons
+// Icons
 import {
   BsPeopleFill,
   BsFillBookmarkCheckFill,
   BsFillPersonPlusFill as AddPerson,
-} from "react-icons/bs";
+} from 'react-icons/bs';
 
 const Container = styled.div`
   height: 200px;
@@ -155,11 +155,12 @@ const LineaD = styled(Linea)`
   right: 0;
 `;
 
-const CommunitieAddCard = ({ image, users, checks, title, i }) => {
-  //let params = useParams();
+function CommunitieAddCard({ image, users, checks, title }) {
+  // let params = useParams();
 
   const unirmeA = () => {
-    console.log("Me uni a la comunidad de:", title);
+    // eslint-disable-next-line
+    console.log('Me uni a la comunidad de:', title);
   };
 
   return (
@@ -179,22 +180,29 @@ const CommunitieAddCard = ({ image, users, checks, title, i }) => {
         <Number>{checks}</Number>
       </ContainerChecks>
 
-        <LinkTo to={`${title}/posts`} onClick={unirmeA}>
-          <AddPerson size="40px" />
-          UNIRME
-        </LinkTo>
+      <LinkTo to={`${title}/posts`} onClick={unirmeA}>
+        <AddPerson size="40px" />
+        UNIRME
+      </LinkTo>
 
       <LineaI />
       <LineaD />
     </Container>
   );
-};
+}
 
 CommunitieAddCard.propTypes = {
   title: PropTypes.string,
   users: PropTypes.number,
-  cheks: PropTypes.number,
+  checks: PropTypes.number,
   image: PropTypes.string,
+};
+
+CommunitieAddCard.defaultProps = {
+  title: '',
+  users: 0,
+  checks: 0,
+  image: '',
 };
 
 export default CommunitieAddCard;

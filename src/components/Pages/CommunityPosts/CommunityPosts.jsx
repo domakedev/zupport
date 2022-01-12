@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react'
-import styled from "styled-components";
-import { WelcomeCommunity } from "./WelcomeCommity/WelcomeCommunity";
-import Header from "../../Layout/Header";
-import { DividingLine } from "../../Layout/LineStyle/DividingLine";
-import { TopHelpers } from "./TopHelpers/TopHelpers";
-import { CreatePost } from "./CreatePost/CreatePost";
-import { GOFData } from "./BoxActions/BoxAction";
-import { PostList } from "./PostList/PostList";
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import WelcomeCommunity from './WelcomeCommity/WelcomeCommunity';
+import Header from '../../Layout/Header';
+import DividingLine from '../../Layout/LineStyle/DividingLine';
+import TopHelpers from './TopHelpers/TopHelpers';
+import CreatePost from './CreatePost/CreatePost';
+import GOFData from './BoxActions/BoxAction';
+import PostList from './PostList/PostList';
 
-//Data Mock
-import axios from "../../../utils/axios"
+// Data Mock
+import axios from '../../../utils/axios';
 
 const CommunityPostCont = styled.div`
   display: grid;
@@ -23,11 +23,11 @@ const CommunityPostCont = styled.div`
     width: 100%;
     justify-self: center;
     grid-template-areas:
-      "welcome  welcome welcome"
-      " .  topHelpers . "
-      ". . gofData"
-      ". . createPost"
-      ". . postList";
+      'welcome  welcome welcome'
+      ' .  topHelpers . '
+      '. . gofData'
+      '. . createPost'
+      '. . postList';
   }
 `;
 const Container = styled.div`
@@ -35,31 +35,26 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-export const CommunityPosts = () => {
-
-
-  const [comuPosts, setComuPosts] = useState([])
+function CommunityPosts() {
+  const [comuPosts, setComuPosts] = useState([]);
 
   const [results, setResults] = useState([]);
 
-  useEffect(()=>{
-
+  useEffect(() => {
     const postsRequest = async () => {
       try {
-        const response = await axios.get("/api/communities/css");
+        const response = await axios.get('/api/communities/css');
         const res = response.data;
         setComuPosts(res);
-        setResults(res)
+        setResults(res);
       } catch (err) {
-        console.error(
-          "404 Error en la petición /api/communities/css"
-        );
+        // eslint-disable-next-line
+        console.error('404 Error en la petición /api/communities/css');
       }
     };
 
     postsRequest();
-
-  },[])
+  }, []);
 
   return (
     <>
@@ -75,11 +70,11 @@ export const CommunityPosts = () => {
             setResults={setResults}
             results={results}
           />
-          <PostList
-            results={results}
-          />
+          <PostList results={results} />
         </CommunityPostCont>
       </Container>
     </>
   );
-};
+}
+
+export default CommunityPosts;

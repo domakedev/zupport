@@ -1,24 +1,25 @@
-import React,{useEffect, useState} from "react";
-import styled from "styled-components";
-import axios from '../../../utils/axios'
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import axios from '../../../utils/axios';
 
-//import { Link, Outlet } from "react-router-dom";
+// import { Link, Outlet } from "react-router-dom";
 
+// Components
+import Header from '../../Layout/Header';
+import Footer from '../../Layout/Footer';
+import NewCommunitie from './NewCommunitie/NewCommunitie';
+import GOFData from './GOFData/GOFData';
+import CommunitieAddCard from '../../Layout/CommunitieAddCard/CommunitieAddCard';
 
+// General Styled
+import {
+  SubTitle,
+  TitleOrange,
+  PageContainer,
+} from '../../../css/generalStyled';
 
-//Components
-import Header from "../../Layout/Header";
-import Footer from "../../Layout/Footer";
-import NewCommunitie from "./NewCommunitie/NewCommunitie";
-import GOFData from "./GOFData/GOFData";
-import CommunitieAddCard from "../../Layout/CommunitieAddCard/CommunitieAddCard";
-
-//General Styled
-import { SubTitle, TitleOrange, PageContainer } from "../../../css/generalStyled";
-
-//Mock, NO BORRAR AUNQUE NO SE USE!
-//import mock from "../../../mocks/generalMock"
-
+// Mock, NO BORRAR AUNQUE NO SE USE!
+// import mock from "../../../mocks/generalMock"
 
 // const PageContainer = styled.div`
 //   display: flex;
@@ -40,23 +41,24 @@ const Comunidades = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+`;
 
-`
-
-
-const Communities = () => {
-
-  const [comunidades, setComunidades] = useState([])
+function Communities() {
+  const [comunidades, setComunidades] = useState([]);
 
   const [results, setResults] = useState([]);
 
-  useEffect(()=>{
-    axios.get("/api/communities/").then(function (response) {
-     // console.log("dataaa",response.data)
-      setComunidades(response.data)
-      setResults(response.data)
-    }).catch(error=> console.log("Errorrrrrr",error))
-  },[])
+  useEffect(() => {
+    axios
+      .get('/api/communities/')
+      .then((response) => {
+        // console.log("dataaa",response.data)
+        setComunidades(response.data);
+        setResults(response.data);
+      })
+      // eslint-disable-next-line
+      .catch((error) => console.log('Errorrrrrr', error));
+  }, []);
 
   return (
     <PageContainer>
@@ -73,7 +75,7 @@ const Communities = () => {
           results={results}
           comunidades={comunidades}
         />
-        <hr style={{ marginTop: "100px" }} />
+        <hr style={{ marginTop: '100px' }} />
 
         {/* <Comunidades>
           {comunidades.map((e, i) => {
@@ -92,29 +94,22 @@ const Communities = () => {
 
         {/* Impresion de resultados de busqueda */}
         <Comunidades>
-          {results?.map((e, i) => {
-            return (
-              <CommunitieAddCard
-                key={i}
-                id={i}
-                image={e.image}
-                users={e.users}
-                checks={e.cheks}
-                title={e.title}
-              />
-            );
-          })}
+          {results?.map((e, i) => (
+            <CommunitieAddCard
+              key={`1000${new Date()}`}
+              id={i}
+              image={e.image}
+              users={e.users}
+              checks={e.cheks}
+              title={e.title}
+            />
+          ))}
         </Comunidades>
-
-
-
       </Container>
 
       <Footer />
-
-
     </PageContainer>
   );
-};
+}
 
 export default Communities;

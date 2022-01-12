@@ -1,16 +1,6 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useStateAuth } from "../../../context/Auth/AuthContext";
-
-import Input from "../../Layout/Inputs/InputText";
-import InputArea from "../../Layout/Inputs/InputTextArea";
-import InputNumber from "../../Layout/Inputs/InputNumber";
-import Header from "../../Layout/Header";
-import Footer from "../../Layout/Footer";
-import GUsers from "./GUsers";
-import UserFoto from "../../Layout/UserPhoto/UserPhoto";
-
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import {
   BsImages,
   BsFolder2Open,
@@ -30,11 +20,30 @@ import {
   BsEmojiSmile,
   BsLink45Deg,
   BsTable,
-} from "react-icons/bs";
+} from 'react-icons/bs';
+import { useStateAuth } from '../../../context/Auth/AuthContext';
+
+import Input from '../../Layout/Inputs/InputText';
+import InputArea from '../../Layout/Inputs/InputTextArea';
+import InputNumber from '../../Layout/Inputs/InputNumber';
+import Header from '../../Layout/Header';
+import Footer from '../../Layout/Footer';
+import GUsers from './GUsers';
+import UserFoto from '../../Layout/UserPhoto/UserPhoto';
 
 function HelpPost() {
-
-  const {bringUsers} = useStateAuth()
+  // Usuarios que vienen del api
+  const [users, setUsers] = useState();
+  // Aqui se guardan los Users seleccionados, todos sus datos
+  // Incluso el _id
+  const [usersSelected, setUsersSelected] = useState([]);
+  // Resultados de la busqueda u orden, luego se imprimen
+  // en pantalla
+  const [results, setResults] = useState([]);
+  const [title, changeTitle] = useState({ field: '', check: null });
+  const [description, changeDescription] = useState({ field: '', check: null });
+  const [points, changePoints] = useState({ field: '', check: null });
+  const { bringUsers } = useStateAuth();
   const parameters = {
     title: /^.{10,50}$/, // 10 a 50 caracteres.
     description: /^.{10,1300}$/, // 10 a 50 caracteres.
@@ -42,19 +51,19 @@ function HelpPost() {
   };
 
   useEffect(() => {
-    const allUsers = async()=>{
+    const allUsers = async () => {
       try {
-        const resultado=  await bringUsers()
-        console.log("allforone",resultado.data);
+        const resultado = await bringUsers();
+        // eslint-disable-next-line
+        console.log('allforone', resultado.data);
         setUsers(resultado.data);
         setResults(resultado.data);
       } catch (error) {
+        // eslint-disable-next-line
         console.log(error);
       }
-
-  }
-  allUsers()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    };
+    allUsers();
   }, []);
 
   const selectUser = (u) => {
@@ -65,22 +74,14 @@ function HelpPost() {
   };
 
   const deleteUserSelected = (userToDelete) => {
+    // eslint-disable-next-line
     console.log(userToDelete);
-    const beforeDelete = usersSelected.filter((u) => u._id !== userToDelete._id);
+    const beforeDelete = usersSelected.filter(
+      // eslint-disable-next-line
+      (u) => u._id !== userToDelete._id
+    );
     setUsersSelected(beforeDelete);
   };
-
-  //Usuarios que vienen del api
-  const [users, setUsers] = useState();
-  //Aqui se guardan los Users seleccionados, todos sus datos
-  //Incluso el _id
-  const [usersSelected, setUsersSelected] = useState([]);
-  //Resultados de la busqueda u orden, luego se imprimen
-  //en pantalla
-  const [results, setResults] = useState([]);
-  const [title, changeTitle] = useState({ field: "", check: null });
-  const [description, changeDescription] = useState({ field: "", check: null });
-  const [points, changePoints] = useState({ field: "", check: null });
 
   return (
     <>
@@ -149,18 +150,23 @@ function HelpPost() {
           <hr />
         </LineTitle>
 
-        <HelpersText>Escoge a quienes quisieras que te ayuden <strong>solo si es necesario</strong> y si lo hacen no dudes en invitarles un cafecito 🙌 ☕</HelpersText>
+        <HelpersText>
+          Escoge a quienes quisieras que te ayuden{' '}
+          <strong>solo si es necesario</strong> y si lo hacen no dudes en
+          invitarles un cafecito 🙌 ☕
+        </HelpersText>
         <AddHelperContainerTitle>
           Helpers
           <SelectedUsersStyle>
             {usersSelected?.map((u) => (
               <UserFoto
+                // eslint-disable-next-line
                 key={u._id}
                 user={u}
                 userPhoto={u.photo}
                 userPoints={u.points}
                 selectUser={selectUser}
-                selected={true}
+                selected
                 deleteUserSelected={deleteUserSelected}
               />
             ))}
@@ -168,15 +174,12 @@ function HelpPost() {
         </AddHelperContainerTitle>
 
         <HelpersMainContainer>
-          <GUsers
-            setResults={setResults}
-            results={results}
-            users={users}
-          ></GUsers>
+          <GUsers setResults={setResults} results={results} users={users} />
 
           <HelpersContainer>
             {results?.map((u) => (
               <UserFoto
+                // eslint-disable-next-line
                 key={u._id}
                 user={u}
                 userPhoto={u.photo}

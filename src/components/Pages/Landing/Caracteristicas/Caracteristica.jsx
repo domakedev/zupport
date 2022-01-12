@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Card = styled.div`
   margin: 30px;
@@ -11,28 +11,25 @@ const Card = styled.div`
   max-width: 315px;
 
   font-family: var(--secondary-font);
-
 `;
 
 const CardImage = styled.img`
- width: 200px;
+  width: 200px;
   height: 150px;
-`
+`;
 
 const CardDescription = styled.p`
- font-size: 1.8rem;
+  font-size: 1.8rem;
   text-align: center;
-`
+`;
 
-const Caracteristica = ({image, description}) => {
+function Caracteristica({ image, description }) {
   return (
     <Card>
       <CardImage src={image} alt="Caracteristica de la plataforma" />
-      <CardDescription>
-        {description}
-      </CardDescription>
+      <CardDescription>{description}</CardDescription>
     </Card>
   );
-};
+}
 
 export default Caracteristica;

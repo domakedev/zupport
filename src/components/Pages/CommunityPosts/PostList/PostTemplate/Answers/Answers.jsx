@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import Answer from "./Answer/Answer";
-import styled from "styled-components";
-import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { GrLike } from "react-icons/gr";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
+import { GrLike } from 'react-icons/gr';
+import Answer from './Answer/Answer';
 
-//Styleds
+// Styleds
 const MoreAnswers = styled.button`
   border: none;
   background-color: white;
@@ -75,84 +75,85 @@ const AnswersContainer = styled.div`
   overflow-x: hidden;
 `;
 
-//FakeData
+// FakeData
 const FakeData = [
   {
-    field: "Respuesta validada mock",
+    field: 'Respuesta validada mock',
     check: null,
     validated: true,
   },
   {
-    field: "Respuesta 1 no validada mock",
+    field: 'Respuesta 1 no validada mock',
     check: null,
     validated: false,
   },
   {
-    field: "Respuesta 2 no validada mock",
+    field: 'Respuesta 2 no validada mock',
     check: null,
     validated: false,
   },
   {
-    field: "Respuesta 3 no validada mock",
+    field: 'Respuesta 3 no validada mock',
     check: null,
     validated: false,
   },
   {
-    field: "Respuesta 4 no validada mock",
+    field: 'Respuesta 4 no validada mock',
     check: null,
     validated: false,
   },
   {
-    field: "Respuesta 5 no validada mock",
+    field: 'Respuesta 5 no validada mock',
     check: null,
     validated: false,
   },
   {
-    field: "Respuesta 6 no validada mock",
+    field: 'Respuesta 6 no validada mock',
     check: null,
     validated: false,
   },
   {
-    field: "Respuesta 7 no validada mock",
+    field: 'Respuesta 7 no validada mock',
     check: null,
     validated: false,
   },
   {
-    field: "Respuesta 8 no validada mock",
+    field: 'Respuesta 8 no validada mock',
     check: null,
     validated: false,
   },
   {
-    field: "Respuesta 10 no validada mock",
+    field: 'Respuesta 10 no validada mock',
     check: null,
     validated: false,
   },
   {
-    field: "Respuesta 11 no validada mock",
+    field: 'Respuesta 11 no validada mock',
     check: null,
     validated: false,
   },
 ];
 
-export const Answers = () => {
+function Answers() {
   const [viewMore, setViewMore] = useState(false);
 
-  const answersValidated = FakeData.filter((e, i) => e.validated === true);
+  const answersValidated = FakeData.filter((e) => e.validated === true);
 
-  const answersNoValidated = FakeData.filter((e, i) => e.validated !== true);
+  const answersNoValidated = FakeData.filter((e) => e.validated !== true);
 
   const [fakeDataValidated, setV] = useState(answersValidated);
   const [fakeDataNoValidated] = useState(answersNoValidated);
 
   const supportAnswer = (comment) => {
-    //console.log("Me gusta:", comment);
+    // eslint-disable-next-line
+    console.log("Me gusta:", comment);
   };
 
   return (
     <AnswersContainer>
       {/* Answers checked */}
-      {fakeDataValidated.map((e, i) => (
-        <div key={i}>
+      {fakeDataValidated.map((e) => (
+        <div key={new Date()}>
           <Answer state={e} setV={setV} stateGeneral={fakeDataValidated} />
           <ValidatedMessage>
             Esta respuesta fue util y soluciono el problema 🎉 🌟
@@ -177,8 +178,8 @@ export const Answers = () => {
       {/* Answers no checked */}
       {viewMore ? (
         <MoreAnswersList>
-          {fakeDataNoValidated.map((e, i) => (
-            <div key={i}>
+          {fakeDataNoValidated.map((e) => (
+            <div key={new Date()}>
               <Answer state={e} />
               <SupportAnswer onClick={() => supportAnswer(e.field)}>
                 Apoyar <GrLike />
@@ -189,4 +190,6 @@ export const Answers = () => {
       ) : null}
     </AnswersContainer>
   );
-};
+}
+
+export default Answers;

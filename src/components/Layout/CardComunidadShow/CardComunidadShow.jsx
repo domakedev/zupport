@@ -1,11 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-
-//Images and Icons
-import IconUsers from "../../../images/users.svg"
-import IconCheck from "../../../images/check.svg"
+// Images and Icons
+import IconUsers from '../../../images/users.svg';
+import IconCheck from '../../../images/check.svg';
 
 const Container = styled.div`
   height: 150px;
@@ -116,7 +115,7 @@ const CardName = styled.h3`
   font-size: 1.8rem;
 `;
 
-const CardComunidadShow = ({image, users, checks, title}) => {
+function CardComunidadShow({ image, users, checks, title }) {
   return (
     <Container>
       <CardComunidadShowIMG src={image} alt="" />
@@ -134,17 +133,21 @@ const CardComunidadShow = ({image, users, checks, title}) => {
       <CardName>{title}</CardName>
     </Container>
   );
-};
+}
 
-
-
-//PropTypes
+// PropTypes
 CardComunidadShow.propTypes = {
-  title:PropTypes.string,
+  title: PropTypes.string,
   users: PropTypes.number,
-  cheks: PropTypes.number,
+  checks: PropTypes.number,
   image: PropTypes.string,
 };
 
+CardComunidadShow.defaultProps = {
+  title: '',
+  users: 0,
+  checks: 0,
+  image: '',
+};
 
 export default CardComunidadShow;

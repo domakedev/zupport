@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const WelcomeContainer = styled.section`
   width: 27rem;
@@ -30,15 +30,17 @@ const QuoteAuthor = styled.cite`
   margin-right: 5px;
 `;
 
-const WelcomeLogin = ()=>(
-  <WelcomeContainer>
-    <TitleLogin>Es bueno volver a verte</TitleLogin>
-    <QuoteContainer>
-        “¿Cuál es la esencia de la vida? <br/>
+function WelcomeLogin() {
+  return (
+    <WelcomeContainer>
+      <TitleLogin>Es bueno volver a verte</TitleLogin>
+      <QuoteContainer>
+        “¿Cuál es la esencia de la vida? <br />
         Servir a otros y hacer el bien”
-      <QuoteAuthor>- Aristóteles</QuoteAuthor>
-    </QuoteContainer>
-  </WelcomeContainer>
-);
+        <QuoteAuthor>- Aristóteles</QuoteAuthor>
+      </QuoteContainer>
+    </WelcomeContainer>
+  );
+}
 
 export default WelcomeLogin;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const InputBtnStyle = styled.button`
   padding: 1rem;
@@ -12,13 +12,12 @@ const InputBtnStyle = styled.button`
   color: var(--light-color);
   font-weight: bold;
   box-shadow: 0 4px 2px 0 var(--boring-color);
-  &:hover{
+  &:hover {
     background: var(--sucess-color);
   }
 `;
-const InputBtn = ({valueBtn, EnviarDataLogin}) =>{
-  return(
-  <InputBtnStyle onClick={EnviarDataLogin}>{valueBtn}</InputBtnStyle>
-)};
+function InputBtn({ valueBtn, EnviarDataLogin }) {
+  return <InputBtnStyle onClick={EnviarDataLogin}>{valueBtn}</InputBtnStyle>;
+}
 
-export default InputBtn
+export default InputBtn;

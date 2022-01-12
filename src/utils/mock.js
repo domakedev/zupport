@@ -1,8 +1,8 @@
-import axios from "./axios";
-import MockAdapter from "axios-mock-adapter"
+// eslint-disable-next-line
+import MockAdapter from 'axios-mock-adapter';
+import axios from './axios';
 
 // This sets the mock adapter on the default instance
-let mock = new MockAdapter(axios);
+const mock = new MockAdapter(axios);
 
-
-export default mock
+export default mock;

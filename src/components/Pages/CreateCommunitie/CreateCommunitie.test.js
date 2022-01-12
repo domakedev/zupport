@@ -1,30 +1,24 @@
-import React from "react";
-import "@testing-library/jest-dom/extend-expect";
-import { render } from "@testing-library/react";
+import React from 'react';
+import '@testing-library/jest-dom/extend-expect';
+import { render } from '@testing-library/react';
 
-//Component
-import CreateCommunitie from "./CreateCommunitie";
+// Component
+import CreateCommunitie from './CreateCommunitie';
 
-test("render content", () => {
+test('render content', () => {
+  const component = render(<CreateCommunitie />);
 
-  const component = render(<CreateCommunitie/>);
+  // Textos visibles
+  component.getByText('Crear Comunidad');
+  component.getByText('Añadir imagen');
+  component.getByText('CREAR');
+  component.getByText('CANCELAR');
+  component.getByText('Nombre');
+  component.getByText('Descripcion');
+  component.getByText('Imagen URL');
 
-
-  //Textos visibles
-  component.getByText("Crear Comunidad");
-  component.getByText("Añadir imagen");
-  component.getByText("CREAR");
-  component.getByText("CANCELAR");
-  component.getByText("Nombre");
-  component.getByText("Descripcion");
-  component.getByText("Imagen URL");
-
-  //Labels
+  // Labels
   // component.getByLabelText("Nombre");
   // component.getByLabelText("Descripcion");
   // component.getByLabelText("Imagen URL");
-
-
-
-
 });

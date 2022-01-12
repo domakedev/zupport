@@ -1,17 +1,17 @@
-import styled, { css } from "styled-components";
-import WelcomeLogin from "./LoginSlice/WelcomeLogin";
-import InputsLogin from "./LoginSlice/InputsLogin";
-import BtnRss from "../../Layout/Inputs/InputSocialMediaButton";
-import SeparatorLine from "./LoginSlice/SeparatorLine";
-import { Link } from "react-router-dom";
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
+import WelcomeLogin from './LoginSlice/WelcomeLogin';
+import InputsLogin from './LoginSlice/InputsLogin';
+import BtnRss from '../../Layout/Inputs/InputSocialMediaButton';
+import SeparatorLine from './LoginSlice/SeparatorLine';
 
-//Import layouts
-import Header from "../../Layout/Header";
-import Footer from "../../Layout/Footer";
-import Loading from "../../Layout/Loading/Loading"
+// Import layouts
+import Header from '../../Layout/Header';
+import Footer from '../../Layout/Footer';
+import Loading from '../../Layout/Loading/Loading';
 
-//Import Context
-import {useStateAuth} from "../../../context/Auth/AuthContext"
+// Import Context
+import { useStateAuth } from '../../../context/Auth/AuthContext';
 
 const FormContainer = styled.div`
   display: flex;
@@ -51,7 +51,7 @@ const SuperContainer = styled.div`
   min-height: 100vh;
 `;
 
-const AlertAuth = styled("p")(
+const AlertAuth = styled('p')(
   () => css`
     font-family: var(--secondary-font);
     font-style: normal;
@@ -62,52 +62,34 @@ const AlertAuth = styled("p")(
   `
 );
 
-const Login = () => {
-
-  const {
-    errorAuth,
-    Login,
-    setSpinning,
-    spinning
-  } = useStateAuth()
-
+function Login() {
+  const { errorAuth, LoginAuth, setSpinning, spinning } = useStateAuth();
 
   return (
     <SuperContainer>
-      <Header></Header>
+      <Header />
 
       <FormContainer>
         <FormLogin>
           <WelcomeLogin />
 
-          <InputsLogin
-            setSpinning={setSpinning}
-            Login={Login}
-          />
-          {errorAuth?
-          <AlertAuth>Error al iniciar sesión</AlertAuth>
-          :
-           null
-          }
-          {spinning?
-          <Loading/>
-          :
-           null
-          }
+          <InputsLogin setSpinning={setSpinning} Login={LoginAuth} />
+          {errorAuth ? <AlertAuth>Error al iniciar sesión</AlertAuth> : null}
+          {spinning ? <Loading /> : null}
 
           <SeparatorLine />
           <BtnRss />
 
-            <OptionRegister>
+          <OptionRegister>
             ¿No tienes una cuenta?
             <LinkTo to="/register"> Regístrate aquí</LinkTo>
           </OptionRegister>
         </FormLogin>
       </FormContainer>
 
-      <Footer></Footer>
+      <Footer />
     </SuperContainer>
-  )
-};
+  );
+}
 
 export default Login;
