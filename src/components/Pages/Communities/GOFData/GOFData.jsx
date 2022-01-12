@@ -1,10 +1,10 @@
-//GOF = GET, ORDER AND FILTER DATA
+// GOF = GET, ORDER AND FILTER DATA
 
-import { useState, useEffect } from "react";
-import styled from "styled-components";
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
-//Icons
-import { FaSearch, FaChevronDown } from "react-icons/fa";
+// Icons
+import { FaSearch, FaChevronDown } from 'react-icons/fa';
 
 const SearchInput = styled.input`
   width: 80%;
@@ -132,19 +132,17 @@ const SubMenu = styled.div`
 //   },
 // ];
 
-const GOFData = ({ setResults, results, comunidades }) => {
-  const [search, setSearch] = useState("");
+function GOFData({ setResults, results, comunidades }) {
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
-    //Ir a la base de datos y buscar en los nombres de comunidades, de forma asincrona
-    let filteredComu = comunidades.filter((comu) =>
+    // Ir a la base de datos y buscar en los nombres de comunidades, de forma asincrona
+    const filteredComu = comunidades.filter((comu) =>
       comu.title?.toLowerCase().includes(search.trim())
     );
 
-    //Enviar resultados a estado de resultados
+    // Enviar resultados a estado de resultados
     setResults(filteredComu);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   const onChange = (e) => {
@@ -155,24 +153,20 @@ const GOFData = ({ setResults, results, comunidades }) => {
 
   const onOrderByUsers = () => {
     const copyResults = [...results];
-    copyResults.sort(function (a, b) {
-      return b.users - a.users;
-    });
+    copyResults.sort((a, b) => b.users - a.users);
     setResults(copyResults);
   };
 
   const onOrderByAnswers = () => {
     const copyResults = [...results];
-    copyResults.sort(function (a, b) {
-      return b.cheks - a.cheks;
-    });
+    copyResults.sort((a, b) => b.cheks - a.cheks);
     setResults(copyResults);
   };
 
   const onOrderByName = () => {
     const copyResults = [...results];
 
-    copyResults.sort(function (a, b) {
+    copyResults.sort((a, b) => {
       if (a.title > b.title) {
         return 1;
       }
@@ -204,7 +198,7 @@ const GOFData = ({ setResults, results, comunidades }) => {
           name="searcher"
           placeholder="Buscar comunidad..."
           onChange={onChange}
-          //onKeyUp={onClickSearch}
+          // onKeyUp={onClickSearch}
           value={search}
         />
         <SearchIcon onClick={onChange}>
@@ -218,8 +212,11 @@ const GOFData = ({ setResults, results, comunidades }) => {
             <FaChevronDown /> Ordenar
           </span>
           <SubMenu>
+            {/* eslint-disable-next-line */}
             <span onClick={onOrderByName}>A-Z</span>
+            {/* eslint-disable-next-line */}
             <span onClick={onOrderByUsers}>Usuarios</span>
+            {/* eslint-disable-next-line */}
             <span onClick={onOrderByAnswers}>Respuestas</span>
           </SubMenu>
         </OrderBtn>
@@ -234,13 +231,15 @@ const GOFData = ({ setResults, results, comunidades }) => {
             <FaChevronDown /> Filtrar
           </span>
           <SubMenu>
+            {/* eslint-disable-next-line */}
             <span onClick={onClick500Users}>+500 usuarios</span>
+            {/* eslint-disable-next-line */}
             <span onClick={onClick500Answer}>+500 respuestas</span>
           </SubMenu>
         </FilterBtn>
       </OrderFilterContainer>
     </>
   );
-};
+}
 
 export default GOFData;

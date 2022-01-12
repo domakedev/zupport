@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import Caracteristica from "./Caracteristica";
+import React from 'react';
+import styled from 'styled-components';
+import Caracteristica from './Caracteristica';
 
-import ImageVoice from "../../../../images/voice.svg";
-import ImageChat from "../../../../images/Chat.svg";
-import ImagePoints from "../../../../images/points.svg";
+import ImageVoice from '../../../../images/voice.svg';
+import ImageChat from '../../../../images/Chat.svg';
+import ImagePoints from '../../../../images/points.svg';
 
 const Container = styled.div`
   display: flex;
@@ -30,31 +30,35 @@ const CardsContainer = styled.div`
 
 const fakeData = [
   {
-    description: "Dentro de tu comunidad únete a canales de voz",
+    description: 'Dentro de tu comunidad únete a canales de voz',
     image: ImageVoice,
   },
   {
-    description: "Gana puntos, sube de rango mientras ayudas a tu comunidad",
+    description: 'Gana puntos, sube de rango mientras ayudas a tu comunidad',
     image: ImagePoints,
   },
   {
-    description: "Crea un post de tu problema y tu comunidad te ayudara.",
+    description: 'Crea un post de tu problema y tu comunidad te ayudara.',
     image: ImageChat,
   },
 ];
 
-const Caracteristicas = () => {
+function Caracteristicas() {
   return (
     <Container>
       <Titulo>DESCUBRE LA PLATAFORMA</Titulo>
 
       <CardsContainer>
-        {fakeData.map((data, index) => (
-          <Caracteristica key={index} description={data.description} image={data.image} />
+        {fakeData.map((data) => (
+          <Caracteristica
+            key={new Date()}
+            description={data.description}
+            image={data.image}
+          />
         ))}
       </CardsContainer>
     </Container>
   );
-};
+}
 
 export default Caracteristicas;

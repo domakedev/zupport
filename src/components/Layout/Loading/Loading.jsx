@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const LoadingSpin = styled.div`
   color: official;
@@ -13,7 +13,7 @@ const LoadingSpin = styled.div`
     animation: lds-spinner 1.2s linear infinite;
   }
   div:after {
-    content: " ";
+    content: ' ';
     display: block;
     position: absolute;
     top: 3px;
@@ -82,23 +82,23 @@ const LoadingSpin = styled.div`
   }
 `;
 
-const Loading = () => {
+function Loading() {
   return (
     <LoadingSpin>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
     </LoadingSpin>
   );
-};
+}
 
 export default Loading;

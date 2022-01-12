@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   justify-items: flex-end;
@@ -53,7 +53,7 @@ const LinkTo = styled(Link)`
   width: fit-content;
 `;
 
-const TextAndButton = () => {
+function TextAndButton() {
   return (
     <Container>
       <Title>
@@ -69,6 +69,6 @@ const TextAndButton = () => {
       <LinkTo to="/register">REGISTRARME</LinkTo>
     </Container>
   );
-};
+}
 
 export default TextAndButton;

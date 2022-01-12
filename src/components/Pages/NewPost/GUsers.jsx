@@ -1,11 +1,11 @@
-//GOF = GET, ORDER AND FILTER DATA
+// GOF = GET, ORDER AND FILTER DATA
 
-import { useState, useEffect } from "react";
-import styled from "styled-components";
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
-//Icons
-//import { FaSearch, FaChevronDown } from "react-icons/fa";
-import { BsFillPersonPlusFill} from "react-icons/bs";
+// Icons
+// import { FaSearch, FaChevronDown } from "react-icons/fa";
+import { BsFillPersonPlusFill } from 'react-icons/bs';
 
 const SearchInput = styled.input`
   width: 80%;
@@ -84,9 +84,9 @@ const SearchIcon = styled.div`
 //   }
 // `;
 
-//const OrderBtn = styled(OFBtn)``;
+// const OrderBtn = styled(OFBtn)``;
 
-//const FilterBtn = styled(OFBtn)``;
+// const FilterBtn = styled(OFBtn)``;
 
 // const SubMenu = styled.div`
 //   max-height: 0;
@@ -109,20 +109,19 @@ const SearchIcon = styled.div`
 //   }
 // `;
 
-const GOFData = ({ setResults, results=[], users }) => {
-  const [search, setSearch] = useState("");
+function GOFData({ setResults, /** results = [] */ users }) {
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
-    //Ir a la base de datos y buscar en los nombres de users, de forma asincrona
-    let filteredUsers = users?.filter((user) =>
-      user.fullname?.toLowerCase().includes(search.trim()) ||
-      user.username?.toLowerCase().includes(search.trim())
+    // Ir a la base de datos y buscar en los nombres de users, de forma asincrona
+    const filteredUsers = users?.filter(
+      (user) =>
+        user.fullname?.toLowerCase().includes(search.trim()) ||
+        user.username?.toLowerCase().includes(search.trim())
     );
 
-    //Enviar resultados a estado de resultados
+    // Enviar resultados a estado de resultados
     setResults(filteredUsers);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   const onChange = (e) => {
@@ -131,24 +130,21 @@ const GOFData = ({ setResults, results=[], users }) => {
     setSearch(text);
   };
 
-
   return (
-    <>
-      <SearcherContainer>
-        <SearchInput
-          type="search"
-          name="searcher"
-          placeholder="Buscar usuario..."
-          onChange={onChange}
-          //onKeyUp={onClickSearch}
-          value={search}
-        />
-        <SearchIcon onClick={onChange}>
-          <BsFillPersonPlusFill color="white" size="3rem" />
-        </SearchIcon>
-      </SearcherContainer>
-    </>
+    <SearcherContainer>
+      <SearchInput
+        type="search"
+        name="searcher"
+        placeholder="Buscar usuario..."
+        onChange={onChange}
+        // onKeyUp={onClickSearch}
+        value={search}
+      />
+      <SearchIcon onClick={onChange}>
+        <BsFillPersonPlusFill color="white" size="3rem" />
+      </SearchIcon>
+    </SearcherContainer>
   );
-};
+}
 
 export default GOFData;

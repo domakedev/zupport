@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from "styled-components";
-
+import styled from 'styled-components';
 
 const TitleLogin = styled.h1`
   color: var(--sucess-color);
@@ -8,13 +7,10 @@ const TitleLogin = styled.h1`
   font-size: 3.6rem;
   font-weight: normal;
   text-align: center;
-
 `;
 
-const WelcomeRegister = ()=>(
-
-    <TitleLogin>¡Unete!</TitleLogin>
-
-);
+function WelcomeRegister() {
+  return <TitleLogin>¡Unete!</TitleLogin>;
+}
 
 export default WelcomeRegister;

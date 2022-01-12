@@ -1,8 +1,8 @@
-import { useState } from "react";
-import styled from "styled-components";
-import { LikeButtonPost } from "./AcctioPost/LikeButton";
-import { CommentButtonPost } from "./AcctioPost/CommentButton";
-import Answer from "../../../../Pages/CommunityPosts/PostList/PostTemplate/Answers/Answer/Answer";
+import { useState } from 'react';
+import styled from 'styled-components';
+import LikeButtonPost from './AcctioPost/LikeButton';
+import CommentButtonPost from './AcctioPost/CommentButton';
+import Answer from './Answers/Answer/Answer';
 
 const PostFooterContainer = styled.section`
   display: flex;
@@ -37,12 +37,12 @@ const ResponderAnimated = styled.div`
   } */
 `;
 
-export const PostFooter = () => {
+function PostFooter() {
   const [responder, setResponder] = useState();
 
   const onClick = () => {
     setResponder(!responder);
-    console.log("olis");
+    // console.log('olis');
   };
 
   return (
@@ -61,4 +61,6 @@ export const PostFooter = () => {
       </ResponderAnimated>
     </>
   );
-};
+}
+
+export default PostFooter;

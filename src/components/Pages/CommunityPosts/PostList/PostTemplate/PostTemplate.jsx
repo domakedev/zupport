@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import { DividingLine } from "../../../../Layout/LineStyle/DividingLine";
-import { IconHeart } from "./IconHeart";
-import { PostFooter } from "./PostFooter";
-import { PostHeader } from "./PostHeader";
-import { PostImage } from "./PostImage";
-import { Answers}  from "./Answers/Answers";
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import DividingLine from '../../../../Layout/LineStyle/DividingLine';
+import IconHeart from './IconHeart';
+import PostFooter from './PostFooter';
+import PostHeader from './PostHeader';
+import PostImage from './PostImage';
+import Answers from './Answers/Answers';
 
 const PostTemplteCont = styled.article`
   background: #fff;
@@ -14,7 +14,7 @@ const PostTemplteCont = styled.article`
   margin-top: 3rem;
   max-width: 625px;
   @media screen and (min-width: 1024px) {
-    border: 1px solid #79777052;  //--dark-color
+    border: 1px solid #79777052; //--dark-color
     border-radius: 2rem;
   }
 `;
@@ -30,7 +30,7 @@ const PostTitle = styled.h3`
   font-weight: normal;
 `;
 const PostDescription = styled.p`
-  color: rgba(0, 0, 0, 0.55);;
+  color: rgba(0, 0, 0, 0.55);
   font-size: 1.7rem;
   font-family: var(--secondary-font);
   font-weight: normal;
@@ -42,26 +42,48 @@ const ReactionContainer = styled.div`
   padding: 0 3rem 0 3rem;
 `;
 
-
-export const PostTemplate = ({ ban, userPhoto, userName, timePost, postTitle, postDescription, points, userPoints, resolved, likes, urlPost}) => (
-  <PostTemplteCont>
-    <PostHeader userPhoto = {userPhoto} userName = {userName} timePost = {timePost} points= {points} userPoints = {userPoints} resolved ={resolved}/>
-    <DividingLine/>
-    <PostContainer>
-      <PostTitle>{postTitle}</PostTitle>
-      <PostDescription>{postDescription}</PostDescription>
-    </PostContainer>
-    <PostImage ban = {ban} urlPost={urlPost}/>
-    <ReactionContainer>
-      <IconHeart likes = {likes}/>
-    </ReactionContainer>
-    <DividingLine/>
-    <PostFooter/>
-    <Answers/>
-  </PostTemplteCont>
-);
+function PostTemplate({
+  ban,
+  userPhoto,
+  userName,
+  timePost,
+  postTitle,
+  postDescription,
+  points,
+  userPoints,
+  resolved,
+  likes,
+  urlPost,
+}) {
+  return (
+    <PostTemplteCont>
+      <PostHeader
+        userPhoto={userPhoto}
+        userName={userName}
+        timePost={timePost}
+        points={points}
+        userPoints={userPoints}
+        resolved={resolved}
+      />
+      <DividingLine />
+      <PostContainer>
+        <PostTitle>{postTitle}</PostTitle>
+        <PostDescription>{postDescription}</PostDescription>
+      </PostContainer>
+      <PostImage ban={ban} urlPost={urlPost} />
+      <ReactionContainer>
+        <IconHeart likes={likes} />
+      </ReactionContainer>
+      <DividingLine />
+      <PostFooter />
+      <Answers />
+    </PostTemplteCont>
+  );
+}
 
 PostTemplate.propTypes = {
   postTitle: PropTypes.string.isRequired,
-  PostDescription: PropTypes.string
-}
+  postDescription: PropTypes.string.isRequired,
+};
+
+export default PostTemplate;

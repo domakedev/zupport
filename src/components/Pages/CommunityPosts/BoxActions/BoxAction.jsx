@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { FaSearch, FaChevronDown } from "react-icons/fa";
+import { FaSearch, FaChevronDown } from 'react-icons/fa';
 
 const BoxActionConatiner = styled.section`
   margin: 3rem 0 2rem 4rem;
@@ -111,19 +110,17 @@ const SubMenu = styled.div`
   }
 `;
 
-export const GOFData = ({ comuPosts=[], results=[], setResults }) => {
-  const [search, setSearch] = useState("");
+function GOFData({ comuPosts = [], results = [], setResults }) {
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
-    //Ir a la base de datos y buscar en los nombres de comunidades, de forma asincrona
-    let filteredPosts = comuPosts.filter((post) =>
+    // Ir a la base de datos y buscar en los nombres de comunidades, de forma asincrona
+    const filteredPosts = comuPosts.filter((post) =>
       post.postTitle?.toLowerCase().includes(search.trim())
     );
 
-    //Enviar resultados a estado de resultados
+    // Enviar resultados a estado de resultados
     setResults(filteredPosts);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   const onChange = (e) => {
@@ -142,25 +139,19 @@ export const GOFData = ({ comuPosts=[], results=[], setResults }) => {
     };
 
     const copyResults = [...results];
-    copyResults.sort(function (a, b) {
-      return obtMilis(b.timePost) - obtMilis(a.timePost);
-    });
+    copyResults.sort((a, b) => obtMilis(b.timePost) - obtMilis(a.timePost));
     setResults(copyResults);
   };
 
   const orderByLikes = () => {
     const copyResults = [...results];
-    copyResults.sort(function (a, b) {
-      return b.likes - a.likes;
-    });
+    copyResults.sort((a, b) => b.likes - a.likes);
     setResults(copyResults);
   };
 
   const orderByPoints = () => {
     const copyResults = [...results];
-    copyResults.sort(function (a, b) {
-      return b.points - a.points;
-    });
+    copyResults.sort((a, b) => b.points - a.points);
     setResults(copyResults);
   };
 
@@ -184,7 +175,7 @@ export const GOFData = ({ comuPosts=[], results=[], setResults }) => {
           name="searcher"
           placeholder="Buscar post..."
           onChange={onChange}
-          //onKeyUp={onChange}
+          // onKeyUp={onChange}
           value={search}
         />
         <SearchIcon onClick={onChange}>
@@ -198,8 +189,11 @@ export const GOFData = ({ comuPosts=[], results=[], setResults }) => {
             <FaChevronDown /> Ordenar
           </span>
           <SubMenu>
+            {/* eslint-disable-next-line */}
             <span onClick={orderByTime}>Fecha de publicacion</span>
+            {/* eslint-disable-next-line */}
             <span onClick={orderByLikes}>Likes</span>
+            {/* eslint-disable-next-line */}
             <span onClick={orderByPoints}>Puntos</span>
           </SubMenu>
         </OrderBtn>
@@ -209,21 +203,15 @@ export const GOFData = ({ comuPosts=[], results=[], setResults }) => {
             <FaChevronDown /> Filtrar
           </span>
           <SubMenu>
+            {/* eslint-disable-next-line */}
             <span onClick={filterNoResolved}>No Resueltos</span>
+            {/* eslint-disable-next-line */}
             <span onClick={filterResolved}>Resueltos</span>
           </SubMenu>
         </FilterBtn>
       </OrderFilterContainer>
     </BoxActionConatiner>
-  )
+  );
 }
 
-
-
-GOFData.propTypes = {
-  comuPosts: PropTypes.array,
-  results: PropTypes.array,
-  setResults: PropTypes.func
-}
-
-
+export default GOFData;

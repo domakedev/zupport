@@ -1,16 +1,14 @@
-//import { useState, useEffect } from "react";
-import styled from "styled-components";
-import { PostTemplate } from "./PostTemplate/PostTemplate";
-//import axios from "../../../../utils/axios.js"
+// import { useState, useEffect } from "react";
+import styled from 'styled-components';
+import PostTemplate from './PostTemplate/PostTemplate';
+// import axios from "../../../../utils/axios.js"
 
-
-
-//import { dataPost } from "../__Mock__/DataPost";
+// import { dataPost } from "../__Mock__/DataPost";
 import {
   getPostTime,
   softNumber,
-} from "../../../../controller/CommunityPostCtr/utilities";
-//import { getItems } from "../../../../controller/CommunityPostCtr/getItems";
+} from '../../../../controller/CommunityPostCtr/utilities';
+// import { getItems } from "../../../../controller/CommunityPostCtr/getItems";
 
 const PostListCont = styled.div`
   background: rgba(41, 171, 224, 0.08);
@@ -21,30 +19,11 @@ const PostListCont = styled.div`
   }
 `;
 
-export const PostList = ({results}) => {
-
-  //const [posts, setPosts] = useState([]);
-
-  // useEffect(() => {
-  //   const dataRequests = async () => {
-  //     try {
-  //       const response = await axios.get("/comunidades/:comudidadId/posts");
-  //       const res = response.data.posts;
-  //       //console.log(sortedDates(res));
-  //       setPosts(res);
-  //       //mock.resetHandlers();
-  //     } catch (err) {
-  //       console.error(
-  //         "404 Error en la petición /comunidades/:comudidadId/posts"
-  //       );
-  //     }
-  //   };
-  //   dataRequests();
-  // }, []);
-
+function PostList({ results }) {
   return (
     <PostListCont>
-      {results?.map( //aqui estaba posts
+      {results?.map(
+        // aqui estaba posts
         (
           {
             userPhoto,
@@ -56,12 +35,12 @@ export const PostList = ({results}) => {
             resolved,
             likes,
             image,
-            userPoints
+            userPoints,
           },
           index
         ) => (
           <PostTemplate
-            key={index}
+            key={new Date()}
             ban={index}
             userPhoto={userPhoto}
             userName={userName}
@@ -69,7 +48,7 @@ export const PostList = ({results}) => {
             postTitle={postTitle}
             postDescription={postDescription}
             points={softNumber(points)}
-            userPoints = {userPoints}
+            userPoints={userPoints}
             resolved={resolved}
             likes={softNumber(likes)}
             urlPost={image}
@@ -78,4 +57,6 @@ export const PostList = ({results}) => {
       )}
     </PostListCont>
   );
-};
+}
+
+export default PostList;

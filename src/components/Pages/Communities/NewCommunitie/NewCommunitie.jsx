@@ -1,13 +1,13 @@
-import React, {useState} from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-//import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+// import PropTypes from 'prop-types';
 
-//Icons
-import { FaPlus } from "react-icons/fa";
+// Icons
+import { FaPlus } from 'react-icons/fa';
 
-//Import General Styled
-import {SubTitle} from "../../../../css/generalStyled"
+// Import General Styled
+import { SubTitle } from '../../../../css/generalStyled';
 
 const Container = styled.div`
   margin: 30px;
@@ -33,34 +33,25 @@ const LinkTo = styled(Link)`
   margin-bottom: 10px;
 `;
 
+function NewCommunitie() {
+  const [newComu, setNewComu] = useState(false);
 
-
-const NewCommunitie = () => {
-
-  const [newComu, setNewComu] = useState(false)
-
-
-  const AddNewComu = () =>{
+  const AddNewComu = () => {
+    // eslint-disable-next-line
     console.log(new Date(), newComu);
-    setNewComu(true)
-  }
+    setNewComu(true);
+  };
 
   return (
-    <>
     <Container>
       <LinkTo to="create-communitie" onClick={AddNewComu}>
         <FaPlus size="6rem" color="white" />
       </LinkTo>
       <SubTitle>Crear nueva Comunidad</SubTitle>
-
-
     </Container>
-    </>
   );
-};
-
-NewCommunitie.propTypes = {
-
 }
+
+NewCommunitie.propTypes = {};
 
 export default NewCommunitie;

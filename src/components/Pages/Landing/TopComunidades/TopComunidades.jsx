@@ -1,12 +1,12 @@
-import axios from "../../../../utils/axios";
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import axios from '../../../../utils/axios';
 
-//Componentes
-import CardComunidadShow from "../../../../components/Layout/CardComunidadShow/CardComunidadShow";
+// Componentes
+import CardComunidadShow from '../../../Layout/CardComunidadShow/CardComunidadShow';
 
-//Mock, NO BORRAR AUNQUE NO SE USE!
+// Mock, NO BORRAR AUNQUE NO SE USE!
 
 const Container = styled.div`
   display: flex;
@@ -34,7 +34,7 @@ const Cards = styled.div`
   margin: 20px auto 0px auto;
 
   border-radius: 3px;
-  gap:1px;
+  gap: 1px;
 `;
 
 const LinkTo = styled(Link)`
@@ -58,17 +58,19 @@ const LinkTo = styled(Link)`
   font-family: var(--secondary-font);
 `;
 
-const TopComunidades = () => {
+function TopComunidades() {
   const [comunidades, setComunidades] = useState([]);
 
   useEffect(() => {
     axios
-      .get("/api/communities/")
-      .then(function (response) {
-        //console.log("Data:", response.data);
+      .get('/api/communities/')
+      .then((response) => {
+        // console.log("Data:", response.data);
         setComunidades(response.data);
       })
-      .catch((error) => console.log("Error:", error));
+      .catch((error) => {
+        // eslint-disable-next-line
+        console.log('Error:', error)});
   }, []);
 
   return (
@@ -76,9 +78,9 @@ const TopComunidades = () => {
       <Titulo>TOP COMUNIDADES</Titulo>
 
       <Cards>
-        {comunidades.map((card, index) => (
+        {comunidades.map((card) => (
           <CardComunidadShow
-            key={index}
+            key={new Date()}
             users={card.users}
             checks={card.cheks}
             title={card.title}
@@ -90,6 +92,6 @@ const TopComunidades = () => {
       <LinkTo to="/communities">VER MAS COMUNIDADES</LinkTo>
     </Container>
   );
-};
+}
 
 export default TopComunidades;

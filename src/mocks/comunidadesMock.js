@@ -1,41 +1,39 @@
-import mock from "../utils/mock"
+import mock from '../utils/mock';
 
-
-//Data falsa
+// Data falsa
 const comunidades = [
   {
-    title: "Javascript",
+    title: 'Javascript',
     users: 11001,
     cheks: 232,
     image:
-      "https://midu.dev/images/wallpapers/javascript-grande-horizontal-4k.png",
+      'https://midu.dev/images/wallpapers/javascript-grande-horizontal-4k.png',
   },
   {
-    title: "NodeJs",
+    title: 'NodeJs',
     users: 700,
     cheks: 87,
     image:
-    "https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg",
+      'https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg',
   },
   {
-    title: "Natacion",
+    title: 'Natacion',
     users: 11000,
     cheks: 232,
     image:
-      "https://midu.dev/images/wallpapers/javascript-grande-horizontal-4k.png",
+      'https://midu.dev/images/wallpapers/javascript-grande-horizontal-4k.png',
   },
   {
-    title: "Cocina",
+    title: 'Cocina',
     users: 700,
     cheks: 87,
     image:
-    "https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg",
+      'https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg',
   },
 ];
 
 // Mock any GET request to /users
 // arguments for reply are (status, data, headers)
-mock.onGet("/comunidades").reply(200, {
-  comunidades
+mock.onGet('/comunidades').reply(200, {
+  comunidades,
 });
-

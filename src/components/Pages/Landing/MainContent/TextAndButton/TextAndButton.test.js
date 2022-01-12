@@ -1,13 +1,12 @@
-import React from "react";
-import "@testing-library/jest-dom/extend-expect";
-import { render } from "@testing-library/react";
+import React from 'react';
+import '@testing-library/jest-dom/extend-expect';
+import { render } from '@testing-library/react';
 
-import TextAndButton from "./TextAndButton";
+import TextAndButton from './TextAndButton';
 
-test("render content", () => {
+test('render content', () => {
+  // eslint-disable-next-line
+  const component = render(<TextAndButton />);
 
-  const component = render(<TextAndButton  />);
-
-  //console.log(component);
-
+  // console.log(component);
 });

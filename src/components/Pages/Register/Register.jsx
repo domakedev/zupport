@@ -1,13 +1,13 @@
 import React from 'react';
-import styled from "styled-components";
-import InputsRegister from "./RegisterSlice/InputsRegister";
-import WelcomeRegister from "./RegisterSlice/WelcomeRegister";
-import BtnRss from "../../Layout/Inputs/InputSocialMediaButton";
-import SeparatorLine from "../Login/LoginSlice/SeparatorLine";
+import styled from 'styled-components';
+import InputsRegister from './RegisterSlice/InputsRegister';
+import WelcomeRegister from './RegisterSlice/WelcomeRegister';
+import BtnRss from '../../Layout/Inputs/InputSocialMediaButton';
+import SeparatorLine from '../Login/LoginSlice/SeparatorLine';
 
-//Import layouts
-import Header from "../../Layout/Header";
-import Footer from "../../Layout/Footer";
+// Import layouts
+import Header from '../../Layout/Header';
+import Footer from '../../Layout/Footer';
 
 const ContainerForm = styled.div`
   display: flex;
@@ -23,9 +23,10 @@ const ContainerForm = styled.div`
   }
 `;
 
-const Register = () => (
-  <>
-    <Header/>
+function Register() {
+  return (
+    <>
+      <Header />
 
       <ContainerForm>
         <WelcomeRegister />
@@ -34,8 +35,9 @@ const Register = () => (
         <BtnRss />
       </ContainerForm>
 
-    <Footer/>
-  </>
-);
+      <Footer />
+    </>
+  );
+}
 
-export default Register
+export default Register;

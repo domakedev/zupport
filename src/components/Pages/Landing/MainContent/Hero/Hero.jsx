@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-//Images
-import IconoPerfil from "../../../../../images/perfil.svg";
-import Scaled from "../../../../../images/scaled.jpg";
-import IronMan from "../../../../../images/iron-man.jpg";
-import Capitan from "../../../../../images/capi.jfif";
-import MainHeroIMG from "../../../../../images/fondo-hero.svg";
+// Images
+import IconoPerfil from '../../../../../images/perfil.svg';
+import Scaled from '../../../../../images/scaled.jpg';
+import IronMan from '../../../../../images/iron-man.jpg';
+import Capitan from '../../../../../images/capi.jfif';
+import MainHeroIMG from '../../../../../images/fondo-hero.svg';
 
 const Container = styled.div`
   max-width: 483px;
@@ -36,7 +36,7 @@ const Description = styled.p`
   font-family: var(--secondary-font);
 `;
 
-//Como cargar ruta dinamicamente aqui fuera del componente principal?
+// Como cargar ruta dinamicamente aqui fuera del componente principal?
 
 const HeroCard1 = styled.div`
   display: inline-block;
@@ -113,33 +113,24 @@ const HeroCardIcon = styled.img`
   border: 1px solid black;
 `;
 
-const Hero = () => {
+function Hero() {
   return (
     <Container>
       <Description>Top Helpers en sus comunidades</Description>
 
       <HeroCard1 className="hero__card--TL">
-        <HeroCardIcon
-          src={IconoPerfil}
-          alt="icono de perfil"
-        />
+        <HeroCardIcon src={IconoPerfil} alt="icono de perfil" />
       </HeroCard1>
 
       <HeroCard2 className="hero__card--TRC">
-        <HeroCardIcon
-          src={IconoPerfil}
-          alt="icono de perfil"
-        />
+        <HeroCardIcon src={IconoPerfil} alt="icono de perfil" />
       </HeroCard2>
 
       <HeroCard3 className="hero__card--BC">
-        <HeroCardIcon
-          src={IconoPerfil}
-          alt="icono de perfil"
-        />
+        <HeroCardIcon src={IconoPerfil} alt="icono de perfil" />
       </HeroCard3>
     </Container>
   );
-};
+}
 
 export default Hero;
