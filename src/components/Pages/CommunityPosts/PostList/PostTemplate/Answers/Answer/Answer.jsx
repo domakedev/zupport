@@ -27,7 +27,7 @@ const Validated = styled.div`
 `;
 
 const InputComment = styled.div`
-  width: 70%;
+  width: ${({ validated }) => (validated ? '70%' : '80%')};
 `;
 
 function Answer({ state = {}, textPlaceholder = '' }) {
@@ -42,9 +42,11 @@ function Answer({ state = {}, textPlaceholder = '' }) {
 
   return (
     <Comment>
-      <UserPhoto userPoints />
-
-      <InputComment>
+      <UserPhoto
+        userPhoto={comment.user.photo}
+        userPoints={comment.user.points}
+      />
+      <InputComment validated={state.resolved}>
         <InputText
           state={comment}
           disabled={false}
@@ -53,8 +55,8 @@ function Answer({ state = {}, textPlaceholder = '' }) {
         />
       </InputComment>
 
-      <Validated validated={state.validated}>
-        <AiFillCheckSquare />
+      <Validated validated={state.resolved}>
+        {state.resolved ? <AiFillCheckSquare /> : null}
       </Validated>
     </Comment>
   );

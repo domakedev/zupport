@@ -39,10 +39,15 @@ const ResponderAnimated = styled.div`
 
 function PostFooter() {
   const [responder, setResponder] = useState();
-
+  const dataUser = {
+    user: {
+      photo: 'https://bit.ly/3Fnkbk9',
+      points: 5430,
+      username: 'domakedev',
+    },
+  };
   const onClick = () => {
     setResponder(!responder);
-    // console.log('olis');
   };
 
   return (
@@ -56,7 +61,10 @@ function PostFooter() {
 
       <ResponderAnimated>
         {responder ? (
-          <Answer textPlaceholder="Escribe tu respuesta aquí..." />
+          <Answer
+            state={dataUser}
+            textPlaceholder="Escribe tu respuesta aquí..."
+          />
         ) : null}
       </ResponderAnimated>
     </>
