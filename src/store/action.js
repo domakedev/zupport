@@ -39,7 +39,7 @@ const getAllAnswers = (idPost) => async (dispatch, getState) => {
     dispatch(loadAnswerValidated(answersValidated));
     dispatch(loadAnswerNoValidated(answersNoValidated));
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 };
 
@@ -47,9 +47,8 @@ const addAnswerPost = (answerData) => async (dispatch) => {
   try {
     const response = await axios.post('/api/answer', answerData);
     dispatch(addAnswer(response));
-    console.log(response);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 };
 

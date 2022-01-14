@@ -20,7 +20,6 @@ function Input({
   disabled = false,
 }) {
   const onChange = (e) => {
-    console.log(e.target.value);
     changeState({ ...state, field: e.target.value });
     onChangeCe(e);
   };
