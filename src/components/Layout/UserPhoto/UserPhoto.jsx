@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { AiTwotoneCrown, AiFillMinusCircle } from 'react-icons/ai';
+import { AiTwotonePropertySafety, AiFillMinusCircle } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
 import defaultPhoto from '../../../images/Icon/user.png';
 
@@ -21,10 +21,14 @@ const Container = styled('div')(
   ({ userPoints }) => css`
     position: relative;
     cursor: pointer;
+    border-radius: 50%;
     .icon-crow {
       color: ${crownColor(userPoints)};
-      height: 2rem;
-      width: 2rem;
+      height: 1.7rem;
+      width: 1.7rem;
+      left: -3px;
+      top: -2px;
+      bottom: 28px;
       stroke-width: 1rem;
       stroke: var(--dark-color);
       position: absolute;
@@ -37,10 +41,7 @@ const PhotoContainer = styled('div')(
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    background: var(--sucess-color);
+    background: #e2e2e2;
     border-radius: 50%;
     object-fit: cover;
     object-position: center center;
@@ -51,13 +52,14 @@ const PhotoContainer = styled('div')(
 
 const Photo = styled('img')(
   () => css`
-    height: 34px;
-    width: 34px;
+    height: 40px;
+    width: 40px;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     object-fit: cover;
     object-position: center center;
+    border: 3px solid var(--sucess-color); //el color cambiara a --alert-color si está activo
   `
 );
 
@@ -76,7 +78,7 @@ const DeleteUser = styled.div`
 `;
 
 function UserPhoto({
-  userPhoto = defaultPhoto,
+  userPhoto,
   userPoints,
   selectUser,
   user,
@@ -87,11 +89,14 @@ function UserPhoto({
   return (
     <Container userPoints={userPoints} onClick={() => selectUser(user)}>
       <IconContext.Provider userPoints={userPoints} value={value}>
-        <AiTwotoneCrown />
+        <AiTwotonePropertySafety />
       </IconContext.Provider>
 
       <PhotoContainer>
-        <Photo src={userPhoto} alt={user?.fullname} />
+        <Photo
+          src={!userPhoto ? defaultPhoto : userPhoto}
+          alt={user?.fullname}
+        />
       </PhotoContainer>
 
       {selected ? (
@@ -108,7 +113,7 @@ UserPhoto.propTypes = {
 };
 
 UserPhoto.defaultProps = {
-  userPhoto: '',
+  userPhoto: defaultPhoto,
 };
 
 export default UserPhoto;
