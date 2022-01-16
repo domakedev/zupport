@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { IoSend } from 'react-icons/io5';
 import LikeButtonPost from './AcctioPost/LikeButton';
 import CommentButtonPost from './AcctioPost/CommentButton';
 import Answer from './Answers/Answer/Answer';
+import action from '../../../../../store/action';
 
 const PostFooterContainer = styled.section`
   display: flex;
@@ -18,53 +21,72 @@ const PostFooterContainer = styled.section`
 `;
 
 const ResponderAnimated = styled.div`
-  //margin-top: 20px;
   margin-bottom: 20px;
-  /* animation-duration: 3s;
-  animation-name: slidein;
-  animation-direction: alternate;
-
-  @keyframes slidein {
-    from {
-      margin-left: 100%;
-      width: 300%;
-    }
-
-    to {
-      margin-left: 0%;
-      width: 100%;
-    }
-  } */
+`;
+const AddAnswerCont = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+`;
+const ButtonSend = styled.button`
+  color: var(--principal-color);
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem;
+  font-size: 2.7rem;
+  height: 40px;
+  background: none;
 `;
 
 function PostFooter() {
   const [responder, setResponder] = useState();
+  const [answerData, setAnswerData] = useState();
+
+  const dispatch = useDispatch();
+
   const dataUser = {
     user: {
       photo: 'https://bit.ly/3Fnkbk9',
       points: 5430,
       username: 'domakedev',
+      id: '61bbfb63acc5c8d066b92b65',
+      post: '61e09c7fb35c71052690ec67',
     },
   };
-  const onClick = () => {
+  const onClickHandle = () => {
     setResponder(!responder);
+  };
+  const handleClick = () => {
+    dispatch(
+      action.addAnswerPost({
+        answer: answerData,
+        user: dataUser.user.id,
+        likes: 0,
+        post: dataUser.user.post,
+        resolved: false,
+      })
+    );
   };
 
   return (
     <>
       <PostFooterContainer>
         <LikeButtonPost />
-        <CommentButtonPost responderFn={onClick} />
+        <CommentButtonPost responderFn={onClickHandle} />
       </PostFooterContainer>
-
-      {/* Box de respuesta nueva */}
-
       <ResponderAnimated>
         {responder ? (
-          <Answer
-            state={dataUser}
-            textPlaceholder="Escribe tu respuesta aquí..."
-          />
+          <AddAnswerCont>
+            <Answer
+              state={dataUser}
+              textPlaceholder="Escribe tu respuesta aquí..."
+              setAnswerData={setAnswerData}
+              sendButton={responder}
+            />
+            <ButtonSend type="button" onClick={handleClick}>
+              <IoSend />
+            </ButtonSend>
+          </AddAnswerCont>
         ) : null}
       </ResponderAnimated>
     </>

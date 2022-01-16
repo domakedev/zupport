@@ -15,13 +15,16 @@ function Input({
   errorText = '',
   inputParameters,
   functionx = () => {},
-  onChangeCe = () => {},
+  onChangeCe,
   name = '',
   disabled = false,
+  textEdit,
+  flag,
+  focusInput,
 }) {
   const onChange = (e) => {
-    changeState({ ...state, field: e.target.value });
-    onChangeCe(e);
+    // changeState({ ...state, field: e.target.value });
+    onChangeCe(e.target.value);
   };
 
   const checking = () => {
@@ -49,12 +52,13 @@ function Input({
           type={inputType}
           placeholder={textPlaceholder}
           id={inputName}
-          value={state.answer}
+          value={flag ? textEdit : state.answer}
           onChange={onChange}
           onKeyUp={checking}
           onBlur={checking}
           check={state.check}
           disabled={disabled}
+          ref={focusInput}
         />
         <IconChecking check={state.check}>
           {state.check === 'true' ? (

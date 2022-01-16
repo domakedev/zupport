@@ -1,9 +1,4 @@
-import {
-  GET_ANSWERS,
-  GET_ANSWERS_VALIDATED,
-  GET_ANSWERS_NO_VALIDATED,
-  ADD_ANSWER,
-} from './types';
+import { GET_ANSWERS, ADD_ANSWER, EDIT_ANSWER, DELETE_ANSWER } from './types';
 import axios from '../utils/axios';
 
 // action creators
@@ -12,32 +7,25 @@ const loadAnswer = (answers) => ({
   type: GET_ANSWERS,
   payload: answers,
 });
-const loadAnswerValidated = (answers) => ({
-  type: GET_ANSWERS_VALIDATED,
-  payload: answers,
-});
-const loadAnswerNoValidated = (answers) => ({
-  type: GET_ANSWERS_NO_VALIDATED,
-  payload: answers,
-});
 const addAnswer = (answer) => ({
   type: ADD_ANSWER,
   payload: answer,
 });
-
+const editAnswer = (answer) => ({
+  type: EDIT_ANSWER,
+  payload: answer,
+});
+const deleteAnswer = (answer) => ({
+  type: DELETE_ANSWER,
+  payload: answer,
+});
 // actions
 
-const getAllAnswers = (idPost) => async (dispatch, getState) => {
+const getAllAnswers = (idPost) => async (dispatch) => {
   try {
     const response = await axios.get(`/api/answer/${idPost}`);
     const res = response.data;
     dispatch(loadAnswer(res));
-    const second = getState();
-    const arr = second.answers;
-    const answersValidated = await arr.filter((e) => e.resolved === true);
-    const answersNoValidated = await arr.filter((e) => e.resolved !== true);
-    dispatch(loadAnswerValidated(answersValidated));
-    dispatch(loadAnswerNoValidated(answersNoValidated));
   } catch (e) {
     // console.log(e);
   }
@@ -52,7 +40,27 @@ const addAnswerPost = (answerData) => async (dispatch) => {
   }
 };
 
+const editAnswerPut = (idAnswer, answerData) => async (dispatch) => {
+  try {
+    const response = await axios.put(`/api/answer/${idAnswer}`, answerData);
+    dispatch(editAnswer(response));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const deletedAnswer = (idAnswer) => async (dispatch) => {
+  try {
+    const response = await axios.delete(`/api/answer/${idAnswer}`);
+    dispatch(deleteAnswer(response));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
 export default {
   getAllAnswers,
   addAnswerPost,
+  editAnswerPut,
+  deletedAnswer,
 };
