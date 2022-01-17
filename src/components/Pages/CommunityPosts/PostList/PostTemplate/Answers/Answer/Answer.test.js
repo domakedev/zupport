@@ -12,6 +12,7 @@ describe('Unit test for Answer Page', () => {
     const userPhoto = component.getByAltText(/userPhoto/i);
     expect(userPhoto).toBeInTheDocument();
   });
+
   test('It should display the valid response for a post', () => {
     const component = render(<Answer state={answerData[0]} />);
     // screen.debug();
@@ -20,6 +21,7 @@ describe('Unit test for Answer Page', () => {
     );
     expect(answerText).toBeInTheDocument();
   });
+
   test('It should show a more options button', () => {
     const component = render(<Answer state={answerData[0]} />);
     const buttonElement = component.getByRole('button', {
@@ -28,6 +30,7 @@ describe('Unit test for Answer Page', () => {
     userEvent.click(buttonElement);
     expect(buttonElement).toBeInTheDocument();
   });
+
   test('It should show an edit button if the more options button is clicked on a answer', () => {
     // const mockHandler = jest.fn();
     const component = render(<Answer state={answerData[0]} />);
@@ -41,6 +44,7 @@ describe('Unit test for Answer Page', () => {
     expect(editButton).toBeInTheDocument();
     // expect(mockHandler.mock.calls).toHaveLength(1);
   });
+
   test('It should show an delete button if the more options button is clicked on a answer', () => {
     // const mockHandler = jest.fn();
     const component = render(<Answer state={answerData[0]} />);
