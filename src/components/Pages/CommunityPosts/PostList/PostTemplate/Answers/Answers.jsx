@@ -91,7 +91,7 @@ function Answers() {
   const dispatch = useDispatch();
 
   const supportAnswer = (comment) => {
-    console.log('Me gusta todo :', comment);
+    // console.log('Me gusta todo :', comment);
   };
   useEffect(async () => {
     const idPost = '61e09c7fb35c71052690ec67';
