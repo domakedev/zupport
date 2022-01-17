@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { IconContext } from 'react-icons';
 import { IoHeartCircle } from 'react-icons/io5';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const IconHeartContainer = styled('div')(
   () => css`
@@ -35,7 +35,7 @@ function IconHeart({ likes }) {
   );
 }
 IconHeart.propTypes = {
-  likes: PropTypes.number.isRequired,
+  // likes: PropTypes.number.isRequired,
 };
 
 export default IconHeart;

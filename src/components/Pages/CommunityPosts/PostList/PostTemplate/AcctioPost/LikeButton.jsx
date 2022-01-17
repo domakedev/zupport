@@ -38,7 +38,7 @@ function LikeButtonPost() {
   const [count, setCount] = useState(0);
   const handleOnclick = () => {
     // eslint-disable-next-line
-    console.log(count);
+    // console.log(count);
     setCount(count + 1);
   };
   const value = useMemo(() => ({ className: 'icon-heart' }));

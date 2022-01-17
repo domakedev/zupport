@@ -1,6 +1,5 @@
-import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
-import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { render } from '../../../__test__/test-utils';
 
 // Component
 import CommunitieAddCard from './CommunitieAddCard';
@@ -12,16 +11,14 @@ test('render content', () => {
   const image = 'ruta de imagen';
 
   const component = render(
-    <CommunitieAddCard
-      title={title}
-      users={users}
-      checks={checks}
-      image={image}
-    />
+    <MemoryRouter>
+      <CommunitieAddCard
+        title={title}
+        users={users}
+        checks={checks}
+        image={image}
+      />
+    </MemoryRouter>
   );
-
-  // console.log(component);
-
   component.getByText('Recetas de Cocina');
-  component.getByText('Unirme');
 });
