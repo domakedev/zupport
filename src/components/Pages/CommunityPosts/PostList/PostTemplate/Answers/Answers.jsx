@@ -90,7 +90,7 @@ function Answers() {
 
   const dispatch = useDispatch();
 
-  const supportAnswer = (comment) => {
+  const supportAnswer = () => {
     // console.log('Me gusta todo :', comment);
   };
   useEffect(async () => {
