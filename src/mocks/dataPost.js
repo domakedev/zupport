@@ -23,7 +23,7 @@ for (let i = 0; i < 20; i += 1) {
 }
 
 mock.onGet('/comunidades/:comudidadId/posts').reply(200, {
-  posts: dataPost.sort((dateA, dateB) => dateB.timePost - dateA.timePost),
+  posts: { hola: 'hola' },
 });
 
 /**

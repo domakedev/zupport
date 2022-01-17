@@ -147,7 +147,11 @@ function Answer({
           {state.resolved ? <AiFillCheckSquare /> : null}
         </Validated>
         {sendButton ? null : (
-          <MoreButton type="button" onClick={handleClickMore}>
+          <MoreButton
+            type="button"
+            onClick={handleClickMore}
+            aria-label="moreAnswer"
+          >
             <AiOutlineEllipsis />
           </MoreButton>
         )}

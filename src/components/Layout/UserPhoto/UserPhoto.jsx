@@ -95,7 +95,7 @@ function UserPhoto({
       <PhotoContainer>
         <Photo
           src={!userPhoto ? defaultPhoto : userPhoto}
-          alt={user?.fullname}
+          alt={!user?.fullname ? 'userPhoto' : user?.fullname}
         />
       </PhotoContainer>
 
