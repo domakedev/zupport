@@ -1,16 +1,11 @@
 /* eslint-disable default-param-last */
-import {
-  GET_ANSWERS,
-  GET_ANSWERS_VALIDATED,
-  GET_ANSWERS_NO_VALIDATED,
-  ADD_ANSWER,
-} from './types';
+import { GET_ANSWERS, ADD_ANSWER, EDIT_ANSWER, DELETE_ANSWER } from './types';
 
 const initialState = {
   answers: [],
-  answersValidated: [],
-  answersNoValidated: [],
   addAnswer: {},
+  editAnswer: {},
+  deleteAnswer: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,11 +13,11 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ANSWERS:
       return { ...state, answers: newValue };
-    case GET_ANSWERS_VALIDATED:
-      return { ...state, answersValidated: newValue };
-    case GET_ANSWERS_NO_VALIDATED:
-      return { ...state, answersNoValidated: newValue };
     case ADD_ANSWER:
+      return { ...state, addAnswer: newValue };
+    case EDIT_ANSWER:
+      return { ...state, addAnswer: newValue };
+    case DELETE_ANSWER:
       return { ...state, addAnswer: newValue };
     default:
       return state;
