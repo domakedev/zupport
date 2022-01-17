@@ -90,12 +90,12 @@ PostHeader.propTypes = {
   userPhoto: PropTypes.string.isRequired, // Si no tiene foto cómo se podria validar?
   userName: PropTypes.string.isRequired,
   timePost: PropTypes.string.isRequired,
-  points: PropTypes.number,
+  // points: PropTypes.number,
   resolved: PropTypes.bool.isRequired,
 };
 
 PostHeader.defaultProps = {
-  points: 0,
+  // points: 0,
 };
 
 export default PostHeader;

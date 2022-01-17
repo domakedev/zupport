@@ -1,7 +1,5 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
-import { fireEvent } from '@testing-library/react';
-import { render } from '../../../../../../../__test__/test-utils'; // './test-utils';
+import { render, fireEvent } from '../../../../../../../__test__/test-utils'; // './test-utils';
 import '@testing-library/jest-dom';
 import answerData from '../../../../../../../mocks/answerData';
 import Answer from './Answer';
@@ -27,7 +25,7 @@ describe('Unit test for Answer Page', () => {
     const buttonElement = component.getByRole('button', {
       name: /moreAnswer/i,
     });
-    userEvent.click(buttonElement);
+    // userEvent.click(buttonElement);
     expect(buttonElement).toBeInTheDocument();
   });
 

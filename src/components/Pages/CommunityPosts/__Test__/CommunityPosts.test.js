@@ -1,51 +1,40 @@
 /* eslint-disable import/order */
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import { render } from '../../../../__test__/test-utils';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import CommunityPosts from '../CommunityPosts';
+import CommunityPosts from '../PostList/PostTemplate/PostTemplate';
 import dataPost from '../../../../mocks/dataPost';
 import {
   softNumber,
   getPostTime,
 } from '../../../../controller/CommunityPostCtr/utilities';
 
+const post = dataPost[0];
+
 beforeEach(() => {
-  render(<CommunityPosts />);
+  render(
+    <CommunityPosts
+      userPhoto={post.userPhoto}
+      userName={post.userName}
+      timePost={getPostTime(post.timePost)}
+      postTitle={post.postTitle}
+      postDescription={post.postDescription}
+      points={softNumber(post.points)} // "24374"
+      userPoints={post.userPoints}
+      resolved={post.resolved}
+      likes={softNumber(post.likes)} // "64397"
+      urlPost={post.image}
+    />
+  );
 });
 
 const getText = (value = '') => {
   const textElement = screen.getByText(value);
   return textElement;
 };
-const getRole = (type, value = '') => {
-  const buttonElement = screen.getByRole(type, { name: value });
-  userEvent.click(buttonElement);
-  return buttonElement;
-};
 
-describe('welcome you to a community posts page', () => {
-  test('It should render the welcome to a community posts page', () => {
-    expect(
-      getText(/Bienvenid@ a tu comunidad Javascript/i)
-    ).toBeInTheDocument();
-  });
-
-  test('It should render the statement of the community top helpers', () => {
-    expect(
-      getText(/Conoce a l@s 5 top helpers de tu comunidad/i)
-    ).toBeInTheDocument();
-  });
-});
-
-describe('Creation of new questions to the community', () => {
-  test('It should render a statement to create a post', () => {
-    expect(getText(/¿En que deseas ayuda?/i)).toBeInTheDocument();
-  });
-  test('It should render the statement of the community top', () => {
-    expect(getRole('button', /PREGUNTAR/i)).toBeInTheDocument();
-  });
-});
-describe('show all posts from a community', () => {
+describe('Unit test for Post Page', () => {
   test('It should render the title of a post', async () => {
     expect(getText(dataPost[0].postTitle)).toBeInTheDocument();
   });
@@ -59,8 +48,6 @@ describe('show all posts from a community', () => {
   test('It should render the publication time of the posts', async () => {
     expect(getText(getPostTime(dataPost[0].timePost))).toBeInTheDocument();
   });
-});
-describe('Comment actions and like posts', () => {
   test('It should render the option to like a post', () => {
     const buttonElement = screen.getAllByRole('button', {
       name: /Te apoyo/i,
