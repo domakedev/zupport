@@ -21,6 +21,9 @@ import {
   BsLink45Deg,
   BsTable,
 } from 'react-icons/bs';
+// Import redux
+import { useDispatch } from 'react-redux';
+import action from '../../../store/action';
 // import Context
 import { useStateAuth } from '../../../context/Auth/AuthContext';
 // Import Layout Components
@@ -43,9 +46,12 @@ function HelpPost() {
   // Resultados de la busqueda u orden, luego se imprimen
   // en pantalla
   const [results, setResults] = useState([]);
-  const [title, changeTitle] = useState({ field: '', check: null });
-  const [description, changeDescription] = useState({ field: '', check: null });
-  const [points, changePoints] = useState({ field: '', check: null });
+  const [titlest, changeTitle] = useState({ field: '', check: null });
+  const [descriptionst, changeDescription] = useState({
+    field: '',
+    check: null,
+  });
+  const [pointsst, changePoints] = useState({ field: '', check: null });
   const { bringUsers } = useStateAuth();
   // Parametros de validacion en frontEnd
   const parameters = {
@@ -87,6 +93,24 @@ function HelpPost() {
     setUsersSelected(beforeDelete);
   };
 
+  const dispatch = useDispatch();
+
+  const addPost = () => {
+    dispatch(
+      action.addedPost({
+        title: titlest.field,
+        description: descriptionst.field,
+        image: '',
+        likes: 0,
+        points: pointsst.field,
+        user: '61eb5ea6345f4538ebf11cd0',
+        taggedUsers: [],
+        community: '61e10b9749e4a27d593c6a95',
+        resolved: false,
+      })
+    );
+  };
+
   return (
     <>
       <Header />
@@ -103,7 +127,7 @@ function HelpPost() {
       <PageContainer>
         <PostTitle>¿En que deseas ayuda?</PostTitle>
         <InputTitle
-          state={title}
+          state={titlest}
           changeState={changeTitle}
           inputType="text"
           label="Titulo"
@@ -130,7 +154,7 @@ function HelpPost() {
           <BsEmojiSmile />
         </InputStyle>
         <InputPost
-          state={description}
+          state={descriptionst}
           changeState={changeDescription}
           inputType="text"
           label="Descripcion"
@@ -199,7 +223,7 @@ function HelpPost() {
           <OfferTitle>OFRECER</OfferTitle>
           <OfferPointsContainer>
             <InputPoints
-              state={points}
+              state={pointsst}
               changeState={changePoints}
               inputType="number"
               label="Puntos"
@@ -214,7 +238,7 @@ function HelpPost() {
 
         <Line />
 
-        <RequestButton to="/communities/community-posts">
+        <RequestButton onClick={addPost} to="/communities/NodeJs/posts">
           PEDIR AYUDA
         </RequestButton>
       </PageContainer>
