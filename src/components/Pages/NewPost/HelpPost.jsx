@@ -21,13 +21,16 @@ import {
   BsLink45Deg,
   BsTable,
 } from 'react-icons/bs';
+// import Context
 import { useStateAuth } from '../../../context/Auth/AuthContext';
-
-import Input from '../../Layout/Inputs/InputText';
-import InputArea from '../../Layout/Inputs/InputTextArea';
-import InputNumber from '../../Layout/Inputs/InputNumber';
+// Import Layout Components
 import Header from '../../Layout/Header';
 import Footer from '../../Layout/Footer';
+// Import Page Components
+import InputTitle from './Components/InputTitle';
+import InputPost from './Components/InputPost';
+import InputPoints from './Components/InputPoints';
+// Import Search and selection components
 import GUsers from './GUsers';
 import UserFoto from '../../Layout/UserPhoto/UserPhoto';
 
@@ -44,10 +47,11 @@ function HelpPost() {
   const [description, changeDescription] = useState({ field: '', check: null });
   const [points, changePoints] = useState({ field: '', check: null });
   const { bringUsers } = useStateAuth();
+  // Parametros de validacion en frontEnd
   const parameters = {
     title: /^.{10,50}$/, // 10 a 50 caracteres.
-    description: /^.{10,1300}$/, // 10 a 50 caracteres.
-    points: /^[0-9]{1,4}$/,
+    description: /^.{10,1300}$/, // 10 a 1300 caracteres.
+    points: /^[0-9]{1,4}$/, // Maximo 9999 puntos
   };
 
   useEffect(() => {
@@ -89,17 +93,16 @@ function HelpPost() {
 
       <MainTitleContainer>
         <MainTitle>Crear Pregunta</MainTitle>
-        <MainTitleIcon to="/communities/community-posts">
+        <GoBack to="/communities/community-posts">
           <BsX />
-        </MainTitleIcon>
+        </GoBack>
       </MainTitleContainer>
-      <LineTitle>
-        <hr />
-      </LineTitle>
+
+      <Line />
 
       <PageContainer>
         <PostTitle>¿En que deseas ayuda?</PostTitle>
-        <Input
+        <InputTitle
           state={title}
           changeState={changeTitle}
           inputType="text"
@@ -126,7 +129,7 @@ function HelpPost() {
           <BsLink45Deg />
           <BsEmojiSmile />
         </InputStyle>
-        <InputArea
+        <InputPost
           state={description}
           changeState={changeDescription}
           inputType="text"
@@ -146,9 +149,7 @@ function HelpPost() {
           </AddSecondaryContainer>
         </AddContainer>
 
-        <LineTitle>
-          <hr />
-        </LineTitle>
+        <Line />
 
         <HelpersText>
           Escoge a quienes quisieras que te ayuden{' '}
@@ -191,33 +192,31 @@ function HelpPost() {
           </HelpersContainer>
         </HelpersMainContainer>
 
-        <LineTitle>
-          <hr />
-        </LineTitle>
+        <Line />
 
         <OfferText>¿Que tan difícil consideras tu problema?</OfferText>
         <OfferMainContainer>
           <OfferTitle>OFRECER</OfferTitle>
           <OfferPointsContainer>
-            <InputNumber
+            <InputPoints
               state={points}
               changeState={changePoints}
               inputType="number"
               label="Puntos"
-              textPlaceholder="POF"
+              textPlaceholder="0"
               inputName="puntos"
-              errorText="Debe ser > 0"
+              errorText="Entre 0 y 9999"
               inputParameters={parameters.points}
             />
-            <OfferPointsText>Puntos POF</OfferPointsText>
+            <OfferPointsText>Puntos</OfferPointsText>
           </OfferPointsContainer>
         </OfferMainContainer>
 
-        <LineTitle>
-          <hr />
-        </LineTitle>
+        <Line />
 
-        <LinkTo to="/communities/community-posts">PEDIR AYUDA</LinkTo>
+        <RequestButton to="/communities/community-posts">
+          PEDIR AYUDA
+        </RequestButton>
       </PageContainer>
 
       <Footer />
@@ -240,18 +239,15 @@ const MainTitle = styled.h1`
   font-size: 2.5rem;
 `;
 
-const MainTitleIcon = styled(Link)`
-  font-family: var(--principal-font);
+const GoBack = styled(Link)`
   color: var(--boring-color);
-  padding-left: 10rem;
+  padding-left: 100px;
   font-size: 3rem;
 `;
 
-const LineTitle = styled.div`
-  & hr {
-    border-top: 0.1rem solid var(--boring-color);
-    opacity: 0.3;
-  }
+const Line = styled.hr`
+  border-top: 0.1rem solid var(--boring-color);
+  opacity: 0.3;
 `;
 
 const PageContainer = styled.div`
@@ -358,7 +354,7 @@ const OfferPointsText = styled.div`
   font-size: 1.8rem;
 `;
 
-const LinkTo = styled(Link)`
+const RequestButton = styled(Link)`
   width: 165px;
   height: 50px;
   background-color: var(--principal-color);
@@ -382,13 +378,13 @@ const LinkTo = styled(Link)`
 
 const InputStyle = styled.div`
   display: none;
-  font-size: 1.8rem;
-  color: var(--boring-color);
-  padding: 1rem;
+
   @media (min-width: 768px) {
     display: flex;
-
-    gap: 1rem;
+    padding: 1rem;
+    justify-content: space-around;
+    font-size: 1.8rem;
+    color: var(--boring-color);
   }
 `;
 
