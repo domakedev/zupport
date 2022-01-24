@@ -97,7 +97,7 @@ function PostFooter() {
     );
     setAnswerData('');
   };
-  // console.log(answerData);
+  // console.log(answerDatagg);
   const onChange = (e) => {
     setAnswerData(e.target.value);
   };
