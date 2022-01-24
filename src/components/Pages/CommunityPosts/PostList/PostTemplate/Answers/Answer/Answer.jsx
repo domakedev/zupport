@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { AiFillCheckSquare, AiOutlineEllipsis } from 'react-icons/ai';
 import PropTypes from 'prop-types';
-import InputText from '../../../../../../Layout/Inputs/InputText';
+import InputText from './InputText';
 import UserPhoto from '../../../../../../Layout/UserPhoto/UserPhoto';
 import action from '../../../../../../../store/action';
 
@@ -66,6 +66,12 @@ const ActionButton = styled.button`
   font-style: normal;
   font-weight: normal;
   line-height: 18px;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  :hover {
+    background: #d3d2ce5b;
+  }
 `;
 
 function Answer({
@@ -73,6 +79,7 @@ function Answer({
   textPlaceholder = '',
   setAnswerData,
   sendButton,
+  cleanInput,
 }) {
   const [comment] = useState(state);
   const [disabledInp, setDisabledInp] = useState(false);
@@ -83,13 +90,14 @@ function Answer({
   const dispatch = useDispatch();
 
   useEffect(() => {}, [comment]);
+  // console.log(comment);
 
   const dataUser = {
     user: {
       photo: 'https://bit.ly/3Fnkbk9',
       points: 5430,
       username: 'domakedev',
-      id: '61bbfb63acc5c8d066b92b65',
+      id: '61eb5ea6345f4538ebf11cd0',
       post: '61e09c7fb35c71052690ec67',
     },
   };
@@ -100,17 +108,21 @@ function Answer({
   };
   const handleEdit = () => {
     dispatch(
-      action.editAnswerPut(comment._id, {
-        answer: editAnswer,
-        user: dataUser.user.id,
-        likes: 0,
-        post: dataUser.user.post,
-        resolved: false,
-      })
+      action.editAnswerPut(
+        comment._id,
+        {
+          answer: editAnswer,
+          user: dataUser.user.id,
+          likes: 0,
+          post: dataUser.user.post,
+          resolved: false,
+        },
+        '61e09c7fb35c71052690ec67'
+      )
     );
   };
   const handleDelete = () => {
-    dispatch(action.deletedAnswer(comment._id));
+    dispatch(action.deletedAnswer(comment._id, '61e09c7fb35c71052690ec67'));
   };
 
   return (
@@ -140,6 +152,7 @@ function Answer({
             flag={disabledInp}
             textEdit={editAnswer}
             focusInput={focusInput}
+            cleanInput={cleanInput}
           />
         </InputComment>
 

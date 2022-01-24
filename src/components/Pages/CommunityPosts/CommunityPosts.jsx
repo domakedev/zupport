@@ -34,8 +34,17 @@ const Container = styled.div`
   justify-content: center;
 `;
 
+const AlertMessage = styled.div`
+  margin-top: 50%;
+  font-family: var(--secondary-font);
+  font-size: var(--secondarey-font-size);
+`;
+
 function CommunityPosts() {
+
   const dispatch = useDispatch();
+
+  const userAuth = useSelector((state) => state.userAuthenticated);
 
   const comuPosts = useSelector((state) => state.posts);
   const [results, setResults] = useState([]);
@@ -53,18 +62,22 @@ function CommunityPosts() {
     <>
       <Header />
       <Container>
-        <CommunityPostCont>
-          <WelcomeCommunity title="Javascript" />
-          <DividingLine />
-          <TopHelpers />
-          <CreatePost />
-          <GOFData
-            comuPosts={comuPosts}
-            setResults={setResults}
-            results={results}
-          />
-          <PostList results={results} />
-        </CommunityPostCont>
+        {!userAuth ? (
+          <AlertMessage>Que tal si iniciamos sesion primero?</AlertMessage>
+        ) : (
+          <CommunityPostCont>
+            <WelcomeCommunity title="Javascript" />
+            <DividingLine />
+            <TopHelpers />
+            <CreatePost />
+            <GOFData
+              comuPosts={comuPosts}
+              setResults={setResults}
+              results={results}
+            />
+            <PostList results={results} />
+          </CommunityPostCont>
+        )}
       </Container>
     </>
   );

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { BsFillExclamationTriangleFill } from 'react-icons/bs';
 import Input from '../../../Layout/Inputs/InputText';
 import InputBtn from '../../../Layout/Inputs/InputBtn';
 
-// Import login function de context
-import { useStateAuth } from '../../../../context/Auth/AuthContext';
+// Import Register from Redux
+import actions from '../../../../store/action';
 
 import '../../../../css/index.css';
 
@@ -69,7 +70,8 @@ const ErrorMsg = styled.div`
 `;
 
 function InputsRegister() {
-  const { Register } = useStateAuth();
+  // Redux
+  const dispatch = useDispatch();
 
   const [user, changeUser] = useState({ field: '', check: null });
   const [name, changeName] = useState({ field: '', check: null });
@@ -122,16 +124,15 @@ function InputsRegister() {
         photo: password2.field,
         points: 0,
       };
-      Register(newUser);
-      // eslint-disable-next-line
-      console.log(newUser);
+      // Con redux
+      dispatch(actions.registerUser(newUser));
 
       // Reset de formulario
       changeFormOk(true);
-      changeUser({ field: '', check: '' });
+      changeUser({ field: '', check: null });
       changeName({ field: '', check: null });
       changePassword({ field: '', check: null });
-      changePassword2({ field: '', check: 'null' });
+      changePassword2({ field: '', check: null });
       changeEmail({ field: '', check: null });
     } else {
       changeFormOk(false);
@@ -195,7 +196,7 @@ function InputsRegister() {
         <Label>
           <input
             type="checkbox"
-            inputName="terminos"
+            // inputName="terminos"
             id="terminos"
             checked={terms}
             onChange={onChangeTerms}
