@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { IconContext } from 'react-icons';
 
@@ -10,6 +11,7 @@ import {
 } from 'react-icons/bs';
 
 import styled from 'styled-components';
+import actions from '../../../store/action';
 import Profile from '../../../images/ProfileP.png';
 
 const List = styled.ul`
@@ -29,13 +31,20 @@ const ListItem = styled.li`
   align-items: center;
   cursor: pointer;
 
-  & a {
+  & a,
+  button {
     text-decoration: none;
     color: var(--boring-color);
     font-family: var(--secondary-font);
     font-size: 18px;
     padding: 15px 15px;
     display: block;
+  }
+
+  & button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
   }
 `;
 
@@ -51,6 +60,7 @@ const Icon = styled.div`
 `;
 
 function ProfileMenu() {
+  const dispatch = useDispatch();
   const value = useMemo(() => ({ className: 'Iconos' }));
   return (
     <List>
@@ -81,7 +91,12 @@ function ProfileMenu() {
           <Icon>
             <BsBoxArrowInRight />
           </Icon>
-          <a href="/logout">Cerrar Sesión</a>
+          <button
+            type="button"
+            onClick={() => dispatch(actions.closeSession())}
+          >
+            Cerrar Sesión
+          </button>
         </ListItem>
       </IconContext.Provider>
     </List>

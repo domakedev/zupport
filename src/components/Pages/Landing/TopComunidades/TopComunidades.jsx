@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import axios from '../../../../utils/axios';
 
 // Componentes
@@ -70,7 +71,8 @@ function TopComunidades() {
       })
       .catch((error) => {
         // eslint-disable-next-line
-        console.log('Error:', error)});
+        console.log('Error:', error);
+      });
   }, []);
 
   return (
@@ -80,8 +82,8 @@ function TopComunidades() {
       <Cards>
         {comunidades.map((card) => (
           <CardComunidadShow
-            key={new Date()}
-            users={card.users}
+            key={uuidv4()}
+            users={card.users.length}
             checks={card.cheks}
             title={card.title}
             image={card.image}

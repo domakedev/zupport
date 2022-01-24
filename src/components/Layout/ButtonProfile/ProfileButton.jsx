@@ -1,4 +1,5 @@
-import React, { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 // import { useDetectOutsideClick } from "react-detect-click-outside";
 
@@ -75,6 +76,7 @@ const Deploy = styled.nav`
 `;
 
 function DropdownMenu() {
+  const currentUser = useSelector((state) => state.currentUserOTokencito);
   const dropdownRef = useRef(null);
 
   const [isActive, setIsActive] = useState(false);
@@ -87,7 +89,7 @@ function DropdownMenu() {
     <MainContainer>
       <MainButton onClick={onClick}>
         <img src={Profile} alt="Imagen de Perfil" />
-        <span>TOM</span>
+        <span>{currentUser.fullname}</span>
         <IconContext.Provider value={value}>
           <MdOutlineKeyboardArrowDown />
         </IconContext.Provider>

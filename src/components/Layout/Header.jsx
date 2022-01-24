@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import actions from '../../store/action';
 
-// import NavButton from "./ButtonNav/NavButton";
+import NavButton from './ButtonNav/NavButton';
 import ProfileButton from './ButtonProfile/ProfileButton';
 
 import Logo from '../../images/Logo.png';
@@ -29,14 +31,25 @@ const Line = styled.hr`
 `;
 
 function Navigation() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(actions.obtainUser());
+  }, []);
+
+  const userAuth = useSelector((state) => state.userAuthenticated);
+  const currentUserOTokencito = useSelector(
+    (state) => state.currentUserOTokencito
+  );
+  const currentUser = currentUserOTokencito?.data?.usuario[0];
+
   return (
     <nav>
       <NavContainer>
+        {JSON.stringify(currentUser)}
         <Link to="/">
           <img src={Logo} alt="Imagen Logo" />
         </Link>
-        {/* <NavButton titulo='registrate' /> */}
-        <ProfileButton />
+        {userAuth ? <ProfileButton /> : <NavButton titulo="registrate" />}
       </NavContainer>
 
       <Line />
