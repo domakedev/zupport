@@ -77,7 +77,6 @@ const Deploy = styled.nav`
 
 function DropdownMenu() {
   const currentUser = useSelector((state) => state.currentUserOTokencito);
-  console.log(currentUser);
   const dropdownRef = useRef(null);
 
   const [isActive, setIsActive] = useState(false);

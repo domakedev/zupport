@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import axios from '../../../utils/axios';
@@ -48,8 +48,7 @@ const Comunidades = styled.div`
 
 function Communities() {
   // const dispatch = useDispatch();
-  const { userAuthenticated } = useSelector((state) => state);
-  console.log('888888', userAuthenticated);
+  // const { userAuthenticated } = useSelector((state) => state);
 
   const [comunidades, setComunidades] = useState([]);
 
