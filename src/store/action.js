@@ -64,28 +64,31 @@ const getAllAnswers = (idPost) => async (dispatch) => {
   }
 };
 
-const addAnswerPost = (answerData) => async (dispatch) => {
+const addAnswerPost = (answerData, idPost) => async (dispatch) => {
   try {
     const response = await axios.post('/api/answer', answerData);
     dispatch(addAnswer(response));
+    dispatch(getAllAnswers(idPost));
   } catch (e) {
     // console.log(e);
   }
 };
 
-const editAnswerPut = (idAnswer, answerData) => async (dispatch) => {
+const editAnswerPut = (idAnswer, answerData, idPost) => async (dispatch) => {
   try {
     const response = await axios.put(`/api/answer/${idAnswer}`, answerData);
     dispatch(editAnswer(response));
+    dispatch(getAllAnswers(idPost));
   } catch (e) {
     // console.log(e);
   }
 };
 
-const deletedAnswer = (idAnswer) => async (dispatch) => {
+const deletedAnswer = (idAnswer, idPost) => async (dispatch) => {
   try {
     const response = await axios.delete(`/api/answer/${idAnswer}`);
     dispatch(deleteAnswer(response));
+    dispatch(getAllAnswers(idPost));
   } catch (e) {
     // console.log(e);
   }

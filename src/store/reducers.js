@@ -32,7 +32,7 @@ const reducer = (state = initialState, action) => {
     case ADD_ANSWER:
       return { ...state, addAnswer: newValue };
     case EDIT_ANSWER:
-      return { ...state, addAnswer: newValue };
+      return { ...state, editAnswer: newValue };
     case DELETE_ANSWER:
       return { ...state, addAnswer: newValue };
 
