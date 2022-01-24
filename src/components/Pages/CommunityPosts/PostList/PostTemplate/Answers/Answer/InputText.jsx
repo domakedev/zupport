@@ -16,6 +16,7 @@ const InputBox = styled.textarea`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 10px;
   &:focus {
     border: 2px solid var(--secondary-color);
     outline: none;
