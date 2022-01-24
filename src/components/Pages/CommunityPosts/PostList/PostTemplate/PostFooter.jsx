@@ -36,6 +36,10 @@ const ButtonSend = styled.button`
   font-size: 2.7rem;
   height: 40px;
   background: none;
+  cursor: pointer;
+  &:hover {
+    color: #29ace094;
+  }
 `;
 
 function PostFooter() {
@@ -46,10 +50,11 @@ function PostFooter() {
 
   const dataUser = {
     user: {
-      photo: 'https://bit.ly/3Fnkbk9',
+      photo:
+        'https://media.istockphoto.com/photos/machu-picchu-peru-picture-id930824730?k=20&m=930824730&s=612x612&w=0&h=Lvzgs0qL32lHBuvFMVg3hotXpE1t0mJpqqrK-ajDzIc=',
       points: 5430,
       username: 'domakedev',
-      id: '61bbfb63acc5c8d066b92b65',
+      id: '61eb5ea6345f4538ebf11cd0',
       post: '61e09c7fb35c71052690ec67',
     },
   };
