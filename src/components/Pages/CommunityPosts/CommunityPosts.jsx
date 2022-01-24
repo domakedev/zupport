@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import WelcomeCommunity from './WelcomeCommity/WelcomeCommunity';
