@@ -34,9 +34,9 @@ const reducer = (state = initialState, action) => {
     case EDIT_ANSWER:
       return { ...state, editAnswer: newValue };
     case DELETE_ANSWER:
-      return { ...state, deleteAnswer: newValue };
-   
-      // Auth: Register and Login
+      return { ...state, addAnswer: newValue };
+
+    // Auth: Register and Login
     case REGISTER_USER:
     case AUTHENTICATE_USER:
       localStorage.setItem('tokencitox', newValue);
