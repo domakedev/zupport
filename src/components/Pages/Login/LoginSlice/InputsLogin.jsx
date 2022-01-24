@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import actions from '../../../../store/action';
 import Input from '../../../Layout/Inputs/InputText';
 import InputBtn from '../../../Layout/Inputs/InputBtn';
 
@@ -18,7 +20,8 @@ const ForgotPassword = styled.a`
   text-align: end;
 `;
 
-function InputsLogin({ Login, setSpinning }) {
+function InputsLogin() {
+  const dispatch = useDispatch();
   const [password, changePassword] = useState({ field: '', check: null });
   const [email, changeEmail] = useState({ field: '', check: null });
 
@@ -29,13 +32,14 @@ function InputsLogin({ Login, setSpinning }) {
 
   const EnviarDataLogin = (e) => {
     e.preventDefault();
-    setSpinning(true);
+    dispatch(actions.setTheSpinner(true));
     const data = {
       email: email.field,
       password: password.field,
     };
 
-    Login(data);
+    // Enviar data del login en un POST
+    dispatch(actions.loginUser(data));
   };
 
   return (

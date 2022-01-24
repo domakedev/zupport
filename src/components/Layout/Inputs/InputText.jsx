@@ -15,21 +15,18 @@ function Input({
   errorText = '',
   inputParameters,
   functionx = () => {},
-  onChangeCe,
+  onChangeCe = () => {},
   name = '',
   disabled = false,
-  textEdit,
-  flag,
-  focusInput,
 }) {
   const onChange = (e) => {
-    // changeState({ ...state, field: e.target.value });
-    onChangeCe(e.target.value);
+    changeState({ ...state, field: e.target.value });
+    onChangeCe(e);
   };
 
   const checking = () => {
     if (inputParameters) {
-      if (inputParameters.test(state.answer)) {
+      if (inputParameters.test(state.field)) {
         changeState({ ...state, check: 'true' });
       } else {
         changeState({ ...state, check: 'false' });
@@ -52,13 +49,12 @@ function Input({
           type={inputType}
           placeholder={textPlaceholder}
           id={inputName}
-          value={flag ? textEdit : state.answer}
+          value={state.field}
           onChange={onChange}
           onKeyUp={checking}
           onBlur={checking}
           check={state.check}
           disabled={disabled}
-          ref={focusInput}
         />
         <IconChecking check={state.check}>
           {state.check === 'true' ? (
@@ -103,7 +99,7 @@ const InputBox = styled.input`
     outline: none;
     box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
   }
-  /* ${(props) =>
+  ${(props) =>
     props.check === 'true' &&
     css`
       border: 2px solid transparent;
@@ -111,8 +107,8 @@ const InputBox = styled.input`
   ${(props) =>
     props.check === 'false' &&
     css`
-      border: 2px solid var(--alert-color) !important; //esto no se hace
-    `} */
+      border: 2px solid var(--alert-color) !important;
+    `}
 `;
 
 const ErrorText = styled.p`
@@ -120,7 +116,7 @@ const ErrorText = styled.p`
   font-size: 1.4rem;
   color: var(--alert-color);
   display: none;
-  /* text-align: start;
+  text-align: start;
   ${(props) =>
     props.check === 'true' &&
     css`
@@ -130,7 +126,7 @@ const ErrorText = styled.p`
     props.check === 'false' &&
     css`
       display: block;
-    `} */
+    `}
 `;
 
 const IconChecking = styled.div`
@@ -140,7 +136,7 @@ const IconChecking = styled.div`
   z-index: 100;
   font-size: 20px;
   opacity: 0;
-  /* ${(props) =>
+  ${(props) =>
     props.check === 'false' &&
     css`
       opacity: 1;
@@ -151,7 +147,7 @@ const IconChecking = styled.div`
     css`
       opacity: 1;
       color: var(--sucess-color);
-    `} */
+    `}
 `;
 
 export default Input;

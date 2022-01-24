@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 import Caracteristica from './Caracteristica';
 
 import ImageVoice from '../../../../images/voice.svg';
@@ -51,7 +52,7 @@ function Caracteristicas() {
       <CardsContainer>
         {fakeData.map((data) => (
           <Caracteristica
-            key={new Date()}
+            key={uuidv4()}
             description={data.description}
             image={data.image}
           />
