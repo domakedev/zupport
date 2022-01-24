@@ -4,6 +4,11 @@ import {
   ADD_ANSWER,
   EDIT_ANSWER,
   DELETE_ANSWER,
+  GET_POSTS,
+  ADD_POST,
+  LOAD_EDIT_POST,
+  EDIT_POST,
+  DELETE_POST,
   AUTHENTICATE_USER,
   REGISTER_USER,
   OBTENER_USER,
@@ -17,6 +22,10 @@ const initialState = {
   addAnswer: {},
   editAnswer: {},
   deleteAnswer: {},
+  posts: [],
+  addPost: {},
+  editPost: {},
+  deletePost: {},
   userAuthenticated: false,
   currentUserOTokencito: {},
   errorLogin: false,
@@ -35,6 +44,16 @@ const reducer = (state = initialState, action) => {
       return { ...state, editAnswer: newValue };
     case DELETE_ANSWER:
       return { ...state, addAnswer: newValue };
+    case GET_POSTS:
+      return { ...state, posts: newValue };
+    case ADD_POST:
+      return { ...state, addPost: newValue };
+    case LOAD_EDIT_POST:
+      return { ...state, editPost: newValue };
+    case EDIT_POST:
+      return { ...state, editPost: newValue };
+    case DELETE_POST:
+      return { ...state, deletePost: newValue };
 
     // Auth: Register and Login
     case REGISTER_USER:

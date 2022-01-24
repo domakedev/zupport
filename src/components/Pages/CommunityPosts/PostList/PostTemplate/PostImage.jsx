@@ -20,10 +20,10 @@ const Image = styled('img')(
   `
 );
 // ban solo es una variable para probar los posts que no tengan imagenes del mock
-function PostImage({ urlPost, ban }) {
+function PostImage({ urlPost }) {
   return (
     <PostImageCont>
-      <Image src={ban % 2 === 1 ? urlPost : null} />
+      <Image src={urlPost} />
     </PostImageCont>
   );
 }

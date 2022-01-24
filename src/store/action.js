@@ -3,6 +3,11 @@ import {
   ADD_ANSWER,
   EDIT_ANSWER,
   DELETE_ANSWER,
+  GET_POSTS,
+  ADD_POST,
+  LOAD_EDIT_POST,
+  EDIT_POST,
+  DELETE_POST,
   REGISTER_USER,
   // AUTHENTICATE_USER,
   OBTENER_USER,
@@ -14,6 +19,7 @@ import axios from '../utils/axios';
 
 // action creators
 
+// Answer
 const loadAnswer = (answers) => ({
   type: GET_ANSWERS,
   payload: answers,
@@ -30,6 +36,30 @@ const deleteAnswer = (answer) => ({
   type: DELETE_ANSWER,
   payload: answer,
 });
+
+// Post
+const loadPost = (posts) => ({
+  type: GET_POSTS,
+  payload: posts,
+});
+const addPost = (post) => ({
+  type: ADD_POST,
+  payload: post,
+});
+const loadEditPost = (post) => ({
+  type: LOAD_EDIT_POST,
+  payload: post,
+});
+const editPost = (post) => ({
+  type: EDIT_POST,
+  payload: post,
+});
+const deletePost = (post) => ({
+  type: DELETE_POST,
+  payload: post,
+});
+
+// actions
 
 // Auth
 const createUser = (user) => ({
@@ -53,7 +83,8 @@ const logOut = () => ({
   payload: false,
 });
 
-// actions
+// Answer
+
 const getAllAnswers = (idPost) => async (dispatch) => {
   try {
     const response = await axios.get(`/api/answer/${idPost}`);
@@ -94,6 +125,60 @@ const deletedAnswer = (idAnswer, idPost) => async (dispatch) => {
   }
 };
 
+// Post
+const getAllPosts = (idCom) => async (dispatch) => {
+  try {
+    const response = await axios.get(`/api/post/${idCom}`);
+    const res = response.data;
+    dispatch(loadPost(res));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const addedPost = (postData) => async (dispatch) => {
+  try {
+    const response = await axios.post('/api/post', postData);
+    dispatch(addPost(response));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const editedPost = (idPost, postData) => async (dispatch) => {
+  try {
+    const response = await axios.put(`/api/post/${idPost}`, postData);
+    dispatch(editPost(response));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const loadEditedPost =
+  (postTitle, postDescription, points, idPost, urlPost) => async (dispatch) => {
+    try {
+      dispatch(
+        loadEditPost({
+          title: postTitle,
+          description: postDescription,
+          points,
+          _id: idPost,
+          image: urlPost,
+        })
+      );
+    } catch (e) {
+      // console.log(e);
+    }
+  };
+
+const deletedPost = (idPost) => async (dispatch) => {
+  try {
+    const response = await axios.delete(`/api/post/${idPost}`);
+    dispatch(deletePost(response));
+  } catch (e) {
+    // console.log(e);
+  }
+};
 // AUTH
 
 const obtainUser = () => async (dispatch) => {
@@ -168,6 +253,11 @@ export default {
   addAnswerPost,
   editAnswerPut,
   deletedAnswer,
+  getAllPosts,
+  addedPost,
+  loadEditedPost,
+  editedPost,
+  deletedPost,
   loginUser,
   registerUser,
   obtainUser,

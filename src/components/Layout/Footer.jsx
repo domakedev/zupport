@@ -1,19 +1,18 @@
+// Import React
 import React, { useMemo } from 'react';
+// Import Styled Components
 import styled from 'styled-components';
+// Import icons and context
 import { BsLinkedin } from 'react-icons/bs';
 import { FaHeart } from 'react-icons/fa';
-
 import { IconContext } from 'react-icons';
 
-// import '../../main.css'
-
-const Footerf = styled.div`
-  width: 100%;
-  bottom: 0;
-  background-color: var(--dark-color);
+const ContactContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
-const FooterMainContainer = styled.div`
+const DataContainer = styled.div`
   display: flex;
   justify-content: space-around;
   padding-top: 20px;
@@ -23,29 +22,18 @@ const FooterMainContainer = styled.div`
     text-align: center;
   }
 `;
-const FooterMainDataContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
-const FooterDataContainer = styled.div`
-  line-height: 1;
+const Description = styled.p`
+  line-height: 1.5;
   font-family: var(--secondary-font);
   color: var(--light-color);
-  font-size: 18px;
-  display: flex;
-  flex-direction: column;
-  @media screen and (min-width: 768px) {
-    display: block;
-    justify-content: center;
-    padding-top: 20px;
-  }
+  font-size: 1.8rem;
 `;
 
-const FooterDescriptionContainer = styled.div`
+const DescriptionContainer = styled.div`
   font-family: var(--secondary-font);
   color: var(--light-color);
-  font-size: 18px;
+  font-size: 1.8rem;
   width: 30%;
 
   @media screen and (min-width: 768px) {
@@ -53,14 +41,6 @@ const FooterDescriptionContainer = styled.div`
     text-align: center;
     padding-top: 20px;
   }
-`;
-
-const FooterTitle = styled.span`
-  font-family: var(--secondary-font);
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--light-color);
-  font-family: var(--secondary-font);
 `;
 
 const FooterLink = styled.a`
@@ -72,14 +52,7 @@ const FooterLink = styled.a`
   }
 `;
 
-const FooterDescription = styled.p`
-  line-height: 1.5;
-  font-family: var(--secondary-font);
-  color: var(--light-color);
-  font-size: 1.8rem;
-`;
-
-const FooterCopyright = styled.div`
+const FooterStamp = styled.div`
   font-family: var(--secondary-font);
   font-size: 1.2rem;
   color: var(--light-color);
@@ -88,47 +61,70 @@ const FooterCopyright = styled.div`
   padding: 20px 0;
 `;
 
+const LinkedInContainer = styled.div`
+  line-height: 1;
+  font-family: var(--secondary-font);
+  color: var(--light-color);
+  font-size: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 768px) {
+    display: block;
+    justify-content: center;
+    padding-top: 20px;
+  }
+`;
+
+const MainContainer = styled.div`
+  width: 100%;
+  bottom: 0;
+  background-color: var(--dark-color);
+`;
+
+const Title = styled.span`
+  font-family: var(--secondary-font);
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--light-color);
+`;
+
 function Footer() {
   const value = useMemo(() => ({ color: 'red', size: '12px' }));
   return (
-    <Footerf>
-      <FooterMainContainer>
-        <FooterMainDataContainer>
-          <FooterTitle>Contactanos</FooterTitle>
-          <FooterDataContainer>
-            <FooterLink href="https://www.linkedin.com/">
-              {' '}
-              <BsLinkedin /> Nayruth{' '}
+    <MainContainer>
+      <DataContainer>
+        <ContactContainer>
+          <Title>Contactanos</Title>
+          <LinkedInContainer>
+            <FooterLink href="https://www.linkedin.com/in/nayruth-calla/">
+              <BsLinkedin /> Nayruth
             </FooterLink>
-            <FooterLink href="https://www.linkedin.com/">
-              {' '}
-              <BsLinkedin /> Cesar{' '}
+            <FooterLink href="https://www.linkedin.com/in/c%C3%A9sar-guevara-cabrera-4890b2140/">
+              <BsLinkedin /> Cesar
             </FooterLink>
             <FooterLink href="https://www.linkedin.com/in/danieloch/">
-              {' '}
-              <BsLinkedin /> Daniel{' '}
+              <BsLinkedin /> Daniel
             </FooterLink>
-            <FooterLink href="https://www.linkedin.com/">
-              {' '}
-              <BsLinkedin /> Juan{' '}
+            <FooterLink href="https://www.linkedin.com/in/juan-bernal-50a680190/">
+              <BsLinkedin /> Juan
             </FooterLink>
-          </FooterDataContainer>
-        </FooterMainDataContainer>
-        <FooterDescriptionContainer>
-          <FooterTitle>Zupport</FooterTitle>
-          <FooterDescription>
+          </LinkedInContainer>
+        </ContactContainer>
+        <DescriptionContainer>
+          <Title>Zupport</Title>
+          <Description>
             Descubre el poder que tienes al ayudar a otros y encuentra ayuda
             facilmente en tu comunidad.
-          </FooterDescription>
-        </FooterDescriptionContainer>
-      </FooterMainContainer>
-      <FooterCopyright>
+          </Description>
+        </DescriptionContainer>
+      </DataContainer>
+      <FooterStamp>
         Zupport © 2021{' '}
         <IconContext.Provider value={value}>
           <FaHeart />
         </IconContext.Provider>
-      </FooterCopyright>
-    </Footerf>
+      </FooterStamp>
+    </MainContainer>
   );
 }
 

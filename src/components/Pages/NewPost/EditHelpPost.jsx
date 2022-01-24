@@ -1,3 +1,5 @@
+// Import redux
+import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
@@ -21,9 +23,8 @@ import {
   BsLink45Deg,
   BsTable,
 } from 'react-icons/bs';
-// Import redux
-import { useDispatch } from 'react-redux';
 import action from '../../../store/action';
+
 // import Context
 import { useStateAuth } from '../../../context/Auth/AuthContext';
 // Import Layout Components
@@ -38,7 +39,8 @@ import InputUpload from './Components/InputUpload';
 import GUsers from './GUsers';
 import UserFoto from '../../Layout/UserPhoto/UserPhoto';
 
-function HelpPost() {
+function EditHelpPost() {
+  const dataPost = useSelector((state) => state.editPost);
   // Usuarios que vienen del api
   const [users, setUsers] = useState();
   // Aqui se guardan los Users seleccionados, todos sus datos
@@ -49,12 +51,18 @@ function HelpPost() {
   const [results, setResults] = useState([]);
   const [imageUrl, setImageUrl] = useState('');
   const [uploaderShow, setUploaderShow] = useState(false);
-  const [titlest, changeTitle] = useState({ field: '', check: null });
-  const [descriptionst, changeDescription] = useState({
-    field: '',
+  const [titlest, changeTitle] = useState({
+    field: dataPost.title,
     check: null,
   });
-  const [pointsst, changePoints] = useState({ field: '', check: null });
+  const [descriptionst, changeDescription] = useState({
+    field: dataPost.description,
+    check: null,
+  });
+  const [pointsst, changePoints] = useState({
+    field: dataPost.points,
+    check: null,
+  });
   const { bringUsers } = useStateAuth();
   // Parametros de validacion en frontEnd
   const parameters = {
@@ -68,7 +76,7 @@ function HelpPost() {
       try {
         const resultado = await bringUsers();
         // eslint-disable-next-line
-        console.log('allforone', resultado.data);
+        // console.log('allforone', resultado.data);
         setUsers(resultado.data);
         setResults(resultado.data);
       } catch (error) {
@@ -100,18 +108,14 @@ function HelpPost() {
 
   const navigate = useNavigate();
 
-  const addPost = async () => {
+  const editPost = async () => {
     await dispatch(
-      action.addedPost({
+      // eslint-disable-next-line
+      action.editedPost(dataPost._id, {
         title: titlest.field,
         description: descriptionst.field,
         image: imageUrl,
-        likes: 0,
         points: pointsst.field,
-        user: '61eb5ea6345f4538ebf11cd0',
-        taggedUsers: [],
-        community: '61e10b9749e4a27d593c6a95',
-        resolved: false,
       })
     );
     navigate('/communities/NodeJs/posts');
@@ -122,7 +126,7 @@ function HelpPost() {
       <Header />
 
       <MainTitleContainer>
-        <MainTitle>Crear Pregunta</MainTitle>
+        <MainTitle>Modificar Pregunta</MainTitle>
         <GoBack to="/communities/community-posts">
           <BsX />
         </GoBack>
@@ -244,7 +248,7 @@ function HelpPost() {
 
         <Line />
 
-        <RequestButton onClick={addPost}>PEDIR AYUDA</RequestButton>
+        <RequestButton onClick={editPost}>GUARDAR CAMBIOS</RequestButton>
       </PageContainer>
 
       <Footer />
@@ -394,7 +398,7 @@ const RequestButton = styled.button`
   box-shadow: 0 4px 2px 0 var(--boring-color);
   text-align: center;
   font-family: var(--secondary-font);
-  font-size: 1.8rem;
+  font-size: 18px;
   color: var(--light-color);
   text-decoration: none;
   border: none;
@@ -425,4 +429,4 @@ const SelectedUsersStyle = styled.div`
   gap: 10px;
 `;
 
-export default HelpPost;
+export default EditHelpPost;

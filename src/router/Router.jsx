@@ -9,6 +9,7 @@ import Communities from '../components/Pages/Communities/Communities';
 import CreateCommunitie from '../components/Pages/CreateCommunitie/CreateCommunitie';
 import CommunityPosts from '../components/Pages/CommunityPosts/CommunityPosts';
 import HelpPost from '../components/Pages/NewPost/HelpPost';
+import EditHelpPost from '../components/Pages/NewPost/EditHelpPost';
 import Login from '../components/Pages/Login/Login';
 import Register from '../components/Pages/Register/Register';
 import P404 from '../components/Pages/404/P404';
@@ -32,6 +33,8 @@ function Router() {
       />
 
       <Route path="communities/help-post" element={<HelpPost />} />
+
+      <Route path="communities/edit-help-post" element={<EditHelpPost />} />
 
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
