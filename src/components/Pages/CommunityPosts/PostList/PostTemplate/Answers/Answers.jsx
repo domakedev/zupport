@@ -6,6 +6,7 @@ import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { GrLike } from 'react-icons/gr';
 import Answer from './Answer/Answer';
 import accions from '../../../../../../store/action';
+import Payment from '../../../../Payment/Payment';
 
 // Styleds
 const MoreAnswers = styled.button`
@@ -54,6 +55,19 @@ const MoreAnswersList = styled.div`
       width: 100%;
     }
   }
+  @media screen and (min-width: 1024px) {
+    @keyframes slidein {
+      from {
+        margin-left: 50%;
+        width: 50%;
+      }
+
+      to {
+        margin-left: 0%;
+        width: 100%;
+      }
+    }
+  }
 `;
 
 const ValidatedMessage = styled.p`
@@ -64,7 +78,6 @@ const ValidatedMessage = styled.p`
   line-height: 18px;
   text-align: center;
   color: rgba(0, 0, 0, 0.55);
-  margin-left: 21px;
 `;
 
 const SupportAnswer = styled(ValidatedMessage)`
@@ -79,8 +92,15 @@ const AnswersContainer = styled.div`
   margin-bottom: 30px;
 `;
 
+const PaymentCont = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+`;
 function Answers() {
   const [viewMore, setViewMore] = useState(false);
+
   const dataValidated = useSelector((state) =>
     state.answers.filter((e) => e.resolved)
   );
@@ -93,6 +113,7 @@ function Answers() {
   const supportAnswer = () => {
     // console.log('Me gusta todo :', comment);
   };
+
   useEffect(async () => {
     const idPost = '61e09c7fb35c71052690ec67';
     dispatch(accions.getAllAnswers(idPost));
@@ -103,9 +124,12 @@ function Answers() {
       {dataValidated.map((e) => (
         <div key={e._id}>
           <Answer state={e} stateGeneral={dataValidated} />
-          <ValidatedMessage>
-            Esta respuesta fue útil y solucionó el problema 🎉 🌟
-          </ValidatedMessage>
+          <PaymentCont>
+            <ValidatedMessage>
+              🎉 🌟 Esta respuesta fue úti, te animas a invitarle un cafecito?
+            </ValidatedMessage>
+            <Payment />
+          </PaymentCont>
         </div>
       ))}
 

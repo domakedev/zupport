@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const ButtonContainer = styled.button`
+const ButtonContainer = styled(Link)`
   margin-left: auto;
+  padding-top: 9px;
   width: 170px;
   height: 48px;
   border: 2px solid var(--principal-color);
@@ -11,9 +13,7 @@ const ButtonContainer = styled.button`
   &:hover {
     background-color: var(--light-color);
   }
-`;
 
-const ButtonText = styled.a`
   text-align: center;
   color: var(--principal-color);
   text-transform: uppercase;
@@ -24,11 +24,7 @@ const ButtonText = styled.a`
 `;
 
 function NavButton({ titulo }) {
-  return (
-    <ButtonContainer>
-      <ButtonText>{titulo}</ButtonText>
-    </ButtonContainer>
-  );
+  return <ButtonContainer to="/register">{titulo}</ButtonContainer>;
 }
 
 export default NavButton;

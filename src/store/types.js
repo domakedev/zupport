@@ -17,3 +17,11 @@ export const DELETE_POST = 'DELETE_POST';
 // Future Actions
 // export const HIDE_LOADER = 'HIDE_LOADER';
 // export const ERROR_MESSAGE = 'ERROR_MESSAGE';
+
+// User: Register and Login
+export const REGISTER_USER = 'REGISTER_USER';
+export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
+export const OBTENER_USER = 'OBTENER_USER';
+export const ERROR_TOKEN = 'ERROR_TOKEN';
+export const SET_SPINNING = 'SET_SPINNING';
+export const LOGOUT = 'LOGOUT';
