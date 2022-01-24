@@ -20,7 +20,7 @@ const Button = styled.button`
 function Payment() {
   const [message, setMessage] = useState('');
   const baseURL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8081';
-  const action = `${baseURL}/api/payment/create-checkout-session`;
+  const action = `${baseURL}api/payment/create-checkout-session`;
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
