@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import styled from 'styled-components';
 
 import { FaSearch, FaChevronDown } from 'react-icons/fa';
@@ -110,13 +112,15 @@ const SubMenu = styled.div`
   }
 `;
 
-function GOFData({ comuPosts = [], results = [], setResults }) {
+function GOFData({ results = [], setResults }) {
   const [search, setSearch] = useState('');
+
+  const comuPosts = useSelector((state) => state.posts);
 
   useEffect(() => {
     // Ir a la base de datos y buscar en los nombres de comunidades, de forma asincrona
     const filteredPosts = comuPosts.filter((post) =>
-      post.postTitle?.toLowerCase().includes(search.trim())
+      post.title?.toLowerCase().includes(search.trim())
     );
 
     // Enviar resultados a estado de resultados

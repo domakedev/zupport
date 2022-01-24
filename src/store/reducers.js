@@ -6,6 +6,7 @@ import {
   DELETE_ANSWER,
   GET_POSTS,
   ADD_POST,
+  LOAD_EDIT_POST,
   EDIT_POST,
   DELETE_POST,
 } from './types';
@@ -36,6 +37,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, posts: newValue };
     case ADD_POST:
       return { ...state, addPost: newValue };
+    case LOAD_EDIT_POST:
+      return { ...state, editPost: newValue };
     case EDIT_POST:
       return { ...state, editPost: newValue };
     case DELETE_POST:

@@ -5,6 +5,7 @@ import {
   DELETE_ANSWER,
   GET_POSTS,
   ADD_POST,
+  LOAD_EDIT_POST,
   EDIT_POST,
   DELETE_POST,
 } from './types';
@@ -37,6 +38,10 @@ const loadPost = (posts) => ({
 });
 const addPost = (post) => ({
   type: ADD_POST,
+  payload: post,
+});
+const loadEditPost = (post) => ({
+  type: LOAD_EDIT_POST,
   payload: post,
 });
 const editPost = (post) => ({
@@ -117,9 +122,26 @@ const editedPost = (idPost, postData) => async (dispatch) => {
   }
 };
 
+const loadEditedPost =
+  (postTitle, postDescription, points, idPost, urlPost) => async (dispatch) => {
+    try {
+      dispatch(
+        loadEditPost({
+          title: postTitle,
+          description: postDescription,
+          points,
+          _id: idPost,
+          image: urlPost,
+        })
+      );
+    } catch (e) {
+      // console.log(e);
+    }
+  };
+
 const deletedPost = (idPost) => async (dispatch) => {
   try {
-    const response = await axios.delete(`/api/answer/${idPost}`);
+    const response = await axios.delete(`/api/post/${idPost}`);
     dispatch(deletePost(response));
   } catch (e) {
     // console.log(e);
@@ -133,6 +155,7 @@ export default {
   deletedAnswer,
   getAllPosts,
   addedPost,
+  loadEditedPost,
   editedPost,
   deletedPost,
 };

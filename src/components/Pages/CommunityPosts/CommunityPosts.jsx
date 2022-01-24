@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 import WelcomeCommunity from './WelcomeCommity/WelcomeCommunity';
 import Header from '../../Layout/Header';
 import DividingLine from '../../Layout/LineStyle/DividingLine';
@@ -7,9 +8,7 @@ import TopHelpers from './TopHelpers/TopHelpers';
 import CreatePost from './CreatePost/CreatePost';
 import GOFData from './BoxActions/BoxAction';
 import PostList from './PostList/PostList';
-
-// Data Mock
-import axios from '../../../utils/axios';
+import action from '../../../store/action';
 
 const CommunityPostCont = styled.div`
   display: grid;
@@ -36,25 +35,19 @@ const Container = styled.div`
 `;
 
 function CommunityPosts() {
-  const [comuPosts, setComuPosts] = useState([]);
+  const dispatch = useDispatch();
 
+  const comuPosts = useSelector((state) => state.posts);
   const [results, setResults] = useState([]);
 
-  useEffect(() => {
-    const postsRequest = async () => {
-      try {
-        const response = await axios.get('/api/communities/css');
-        const res = response.data;
-        setComuPosts(res);
-        setResults(res);
-      } catch (err) {
-        // eslint-disable-next-line
-        console.error('404 Error en la petición /api/communities/css');
-      }
-    };
-
-    postsRequest();
+  useEffect(async () => {
+    const idPost = '61e10b9749e4a27d593c6a95';
+    await dispatch(action.getAllPosts(idPost));
   }, []);
+
+  useEffect(async () => {
+    setResults(comuPosts);
+  }, [comuPosts]);
 
   return (
     <>

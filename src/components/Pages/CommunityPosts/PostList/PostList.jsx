@@ -26,32 +26,33 @@ function PostList({ results }) {
         // aqui estaba posts
         (
           {
-            userPhoto,
-            userName,
-            timePost,
-            postTitle,
-            postDescription,
+            user,
+            timePosted,
+            title,
+            description,
             points,
             resolved,
             likes,
             image,
             userPoints,
+            _id,
           },
           index
         ) => (
           <PostTemplate
-            key={new Date()}
+            key={`${title}0${user.username}`}
             ban={index}
-            userPhoto={userPhoto}
-            userName={userName}
-            timePost={getPostTime(timePost)}
-            postTitle={postTitle}
-            postDescription={postDescription}
+            userPhoto={user.photo}
+            userName={user.username}
+            timePost={getPostTime(timePosted)}
+            postTitle={title}
+            postDescription={description}
             points={softNumber(points)}
             userPoints={userPoints}
             resolved={resolved}
             likes={softNumber(likes)}
             urlPost={image}
+            idPost={_id}
           />
         )
       )}
