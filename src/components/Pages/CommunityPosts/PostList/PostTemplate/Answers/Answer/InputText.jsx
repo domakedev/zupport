@@ -1,17 +1,21 @@
+/* eslint-disable no-param-reassign */
 import React from 'react';
 import styled from 'styled-components';
 
-const InputBox = styled.input`
+const InputBox = styled.textarea`
   font-family: var(--secondary-font);
   font-size: 1.8rem;
   width: 100%;
   background: rgba(41, 171, 224, 0.08);
   border-radius: 3px;
-  line-height: 45px;
   padding-left: 20px;
   padding-right: 40px;
   transition: 0.3s ease all;
   border: 3px solid transparent;
+  resize: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:focus {
     border: 2px solid var(--secondary-color);
     outline: none;
@@ -26,13 +30,12 @@ function Input({
   onChangeCe,
   name = '',
   disabled = false,
-  textEdit,
+  textEdit = '',
   flag,
 }) {
   const onChange = (e) => {
     onChangeCe(e.target.value);
   };
-
   return (
     <InputBox
       name={name}

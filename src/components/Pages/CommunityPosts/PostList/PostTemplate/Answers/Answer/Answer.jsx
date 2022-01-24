@@ -79,6 +79,7 @@ function Answer({
   textPlaceholder = '',
   setAnswerData,
   sendButton,
+  cleanInput,
 }) {
   const [comment] = useState(state);
   const [disabledInp, setDisabledInp] = useState(false);
@@ -107,17 +108,21 @@ function Answer({
   };
   const handleEdit = () => {
     dispatch(
-      action.editAnswerPut(comment._id, {
-        answer: editAnswer,
-        user: dataUser.user.id,
-        likes: 0,
-        post: dataUser.user.post,
-        resolved: false,
-      })
+      action.editAnswerPut(
+        comment._id,
+        {
+          answer: editAnswer,
+          user: dataUser.user.id,
+          likes: 0,
+          post: dataUser.user.post,
+          resolved: false,
+        },
+        '61e09c7fb35c71052690ec67'
+      )
     );
   };
   const handleDelete = () => {
-    dispatch(action.deletedAnswer(comment._id));
+    dispatch(action.deletedAnswer(comment._id, '61e09c7fb35c71052690ec67'));
   };
 
   return (
@@ -147,6 +152,7 @@ function Answer({
             flag={disabledInp}
             textEdit={editAnswer}
             focusInput={focusInput}
+            cleanInput={cleanInput}
           />
         </InputComment>
 
