@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 import axios from '../../../utils/axios';
 
 // import { Link, Outlet } from "react-router-dom";
@@ -11,6 +13,7 @@ import NewCommunitie from './NewCommunitie/NewCommunitie';
 import GOFData from './GOFData/GOFData';
 import CommunitieAddCard from '../../Layout/CommunitieAddCard/CommunitieAddCard';
 
+// import actions from '../../../store/action';
 // General Styled
 import {
   SubTitle,
@@ -44,9 +47,15 @@ const Comunidades = styled.div`
 `;
 
 function Communities() {
+  // const dispatch = useDispatch();
+  const { userAuthenticated } = useSelector((state) => state);
+  console.log('888888', userAuthenticated);
+
   const [comunidades, setComunidades] = useState([]);
 
   const [results, setResults] = useState([]);
+
+  // const userAuth = useSelector((state) => state.userAuthenticated);
 
   useEffect(() => {
     axios
@@ -65,7 +74,7 @@ function Communities() {
       <Header />
 
       <Container>
-        <TitleOrange>¿Qué te interesa ahora?</TitleOrange>
+        <TitleOrange>¿Qué te interesa ahora? </TitleOrange>
         <SubTitle>Sé parte de una comunidad o crea una.</SubTitle>
 
         <NewCommunitie />
@@ -77,29 +86,14 @@ function Communities() {
         />
         <hr style={{ marginTop: '100px' }} />
 
-        {/* <Comunidades>
-          {comunidades.map((e, i) => {
-            return (
-              <CommunitieAddCard
-                key={i}
-                id={i}
-                image={e.image}
-                users={e.users}
-                checks={e.cheks}
-                title={e.title}
-              />
-            );
-          })}
-        </Comunidades> */}
-
         {/* Impresion de resultados de busqueda */}
         <Comunidades>
           {results?.map((e, i) => (
             <CommunitieAddCard
-              key={`1000${new Date()}`}
+              key={uuidv4()}
               id={i}
               image={e.image}
-              users={e.users}
+              users={e.users.length}
               checks={e.cheks}
               title={e.title}
             />

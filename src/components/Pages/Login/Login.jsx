@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+// Actions Redux
 import WelcomeLogin from './LoginSlice/WelcomeLogin';
 import InputsLogin from './LoginSlice/InputsLogin';
 import BtnRss from '../../Layout/Inputs/InputSocialMediaButton';
@@ -9,9 +11,6 @@ import SeparatorLine from './LoginSlice/SeparatorLine';
 import Header from '../../Layout/Header';
 import Footer from '../../Layout/Footer';
 import Loading from '../../Layout/Loading/Loading';
-
-// Import Context
-import { useStateAuth } from '../../../context/Auth/AuthContext';
 
 const FormContainer = styled.div`
   display: flex;
@@ -63,29 +62,36 @@ const AlertAuth = styled('p')(
 );
 
 function Login() {
-  const { errorAuth, LoginAuth, setSpinning, spinning } = useStateAuth();
+  const history = useNavigate();
+  const userAuth = useSelector((state) => state.userAuthenticated);
+  const errorAuth = useSelector((state) => state.errorLogin);
+  const spinning = useSelector((state) => state.spinningLoading);
 
   return (
     <SuperContainer>
       <Header />
+      {userAuth ? (
+        history('/communities')
+      ) : (
+        <FormContainer>
+          <FormLogin>
+            <WelcomeLogin />
 
-      <FormContainer>
-        <FormLogin>
-          <WelcomeLogin />
+            <InputsLogin />
+            {errorAuth ? <AlertAuth>Error al iniciar sesión</AlertAuth> : null}
 
-          <InputsLogin setSpinning={setSpinning} Login={LoginAuth} />
-          {errorAuth ? <AlertAuth>Error al iniciar sesión</AlertAuth> : null}
-          {spinning ? <Loading /> : null}
+            {spinning ? <Loading /> : null}
 
-          <SeparatorLine />
-          <BtnRss />
+            <SeparatorLine />
+            <BtnRss />
 
-          <OptionRegister>
-            ¿No tienes una cuenta?
-            <LinkTo to="/register"> Regístrate aquí</LinkTo>
-          </OptionRegister>
-        </FormLogin>
-      </FormContainer>
+            <OptionRegister>
+              ¿No tienes una cuenta?
+              <LinkTo to="/register"> Regístrate aquí</LinkTo>
+            </OptionRegister>
+          </FormLogin>
+        </FormContainer>
+      )}
 
       <Footer />
     </SuperContainer>
