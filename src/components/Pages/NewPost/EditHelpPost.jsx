@@ -33,6 +33,7 @@ import Footer from '../../Layout/Footer';
 import InputTitle from './Components/InputTitle';
 import InputPost from './Components/InputPost';
 import InputPoints from './Components/InputPoints';
+import InputUpload from './Components/InputUpload';
 // Import Search and selection components
 import GUsers from './GUsers';
 import UserFoto from '../../Layout/UserPhoto/UserPhoto';
@@ -47,6 +48,8 @@ function EditHelpPost() {
   // Resultados de la busqueda u orden, luego se imprimen
   // en pantalla
   const [results, setResults] = useState([]);
+  const [imageUrl, setImageUrl] = useState('');
+  const [uploaderShow, setUploaderShow] = useState(false);
   const [titlest, changeTitle] = useState({
     field: dataPost.title,
     check: null,
@@ -110,7 +113,7 @@ function EditHelpPost() {
       action.editedPost(dataPost._id, {
         title: titlest.field,
         description: descriptionst.field,
-        image: '',
+        image: imageUrl,
         points: pointsst.field,
       })
     );
@@ -169,9 +172,9 @@ function EditHelpPost() {
           errorText="La descripción debe poseer de 10 a 1300 caracteres."
           inputParameters={parameters.description}
         />
-
+        {uploaderShow ? <InputUpload setState={setImageUrl} /> : null}
         <AddContainer>
-          <AddSecondaryContainer href="#">
+          <AddSecondaryContainer onClick={() => setUploaderShow(!uploaderShow)}>
             <BsImages /> Añadir imagenes
           </AddSecondaryContainer>
           <AddSecondaryContainer href="#">
@@ -312,6 +315,7 @@ const AddSecondaryContainer = styled.a`
   font-weight: normal;
   font-size: 1.8rem;
   text-decoration: none;
+  cursor: pointer;
 `;
 
 const HelpersMainContainer = styled.div`

@@ -33,6 +33,7 @@ import Footer from '../../Layout/Footer';
 import InputTitle from './Components/InputTitle';
 import InputPost from './Components/InputPost';
 import InputPoints from './Components/InputPoints';
+import InputUpload from './Components/InputUpload';
 // Import Search and selection components
 import GUsers from './GUsers';
 import UserFoto from '../../Layout/UserPhoto/UserPhoto';
@@ -46,6 +47,8 @@ function HelpPost() {
   // Resultados de la busqueda u orden, luego se imprimen
   // en pantalla
   const [results, setResults] = useState([]);
+  const [imageUrl, setImageUrl] = useState('');
+  const [uploaderShow, setUploaderShow] = useState(false);
   const [titlest, changeTitle] = useState({ field: '', check: null });
   const [descriptionst, changeDescription] = useState({
     field: '',
@@ -102,7 +105,7 @@ function HelpPost() {
       action.addedPost({
         title: titlest.field,
         description: descriptionst.field,
-        image: '',
+        image: imageUrl,
         likes: 0,
         points: pointsst.field,
         user: '61eb5ea6345f4538ebf11cd0',
@@ -166,9 +169,9 @@ function HelpPost() {
           errorText="La descripción debe poseer de 10 a 1300 caracteres."
           inputParameters={parameters.description}
         />
-
+        {uploaderShow ? <InputUpload setState={setImageUrl} /> : null}
         <AddContainer>
-          <AddSecondaryContainer href="#">
+          <AddSecondaryContainer onClick={() => setUploaderShow(!uploaderShow)}>
             <BsImages /> Añadir imagenes
           </AddSecondaryContainer>
           <AddSecondaryContainer href="#">
@@ -309,6 +312,7 @@ const AddSecondaryContainer = styled.a`
   font-weight: normal;
   font-size: 1.8rem;
   text-decoration: none;
+  cursor: pointer;
 `;
 
 const HelpersMainContainer = styled.div`
@@ -390,7 +394,7 @@ const RequestButton = styled.button`
   box-shadow: 0 4px 2px 0 var(--boring-color);
   text-align: center;
   font-family: var(--secondary-font);
-  font-size: 18px;
+  font-size: 1.8rem;
   color: var(--light-color);
   text-decoration: none;
   border: none;
