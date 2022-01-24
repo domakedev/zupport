@@ -15,7 +15,6 @@ import {
   ERROR_TOKEN,
   SET_SPINNING,
   LOGOUT,
-
 } from './types';
 
 const initialState = {

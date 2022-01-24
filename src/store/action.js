@@ -37,7 +37,6 @@ const deleteAnswer = (answer) => ({
   payload: answer,
 });
 
-
 // Post
 const loadPost = (posts) => ({
   type: GET_POSTS,
@@ -178,7 +177,8 @@ const deletedPost = (idPost) => async (dispatch) => {
     dispatch(deletePost(response));
   } catch (e) {
     // console.log(e);
-
+  }
+};
 // AUTH
 
 const obtainUser = () => async (dispatch) => {

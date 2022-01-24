@@ -1,3 +1,5 @@
+// Import redux
+import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
@@ -21,9 +23,8 @@ import {
   BsLink45Deg,
   BsTable,
 } from 'react-icons/bs';
-// Import redux
-import { useDispatch, useSelector } from 'react-redux';
 import action from '../../../store/action';
+
 // import Context
 import { useStateAuth } from '../../../context/Auth/AuthContext';
 // Import Layout Components

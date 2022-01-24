@@ -41,7 +41,6 @@ const AlertMessage = styled.div`
 `;
 
 function CommunityPosts() {
-
   const dispatch = useDispatch();
 
   const userAuth = useSelector((state) => state.userAuthenticated);
