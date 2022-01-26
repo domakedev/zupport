@@ -12,6 +12,7 @@ import HelpPost from '../components/Pages/NewPost/HelpPost';
 import EditHelpPost from '../components/Pages/NewPost/EditHelpPost';
 import Login from '../components/Pages/Login/Login';
 import Register from '../components/Pages/Register/Register';
+import Verify from '../components/Pages/Register/Verify';
 import P404 from '../components/Pages/404/P404';
 
 function Router() {
@@ -32,12 +33,13 @@ function Router() {
         element={<CommunityPosts />}
       />
 
-      <Route path="communities/help-post" element={<HelpPost />} />
+      <Route path="/communities/help-post" element={<HelpPost />} />
 
-      <Route path="communities/edit-help-post" element={<EditHelpPost />} />
+      <Route path="/communities/edit-help-post" element={<EditHelpPost />} />
 
-      <Route path="login" element={<Login />} />
-      <Route path="register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/activate/:hash" element={<Verify />} />
 
       <Route path="*" element={<P404 />} />
     </Routes>

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // Actions Redux
 import WelcomeLogin from './LoginSlice/WelcomeLogin';
@@ -62,36 +62,31 @@ const AlertAuth = styled('p')(
 );
 
 function Login() {
-  const history = useNavigate();
-  const userAuth = useSelector((state) => state.userAuthenticated);
   const errorAuth = useSelector((state) => state.errorLogin);
   const spinning = useSelector((state) => state.spinningLoading);
 
   return (
     <SuperContainer>
       <Header />
-      {userAuth ? (
-        history('/communities')
-      ) : (
-        <FormContainer>
-          <FormLogin>
-            <WelcomeLogin />
 
-            <InputsLogin />
-            {errorAuth ? <AlertAuth>Error al iniciar sesión</AlertAuth> : null}
+      <FormContainer>
+        <FormLogin>
+          <WelcomeLogin />
 
-            {spinning ? <Loading /> : null}
+          <InputsLogin />
+          {errorAuth ? <AlertAuth>Error al iniciar sesión</AlertAuth> : null}
 
-            <SeparatorLine />
-            <BtnRss />
+          {spinning ? <Loading /> : null}
 
-            <OptionRegister>
-              ¿No tienes una cuenta?
-              <LinkTo to="/register"> Regístrate aquí</LinkTo>
-            </OptionRegister>
-          </FormLogin>
-        </FormContainer>
-      )}
+          <SeparatorLine />
+          <BtnRss />
+
+          <OptionRegister>
+            ¿No tienes una cuenta?
+            <LinkTo to="/register"> Regístrate aquí</LinkTo>
+          </OptionRegister>
+        </FormLogin>
+      </FormContainer>
 
       <Footer />
     </SuperContainer>

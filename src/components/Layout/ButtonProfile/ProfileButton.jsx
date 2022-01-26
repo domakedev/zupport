@@ -89,7 +89,7 @@ function DropdownMenu() {
     <MainContainer>
       <MainButton onClick={onClick}>
         <img src={Profile} alt="Imagen de Perfil" />
-        <span>{currentUser.fullname}</span>
+        <span>{currentUser.fullname.split(' ')[0]}</span>
         <IconContext.Provider value={value}>
           <MdOutlineKeyboardArrowDown />
         </IconContext.Provider>

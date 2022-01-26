@@ -44,14 +44,14 @@ function CommunityPosts() {
   const dispatch = useDispatch();
 
   const userAuth = useSelector((state) => state.userAuthenticated);
-
-  const comuPosts = useSelector((state) => state.posts);
   const [results, setResults] = useState([]);
 
   useEffect(async () => {
     const idPost = '61e10b9749e4a27d593c6a95';
     await dispatch(action.getAllPosts(idPost));
   }, []);
+
+  const comuPosts = useSelector((state) => state.posts);
 
   useEffect(async () => {
     setResults(comuPosts);

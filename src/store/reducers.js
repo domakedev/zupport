@@ -10,6 +10,7 @@ import {
   EDIT_POST,
   DELETE_POST,
   AUTHENTICATE_USER,
+  VERIFY_USER,
   REGISTER_USER,
   OBTENER_USER,
   ERROR_TOKEN,
@@ -26,6 +27,7 @@ const initialState = {
   addPost: {},
   editPost: {},
   deletePost: {},
+  currentUser: {},
   userAuthenticated: false,
   currentUserOTokencito: {},
   errorLogin: false,
@@ -57,6 +59,11 @@ const reducer = (state = initialState, action) => {
 
     // Auth: Register and Login
     case REGISTER_USER:
+      localStorage.setItem('tokencitox', newValue);
+      return { ...state, currentUser: newValue };
+    case VERIFY_USER:
+      localStorage.setItem('tokencitox', newValue);
+      return { ...state, currentUser: newValue };
     case AUTHENTICATE_USER:
       localStorage.setItem('tokencitox', newValue);
       return {
