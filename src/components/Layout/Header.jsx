@@ -37,19 +37,14 @@ function Navigation() {
   }, []);
 
   const userAuth = useSelector((state) => state.userAuthenticated);
-  const currentUserOTokencito = useSelector(
-    (state) => state.currentUserOTokencito
-  );
-  const currentUser = currentUserOTokencito?.data?.usuario[0];
 
   return (
     <nav>
       <NavContainer>
-        {JSON.stringify(currentUser)}
         <Link to="/">
           <img src={Logo} alt="Imagen Logo" />
         </Link>
-        {userAuth ? <ProfileButton /> : <NavButton titulo="registrate" />}
+        {userAuth ? <ProfileButton /> : <NavButton titulo="login" />}
       </NavContainer>
 
       <Line />

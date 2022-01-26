@@ -20,6 +20,7 @@ export const DELETE_POST = 'DELETE_POST';
 
 // User: Register and Login
 export const REGISTER_USER = 'REGISTER_USER';
+export const VERIFY_USER = 'VERIFY_USER';
 export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
 export const OBTENER_USER = 'OBTENER_USER';
 export const ERROR_TOKEN = 'ERROR_TOKEN';

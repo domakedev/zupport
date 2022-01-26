@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import actions from '../../../../store/action';
 import Input from '../../../Layout/Inputs/InputText';
@@ -22,6 +23,7 @@ const ForgotPassword = styled.a`
 
 function InputsLogin() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [password, changePassword] = useState({ field: '', check: null });
   const [email, changeEmail] = useState({ field: '', check: null });
 
@@ -40,6 +42,7 @@ function InputsLogin() {
 
     // Enviar data del login en un POST
     dispatch(actions.loginUser(data));
+    navigate('/communities');
   };
 
   return (

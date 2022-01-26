@@ -24,7 +24,7 @@ const ButtonContainer = styled(Link)`
 `;
 
 function NavButton({ titulo }) {
-  return <ButtonContainer to="/register">{titulo}</ButtonContainer>;
+  return <ButtonContainer to="/login">{titulo}</ButtonContainer>;
 }
 
 export default NavButton;
