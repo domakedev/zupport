@@ -11,6 +11,7 @@ import {
 } from 'react-icons/bs';
 
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import actions from '../../../store/action';
 import Profile from '../../../images/ProfileP.png';
 
@@ -61,6 +62,7 @@ const Icon = styled.div`
 
 function ProfileMenu() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const value = useMemo(() => ({ className: 'Iconos' }));
   return (
     <List>
@@ -93,7 +95,10 @@ function ProfileMenu() {
           </Icon>
           <button
             type="button"
-            onClick={() => dispatch(actions.closeSession())}
+            onClick={() => {
+              dispatch(actions.closeSession());
+              navigate('/');
+            }}
           >
             Cerrar Sesión
           </button>

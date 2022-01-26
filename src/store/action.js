@@ -9,6 +9,7 @@ import {
   EDIT_POST,
   DELETE_POST,
   REGISTER_USER,
+  VERIFY_USER,
   // AUTHENTICATE_USER,
   OBTENER_USER,
   ERROR_TOKEN,
@@ -68,6 +69,10 @@ const createUser = (user) => ({
 });
 const obtainUserType = (user) => ({
   type: OBTENER_USER,
+  payload: user,
+});
+const verifyUser = (user) => ({
+  type: VERIFY_USER,
   payload: user,
 });
 const errorLogin = (errorState) => ({
@@ -195,11 +200,10 @@ const obtainUser = () => async (dispatch) => {
     }
 
     const respuesta = await axios.get('/api/users/tokencitox');
-
-    if (respuesta.data.usuario[0]) {
-      dispatch(obtainUserType(respuesta?.data?.usuario[0]));
+    if (respuesta.data.usuario) {
+      dispatch(obtainUserType(respuesta?.data?.usuario));
       dispatch(errorLogin(false));
-    } else if (!respuesta.data.usuario[0]) {
+    } else if (!respuesta.data.usuario) {
       dispatch(errorLogin(true));
     }
   } catch (error) {
@@ -216,6 +220,20 @@ const registerUser = (user) => async (dispatch) => {
     await dispatch(createUser(response.data.tokencito));
 
     // Obtener usuario del token
+    // dispatch(obtainUser());
+  } catch (error) {
+    dispatch(errorLogin(true));
+  }
+};
+
+const validateUser = (hash) => async (dispatch) => {
+  try {
+    // Backend
+    const response = await axios.post('/auth/local/verify-account', hash);
+    // FrontEnd
+    await dispatch(verifyUser(response.data.token));
+
+    // Obtener usuario del token
     dispatch(obtainUser());
   } catch (error) {
     dispatch(errorLogin(true));
@@ -228,10 +246,10 @@ const setTheSpinner = (spinning) => async (dispatch) => {
 
 const loginUser = (datos) => async (dispatch) => {
   try {
-    const respuesta = await axios.post('/api/login', datos);
+    const respuesta = await axios.post('/auth/local/login', datos);
 
     // FrontEnd
-    await dispatch(createUser(respuesta.data.tokencito));
+    await dispatch(createUser(respuesta.data.token));
 
     dispatch(obtainUser());
   } catch (error) {
@@ -260,6 +278,7 @@ export default {
   deletedPost,
   loginUser,
   registerUser,
+  validateUser,
   obtainUser,
   setTheSpinner,
   closeSession,
