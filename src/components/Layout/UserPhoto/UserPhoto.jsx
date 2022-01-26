@@ -18,14 +18,14 @@ const crownColor = (points) => {
 };
 
 const Container = styled('div')(
-  ({ userPoints }) => css`
+  ({ userPoints, medalSize }) => css`
     position: relative;
     cursor: pointer;
     border-radius: 50%;
     .icon-crow {
       color: ${crownColor(userPoints)};
-      height: 1.7rem;
-      width: 1.7rem;
+      height: ${medalSize || '2rem'};
+      width: ${medalSize || '2rem'};
       left: -3px;
       top: -2px;
       bottom: 28px;
@@ -51,15 +51,15 @@ const PhotoContainer = styled('div')(
 );
 
 const Photo = styled('img')(
-  () => css`
-    height: 40px;
-    width: 40px;
+  ({ photoSize = '40px', borderSize }) => css`
+    height: ${photoSize};
+    width: ${photoSize};
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     object-fit: cover;
     object-position: center center;
-    border: 3px solid var(--sucess-color); //el color cambiara a --alert-color si está activo
+    border: ${borderSize} solid var(--sucess-color); //el color cambiara a --alert-color si está activo
   `
 );
 
@@ -79,21 +79,35 @@ const DeleteUser = styled.div`
 
 function UserPhoto({
   userPhoto,
+  photoSize,
   userPoints,
   selectUser,
   user,
   selected = false,
   deleteUserSelected,
+  medalSize,
+  borderSize = '3px',
 }) {
   const value = useMemo(() => ({ className: 'icon-crow' }));
+  console.log('medalSize', medalSize);
   return (
-    <Container userPoints={userPoints} onClick={() => selectUser(user)}>
-      <IconContext.Provider userPoints={userPoints} value={value}>
+    <Container
+      userPoints={userPoints}
+      medalSize={medalSize}
+      onClick={() => selectUser(user)}
+    >
+      <IconContext.Provider
+        userPoints={userPoints}
+        value={value}
+        medalSize={medalSize}
+      >
         <AiTwotonePropertySafety />
       </IconContext.Provider>
 
       <PhotoContainer>
         <Photo
+          photoSize={photoSize}
+          borderSize={borderSize}
           src={!userPhoto ? defaultPhoto : userPhoto}
           alt={!user?.fullname ? 'userPhoto' : user?.fullname}
         />

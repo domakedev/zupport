@@ -13,11 +13,15 @@ import EditHelpPost from '../components/Pages/NewPost/EditHelpPost';
 import Login from '../components/Pages/Login/Login';
 import Register from '../components/Pages/Register/Register';
 import P404 from '../components/Pages/404/P404';
+import UserProfile from '../components/Pages/UserProfile/UserProfile';
 
 function Router() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
+
+      <Route path="/profile" element={<UserProfile />} />
+
       <Route path="communities/" element={<Communities />} />
 
       <Route
