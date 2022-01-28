@@ -95,8 +95,9 @@ const getAllAnswers = (idPost) => async (dispatch) => {
     const response = await axios.get(`/api/answer/${idPost}`);
     const res = response.data;
     dispatch(loadAnswer(res));
+    // console.log(res);
   } catch (e) {
-    // console.log(e);
+    console.log(e);
   }
 };
 
@@ -104,6 +105,7 @@ const addAnswerPost = (answerData, idPost) => async (dispatch) => {
   try {
     const response = await axios.post('/api/answer', answerData);
     dispatch(addAnswer(response));
+    console.log(idPost);
     dispatch(getAllAnswers(idPost));
   } catch (e) {
     // console.log(e);

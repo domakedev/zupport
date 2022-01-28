@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import styled from 'styled-components';
@@ -79,17 +79,17 @@ function Answer({
   textPlaceholder = '',
   setAnswerData,
   sendButton,
-  cleanInput,
+  idPost,
 }) {
-  const [comment] = useState(state);
+  // const [comment] = useState(state);
   const [disabledInp, setDisabledInp] = useState(false);
-  const [editAnswer, setEditAnswer] = useState(comment.answer);
+  const [editAnswer, setEditAnswer] = useState(state.answer);
   const [disableInput, setDisableInput] = useState(true);
   const [showButton, setShowButton] = useState(true);
   const focusInput = useRef();
   const dispatch = useDispatch();
 
-  useEffect(() => {}, [comment]);
+  // useEffect(() => {}, [comment]);
   // console.log(comment);
 
   const dataUser = {
@@ -109,20 +109,20 @@ function Answer({
   const handleEdit = () => {
     dispatch(
       action.editAnswerPut(
-        comment._id,
+        state._id,
         {
           answer: editAnswer,
           user: dataUser.user.id,
           likes: 0,
-          post: dataUser.user.post,
+          post: idPost,
           resolved: false,
         },
-        '61e09c7fb35c71052690ec67'
+        idPost
       )
     );
   };
   const handleDelete = () => {
-    dispatch(action.deletedAnswer(comment._id, '61e09c7fb35c71052690ec67'));
+    dispatch(action.deletedAnswer(state._id, idPost));
   };
 
   return (
@@ -140,19 +140,18 @@ function Answer({
 
       <Comment sendButton={sendButton}>
         <UserPhoto
-          userPhoto={comment.user.photo}
-          userPoints={comment.user.points}
+          userPhoto={state.user.photo}
+          userPoints={state.user.points}
         />
         <InputComment validated={state.resolved}>
           <InputText
-            state={comment}
+            state={state}
             disabled={sendButton ? !sendButton : disableInput}
             textPlaceholder={textPlaceholder}
             onChangeCe={sendButton ? setAnswerData : setEditAnswer}
             flag={disabledInp}
             textEdit={editAnswer}
             focusInput={focusInput}
-            cleanInput={cleanInput}
           />
         </InputComment>
 

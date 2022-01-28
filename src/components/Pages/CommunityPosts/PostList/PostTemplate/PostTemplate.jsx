@@ -123,8 +123,8 @@ function PostTemplate({
         ) : null}
       </ReactionContainer>
       <DividingLine />
-      <PostFooter />
-      <Answers />
+      <PostFooter idPost={idPost} />
+      <Answers idPost={idPost} />
     </PostTemplteCont>
   );
 }

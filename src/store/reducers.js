@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-case-declarations */
 /* eslint-disable default-param-last */
 import {
   GET_ANSWERS,
@@ -20,6 +22,7 @@ import {
 
 const initialState = {
   answers: [],
+  // arr: [],
   addAnswer: {},
   editAnswer: {},
   deleteAnswer: {},
@@ -36,16 +39,18 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   const newValue = action.payload;
-
   switch (action.type) {
     case GET_ANSWERS:
+      // const { _id } = action.payload;
+      // state.arr.push(newValue);
+      // console.log(state.arr);
       return { ...state, answers: newValue };
     case ADD_ANSWER:
       return { ...state, addAnswer: newValue };
     case EDIT_ANSWER:
       return { ...state, editAnswer: newValue };
     case DELETE_ANSWER:
-      return { ...state, addAnswer: newValue };
+      return { ...state, deleteAnswer: newValue };
     case GET_POSTS:
       return { ...state, posts: newValue };
     case ADD_POST:

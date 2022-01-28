@@ -1,6 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IoSend } from 'react-icons/io5';
 import LikeButtonPost from './AcctioPost/LikeButton';
 import CommentButtonPost from './AcctioPost/CommentButton';
@@ -62,23 +63,26 @@ const InputBox = styled.input`
     box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
   }
 `;
-function PostFooter() {
-  const [responder, setResponder] = useState();
-  const [answerData, setAnswerData] = useState();
+function PostFooter({ idPost }) {
+  const [responder, setResponder] = useState(false);
+  const [answerData, setAnswerData] = useState('');
   // const [cleanInput, setCleanInput] = useState(false);
+  // obteniendo al usuario actual para crear el comentario
+  const currentUser = useSelector((state) => state.currentUserOTokencito);
+  // console.log(currentUser, idPost, currentUser.points);
 
   const dispatch = useDispatch();
 
-  const dataUser = {
-    user: {
-      photo:
-        'https://media.istockphoto.com/photos/machu-picchu-peru-picture-id930824730?k=20&m=930824730&s=612x612&w=0&h=Lvzgs0qL32lHBuvFMVg3hotXpE1t0mJpqqrK-ajDzIc=',
-      points: 5430,
-      username: 'domakedev',
-      id: '61eb5ea6345f4538ebf11cd0',
-      post: '61e09c7fb35c71052690ec67',
-    },
-  };
+  // const dataUser = {
+  //   user: {
+  //     photo:
+  //       'https://media.istockphoto.com/photos/machu-picchu-peru-picture-id930824730?k=20&m=930824730&s=612x612&w=0&h=Lvzgs0qL32lHBuvFMVg3hotXpE1t0mJpqqrK-ajDzIc=',
+  //     points: 5430,
+  //     username: 'domakedev',
+  //     id: '61eb5ea6345f4538ebf11cd0',
+  //     post: '61e09c7fb35c71052690ec67',
+  //   },
+  // };
   const onClickHandle = () => {
     setResponder(!responder);
   };
@@ -87,12 +91,12 @@ function PostFooter() {
       action.addAnswerPost(
         {
           answer: answerData,
-          user: dataUser.user.id,
+          user: currentUser._id,
           likes: 0,
-          post: dataUser.user.post,
+          post: idPost,
           resolved: false,
         },
-        '61e09c7fb35c71052690ec67'
+        idPost
       )
     );
     setAnswerData('');
@@ -111,8 +115,8 @@ function PostFooter() {
         {responder ? (
           <AddAnswerCont>
             <UserPhoto
-              userPhoto={dataUser.user.photo}
-              userPoints={dataUser.user.points}
+              userPhoto={currentUser.photo}
+              userPoints={currentUser.points}
             />{' '}
             <InputBox
               type="text"

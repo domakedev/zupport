@@ -1,5 +1,5 @@
-/* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect } from 'react';
+/* eslint-disable */
+import React, { useState, /*useEffect*/ } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
@@ -98,42 +98,57 @@ const PaymentCont = styled.div`
   align-items: center;
   margin-top: 10px;
 `;
-function Answers() {
+function Answers({ idPost }) {
   const [viewMore, setViewMore] = useState(false);
-
-  const dataValidated = useSelector((state) =>
-    state.answers.filter((e) => e.resolved)
-  );
-  const dataNoValidated = useSelector((state) =>
-    state.answers.filter((e) => !e.resolved)
-  );
+  // const [answer, setAnswer] = useState([]);
+  // const [dataValidated, setDataValidated] = useState([]);
+  // const [dataNoValidated, setDataNoValidated] = useState([]);
 
   const dispatch = useDispatch();
 
   const supportAnswer = () => {
     // console.log('Me gusta todo :', comment);
   };
-
-  useEffect(async () => {
-    const idPost = '61e09c7fb35c71052690ec67';
+  // useEffect(async () => {
+  //   // const idPost = '61e09c7fb35c71052690ec67';
+  //   dispatch(accions.getAllAnswers(idPost));
+  // }, []);
+  const answers = useSelector((state) => state.answers);
+  // const dataNoValidatedd = useSelector((state) =>
+  //   state.answers.filter((e) => !e.resolved)
+  // );
+  const dataValidated = useSelector((state) =>
+    state.answers.filter((e) => e.resolved)
+  );
+  const dataNoValidated = useSelector((state) =>
+    state.answers.filter((e) => !e.resolved)
+  );
+  // useEffect(() => {
+  //   setDataValidated(dataValidatedInit);
+  //   setDataNoValidated(dataNoValidatedInit);
+  // }, []);
+  console.log(answers);
+  const datosAnswer = () => {
+    setViewMore(!viewMore);
     dispatch(accions.getAllAnswers(idPost));
-  }, []);
+  };
+
   return (
     <AnswersContainer>
       {/* Answers checked co */}
       {dataValidated.map((e) => (
         <div key={e._id}>
-          <Answer state={e} stateGeneral={dataValidated} />
+          <Answer state={e} stateGeneral={dataValidated} idPost={idPost} />
           <PaymentCont>
             <ValidatedMessage>
-              🎉 🌟 Esta respuesta fue úti, te animas a invitarle un cafecito?
+              🎉 🌟 Esta respuesta fue útil, te animas a invitarle un cafecito?
             </ValidatedMessage>
             <Payment />
           </PaymentCont>
         </div>
       ))}
 
-      <MoreAnswers onClick={() => setViewMore(!viewMore)}>
+      <MoreAnswers onClick={datosAnswer}>
         {viewMore ? (
           <>
             <FaAngleUp />
@@ -150,7 +165,7 @@ function Answers() {
         <MoreAnswersList>
           {dataNoValidated.map((e) => (
             <div key={e._id}>
-              <Answer state={e} />
+              <Answer state={e} idPost={idPost} />
               <SupportAnswer onClick={() => supportAnswer(e.answer)}>
                 Apoyar <GrLike />
               </SupportAnswer>
