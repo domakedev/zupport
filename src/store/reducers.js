@@ -11,6 +11,7 @@ import {
   DELETE_POST,
   AUTHENTICATE_USER,
   VERIFY_USER,
+  MODIFY_USER,
   REGISTER_USER,
   GET_USERS,
   OBTENER_USER,
@@ -71,7 +72,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         userAuthenticated: true,
       };
-
+    case MODIFY_USER:
     case OBTENER_USER:
       return {
         ...state,

@@ -120,7 +120,6 @@ function HelpPost() {
     );
     navigate('/communities/NodeJs/posts');
   };
-
   return (
     <>
       <Header />
@@ -196,12 +195,13 @@ function HelpPost() {
             {usersSelected?.map((u) => (
               <UserFoto
                 // eslint-disable-next-line
-                key={u._id}
+                key={`${u.photo}02${u.points}`}
                 user={u}
                 userPhoto={u.photo}
                 userPoints={u.points}
                 selectUser={selectUser}
                 selected
+                isOnline={u.isOnline}
                 deleteUserSelected={deleteUserSelected}
               />
             ))}
@@ -215,12 +215,13 @@ function HelpPost() {
             {results?.map((u) => (
               <UserFoto
                 // eslint-disable-next-line
-                key={u._id}
+                key={`${u.photo}02${u.fullname}`}
                 user={u}
                 userPhoto={u.photo}
                 alt={u.fullname}
                 userPoints={u.points}
                 selectUser={selectUser}
+                isOnline={u.isOnline}
               />
             ))}
           </HelpersContainer>
@@ -346,9 +347,15 @@ const AddHelperContainerTitle = styled.div`
 
 const HelpersContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
   gap: 10px;
   margin-top: 15px;
-  max-height: 150px;
+  padding: 20px;
+  width: 80%;
+  min-height: 60px;
+  max-height: 120px;
   overflow-y: scroll;
 `;
 

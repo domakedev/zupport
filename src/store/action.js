@@ -11,6 +11,7 @@ import {
   REGISTER_USER,
   VERIFY_USER,
   // AUTHENTICATE_USER,
+  MODIFY_USER,
   OBTENER_USER,
   GET_USERS,
   ERROR_TOKEN,
@@ -75,6 +76,10 @@ const obtainUserType = (user) => ({
 const loadUsers = (users) => ({
   type: GET_USERS,
   payload: users,
+});
+const updateUser = (user) => ({
+  type: MODIFY_USER,
+  payload: user,
 });
 const verifyUser = (user) => ({
   type: VERIFY_USER,
@@ -261,6 +266,15 @@ const getAllUsers = () => async (dispatch) => {
   }
 };
 
+const updatedUser = (userName, userData) => async (dispatch) => {
+  try {
+    const response = await axios.put(`/api/users/name/${userName}`, userData);
+    dispatch(updateUser(response));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
 const registerUser = (user) => async (dispatch) => {
   try {
     // Backend
@@ -306,8 +320,9 @@ const loginUser = (datos) => async (dispatch) => {
   }
 };
 
-const closeSession = () => async (dispatch) => {
+const closeSession = (userName, userData) => async (dispatch) => {
   try {
+    await updatedUser(userName, userData)();
     dispatch(logOut());
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -329,6 +344,7 @@ export default {
   loginUser,
   registerUser,
   validateUser,
+  updatedUser,
   obtainUser,
   getAllUsers,
   setTheSpinner,

@@ -96,8 +96,10 @@ function ProfileMenu() {
           </Icon>
           <button
             type="button"
-            onClick={() => {
-              dispatch(actions.closeSession());
+            onClick={async () => {
+              await dispatch(
+                actions.closeSession(currentUser.username, { isOnline: false })
+              );
               navigate('/');
             }}
           >

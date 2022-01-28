@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { BsX } from 'react-icons/bs';
 import action from '../../../store/action';
 
 import Header from '../../Layout/Header';
@@ -11,9 +12,35 @@ import {
   softNumber,
 } from '../../../controller/CommunityPostCtr/utilities';
 
+const MainTitleContainer = styled.div`
+  padding: 2rem 0 1rem 0;
+  display: flex;
+  justify-content: center;
+`;
+
+const MainTitle = styled.h1`
+  font-family: var(--principal-font);
+  color: var(--boring-color);
+  text-align: center;
+  padding-left: 25rem;
+  font-weight: normal;
+  font-size: 2.5rem;
+`;
+
+const GoBack = styled(Link)`
+  color: var(--boring-color);
+  margin-left: auto;
+  font-size: 3rem;
+`;
+
+const Line = styled.hr`
+  border-top: 0.1rem solid var(--boring-color);
+  opacity: 0.3;
+`;
+
 const CommunityPostCont = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   padding: 4rem 0 3rem 0;
 
   @media screen and (min-width: 768px) {
@@ -61,6 +88,14 @@ function UniquePost() {
           <AlertMessage>Que tal si iniciamos sesion primero?</AlertMessage>
         ) : (
           <CommunityPostCont>
+            <MainTitleContainer>
+              <MainTitle>Publicacion</MainTitle>
+              <GoBack to="/communities/community-posts">
+                <BsX />
+              </GoBack>
+            </MainTitleContainer>
+
+            <Line />
             <PostTemplate
               key={`${currentPost.title}0${currentPost.user?.username}`}
               // ban={index}
