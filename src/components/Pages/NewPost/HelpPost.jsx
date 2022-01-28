@@ -22,10 +22,11 @@ import {
   BsTable,
 } from 'react-icons/bs';
 // Import redux
-import { useDispatch } from 'react-redux';
+
+import { useDispatch, useSelector } from 'react-redux';
 import action from '../../../store/action';
 // import Context
-import { useStateAuth } from '../../../context/Auth/AuthContext';
+// import { useStateAuth } from '../../../context/Auth/AuthContext';
 // Import Layout Components
 import Header from '../../Layout/Header';
 import Footer from '../../Layout/Footer';
@@ -55,7 +56,7 @@ function HelpPost() {
     check: null,
   });
   const [pointsst, changePoints] = useState({ field: '', check: null });
-  const { bringUsers } = useStateAuth();
+  // const { bringUsers } = useStateAuth();
   // Parametros de validacion en frontEnd
   const parameters = {
     title: /^.{10,50}$/, // 10 a 50 caracteres.
@@ -63,27 +64,29 @@ function HelpPost() {
     points: /^[0-9]{1,4}$/, // Maximo 9999 puntos
   };
 
-  useEffect(() => {
-    const allUsers = async () => {
-      try {
-        const resultado = await bringUsers();
-        // eslint-disable-next-line
-        console.log('allforone', resultado.data);
-        setUsers(resultado.data);
-        setResults(resultado.data);
-      } catch (error) {
-        // eslint-disable-next-line
-        console.log(error);
-      }
-    };
-    allUsers();
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  useEffect(async () => {
+    await dispatch(action.getAllUsers());
   }, []);
+
+  const usuarios = useSelector((state) => state.users);
+
+  useEffect(async () => {
+    setUsers(usuarios);
+    setResults(usuarios);
+  }, [usuarios]);
+
+  const [userNames, setUserNames] = useState([]);
 
   const selectUser = (u) => {
     if (usersSelected.includes(u)) {
       return;
     }
     setUsersSelected([...usersSelected, u]);
+    setUserNames([...userNames, u.username]);
   };
 
   const deleteUserSelected = (userToDelete) => {
@@ -93,12 +96,13 @@ function HelpPost() {
       // eslint-disable-next-line
       (u) => u._id !== userToDelete._id
     );
+    const beforeDeleteUN = userNames.filter(
+      // eslint-disable-next-line
+      (u) => u !== userToDelete.username
+    );
+    setUserNames(beforeDeleteUN);
     setUsersSelected(beforeDelete);
   };
-
-  const dispatch = useDispatch();
-
-  const navigate = useNavigate();
 
   const addPost = async () => {
     await dispatch(
@@ -109,7 +113,7 @@ function HelpPost() {
         likes: 0,
         points: pointsst.field,
         user: '61eb5ea6345f4538ebf11cd0',
-        taggedUsers: [],
+        taggedUsers: userNames,
         community: '61e10b9749e4a27d593c6a95',
         resolved: false,
       })

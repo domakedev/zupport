@@ -26,7 +26,7 @@ import {
 import action from '../../../store/action';
 
 // import Context
-import { useStateAuth } from '../../../context/Auth/AuthContext';
+// import { useStateAuth } from '../../../context/Auth/AuthContext';
 // Import Layout Components
 import Header from '../../Layout/Header';
 import Footer from '../../Layout/Footer';
@@ -63,7 +63,7 @@ function EditHelpPost() {
     field: dataPost.points,
     check: null,
   });
-  const { bringUsers } = useStateAuth();
+  // const { bringUsers } = useStateAuth();
   // Parametros de validacion en frontEnd
   const parameters = {
     title: /^.{10,50}$/, // 10 a 50 caracteres.
@@ -71,27 +71,30 @@ function EditHelpPost() {
     points: /^[0-9]{1,4}$/, // Maximo 9999 puntos
   };
 
-  useEffect(() => {
-    const allUsers = async () => {
-      try {
-        const resultado = await bringUsers();
-        // eslint-disable-next-line
-        // console.log('allforone', resultado.data);
-        setUsers(resultado.data);
-        setResults(resultado.data);
-      } catch (error) {
-        // eslint-disable-next-line
-        console.log(error);
-      }
-    };
-    allUsers();
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  useEffect(async () => {
+    await dispatch(action.getAllUsers());
   }, []);
+
+  const usuarios = useSelector((state) => state.users);
+
+  useEffect(async () => {
+    setUsers(usuarios);
+    setResults(usuarios);
+  }, [usuarios]);
+
+  const [userNames, setUserNames] = useState([]);
 
   const selectUser = (u) => {
     if (usersSelected.includes(u)) {
       return;
     }
     setUsersSelected([...usersSelected, u]);
+    setUserNames([...userNames, u.username]);
+    console.log(userNames);
   };
 
   const deleteUserSelected = (userToDelete) => {
@@ -101,12 +104,14 @@ function EditHelpPost() {
       // eslint-disable-next-line
       (u) => u._id !== userToDelete._id
     );
+    const beforeDeleteUN = userNames.filter(
+      // eslint-disable-next-line
+      (u) => u !== userToDelete.username
+    );
+    setUserNames(beforeDeleteUN);
+    console.log(userNames);
     setUsersSelected(beforeDelete);
   };
-
-  const dispatch = useDispatch();
-
-  const navigate = useNavigate();
 
   const editPost = async () => {
     await dispatch(
@@ -116,143 +121,152 @@ function EditHelpPost() {
         description: descriptionst.field,
         image: imageUrl,
         points: pointsst.field,
+        taggedUsers: userNames,
       })
     );
     navigate('/communities/NodeJs/posts');
   };
 
   return (
-    <>
-      <Header />
+    <div>
+      {dataPost.title ? (
+        <div>
+          <Header />
 
-      <MainTitleContainer>
-        <MainTitle>Modificar Pregunta</MainTitle>
-        <GoBack to="/communities/community-posts">
-          <BsX />
-        </GoBack>
-      </MainTitleContainer>
+          <MainTitleContainer>
+            <MainTitle>Modificar Pregunta</MainTitle>
+            <GoBack to="/communities/community-posts">
+              <BsX />
+            </GoBack>
+          </MainTitleContainer>
 
-      <Line />
+          <Line />
 
-      <PageContainer>
-        <PostTitle>¿En que deseas ayuda?</PostTitle>
-        <InputTitle
-          state={titlest}
-          changeState={changeTitle}
-          inputType="text"
-          label="Titulo"
-          textPlaceholder="Título del problema"
-          inputName="titulo"
-          errorText="El título debe poseer de 10 a 50 caracteres."
-          inputParameters={parameters.title}
-        />
-        <InputStyle>
-          <BsTypeBold />
-          <BsTypeItalic />
-          <BsTypeUnderline />
-          <BsListUl />
-          <BsListOl />
-          <BsJustifyLeft />
-          <BsTextCenter />
-          <BsJustifyRight />
-          <BsJustify />
-          <BsTextIndentLeft />
-          <BsTextIndentRight />
-          <BsTable />
-          <BsCode />
-          <BsLink45Deg />
-          <BsEmojiSmile />
-        </InputStyle>
-        <InputPost
-          state={descriptionst}
-          changeState={changeDescription}
-          inputType="text"
-          label="Descripcion"
-          textPlaceholder="Ingresa aquí una breve descripción de tu problema..."
-          inputName="descripcion"
-          errorText="La descripción debe poseer de 10 a 1300 caracteres."
-          inputParameters={parameters.description}
-        />
-        {uploaderShow ? <InputUpload setState={setImageUrl} /> : null}
-        <AddContainer>
-          <AddSecondaryContainer onClick={() => setUploaderShow(!uploaderShow)}>
-            <BsImages /> Añadir imagenes
-          </AddSecondaryContainer>
-          <AddSecondaryContainer href="#">
-            <BsFolder2Open /> Añadir archivo
-          </AddSecondaryContainer>
-        </AddContainer>
-
-        <Line />
-
-        <HelpersText>
-          Escoge a quienes quisieras que te ayuden{' '}
-          <strong>solo si es necesario</strong> y si lo hacen no dudes en
-          invitarles un cafecito 🙌 ☕
-        </HelpersText>
-        <AddHelperContainerTitle>
-          Helpers
-          <SelectedUsersStyle>
-            {usersSelected?.map((u) => (
-              <UserFoto
-                // eslint-disable-next-line
-                key={u._id}
-                user={u}
-                userPhoto={u.photo}
-                userPoints={u.points}
-                selectUser={selectUser}
-                selected
-                deleteUserSelected={deleteUserSelected}
-              />
-            ))}
-          </SelectedUsersStyle>
-        </AddHelperContainerTitle>
-
-        <HelpersMainContainer>
-          <GUsers setResults={setResults} results={results} users={users} />
-
-          <HelpersContainer>
-            {results?.map((u) => (
-              <UserFoto
-                // eslint-disable-next-line
-                key={u._id}
-                user={u}
-                userPhoto={u.photo}
-                alt={u.fullname}
-                userPoints={u.points}
-                selectUser={selectUser}
-              />
-            ))}
-          </HelpersContainer>
-        </HelpersMainContainer>
-
-        <Line />
-
-        <OfferText>¿Que tan difícil consideras tu problema?</OfferText>
-        <OfferMainContainer>
-          <OfferTitle>OFRECER</OfferTitle>
-          <OfferPointsContainer>
-            <InputPoints
-              state={pointsst}
-              changeState={changePoints}
-              inputType="number"
-              label="Puntos"
-              textPlaceholder="0"
-              inputName="puntos"
-              errorText="Entre 0 y 9999"
-              inputParameters={parameters.points}
+          <PageContainer>
+            <PostTitle>¿En que deseas ayuda?</PostTitle>
+            <InputTitle
+              state={titlest}
+              changeState={changeTitle}
+              inputType="text"
+              label="Titulo"
+              textPlaceholder="Título del problema"
+              inputName="titulo"
+              errorText="El título debe poseer de 10 a 50 caracteres."
+              inputParameters={parameters.title}
             />
-            <OfferPointsText>Puntos</OfferPointsText>
-          </OfferPointsContainer>
-        </OfferMainContainer>
+            <InputStyle>
+              <BsTypeBold />
+              <BsTypeItalic />
+              <BsTypeUnderline />
+              <BsListUl />
+              <BsListOl />
+              <BsJustifyLeft />
+              <BsTextCenter />
+              <BsJustifyRight />
+              <BsJustify />
+              <BsTextIndentLeft />
+              <BsTextIndentRight />
+              <BsTable />
+              <BsCode />
+              <BsLink45Deg />
+              <BsEmojiSmile />
+            </InputStyle>
+            <InputPost
+              state={descriptionst}
+              changeState={changeDescription}
+              inputType="text"
+              label="Descripcion"
+              textPlaceholder="Ingresa aquí una breve descripción de tu problema..."
+              inputName="descripcion"
+              errorText="La descripción debe poseer de 10 a 1300 caracteres."
+              inputParameters={parameters.description}
+            />
+            {uploaderShow ? <InputUpload setState={setImageUrl} /> : null}
+            <AddContainer>
+              <AddSecondaryContainer
+                onClick={() => setUploaderShow(!uploaderShow)}
+              >
+                <BsImages /> Añadir imagenes
+              </AddSecondaryContainer>
+              <AddSecondaryContainer href="#">
+                <BsFolder2Open /> Añadir archivo
+              </AddSecondaryContainer>
+            </AddContainer>
 
-        <Line />
+            <Line />
 
-        <RequestButton onClick={editPost}>GUARDAR CAMBIOS</RequestButton>
-      </PageContainer>
+            <HelpersText>
+              Escoge a quienes quisieras que te ayuden{' '}
+              <strong>solo si es necesario</strong> y si lo hacen no dudes en
+              invitarles un cafecito 🙌 ☕
+            </HelpersText>
+            <AddHelperContainerTitle>
+              Helpers
+              <SelectedUsersStyle>
+                {usersSelected?.map((u) => (
+                  <UserFoto
+                    // eslint-disable-next-line
+                key={u._id}
+                    user={u}
+                    userPhoto={u.photo}
+                    userPoints={u.points}
+                    selectUser={selectUser}
+                    selected
+                    deleteUserSelected={deleteUserSelected}
+                  />
+                ))}
+              </SelectedUsersStyle>
+            </AddHelperContainerTitle>
 
-      <Footer />
-    </>
+            <HelpersMainContainer>
+              <GUsers setResults={setResults} results={results} users={users} />
+
+              <HelpersContainer>
+                {results?.map((u) => (
+                  <UserFoto
+                    // eslint-disable-next-line
+                key={u._id}
+                    user={u}
+                    userPhoto={u.photo}
+                    alt={u.fullname}
+                    userPoints={u.points}
+                    selectUser={selectUser}
+                  />
+                ))}
+              </HelpersContainer>
+            </HelpersMainContainer>
+
+            <Line />
+
+            <OfferText>¿Que tan difícil consideras tu problema?</OfferText>
+            <OfferMainContainer>
+              <OfferTitle>OFRECER</OfferTitle>
+              <OfferPointsContainer>
+                <InputPoints
+                  state={pointsst}
+                  changeState={changePoints}
+                  inputType="number"
+                  label="Puntos"
+                  textPlaceholder="0"
+                  inputName="puntos"
+                  errorText="Entre 0 y 9999"
+                  inputParameters={parameters.points}
+                />
+                <OfferPointsText>Puntos</OfferPointsText>
+              </OfferPointsContainer>
+            </OfferMainContainer>
+
+            <Line />
+
+            <RequestButton onClick={editPost}>GUARDAR CAMBIOS</RequestButton>
+          </PageContainer>
+
+          <Footer />
+        </div>
+      ) : (
+        navigate('/')
+      )}
+    </div>
   );
 }
 

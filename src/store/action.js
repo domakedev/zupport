@@ -12,6 +12,7 @@ import {
   VERIFY_USER,
   // AUTHENTICATE_USER,
   OBTENER_USER,
+  GET_USERS,
   ERROR_TOKEN,
   SET_SPINNING,
   LOGOUT,
@@ -70,6 +71,10 @@ const createUser = (user) => ({
 const obtainUserType = (user) => ({
   type: OBTENER_USER,
   payload: user,
+});
+const loadUsers = (users) => ({
+  type: GET_USERS,
+  payload: users,
 });
 const verifyUser = (user) => ({
   type: VERIFY_USER,
@@ -145,10 +150,20 @@ const getAllPosts = (idCom) => async (dispatch) => {
   }
 };
 
+const getPost = (idPost) => async (dispatch) => {
+  try {
+    const response = await axios.get(`/api/post/unique/${idPost}`);
+    const res = response.data;
+    dispatch(addPost(res));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
 const addedPost = (postData) => async (dispatch) => {
   try {
     const response = await axios.post('/api/post', postData);
-    dispatch(addPost(response));
+    dispatch(addPost(response.data));
   } catch (e) {
     // console.log(e);
   }
@@ -164,7 +179,20 @@ const editedPost = (idPost, postData) => async (dispatch) => {
 };
 
 const loadEditedPost =
-  (postTitle, postDescription, points, idPost, urlPost) => async (dispatch) => {
+  (
+    userPhoto,
+    userName,
+    timePosted,
+    postTitle,
+    postDescription,
+    points,
+    userPoints,
+    resolved,
+    likes,
+    urlPost,
+    idPost
+  ) =>
+  async (dispatch) => {
     try {
       dispatch(
         loadEditPost({
@@ -173,6 +201,14 @@ const loadEditedPost =
           points,
           _id: idPost,
           image: urlPost,
+          timePosted,
+          resolved,
+          likes,
+          user: {
+            username: userName,
+            photo: userPhoto,
+            points: userPoints,
+          },
         })
       );
     } catch (e) {
@@ -212,6 +248,16 @@ const obtainUser = () => async (dispatch) => {
     }
   } catch (error) {
     dispatch(errorLogin(true));
+  }
+};
+
+const getAllUsers = () => async (dispatch) => {
+  try {
+    const response = await axios.get('/api/users/');
+    const res = response.data;
+    dispatch(loadUsers(res));
+  } catch (e) {
+    // console.log(e);
   }
 };
 
@@ -275,6 +321,7 @@ export default {
   editAnswerPut,
   deletedAnswer,
   getAllPosts,
+  getPost,
   addedPost,
   loadEditedPost,
   editedPost,
@@ -283,6 +330,7 @@ export default {
   registerUser,
   validateUser,
   obtainUser,
+  getAllUsers,
   setTheSpinner,
   closeSession,
 };

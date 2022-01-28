@@ -23,6 +23,7 @@ export const REGISTER_USER = 'REGISTER_USER';
 export const VERIFY_USER = 'VERIFY_USER';
 export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
 export const OBTENER_USER = 'OBTENER_USER';
+export const GET_USERS = 'GET_USERS';
 export const ERROR_TOKEN = 'ERROR_TOKEN';
 export const SET_SPINNING = 'SET_SPINNING';
 export const LOGOUT = 'LOGOUT';

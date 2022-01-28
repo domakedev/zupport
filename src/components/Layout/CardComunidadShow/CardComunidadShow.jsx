@@ -22,7 +22,7 @@ const Container = styled.div`
 `;
 
 const CardComunidadShowIMG = styled.img`
-  height: 80%;
+  height: 100%;
   width: 100%;
 
   object-fit: cover;

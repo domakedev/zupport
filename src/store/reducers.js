@@ -12,6 +12,7 @@ import {
   AUTHENTICATE_USER,
   VERIFY_USER,
   REGISTER_USER,
+  GET_USERS,
   OBTENER_USER,
   ERROR_TOKEN,
   SET_SPINNING,
@@ -28,6 +29,7 @@ const initialState = {
   editPost: {},
   deletePost: {},
   currentUser: {},
+  users: [],
   userAuthenticated: false,
   currentUserOTokencito: {},
   errorLogin: false,
@@ -77,7 +79,8 @@ const reducer = (state = initialState, action) => {
         userAuthenticated: true,
         spinningLoading: false,
       };
-
+    case GET_USERS:
+      return { ...state, users: newValue };
     case ERROR_TOKEN:
       return {
         ...state,
