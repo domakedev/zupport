@@ -8,8 +8,6 @@ import { IconContext } from 'react-icons';
 
 import styled from 'styled-components';
 
-import Profile from '../../../images/ProfileP.png';
-
 import ProfileMenu from './ProfileMenu';
 
 const MainContainer = styled.div`
@@ -36,9 +34,10 @@ const MainButton = styled.button`
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   }
   & img {
-    border-radius: 90px;
+    border-radius: 20px;
     width: 40px;
     height: 40px;
+    object-fit: cover;
   }
   & span {
     vertical-align: middle;
@@ -88,7 +87,7 @@ function DropdownMenu() {
   return (
     <MainContainer>
       <MainButton onClick={onClick}>
-        <img src={Profile} alt="Imagen de Perfil" />
+        <img src={currentUser.photo} alt="Imagen de Perfil" />
         <span>{currentUser.fullname.split(' ')[0]}</span>
         <IconContext.Provider value={value}>
           <MdOutlineKeyboardArrowDown />

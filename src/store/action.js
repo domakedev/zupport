@@ -75,6 +75,10 @@ const verifyUser = (user) => ({
   type: VERIFY_USER,
   payload: user,
 });
+const logingUser = (user) => ({
+  type: VERIFY_USER,
+  payload: user,
+});
 const errorLogin = (errorState) => ({
   type: ERROR_TOKEN,
   payload: errorState,
@@ -217,7 +221,7 @@ const registerUser = (user) => async (dispatch) => {
     const response = await axios.post('/api/users', user);
 
     // FrontEnd
-    await dispatch(createUser(response.data.tokencito));
+    await dispatch(createUser(response.data));
 
     // Obtener usuario del token
     // dispatch(obtainUser());
@@ -247,9 +251,8 @@ const setTheSpinner = (spinning) => async (dispatch) => {
 const loginUser = (datos) => async (dispatch) => {
   try {
     const respuesta = await axios.post('/auth/local/login', datos);
-
     // FrontEnd
-    await dispatch(createUser(respuesta.data.token));
+    await dispatch(logingUser(respuesta.data.token));
 
     dispatch(obtainUser());
   } catch (error) {

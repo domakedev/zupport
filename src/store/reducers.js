@@ -59,11 +59,10 @@ const reducer = (state = initialState, action) => {
 
     // Auth: Register and Login
     case REGISTER_USER:
-      localStorage.setItem('tokencitox', newValue);
       return { ...state, currentUser: newValue };
     case VERIFY_USER:
       localStorage.setItem('tokencitox', newValue);
-      return { ...state, currentUser: newValue };
+      return { ...state };
     case AUTHENTICATE_USER:
       localStorage.setItem('tokencitox', newValue);
       return {
