@@ -112,6 +112,7 @@ function UniquePost() {
               // eslint-disable-next-line
               idPost={currentPost._id}
               authVer={currentUser.username === currentPost.user?.username}
+              isOnline={currentPost.user?.isOnline}
             />
           </CommunityPostCont>
         )}

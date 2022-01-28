@@ -80,6 +80,7 @@ function PostTemplate({
   authVer = false,
   idPost,
   timePosted,
+  isOnline,
 }) {
   const dispatch = useDispatch();
 
@@ -141,6 +142,7 @@ function PostTemplate({
     <PostTemplteCont>
       <DontShow>{timePosted}</DontShow>
       <PostHeader
+        isOnline={isOnline}
         onClick={goTo}
         userPhoto={userPhoto}
         userName={userName}

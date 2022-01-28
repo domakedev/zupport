@@ -60,6 +60,7 @@ function PostList({ results }) {
               currentUser.username === user.username ||
               currentUser.role === 'admin'
             }
+            isOnline={user.isOnline}
           />
         )
       )}
