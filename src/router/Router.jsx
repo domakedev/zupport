@@ -10,6 +10,7 @@ import CreateCommunitie from '../components/Pages/CreateCommunitie/CreateCommuni
 import CommunityPosts from '../components/Pages/CommunityPosts/CommunityPosts';
 import HelpPost from '../components/Pages/NewPost/HelpPost';
 import EditHelpPost from '../components/Pages/NewPost/EditHelpPost';
+import OnlyPostAnswers from '../components/Pages/CommunityPosts/PostList/PostTemplate/Answers/OnlyPostAnswers';
 import Login from '../components/Pages/Login/Login';
 import Register from '../components/Pages/Register/Register';
 import Verify from '../components/Pages/Register/Verify';
@@ -31,6 +32,10 @@ function Router() {
       <Route
         path="/communities/:comuTitle/posts"
         element={<CommunityPosts />}
+      />
+      <Route
+        path="/communities/:comuTitle/posts/:idPost"
+        element={<OnlyPostAnswers />}
       />
 
       <Route path="/communities/help-post" element={<HelpPost />} />

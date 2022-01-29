@@ -7,7 +7,7 @@ import IconHeart from './IconHeart';
 import PostFooter from './PostFooter';
 import PostHeader from './PostHeader';
 import PostImage from './PostImage';
-import Answers from './Answers/Answers';
+// import Answers from './Answers/Answers';
 import action from '../../../../../store/action';
 
 const Option = styled.span`
@@ -124,8 +124,8 @@ function PostTemplate({
         ) : null}
       </ReactionContainer>
       <DividingLine />
-      <PostFooter idPost={idPost} />
-      <Answers idPost={idPost} />
+      <PostFooter idPost={idPost} textComment="Ver Respuestas" />
+      {/* <Answers idPost={idPost} /> */}
     </PostTemplteCont>
   );
 }

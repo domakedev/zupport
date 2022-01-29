@@ -2,6 +2,8 @@
 export const SHOW_LOADING = 'SHOW_LOADING';
 
 // Answer types
+// se crea un tipo para poder cargar un estado de un post
+export const LOAD_ONLY_POST = 'LOAD_ONLY_POST';
 export const GET_ANSWERS = 'GET_ANSWERS';
 export const ADD_ANSWER = 'ADD_ANSWER';
 export const EDIT_ANSWER = 'EDIT_ANSWER';
