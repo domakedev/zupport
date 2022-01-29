@@ -78,6 +78,7 @@ function PostTemplate({
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+  // dispatch(action.getAllAnswers(idPost));
 
   const editPost = async () => {
     // lo primero que haria seria setear un estado en el redux

@@ -22,7 +22,7 @@ import {
 
 const initialState = {
   answers: [],
-  // arr: [],
+  arr: [],
   addAnswer: {},
   editAnswer: {},
   deleteAnswer: {},
@@ -43,8 +43,8 @@ const reducer = (state = initialState, action) => {
     case GET_ANSWERS:
       // const { _id } = action.payload;
       // state.arr.push(newValue);
-      // console.log(state.arr);
-      return { ...state, answers: newValue };
+      console.log(state.arr);
+      return { ...state, answers: [state.answers, newValue] };
     case ADD_ANSWER:
       return { ...state, addAnswer: newValue };
     case EDIT_ANSWER:

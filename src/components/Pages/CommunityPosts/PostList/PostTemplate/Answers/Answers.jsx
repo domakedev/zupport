@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState, /*useEffect*/ } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
@@ -100,6 +100,7 @@ const PaymentCont = styled.div`
 `;
 function Answers({ idPost }) {
   const [viewMore, setViewMore] = useState(false);
+  const [resp, setResp] = useState([]);
   // const [answer, setAnswer] = useState([]);
   // const [dataValidated, setDataValidated] = useState([]);
   // const [dataNoValidated, setDataNoValidated] = useState([]);
@@ -117,20 +118,37 @@ function Answers({ idPost }) {
   // const dataNoValidatedd = useSelector((state) =>
   //   state.answers.filter((e) => !e.resolved)
   // );
-  const dataValidated = useSelector((state) =>
-    state.answers.filter((e) => e.resolved)
-  );
-  const dataNoValidated = useSelector((state) =>
-    state.answers.filter((e) => !e.resolved)
-  );
+  // const dataValidated = useSelector((state) =>
+  //   state.answers.filter((e) => e.resolved)
+  // );
+  // const dataNoValidated = useSelector((state) =>
+  //   state.answers.filter((e) => !e.resolved)
+  // );
+  // should
+  const dataValidated = resp.filter((e) => e.resolved)
+  const dataNoValidated = resp.filter((e) => !e.resolved)
+
   // useEffect(() => {
   //   setDataValidated(dataValidatedInit);
   //   setDataNoValidated(dataNoValidatedInit);
   // }, []);
-  console.log(answers);
+
+   useEffect(() => { 
+     let arr = []
+    if(answers.length !== 0){
+      for(let i= 0; i< answers.length; i++){
+        const resp = answers[i].filter((e)=>e.post === idPost)
+        arr.push(...resp);
+
+      }
+      setResp(arr)
+    }
+    console.log('resp filtradas',arr);
+  }, [answers]);
+  console.log('answer',answers);
   const datosAnswer = () => {
-    setViewMore(!viewMore);
-    dispatch(accions.getAllAnswers(idPost));
+    setViewMore(!viewMore);    
+     dispatch(accions.getAllAnswers(idPost));   
   };
 
   return (

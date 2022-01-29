@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import {
   GET_ANSWERS,
   ADD_ANSWER,
@@ -101,11 +102,13 @@ const getAllAnswers = (idPost) => async (dispatch) => {
   }
 };
 
-const addAnswerPost = (answerData, idPost) => async (dispatch) => {
+const addAnswerPost = (answerData, idPost) => async (dispatch, getState) => {
   try {
     const response = await axios.post('/api/answer', answerData);
     dispatch(addAnswer(response));
-    console.log(idPost);
+    const secondState = getState();
+    const { answers } = secondState;
+    console.log(answers);
     dispatch(getAllAnswers(idPost));
   } catch (e) {
     // console.log(e);
