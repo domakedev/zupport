@@ -27,6 +27,7 @@ const PostTemplteCont = styled.article`
   flex-direction: column;
   margin-top: 3rem;
   max-width: 625px;
+  min-width: 625px;
   @media screen and (min-width: 1024px) {
     border: 1px solid #79777052; //--dark-color
     border-radius: 2rem;
@@ -74,6 +75,7 @@ function PostTemplate({
   urlPost,
   authVer = true,
   idPost,
+  textComment, // props para el boton comentar (cambiará a Ver Comentarios)
 }) {
   const dispatch = useDispatch();
 
@@ -124,7 +126,7 @@ function PostTemplate({
         ) : null}
       </ReactionContainer>
       <DividingLine />
-      <PostFooter idPost={idPost} textComment="Ver Respuestas" />
+      <PostFooter idPost={idPost} textComment={textComment} />
       {/* <Answers idPost={idPost} /> */}
     </PostTemplteCont>
   );

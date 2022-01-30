@@ -1,11 +1,11 @@
-/* eslint-disable */
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { GrLike } from 'react-icons/gr';
 import Answer from './Answer/Answer';
-import accions from '../../../../../../store/action';
+import action from '../../../../../../store/action';
 import Payment from '../../../../Payment/Payment';
 
 // Styleds
@@ -99,98 +99,94 @@ const PaymentCont = styled.div`
   margin-top: 10px;
 `;
 function Answers({ idPost }) {
-  const [viewMore, setViewMore] = useState(false);
-  const [resp, setResp] = useState([]);
-  // const [answer, setAnswer] = useState([]);
-  // const [dataValidated, setDataValidated] = useState([]);
-  // const [dataNoValidated, setDataNoValidated] = useState([]);
-
   const dispatch = useDispatch();
 
-  const supportAnswer = () => {
-    // console.log('Me gusta todo :', comment);
-  };
-  // useEffect(async () => {
-  //   // const idPost = '61e09c7fb35c71052690ec67';
-  //   dispatch(accions.getAllAnswers(idPost));
-  // }, []);
-  const answers = useSelector((state) => state.answers);
-  // const dataNoValidatedd = useSelector((state) =>
-  //   state.answers.filter((e) => !e.resolved)
-  // );
-  // const dataValidated = useSelector((state) =>
+  // const dataValidatedIni = useSelector((state) =>
   //   state.answers.filter((e) => e.resolved)
   // );
-  // const dataNoValidated = useSelector((state) =>
+  // const dataNoValidatedIni = useSelector((state) =>
   //   state.answers.filter((e) => !e.resolved)
   // );
-  // should
-  const dataValidated = resp.filter((e) => e.resolved)
-  const dataNoValidated = resp.filter((e) => !e.resolved)
 
-  // useEffect(() => {
-  //   setDataValidated(dataValidatedInit);
-  //   setDataNoValidated(dataNoValidatedInit);
-  // }, []);
+  const [viewMore, setViewMore] = useState(false);
+  // const [dataValidated, setDataValidated] = useState(dataValidatedIni);
+  // const [dataNoValidated, setDataNoValidated] = useState(dataNoValidatedIni);
 
-   useEffect(() => { 
-     let arr = []
-    if(answers.length !== 0){
-      for(let i= 0; i< answers.length; i++){
-        const resp = answers[i].filter((e)=>e.post === idPost)
-        arr.push(...resp);
+  // traemos las respuestas filtradas para ese id de post
 
-      }
-      setResp(arr)
-    }
-    console.log('resp filtradas',arr);
-  }, [answers]);
-  console.log('answer',answers);
+  const dataValidated = useSelector((state) =>
+    state.answers.filter((e) => e.resolved)
+  );
+  const dataNoValidated = useSelector((state) =>
+    state.answers.filter((e) => !e.resolved)
+  );
+  // const answers = useSelector((state) => state.answers);
+  // const dataValidated = answersView.filter((e) => e.resolved);
+  // const dataNoValidated = answersView.filter((e) => !e.resolved);
+
+  // const dispatch = useDispatch();
+  // dispatch(accions.getAllAnswers(idPost));
+  // dispatch(action.getAllAnswers(idPost));
+  console.log(idPost);
+  useEffect(async () => {
+    dispatch(action.getAllAnswers(idPost));
+    // setDataValidated(dataValidatedIni);
+    // setDataNoValidated(dataNoValidatedIni);
+    // setAnswersView(answers);
+  }, [idPost]);
+  // console.log(dataValidated, dataNoValidated);
+  // eventos
   const datosAnswer = () => {
-    setViewMore(!viewMore);    
-     dispatch(accions.getAllAnswers(idPost));   
+    setViewMore(!viewMore);
+  };
+  const supportAnswer = () => {
+    // console.log('Me gusta todo :', comment);
   };
 
   return (
     <AnswersContainer>
-      {/* Answers checked co */}
-      {dataValidated.map((e) => (
-        <div key={e._id}>
-          <Answer state={e} stateGeneral={dataValidated} idPost={idPost} />
-          <PaymentCont>
-            <ValidatedMessage>
-              🎉 🌟 Esta respuesta fue útil, te animas a invitarle un cafecito?
-            </ValidatedMessage>
-            <Payment />
-          </PaymentCont>
-        </div>
-      ))}
-
-      <MoreAnswers onClick={datosAnswer}>
-        {viewMore ? (
-          <>
-            <FaAngleUp />
-            <span>Ocultar respuestas</span>
-          </>
-        ) : (
-          <>
-            <FaAngleDown />
-            <span>Ver más respuestas</span>
-          </>
-        )}
-      </MoreAnswers>
-      {viewMore ? (
-        <MoreAnswersList>
-          {dataNoValidated.map((e) => (
+      {dataValidated.length === 0 || dataNoValidated.length === 0 ? null : (
+        <div>
+          {dataValidated.map((e) => (
             <div key={e._id}>
-              <Answer state={e} idPost={idPost} />
-              <SupportAnswer onClick={() => supportAnswer(e.answer)}>
-                Apoyar <GrLike />
-              </SupportAnswer>
+              <Answer state={e} stateGeneral={dataValidated} idPost={idPost} />
+              <PaymentCont>
+                <ValidatedMessage>
+                  🎉 🌟 Esta respuesta fue útil, te animas a invitarle un
+                  cafecito?
+                </ValidatedMessage>
+                <Payment />
+              </PaymentCont>
             </div>
           ))}
-        </MoreAnswersList>
-      ) : null}
+
+          <MoreAnswers onClick={datosAnswer}>
+            {viewMore ? (
+              <>
+                <FaAngleUp />
+                <span>Ocultar respuestas</span>
+              </>
+            ) : (
+              <>
+                <FaAngleDown />
+                <span>Ver más respuestas</span>
+              </>
+            )}
+          </MoreAnswers>
+          {viewMore ? (
+            <MoreAnswersList>
+              {dataNoValidated.map((e) => (
+                <div key={e._id}>
+                  <Answer state={e} idPost={idPost} />
+                  <SupportAnswer onClick={() => supportAnswer(e.answer)}>
+                    Apoyar <GrLike />
+                  </SupportAnswer>
+                </div>
+              ))}
+            </MoreAnswersList>
+          ) : null}
+        </div>
+      )}
     </AnswersContainer>
   );
 }

@@ -1,119 +1,112 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-// import UserPhoto from '../../../../../Layout/UserPhoto/UserPhoto';
-// import DividingLine from '../../../../../Layout/LineStyle/DividingLine';
-// import IconHeart from '../IconHeart';
-// import PostFooter from '../PostFooter';
-// import PostImage from '../PostImage';
-// import PostHeader from '../PostHeader';
-// // // import PostTemplate from '../PostTemplate';
-// import {
-//   getPostTime,
-//   softNumber,
-// } from '../../../../../../controller/CommunityPostCtr/utilities';
+import { useNavigate } from 'react-router-dom';
+import { BsX } from 'react-icons/bs';
+import PostTemplate from '../PostTemplate';
+import Answers from './Answers';
+import {
+  getPostTime,
+  softNumber,
+} from '../../../../../../controller/CommunityPostCtr/utilities';
 // import action from '../../../../../../store/action';
 
-const PostTemplteCont = styled.article`
-  background: #fff;
+const PostCont = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 3rem;
-  max-width: 625px;
+  align-items: center;
+  background: rgba(41, 171, 224, 0.08);
   @media screen and (min-width: 1024px) {
-    border: 1px solid #79777052; //--dark-color
-    border-radius: 2rem;
+    background: none;
+    grid-area: postList;
+    margin: 0 14rem 0 14rem;
   }
 `;
-// const PostContainer = styled.div`
-//   margin-top: 1rem;
-//   padding: 0 3rem 0 3rem;
-// `;
-// const PostTitle = styled.h3`
-//   color: var(--dark-color);
-//   font-size: 2.5rem;
-//   font-family: var(--secondary-font);
-//   font-weight: normal;
-// `;
-// const PostDescription = styled.p`
-//   color: rgba(0, 0, 0, 0.55);
-//   font-size: 1.7rem;
-//   font-family: var(--secondary-font);
-//   font-weight: normal;
-//   text-align: justify;
-//   margin: 1.3rem 0 1.5rem 1.3rem;
-// `;
-// const ReactionContainer = styled.div`
-//   margin: 0 0 0.5rem 1.3rem;
-//   padding: 0 3rem 0 3rem;
-//   font-family: var(--secondary-font);
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-// `;
-
+const MainTitleContainer = styled.div`
+  padding: 2rem 0 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+`;
+const MainTitle = styled.h1`
+  font-family: var(--principal-font);
+  color: var(--boring-color);
+  text-align: center;
+  padding-left: 10rem;
+  font-weight: normal;
+  font-size: 2.5rem;
+`;
+const GoBack = styled.button`
+  color: var(--boring-color);
+  font-size: 3rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem 0 1rem;
+  :hover {
+    background: #d3d2ce5b;
+  }
+`;
+const Line = styled.hr`
+  border-top: 0.1rem solid var(--boring-color);
+  opacity: 0.3;
+`;
 function OnlyPostAnswers() {
-  // const [post, setPost] = useState({});
-
-  // const currentPost = {
-  //   _id: '61f30fd7cd6f6c5ab4490cff',
-  //   timePosted: '2022-01-26T21:42:51.891Z',
-  //   title: 'Este post es Nayruth prueba',
-  //   description: 'prueba',
-  //   image: '',
-  //   likes: 0,
-  //   points: 20,
-  //   user: {
-  //     _id: '61f1c14a60a95d2e585279e3',
-  //     username: 'nayruth1212',
-  //     photo:
-  //       'https://media-exp1.licdn.com/dms/image/C4D03AQGCyan1-WzT6A/profile-displayphoto-shrink_200_200/0/1566666564798?e=1648684800&v=beta&t=mG056XVIGe4bX00rz-NAfbDGHrm7sWzbHlFJEeGxpW0',
-  //     points: 3,
-  //   },
-  //   taggedUsers: ['61eb5ea6345f4538ebf11cd0', '61f1c14a60a95d2e585279e3'],
-  //   community: '61e1862cd149a9366f8bfe1d',
-  //   resolved: false,
-  //   __v: 0,
-  // };
-  const currentPost = useSelector((state) => state.loadOnlyPost);
-  console.log('hola', currentPost);
+  const [post, setPost] = useState({});
+  // const [view, setView] = useState(false);
   // const dispatch = useDispatch();
-  // dispatch(action.getOnlyPost('61f30fd7cd6f6c5ab4490cff'));
-  // const currentPostp = useSelector((state) => state.loadOnlyPost);
-  useEffect(async () => {
-    // await dispatch(action.getOnlyPost('61f30fd7cd6f6c5ab4490cff'));
-    // setPost(currentPost);
-  }, []);
-  // console.log(currentPostp);
+  const currentPost = useSelector((state) => state.loadOnlyPost);
+  // console.log('currentt', currentPost);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setPost(currentPost);
+  }, [currentPost]);
+  // console.log(!post, post);
+  // const AnswerView = () => {
+  //   setView(!view);
+  //   console.log(post._id);
+  //   dispatch(action.getAllAnswers(post._id));
+  // };
   return (
-    <PostTemplteCont>
-      <h1>{currentPost.title}</h1>
-      {/* <UserPhoto
-        userPhoto={currentPost.user.photo}
-        userPoints={currentPost.user.points}
-      /> */}
-      {/* <PostHeader
-        userPhoto={currentPost.user.photo}
-        userName={currentPost.user.username}
-        timePost={getPostTime(currentPost.timePosted)}
-        points={softNumber(currentPost.points)}
-        userPoints={currentPost.user.points}
-        resolved={currentPost.resolved}
-      /> */}
-      {/* <DividingLine />
-      <PostContainer>
-        <PostTitle>{currentPost.postTitle}</PostTitle>
-        <PostDescription>{currentPost.description}</PostDescription>
-      </PostContainer>
-      <PostImage urlPost={currentPost.urlPost} />
-      <ReactionContainer>
-        <IconHeart likes={softNumber(currentPost.likes)} />
-      </ReactionContainer>
-      <DividingLine />
-      <PostFooter idPost={currentPost.idPost} textComment="Responder" /> */}
-      {/* <Answers idPost={idPost} /> */}
-    </PostTemplteCont>
+    <PostCont>
+      <MainTitleContainer>
+        <MainTitle>Ver Detalle</MainTitle>
+        <GoBack type="button" onClick={() => navigate(-1)}>
+          <BsX />
+        </GoBack>
+      </MainTitleContainer>
+
+      <Line />
+
+      {Object.entries(post).length === 0 ? (
+        <h1>cargando</h1>
+      ) : (
+        <div>
+          <PostTemplate
+            userPhoto={post.user.photo === null ? '' : post.user.photo}
+            userName={post.user.username}
+            timePost={getPostTime(post.timePosted)}
+            postTitle={post.title}
+            postDescription={post.description}
+            points={softNumber(post.points)}
+            userPoints={post.userPoints}
+            resolved={post.resolved}
+            likes={softNumber(post.likes)}
+            urlPost={post.image}
+            idPost={post._id}
+          />
+          {/* <button type="button" onClick={AnswerView}>
+            ver respuestas
+          </button>
+          {view ? <Answers idPost={post._id} /> : <h1>no hay</h1>} */}
+          <Answers idPost={post._id} />
+        </div>
+      )}
+    </PostCont>
   );
 }
 

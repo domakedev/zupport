@@ -98,7 +98,7 @@ const getOnlyPost = (idPost) => async (dispatch) => {
   try {
     const response = await axios.get(`/api/post/onlyPost/${idPost}`);
     const res = response.data;
-    console.log(res);
+    // console.log(res);
     dispatch(loadOnlyPost(res));
     // console.log(res);
   } catch (e) {
@@ -111,9 +111,9 @@ const getAllAnswers = (idPost) => async (dispatch) => {
     const response = await axios.get(`/api/answer/${idPost}`);
     const res = response.data;
     dispatch(loadAnswer(res));
-    // console.log(res);
+    console.log(res, idPost);
   } catch (e) {
-    // console.log(e);
+    console.log(e);
   }
 };
 

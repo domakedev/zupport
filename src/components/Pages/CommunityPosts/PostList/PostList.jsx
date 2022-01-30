@@ -53,6 +53,7 @@ function PostList({ results }) {
             likes={softNumber(likes)}
             urlPost={image}
             idPost={_id}
+            textComment="Ver Respuestas" // boton para ver Comentarios de Answers
           />
         )
       )}

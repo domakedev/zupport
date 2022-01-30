@@ -42,13 +42,11 @@ const reducer = (state = initialState, action) => {
   const newValue = action.payload;
   switch (action.type) {
     case LOAD_ONLY_POST:
-      console.log(newValue);
+      // console.log(newValue);
       return { ...state, loadOnlyPost: newValue };
     case GET_ANSWERS:
-      // const { _id } = action.payload;
-      // state.arr.push(newValue);
-      console.log(state.arr);
-      return { ...state, answers: [state.answers, newValue] };
+      console.log(newValue);
+      return { ...state, answers: newValue };
     case ADD_ANSWER:
       return { ...state, addAnswer: newValue };
     case EDIT_ANSWER:
