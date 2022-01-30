@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { IconContext } from 'react-icons';
 import { IoHeartCircle } from 'react-icons/io5';
+import { useSelector } from 'react-redux';
 // import PropTypes from 'prop-types';
 
 const IconHeartContainer = styled('div')(
@@ -25,12 +26,14 @@ const IconText = styled.p`
 `;
 function IconHeart({ likes }) {
   const value = useMemo(() => ({ className: 'icon-heart' }));
+  const User = useSelector((state) => state.editPost);
+  useEffect(() => {}, [User]);
   return (
     <IconHeartContainer>
       <IconContext.Provider value={value}>
         <IoHeartCircle />
       </IconContext.Provider>
-      <IconText>{likes}</IconText>
+      <IconText>{likes?.length}</IconText>
     </IconHeartContainer>
   );
 }

@@ -53,7 +53,7 @@ function PostList({ results }) {
             points={softNumber(points)}
             userPoints={userPoints}
             resolved={resolved}
-            likes={softNumber(likes)}
+            likes={likes}
             urlPost={image}
             idPost={_id}
             authVer={

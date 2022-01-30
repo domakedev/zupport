@@ -167,7 +167,7 @@ function PostTemplate({
         ) : null}
       </ReactionContainer>
       <DividingLine />
-      <PostFooter />
+      <PostFooter likes={likes} idPost={idPost} />
       <Answers />
     </PostTemplteCont>
   );

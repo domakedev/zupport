@@ -94,7 +94,6 @@ function EditHelpPost() {
     }
     setUsersSelected([...usersSelected, u]);
     setUserNames([...userNames, u.username]);
-    console.log(userNames);
   };
 
   const deleteUserSelected = (userToDelete) => {
@@ -109,7 +108,6 @@ function EditHelpPost() {
       (u) => u !== userToDelete.username
     );
     setUserNames(beforeDeleteUN);
-    console.log(userNames);
     setUsersSelected(beforeDelete);
   };
 
@@ -212,6 +210,7 @@ function EditHelpPost() {
                     userPoints={u.points}
                     selectUser={selectUser}
                     selected
+                    isOnline={u.isOnline}
                     deleteUserSelected={deleteUserSelected}
                   />
                 ))}
@@ -231,6 +230,7 @@ function EditHelpPost() {
                     alt={u.fullname}
                     userPoints={u.points}
                     selectUser={selectUser}
+                    isOnline={u.isOnline}
                   />
                 ))}
               </HelpersContainer>
@@ -360,9 +360,15 @@ const AddHelperContainerTitle = styled.div`
 
 const HelpersContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
   gap: 10px;
   margin-top: 15px;
-  max-height: 150px;
+  padding: 20px;
+  width: 80%;
+  min-height: 60px;
+  max-height: 120px;
   overflow-y: scroll;
 `;
 

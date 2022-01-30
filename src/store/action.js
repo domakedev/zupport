@@ -177,7 +177,16 @@ const addedPost = (postData) => async (dispatch) => {
 const editedPost = (idPost, postData) => async (dispatch) => {
   try {
     const response = await axios.put(`/api/post/${idPost}`, postData);
-    dispatch(editPost(response));
+    dispatch(editPost(response.data));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const likedPost = (idPost, postData) => async (dispatch) => {
+  try {
+    const response = await axios.put(`/api/post/like/${idPost}`, postData);
+    dispatch(editPost(response.data));
   } catch (e) {
     // console.log(e);
   }
@@ -340,6 +349,7 @@ export default {
   addedPost,
   loadEditedPost,
   editedPost,
+  likedPost,
   deletedPost,
   loginUser,
   registerUser,

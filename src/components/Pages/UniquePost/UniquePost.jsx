@@ -107,7 +107,7 @@ function UniquePost() {
               points={softNumber(currentPost.points)}
               userPoints={currentPost.user?.points}
               resolved={currentPost.resolved}
-              likes={softNumber(currentPost.likes)}
+              likes={currentPost.likes}
               urlPost={currentPost.image}
               // eslint-disable-next-line
               idPost={currentPost._id}
