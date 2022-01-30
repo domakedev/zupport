@@ -105,25 +105,21 @@ const getOnlyPost = (idPost) => async (dispatch) => {
     // console.log(e);
   }
 };
-
 const getAllAnswers = (idPost) => async (dispatch) => {
   try {
     const response = await axios.get(`/api/answer/${idPost}`);
     const res = response.data;
     dispatch(loadAnswer(res));
-    console.log(res, idPost);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 };
 
-const addAnswerPost = (answerData, idPost) => async (dispatch, getState) => {
+const addAnswerPost = (answerData, idPost) => async (dispatch) => {
   try {
     const response = await axios.post('/api/answer', answerData);
     dispatch(addAnswer(response));
-    const secondState = getState();
-    const { answers } = secondState;
-    console.log(answers);
+    // console.log(answers);
     dispatch(getAllAnswers(idPost));
   } catch (e) {
     // console.log(e);

@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styled from 'styled-components';
 import { AiFillCheckSquare, AiOutlineEllipsis } from 'react-icons/ai';
@@ -74,63 +74,68 @@ const ActionButton = styled.button`
   }
 `;
 
-function Answer({
-  state = {},
-  textPlaceholder = '',
-  setAnswerData,
-  sendButton,
-  idPost,
-}) {
+function Answer({ state = {}, textPlaceholder = '', idPost }) {
   // const [comment] = useState(state);
   const [disabledInp, setDisabledInp] = useState(false);
   const [editAnswer, setEditAnswer] = useState(state.answer);
   const [disableInput, setDisableInput] = useState(true);
   const [showButton, setShowButton] = useState(true);
+  const [buttonText, setButtonText] = useState('Editar');
+  // const [isAutor, setIsAutor] = useState(true);
   const focusInput = useRef();
   const dispatch = useDispatch();
+
+  const currentUser = useSelector(
+    (stateUser) => stateUser.currentUserOTokencito
+  );
 
   // useEffect(() => {}, [comment]);
   // console.log(comment);
 
-  const dataUser = {
-    user: {
-      photo: 'https://bit.ly/3Fnkbk9',
-      points: 5430,
-      username: 'domakedev',
-      id: '61eb5ea6345f4538ebf11cd0',
-      post: '61e09c7fb35c71052690ec67',
-    },
-  };
+  // const dataUser = {
+  //   user: {
+  //     photo: 'https://bit.ly/3Fnkbk9',
+  //     points: 5430,
+  //     username: 'domakedev',
+  //     id: '61eb5ea6345f4538ebf11cd0',
+  //     post: '61e09c7fb35c71052690ec67',
+  //   },
+  // };
   const handleClickMore = () => {
     setDisabledInp(true);
-    setDisableInput(false);
     setShowButton(!showButton);
   };
-  const handleEdit = () => {
-    dispatch(
-      action.editAnswerPut(
-        state._id,
-        {
-          answer: editAnswer,
-          user: dataUser.user.id,
-          likes: 0,
-          post: idPost,
-          resolved: false,
-        },
-        idPost
-      )
-    );
+
+  const handleEdit = (e) => {
+    setDisableInput(false);
+    setButtonText('Guardar');
+    if (e.target.name === 'Guardar') {
+      dispatch(
+        action.editAnswerPut(
+          state._id,
+          {
+            answer: editAnswer,
+            user: currentUser._id,
+            likes: 0,
+            post: idPost,
+            resolved: false,
+          },
+          idPost
+        )
+      );
+    }
+    console.log(e);
   };
   const handleDelete = () => {
     dispatch(action.deletedAnswer(state._id, idPost));
   };
-
+  console.log('holi', currentUser, state);
   return (
     <CommentCont>
       {showButton ? null : (
         <ActionButtonCont>
-          <ActionButton type="button" onClick={handleEdit}>
-            Editar
+          <ActionButton type="input" onClick={handleEdit} name={buttonText}>
+            {buttonText}
           </ActionButton>
           <ActionButton type="button" onClick={handleDelete}>
             Eliminar
@@ -138,7 +143,7 @@ function Answer({
         </ActionButtonCont>
       )}
 
-      <Comment sendButton={sendButton}>
+      <Comment>
         <UserPhoto
           userPhoto={state.user.photo}
           userPoints={state.user.points}
@@ -146,9 +151,9 @@ function Answer({
         <InputComment validated={state.resolved}>
           <InputText
             state={state}
-            disabled={sendButton ? !sendButton : disableInput}
+            disabled={disableInput}
             textPlaceholder={textPlaceholder}
-            onChangeCe={sendButton ? setAnswerData : setEditAnswer}
+            onChangeCe={setEditAnswer}
             flag={disabledInp}
             textEdit={editAnswer}
             focusInput={focusInput}
@@ -158,7 +163,7 @@ function Answer({
         <Validated validated={state.resolved}>
           {state.resolved ? <AiFillCheckSquare /> : null}
         </Validated>
-        {sendButton ? null : (
+        {currentUser._id === state.user._id ? (
           <MoreButton
             type="button"
             onClick={handleClickMore}
@@ -166,7 +171,7 @@ function Answer({
           >
             <AiOutlineEllipsis />
           </MoreButton>
-        )}
+        ) : null}
       </Comment>
     </CommentCont>
   );

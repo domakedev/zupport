@@ -16,7 +16,7 @@ const PostCont = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(41, 171, 224, 0.08);
+  /* background: rgba(41, 171, 224, 0.08); */
   @media screen and (min-width: 1024px) {
     background: none;
     grid-area: postList;
@@ -58,6 +58,7 @@ function OnlyPostAnswers() {
   const [post, setPost] = useState({});
   // const [view, setView] = useState(false);
   // const dispatch = useDispatch();
+  // dispatch(action.getAllAnswers(post._id));
   const currentPost = useSelector((state) => state.loadOnlyPost);
   // console.log('currentt', currentPost);
   const navigate = useNavigate();
@@ -66,16 +67,15 @@ function OnlyPostAnswers() {
     setPost(currentPost);
   }, [currentPost]);
   // console.log(!post, post);
-  // const AnswerView = () => {
-  //   setView(!view);
-  //   console.log(post._id);
-  //   dispatch(action.getAllAnswers(post._id));
-  // };
+  const handleClick = () => {
+    navigate(-1);
+    // dispatch(action.getAllAnswers(post));
+  };
   return (
     <PostCont>
       <MainTitleContainer>
         <MainTitle>Ver Detalle</MainTitle>
-        <GoBack type="button" onClick={() => navigate(-1)}>
+        <GoBack type="button" onClick={handleClick}>
           <BsX />
         </GoBack>
       </MainTitleContainer>

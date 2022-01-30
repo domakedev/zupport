@@ -101,18 +101,7 @@ const PaymentCont = styled.div`
 function Answers({ idPost }) {
   const dispatch = useDispatch();
 
-  // const dataValidatedIni = useSelector((state) =>
-  //   state.answers.filter((e) => e.resolved)
-  // );
-  // const dataNoValidatedIni = useSelector((state) =>
-  //   state.answers.filter((e) => !e.resolved)
-  // );
-
   const [viewMore, setViewMore] = useState(false);
-  // const [dataValidated, setDataValidated] = useState(dataValidatedIni);
-  // const [dataNoValidated, setDataNoValidated] = useState(dataNoValidatedIni);
-
-  // traemos las respuestas filtradas para ese id de post
 
   const dataValidated = useSelector((state) =>
     state.answers.filter((e) => e.resolved)
@@ -120,32 +109,23 @@ function Answers({ idPost }) {
   const dataNoValidated = useSelector((state) =>
     state.answers.filter((e) => !e.resolved)
   );
-  // const answers = useSelector((state) => state.answers);
-  // const dataValidated = answersView.filter((e) => e.resolved);
-  // const dataNoValidated = answersView.filter((e) => !e.resolved);
+  const answers = useSelector((state) => state.answers);
 
-  // const dispatch = useDispatch();
-  // dispatch(accions.getAllAnswers(idPost));
-  // dispatch(action.getAllAnswers(idPost));
-  console.log(idPost);
+  // console.log(idPost);
   useEffect(async () => {
     dispatch(action.getAllAnswers(idPost));
-    // setDataValidated(dataValidatedIni);
-    // setDataNoValidated(dataNoValidatedIni);
-    // setAnswersView(answers);
   }, [idPost]);
-  // console.log(dataValidated, dataNoValidated);
-  // eventos
+
   const datosAnswer = () => {
     setViewMore(!viewMore);
   };
   const supportAnswer = () => {
     // console.log('Me gusta todo :', comment);
   };
-
+  console.log('llegamoos');
   return (
     <AnswersContainer>
-      {dataValidated.length === 0 || dataNoValidated.length === 0 ? null : (
+      {answers.length === 0 ? null : (
         <div>
           {dataValidated.map((e) => (
             <div key={e._id}>

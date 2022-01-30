@@ -45,7 +45,7 @@ const reducer = (state = initialState, action) => {
       // console.log(newValue);
       return { ...state, loadOnlyPost: newValue };
     case GET_ANSWERS:
-      console.log(newValue);
+      // console.log(newValue);
       return { ...state, answers: newValue };
     case ADD_ANSWER:
       return { ...state, addAnswer: newValue };
