@@ -98,10 +98,12 @@ const PaymentCont = styled.div`
   align-items: center;
   margin-top: 10px;
 `;
-function Answers({ idPost }) {
+function Answers({ idPost, postUser }) {
   const dispatch = useDispatch();
 
   const [viewMore, setViewMore] = useState(false);
+  const [like, setLike] = useState(true);
+  // const [textLike, setTextLike] = useState(true);
 
   const dataValidated = useSelector((state) =>
     state.answers.filter((e) => e.resolved)
@@ -119,17 +121,50 @@ function Answers({ idPost }) {
   const datosAnswer = () => {
     setViewMore(!viewMore);
   };
-  const supportAnswer = () => {
-    // console.log('Me gusta todo :', comment);
+
+  // Dar like solo una vez
+  const supportAnswer = (e) => {
+    // console.log('Me gusta todo :', e);
+    // like
+    if (like) {
+      // setTextLike(e.likes + 1);
+      dispatch(
+        action.editAnswerPut(
+          e._id,
+          {
+            likes: e.likes + 1,
+          },
+          idPost
+        )
+      );
+    } else {
+      // setTextLike(e.likes - 1);
+      dispatch(
+        action.editAnswerPut(
+          e._id,
+          {
+            likes: e.likes - 1,
+          },
+          idPost
+        )
+      );
+    }
+    setLike(!like);
   };
-  console.log('llegamoos');
+  // console.log(like);
   return (
     <AnswersContainer>
       {answers.length === 0 ? null : (
         <div>
           {dataValidated.map((e) => (
             <div key={e._id}>
-              <Answer state={e} stateGeneral={dataValidated} idPost={idPost} />
+              <Answer
+                state={e}
+                stateGeneral={dataValidated}
+                idPost={idPost}
+                postUser={postUser}
+                validatedAnswer={dataValidated}
+              />
               <PaymentCont>
                 <ValidatedMessage>
                   🎉 🌟 Esta respuesta fue útil, te animas a invitarle un
@@ -157,9 +192,14 @@ function Answers({ idPost }) {
             <MoreAnswersList>
               {dataNoValidated.map((e) => (
                 <div key={e._id}>
-                  <Answer state={e} idPost={idPost} />
-                  <SupportAnswer onClick={() => supportAnswer(e.answer)}>
-                    Apoyar <GrLike />
+                  <Answer
+                    state={e}
+                    idPost={idPost}
+                    postUser={postUser}
+                    validatedAnswer={dataValidated}
+                  />
+                  <SupportAnswer onClick={() => supportAnswer(e)}>
+                    Apoyar {e.likes} <GrLike />
                   </SupportAnswer>
                 </div>
               ))}

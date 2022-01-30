@@ -56,9 +56,6 @@ const Line = styled.hr`
 `;
 function OnlyPostAnswers() {
   const [post, setPost] = useState({});
-  // const [view, setView] = useState(false);
-  // const dispatch = useDispatch();
-  // dispatch(action.getAllAnswers(post._id));
   const currentPost = useSelector((state) => state.loadOnlyPost);
   // console.log('currentt', currentPost);
   const navigate = useNavigate();
@@ -68,8 +65,8 @@ function OnlyPostAnswers() {
   }, [currentPost]);
   // console.log(!post, post);
   const handleClick = () => {
+    // regresando a la página anterior
     navigate(-1);
-    // dispatch(action.getAllAnswers(post));
   };
   return (
     <PostCont>
@@ -99,11 +96,7 @@ function OnlyPostAnswers() {
             urlPost={post.image}
             idPost={post._id}
           />
-          {/* <button type="button" onClick={AnswerView}>
-            ver respuestas
-          </button>
-          {view ? <Answers idPost={post._id} /> : <h1>no hay</h1>} */}
-          <Answers idPost={post._id} />
+          <Answers idPost={post._id} postUser={post.user} />
         </div>
       )}
     </PostCont>

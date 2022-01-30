@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,7 +24,9 @@ const Comment = styled.div`
   }
 `;
 
-const Validated = styled.div`
+const Validated = styled.button`
+  border: none;
+  background: none;
   svg {
     font-size: 45px;
     border-radius: 1px;
@@ -74,13 +77,20 @@ const ActionButton = styled.button`
   }
 `;
 
-function Answer({ state = {}, textPlaceholder = '', idPost }) {
+function Answer({
+  state = {},
+  textPlaceholder = '',
+  idPost,
+  postUser,
+  validatedAnswer,
+}) {
   // const [comment] = useState(state);
   const [disabledInp, setDisabledInp] = useState(false);
   const [editAnswer, setEditAnswer] = useState(state.answer);
   const [disableInput, setDisableInput] = useState(true);
   const [showButton, setShowButton] = useState(true);
   const [buttonText, setButtonText] = useState('Editar');
+  // const [stateResolved, setStateResolved] = useState(true);
   // const [isAutor, setIsAutor] = useState(true);
   const focusInput = useRef();
   const dispatch = useDispatch();
@@ -89,18 +99,6 @@ function Answer({ state = {}, textPlaceholder = '', idPost }) {
     (stateUser) => stateUser.currentUserOTokencito
   );
 
-  // useEffect(() => {}, [comment]);
-  // console.log(comment);
-
-  // const dataUser = {
-  //   user: {
-  //     photo: 'https://bit.ly/3Fnkbk9',
-  //     points: 5430,
-  //     username: 'domakedev',
-  //     id: '61eb5ea6345f4538ebf11cd0',
-  //     post: '61e09c7fb35c71052690ec67',
-  //   },
-  // };
   const handleClickMore = () => {
     setDisabledInp(true);
     setShowButton(!showButton);
@@ -123,17 +121,38 @@ function Answer({ state = {}, textPlaceholder = '', idPost }) {
           idPost
         )
       );
+      setDisableInput(true);
+      setButtonText('Editar');
     }
-    console.log(e);
   };
   const handleDelete = () => {
     dispatch(action.deletedAnswer(state._id, idPost));
   };
-  console.log('holi', currentUser, state);
+  const handleValidated = () => {
+    // editando una respuesta cuando el dueño del post la valida;
+    dispatch(
+      action.editAnswerPut(
+        state._id,
+        {
+          resolved: true,
+        },
+        idPost
+      )
+    );
+    // setStateResolved()
+  };
+  const handleCancel = () => {
+    setDisableInput(true);
+    setButtonText('Editar');
+  };
+  // console.log('porque', validatedAnswer);
   return (
     <CommentCont>
       {showButton ? null : (
         <ActionButtonCont>
+          <ActionButton type="input" onClick={handleCancel} name={buttonText}>
+            Cancelar
+          </ActionButton>
           <ActionButton type="input" onClick={handleEdit} name={buttonText}>
             {buttonText}
           </ActionButton>
@@ -159,10 +178,19 @@ function Answer({ state = {}, textPlaceholder = '', idPost }) {
             focusInput={focusInput}
           />
         </InputComment>
-
-        <Validated validated={state.resolved}>
-          {state.resolved ? <AiFillCheckSquare /> : null}
+        {/* {validatedAnswer.length !== 0 ? null : ( */}
+        <Validated
+          validated={state.resolved}
+          onClick={handleValidated}
+          disabled={validatedAnswer.length !== 0}
+        >
+          {currentUser._id === postUser._id ? (
+            currentUser._id === state.user._id ? null : (
+              <AiFillCheckSquare />
+            )
+          ) : null}
         </Validated>
+        {/* )} */}
         {currentUser._id === state.user._id ? (
           <MoreButton
             type="button"
