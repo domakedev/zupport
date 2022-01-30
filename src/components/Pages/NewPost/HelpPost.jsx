@@ -25,6 +25,7 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 import action from '../../../store/action';
+import axios from '../../../utils/axios';
 // import Context
 // import { useStateAuth } from '../../../context/Auth/AuthContext';
 // Import Layout Components
@@ -34,7 +35,7 @@ import Footer from '../../Layout/Footer';
 import InputTitle from './Components/InputTitle';
 import InputPost from './Components/InputPost';
 import InputPoints from './Components/InputPoints';
-import InputUpload from './Components/InputUpload';
+// import InputUpload from './Components/InputUpload';
 // Import Search and selection components
 import GUsers from './GUsers';
 import UserFoto from '../../Layout/UserPhoto/UserPhoto';
@@ -48,7 +49,7 @@ function HelpPost() {
   // Resultados de la busqueda u orden, luego se imprimen
   // en pantalla
   const [results, setResults] = useState([]);
-  const [imageUrl, setImageUrl] = useState('');
+  const [file, setFile] = useState(null);
   const [uploaderShow, setUploaderShow] = useState(false);
   const [titlest, changeTitle] = useState({ field: '', check: null });
   const [descriptionst, changeDescription] = useState({
@@ -67,6 +68,10 @@ function HelpPost() {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  const onChangeFile = (e) => {
+    setFile(e.target.files[0]);
+  };
 
   useEffect(async () => {
     await dispatch(action.getAllUsers());
@@ -105,14 +110,21 @@ function HelpPost() {
   };
 
   const addPost = async () => {
+    let urltemp = '';
+    if (file !== null) {
+      const formData = new FormData();
+      formData.append('file', file);
+      const result = await axios.post('/api/uploads/file', formData);
+      const { url } = result.data;
+      urltemp = url;
+    }
+
     await dispatch(
       action.addedPost({
         title: titlest.field,
         description: descriptionst.field,
-        image: imageUrl,
-        likes: 0,
+        image: urltemp,
         points: pointsst.field,
-        user: '61eb5ea6345f4538ebf11cd0',
         taggedUsers: userNames,
         community: '61e10b9749e4a27d593c6a95',
         resolved: false,
@@ -172,7 +184,16 @@ function HelpPost() {
           errorText="La descripción debe poseer de 10 a 1300 caracteres."
           inputParameters={parameters.description}
         />
-        {uploaderShow ? <InputUpload setState={setImageUrl} /> : null}
+        {uploaderShow ? (
+          <Input
+            type="file"
+            name="file"
+            id="file"
+            onChange={onChangeFile}
+            accept="image/*"
+            multiple
+          />
+        ) : null}
         <AddContainer>
           <AddSecondaryContainer onClick={() => setUploaderShow(!uploaderShow)}>
             <BsImages /> Añadir imagenes
@@ -256,6 +277,30 @@ function HelpPost() {
     </>
   );
 }
+
+const Input = styled.input`
+  width: min-content;
+  font-family: var(--secondary-font);
+  font-size: 1.8rem;
+  margin-top: 20px;
+
+  ::-webkit-file-upload-button {
+    width: 130px;
+    height: 30px;
+    background-color: var(--principal-color);
+    border-radius: 3px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 2px 0 var(--boring-color);
+    text-align: center;
+    font-family: var(--secondary-font);
+    font-size: 1.8rem;
+    color: var(--light-color);
+    text-decoration: none;
+    border: none;
+  }
+`;
 
 const MainTitleContainer = styled.div`
   padding: 2rem 0 1rem 0;
