@@ -83,7 +83,6 @@ function PostTemplate({
   textComment, // props para el boton comentar (cambiará a Ver Comentarios)
   timePosted,
   isOnline,
-
 }) {
   const dispatch = useDispatch();
 
@@ -174,7 +173,6 @@ function PostTemplate({
 
       <PostFooter likes={likes} idPost={idPost} textComment={textComment} />
       {/* <Answers idPost={idPost} /> */}
-
     </PostTemplteCont>
   );
 }

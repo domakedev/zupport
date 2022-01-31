@@ -127,10 +127,8 @@ function PostFooter({ idPost, textComment, likes }) {
   return (
     <>
       <PostFooterContainer>
-
         <LikeButtonPost likes={likes} idPost={idPost} />
         <CommentButtonPost responderFn={onClickHandle} text={textComment} />
-
       </PostFooterContainer>
       <ResponderAnimated>
         {responder ? (
