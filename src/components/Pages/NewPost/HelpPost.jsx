@@ -124,6 +124,7 @@ function HelpPost() {
         title: titlest.field,
         description: descriptionst.field,
         image: urltemp,
+        likes: [],
         points: pointsst.field,
         taggedUsers: userNames,
         community: '61e10b9749e4a27d593c6a95',
