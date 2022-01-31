@@ -62,6 +62,7 @@ const LineCont = styled.div`
 `;
 
 function PostHeader({
+  user,
   userPhoto,
   userName,
   timePost,
@@ -74,6 +75,8 @@ function PostHeader({
     <PostHeaderCont resolved={resolved}>
       <UserProfileCont>
         <UserPhoto
+          user={user}
+          // photo={userPhoto}
           isOnline={isOnline}
           userPhoto={userPhoto}
           userPoints={userPoints}

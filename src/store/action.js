@@ -18,6 +18,9 @@ import {
   ERROR_TOKEN,
   SET_SPINNING,
   LOGOUT,
+  VISIT_USER,
+  TOP_LANDING_USERS,
+  UPDATE_USER,
 } from './types';
 import axios from '../utils/axios';
 
@@ -82,7 +85,7 @@ const loadUsers = (users) => ({
   type: GET_USERS,
   payload: users,
 });
-const updateUser = (user) => ({
+const updateUserX = (user) => ({
   type: MODIFY_USER,
   payload: user,
 });
@@ -107,6 +110,22 @@ const logOut = () => ({
   payload: false,
 });
 
+// Users
+const visitTheUser = (user) => ({
+  type: VISIT_USER,
+  payload: user,
+});
+const setTheTopUsersLanding = (topUsers) => ({
+  type: TOP_LANDING_USERS,
+  payload: topUsers,
+});
+const updateUser = (newData) => ({
+  type: UPDATE_USER,
+  payload: newData,
+});
+
+// Answer
+
 // Answer loadOnlyPost
 const getOnlyPost = (idPost) => async (dispatch) => {
   try {
@@ -119,6 +138,7 @@ const getOnlyPost = (idPost) => async (dispatch) => {
     // console.log(e);
   }
 };
+
 const getAllAnswers = (idPost) => async (dispatch) => {
   try {
     const response = await axios.get(`/api/answer/${idPost}`);
@@ -256,7 +276,7 @@ const deletedPost = (idPost) => async (dispatch) => {
 };
 // AUTH
 
-const obtainUser = () => async (dispatch) => {
+const obtainUser = (userUsername) => async (dispatch) => {
   try {
     const tokencito = localStorage.getItem('tokencitox');
 
@@ -276,7 +296,29 @@ const obtainUser = () => async (dispatch) => {
     } else if (!respuesta.data.usuario) {
       dispatch(errorLogin(true));
     }
+
+    if (userUsername) {
+      const respuestaUsername = await axios.get(`/api/users/${userUsername}`);
+
+      if (respuestaUsername.data[0].username.length > 0) {
+        dispatch(visitTheUser(respuesta.data[0].username));
+      }
+    }
   } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('🚀 ~ file: action.js ~ line 232 ~ obtainUser ~ error', error);
+
+    dispatch(errorLogin(true));
+  }
+};
+const obtainUserByUsername = (userUsername) => async (dispatch) => {
+  try {
+    const respuesta = await axios.get(`/api/users/${userUsername}`);
+    dispatch(visitTheUser(respuesta.data[0]));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('🚀 ~ file: action.js ~ line 232 ~ obtainUser ~ error', error);
+
     dispatch(errorLogin(true));
   }
 };
@@ -294,7 +336,7 @@ const getAllUsers = () => async (dispatch) => {
 const updatedUser = (userName, userData) => async (dispatch) => {
   try {
     const response = await axios.put(`/api/users/name/${userName}`, userData);
-    dispatch(updateUser(response));
+    dispatch(updateUserX(response));
   } catch (e) {
     // console.log(e);
   }
@@ -355,6 +397,64 @@ const closeSession = (userName, userData) => async (dispatch) => {
   }
 };
 
+const setVisitedUser = (userUsername) => async (dispatch) => {
+  try {
+    await dispatch(obtainUserByUsername(userUsername));
+    // userData obtenida de usar el email
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(
+      '🚀 ~ file: action.js ~ line 290 ~ setVisitedUser ~ error',
+      error
+    );
+  }
+};
+
+const getTopUsersLanding = () => async (dispatch) => {
+  try {
+    const respuesta = await axios.get('/api/users');
+
+    const theThree = respuesta.data.sort((a, b) => -a.points + b.points);
+    const the3TopGeneralUsers = theThree.slice(0, 3);
+    dispatch(setTheTopUsersLanding(the3TopGeneralUsers));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(
+      '🚀 ~ file: action.js ~ line 325 ~ getTopUsersLanding ~ error',
+      error
+    );
+  }
+};
+
+const updateTheUser = (userUsername, newData) => async (dispatch) => {
+  dispatch(setSpinning(true));
+
+  try {
+    const tokencito = localStorage.getItem('tokencitox');
+
+    // Funcion para enviar el token por header
+
+    if (tokencito) {
+      axios.defaults.headers.common['x-auth-token'] = tokencito;
+    } else {
+      delete axios.defaults.headers.common['x-auth-token'];
+      return;
+    }
+
+    const respuesta = await axios.put(`/api/users/${userUsername}`, newData);
+
+    dispatch(updateUser(respuesta.data[0]));
+
+    dispatch(setSpinning(false));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(
+      '🚀 ~ file: action.js ~ line 359 ~ updateTheUser ~ error',
+      error
+    );
+  }
+};
+
 export default {
   getOnlyPost,
   getAllAnswers,
@@ -376,4 +476,7 @@ export default {
   getAllUsers,
   setTheSpinner,
   closeSession,
+  setVisitedUser,
+  getTopUsersLanding,
+  updateTheUser,
 };

@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+// import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+// Actions de Redux
+// import actions from '../../../../../store/action';
 
 // Images
-import IconoPerfil from '../../../../../images/perfil.svg';
-import Scaled from '../../../../../images/scaled.jpg';
-import IronMan from '../../../../../images/iron-man.jpg';
-import Capitan from '../../../../../images/capi.jfif';
+// import IconoPerfil from '../../../../../images/perfil.svg';
+import Capitan from '../../../../../images/DefaultImage.png';
 import MainHeroIMG from '../../../../../images/fondo-hero.svg';
 
 const Container = styled.div`
@@ -40,6 +43,7 @@ const Description = styled.p`
 
 const HeroCard1 = styled.div`
   display: inline-block;
+  cursor: pointer;
 
   position: absolute;
 
@@ -52,7 +56,7 @@ const HeroCard1 = styled.div`
 
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
-  background-image: url(${Scaled});
+  background-image: url(${(props) => props.image});
 
   border-radius: 43px 3px 3px 3px;
   top: 53px;
@@ -61,6 +65,7 @@ const HeroCard1 = styled.div`
 
 const HeroCard2 = styled.div`
   display: inline-block;
+  cursor: pointer;
 
   position: absolute;
 
@@ -73,7 +78,7 @@ const HeroCard2 = styled.div`
 
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
-  background-image: url(${IronMan});
+  background-image: url(${(props) => props.image});
 
   border-radius: 3px 43px 3px 3px;
   right: 15px;
@@ -82,6 +87,7 @@ const HeroCard2 = styled.div`
 
 const HeroCard3 = styled.div`
   display: inline-block;
+  cursor: pointer;
 
   position: absolute;
 
@@ -94,40 +100,60 @@ const HeroCard3 = styled.div`
 
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
-  background-image: url(${Capitan});
+  background-image: url(${(props) => props.image});
 
   border-radius: 3px 3px 3px 43px;
   top: 240px;
   left: 14%;
 `;
 
-const HeroCardIcon = styled.img`
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+// const HeroCardIcon = styled.img`
+//   position: absolute;
+//   bottom: 10px;
+//   right: 10px;
 
-  background-color: white;
-  padding: 5px;
+//   background-color: white;
+//   padding: 5px;
 
-  border-radius: 50%;
-  border: 1px solid black;
-`;
+//   border-radius: 50%;
+//   border: 1px solid black;
+// `;
 
-function Hero() {
+function Hero({ topUsers = [] }) {
+  const navigate = useNavigate();
+
+  // const dispatch = useDispatch();
+
+  const visitUser = (user) => {
+    if (user) {
+      // dispatch(actions.setVisitedUser(user.username));
+      navigate(`/profile/${user.username}`);
+    }
+  };
+
   return (
     <Container>
       <Description>Top Helpers en sus comunidades</Description>
 
-      <HeroCard1 className="hero__card--TL">
-        <HeroCardIcon src={IconoPerfil} alt="icono de perfil" />
+      <HeroCard1
+        image={topUsers[0]?.photo || Capitan}
+        onClick={() => visitUser(topUsers[0] ? topUsers[0] : null)}
+      >
+        {/* <HeroCardIcon src={IconoPerfil} alt="icono de perfil" /> */}
       </HeroCard1>
 
-      <HeroCard2 className="hero__card--TRC">
-        <HeroCardIcon src={IconoPerfil} alt="icono de perfil" />
+      <HeroCard2
+        image={topUsers[1]?.photo || Capitan}
+        onClick={() => visitUser(topUsers[1] ? topUsers[1] : null)}
+      >
+        {/* <HeroCardIcon src={IconoPerfil} alt="icono de perfil" /> */}
       </HeroCard2>
 
-      <HeroCard3 className="hero__card--BC">
-        <HeroCardIcon src={IconoPerfil} alt="icono de perfil" />
+      <HeroCard3
+        image={topUsers[2]?.photo || Capitan}
+        onClick={() => visitUser(topUsers[2] ? topUsers[2] : null)}
+      >
+        {/* <HeroCardIcon src={IconoPerfil} alt="icono de perfil" /> */}
       </HeroCard3>
     </Container>
   );

@@ -1,8 +1,11 @@
 import React, { useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { AiTwotonePropertySafety, AiFillMinusCircle } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
+import actions from '../../../store/action';
 import defaultPhoto from '../../../images/Icon/user.png';
 
 // --alert-color : #D9534F; FaUserCircle
@@ -18,14 +21,14 @@ const crownColor = (points) => {
 };
 
 const Container = styled('div')(
-  ({ userPoints }) => css`
+  ({ userPoints, medalSize, route }) => css`
     position: relative;
-    cursor: pointer;
+    cursor: ${route === '/profile' ? '' : 'pointer'};
     border-radius: 50%;
     .icon-crow {
       color: ${crownColor(userPoints)};
-      height: 1.7rem;
-      width: 1.7rem;
+      height: ${medalSize || '2rem'};
+      width: ${medalSize || '2rem'};
       left: -3px;
       top: -2px;
       bottom: 28px;
@@ -51,15 +54,17 @@ const PhotoContainer = styled('div')(
 );
 
 const Photo = styled('img')(
-  () => css`
-    height: 40px;
-    width: 40px;
+  ({ photoSize = '40px', borderSize }) => css`
+    min-height: ${photoSize};
+    min-width: ${photoSize};
+    max-height: ${photoSize};
+    max-width: ${photoSize};
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     object-fit: cover;
     object-position: center center;
-    /* border: 3px solid var(--sucess-color); //el color cambiara a --alert-color si está activo */
+    border: ${borderSize} solid var(--sucess-color); //el color cambiara a --alert-color si está activo
     ${(props) =>
       props.isOnline === true &&
       css`
@@ -89,26 +94,75 @@ const DeleteUser = styled.div`
 
 function UserPhoto({
   userPhoto,
+  photoSize,
   userPoints,
-  selectUser,
+  selectUser = () => {},
   user,
   selected = false,
   deleteUserSelected,
+  medalSize,
+  borderSize = '0px',
   isOnline = false,
 }) {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const onClickHandler = () => {
+    if (location.pathname === '/communities/help-post') {
+      selectUser(user);
+    } else if (location.pathname === '/profile') {
+      // nothing no borrar
+    } else if (location.pathname.includes('posts')) {
+      // nothing no borrar
+    } else {
+      dispatch(actions.setVisitedUser(user.username ? user.username : null));
+      navigate('/profile');
+    }
+  };
+
   const value = useMemo(() => ({ className: 'icon-crow' }));
+
+  // const onClickPhoto = async () => {
+  //   await dispatch(
+  //     actions.setVisitedUser(user.username ? user.username : null)
+  //   );
+  //   console.log('Click en la foto');
+  //   // navigate('/profile');
+  //   window.open('/profile');
+  // };
   return (
-    <Container userPoints={userPoints} onClick={() => selectUser(user)}>
-      <IconContext.Provider userPoints={userPoints} value={value}>
+    <Container
+      userPoints={userPoints}
+      medalSize={medalSize}
+      onClick={onClickHandler}
+      route={location.pathname}
+    >
+      <IconContext.Provider
+        userPoints={userPoints}
+        value={value}
+        medalSize={medalSize}
+      >
         <AiTwotonePropertySafety />
       </IconContext.Provider>
 
       <PhotoContainer>
-        <Photo
-          isOnline={isOnline}
-          src={!userPhoto ? defaultPhoto : userPhoto}
-          alt={!user?.fullname ? 'userPhoto' : user?.fullname}
-        />
+        <Link
+          to={{
+            pathname: `/profile/${user?.username ? user.username : null}`,
+          }}
+          target="_blank"
+          rel="noopener noreferrer"
+          // state={{ username: user.username }}
+        >
+          <Photo
+            isOnline={isOnline}
+            photoSize={photoSize}
+            borderSize={borderSize}
+            src={!userPhoto ? defaultPhoto : userPhoto}
+            alt={!user?.username ? 'userPhoto' : user?.username}
+            // onClick={onClickPhoto}
+          />
+        </Link>
       </PhotoContainer>
 
       {selected ? (

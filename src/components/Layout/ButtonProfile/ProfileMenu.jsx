@@ -11,7 +11,7 @@ import {
 } from 'react-icons/bs';
 
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import actions from '../../../store/action';
 
 const List = styled.ul`
@@ -54,6 +54,7 @@ const ProfileMenuImg = styled.img`
   border-radius: 25px;
   margin: 10px;
   object-fit: cover;
+  object-position: center center;
 `;
 
 const Icon = styled.div`
@@ -63,14 +64,22 @@ const Icon = styled.div`
 function ProfileMenu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const currentUser = useSelector((state) => state.currentUserOTokencito);
+
+  const authenticateUser = useSelector((state) => state.currentUserOTokencito);
+
   const value = useMemo(() => ({ className: 'Iconos' }));
   return (
     <List>
-      <ListItem>
-        <ProfileMenuImg src={currentUser.photo} alt="Imagen de Perfil" />
-        <a href="/profile"> Perfil</a>
+      <ListItem
+        onClick={() =>
+          dispatch(actions.setVisitedUser(authenticateUser.username))
+        }
+      >
+        <ProfileMenuImg src={authenticateUser?.photo} alt="Imagen de Perfil" />
+        {/* <Link to="/profile"> Perfil</Link> */}
+        <Link to={`/profile/${authenticateUser?.username}`}> Perfil</Link>
       </ListItem>
+
       <IconContext.Provider value={value}>
         <ListItem>
           <Icon>
@@ -88,7 +97,7 @@ function ProfileMenu() {
           <Icon>
             <BsFillGearFill />
           </Icon>
-          <a href="/config">Configuración</a>
+          <Link to="/config">Configuración</Link>
         </ListItem>
         <ListItem>
           <Icon>
@@ -98,7 +107,9 @@ function ProfileMenu() {
             type="button"
             onClick={async () => {
               await dispatch(
-                actions.closeSession(currentUser.username, { isOnline: false })
+                actions.closeSession(authenticateUser.username, {
+                  isOnline: false,
+                })
               );
               navigate('/');
             }}
