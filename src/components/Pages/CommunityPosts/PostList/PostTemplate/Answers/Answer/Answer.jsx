@@ -113,7 +113,6 @@ function Answer({
           state._id,
           {
             answer: editAnswer,
-            user: currentUser._id,
             likes: 0,
             post: idPost,
             resolved: false,
@@ -184,14 +183,14 @@ function Answer({
           onClick={handleValidated}
           disabled={validatedAnswer.length !== 0}
         >
-          {currentUser._id === postUser._id ? (
-            currentUser._id === state.user._id ? null : (
+          {currentUser.username === postUser.username ? (
+            currentUser.username === state.user.username ? null : (
               <AiFillCheckSquare />
             )
           ) : null}
         </Validated>
         {/* )} */}
-        {currentUser._id === state.user._id ? (
+        {currentUser.username === state.user.username ? (
           <MoreButton
             type="button"
             onClick={handleClickMore}

@@ -151,7 +151,7 @@ function Answers({ idPost, postUser }) {
     }
     setLike(!like);
   };
-  // console.log(like);
+  console.log(answers);
   return (
     <AnswersContainer>
       {answers.length === 0 ? null : (

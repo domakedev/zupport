@@ -72,6 +72,7 @@ function PostFooter({ idPost, textComment }) {
   // obteniendo al usuario actual para crear el comentario
   const currentUser = useSelector((state) => state.currentUserOTokencito);
   // console.log(currentUser, idPost, currentUser.points);
+  // console.log(currentUser);
 
   // Se hace un set de los datos del post
 
