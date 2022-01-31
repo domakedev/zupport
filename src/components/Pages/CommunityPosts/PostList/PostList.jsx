@@ -56,6 +56,7 @@ function PostList({ results }) {
             likes={likes}
             urlPost={image}
             idPost={_id}
+            textComment="Ver Respuestas" // boton para ver Comentarios de Answers
             authVer={
               currentUser.username === user.username ||
               currentUser.role === 'admin'

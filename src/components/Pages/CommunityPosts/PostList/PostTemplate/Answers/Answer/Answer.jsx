@@ -1,6 +1,7 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styled from 'styled-components';
 import { AiFillCheckSquare, AiOutlineEllipsis } from 'react-icons/ai';
@@ -23,7 +24,9 @@ const Comment = styled.div`
   }
 `;
 
-const Validated = styled.div`
+const Validated = styled.button`
+  border: none;
+  background: none;
   svg {
     font-size: 45px;
     border-radius: 1px;
@@ -77,60 +80,80 @@ const ActionButton = styled.button`
 function Answer({
   state = {},
   textPlaceholder = '',
-  setAnswerData,
-  sendButton,
-  cleanInput,
+  idPost,
+  postUser,
+  validatedAnswer,
 }) {
-  const [comment] = useState(state);
+  // const [comment] = useState(state);
   const [disabledInp, setDisabledInp] = useState(false);
-  const [editAnswer, setEditAnswer] = useState(comment.answer);
+  const [editAnswer, setEditAnswer] = useState(state.answer);
   const [disableInput, setDisableInput] = useState(true);
   const [showButton, setShowButton] = useState(true);
+  const [buttonText, setButtonText] = useState('Editar');
+  // const [stateResolved, setStateResolved] = useState(true);
+  // const [isAutor, setIsAutor] = useState(true);
   const focusInput = useRef();
   const dispatch = useDispatch();
 
-  useEffect(() => {}, [comment]);
-  // console.log(comment);
+  const currentUser = useSelector(
+    (stateUser) => stateUser.currentUserOTokencito
+  );
 
-  const dataUser = {
-    user: {
-      photo: 'https://bit.ly/3Fnkbk9',
-      points: 5430,
-      username: 'domakedev',
-      id: '61eb5ea6345f4538ebf11cd0',
-      post: '61e09c7fb35c71052690ec67',
-    },
-  };
   const handleClickMore = () => {
     setDisabledInp(true);
-    setDisableInput(false);
     setShowButton(!showButton);
   };
-  const handleEdit = () => {
-    dispatch(
-      action.editAnswerPut(
-        comment._id,
-        {
-          answer: editAnswer,
-          user: dataUser.user.id,
-          likes: 0,
-          post: dataUser.user.post,
-          resolved: false,
-        },
-        '61e09c7fb35c71052690ec67'
-      )
-    );
+
+  const handleEdit = (e) => {
+    setDisableInput(false);
+    setButtonText('Guardar');
+    if (e.target.name === 'Guardar') {
+      dispatch(
+        action.editAnswerPut(
+          state._id,
+          {
+            answer: editAnswer,
+            likes: 0,
+            post: idPost,
+            resolved: false,
+          },
+          idPost
+        )
+      );
+      setDisableInput(true);
+      setButtonText('Editar');
+    }
   };
   const handleDelete = () => {
-    dispatch(action.deletedAnswer(comment._id, '61e09c7fb35c71052690ec67'));
+    dispatch(action.deletedAnswer(state._id, idPost));
   };
-
+  const handleValidated = () => {
+    // editando una respuesta cuando el dueño del post la valida;
+    dispatch(
+      action.editAnswerPut(
+        state._id,
+        {
+          resolved: true,
+        },
+        idPost
+      )
+    );
+    // setStateResolved()
+  };
+  const handleCancel = () => {
+    setDisableInput(true);
+    setButtonText('Editar');
+  };
+  // console.log('porque', validatedAnswer);
   return (
     <CommentCont>
       {showButton ? null : (
         <ActionButtonCont>
-          <ActionButton type="button" onClick={handleEdit}>
-            Editar
+          <ActionButton type="input" onClick={handleCancel} name={buttonText}>
+            Cancelar
+          </ActionButton>
+          <ActionButton type="input" onClick={handleEdit} name={buttonText}>
+            {buttonText}
           </ActionButton>
           <ActionButton type="button" onClick={handleDelete}>
             Eliminar
@@ -138,28 +161,36 @@ function Answer({
         </ActionButtonCont>
       )}
 
-      <Comment sendButton={sendButton}>
+      <Comment>
         <UserPhoto
-          userPhoto={comment.user.photo}
-          userPoints={comment.user.points}
+          userPhoto={state.user.photo}
+          userPoints={state.user.points}
         />
         <InputComment validated={state.resolved}>
           <InputText
-            state={comment}
-            disabled={sendButton ? !sendButton : disableInput}
+            state={state}
+            disabled={disableInput}
             textPlaceholder={textPlaceholder}
-            onChangeCe={sendButton ? setAnswerData : setEditAnswer}
+            onChangeCe={setEditAnswer}
             flag={disabledInp}
             textEdit={editAnswer}
             focusInput={focusInput}
-            cleanInput={cleanInput}
           />
         </InputComment>
-
-        <Validated validated={state.resolved}>
-          {state.resolved ? <AiFillCheckSquare /> : null}
+        {/* {validatedAnswer.length !== 0 ? null : ( */}
+        <Validated
+          validated={state.resolved}
+          onClick={handleValidated}
+          disabled={validatedAnswer.length !== 0}
+        >
+          {currentUser.username === postUser.username ? (
+            currentUser.username === state.user.username ? null : (
+              <AiFillCheckSquare />
+            )
+          ) : null}
         </Validated>
-        {sendButton ? null : (
+        {/* )} */}
+        {currentUser.username === state.user.username ? (
           <MoreButton
             type="button"
             onClick={handleClickMore}
@@ -167,7 +198,7 @@ function Answer({
           >
             <AiOutlineEllipsis />
           </MoreButton>
-        )}
+        ) : null}
       </Comment>
     </CommentCont>
   );

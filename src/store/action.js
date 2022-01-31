@@ -1,4 +1,5 @@
 import {
+  LOAD_ONLY_POST,
   GET_ANSWERS,
   ADD_ANSWER,
   EDIT_ANSWER,
@@ -23,6 +24,10 @@ import axios from '../utils/axios';
 // action creators
 
 // Answer
+const loadOnlyPost = (post) => ({
+  type: LOAD_ONLY_POST,
+  payload: post,
+});
 const loadAnswer = (answers) => ({
   type: GET_ANSWERS,
   payload: answers,
@@ -102,8 +107,18 @@ const logOut = () => ({
   payload: false,
 });
 
-// Answer
-
+// Answer loadOnlyPost
+const getOnlyPost = (idPost) => async (dispatch) => {
+  try {
+    const response = await axios.get(`/api/post/onlyPost/${idPost}`);
+    const res = response.data;
+    // console.log(res);
+    dispatch(loadOnlyPost(res));
+    // console.log(res);
+  } catch (e) {
+    // console.log(e);
+  }
+};
 const getAllAnswers = (idPost) => async (dispatch) => {
   try {
     const response = await axios.get(`/api/answer/${idPost}`);
@@ -118,6 +133,7 @@ const addAnswerPost = (answerData, idPost) => async (dispatch) => {
   try {
     const response = await axios.post('/api/answer', answerData);
     dispatch(addAnswer(response));
+    // console.log(answers);
     dispatch(getAllAnswers(idPost));
   } catch (e) {
     // console.log(e);
@@ -340,6 +356,7 @@ const closeSession = (userName, userData) => async (dispatch) => {
 };
 
 export default {
+  getOnlyPost,
   getAllAnswers,
   addAnswerPost,
   editAnswerPut,

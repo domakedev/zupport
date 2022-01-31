@@ -7,7 +7,7 @@ import IconHeart from './IconHeart';
 import PostFooter from './PostFooter';
 import PostHeader from './PostHeader';
 import PostImage from './PostImage';
-import Answers from './Answers/Answers';
+// import Answers from './Answers/Answers';
 import action from '../../../../../store/action';
 
 const Option = styled.span`
@@ -27,6 +27,7 @@ const PostTemplteCont = styled.article`
   flex-direction: column;
   margin-top: 3rem;
   max-width: 625px;
+  min-width: 625px;
   @media screen and (min-width: 1024px) {
     border: 1px solid #79777052; //--dark-color
     border-radius: 2rem;
@@ -79,12 +80,15 @@ function PostTemplate({
   urlPost,
   authVer = false,
   idPost,
+  textComment, // props para el boton comentar (cambiará a Ver Comentarios)
   timePosted,
   isOnline,
+
 }) {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+  // dispatch(action.getAllAnswers(idPost));
 
   const goTo = async () => {
     // lo primero que haria seria setear un estado en el redux
@@ -167,8 +171,10 @@ function PostTemplate({
         ) : null}
       </ReactionContainer>
       <DividingLine />
-      <PostFooter likes={likes} idPost={idPost} />
-      <Answers />
+
+      <PostFooter likes={likes} idPost={idPost} textComment={textComment} />
+      {/* <Answers idPost={idPost} /> */}
+
     </PostTemplteCont>
   );
 }

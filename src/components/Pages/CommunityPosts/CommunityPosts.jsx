@@ -47,7 +47,7 @@ function CommunityPosts() {
   const [results, setResults] = useState([]);
 
   useEffect(async () => {
-    const idPost = '61e10b9749e4a27d593c6a95';
+    const idPost = '61e10b9749e4a27d593c6a95'; // '61e10b9749e4a27d593c6a95 61e1862cd149a9366f8bfe1d ';
     await dispatch(action.getAllPosts(idPost));
   }, []);
 
@@ -56,6 +56,7 @@ function CommunityPosts() {
   useEffect(async () => {
     setResults(comuPosts);
   }, [comuPosts]);
+  // console.log(comuPosts);
 
   return (
     <>
