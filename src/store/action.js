@@ -173,7 +173,7 @@ const getAllPosts = (idCom) => async (dispatch) => {
 
 const getPost = (idPost) => async (dispatch) => {
   try {
-    const response = await axios.get(`/api/post/unique/${idPost}`);
+    const response = await axios.get(`/api/post/onlyPost/${idPost}`);
     const res = response.data;
     dispatch(addPost(res));
   } catch (e) {

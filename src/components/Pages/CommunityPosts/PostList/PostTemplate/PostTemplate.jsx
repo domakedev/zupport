@@ -107,7 +107,7 @@ function PostTemplate({
       )
     );
     // Llevarme con navigate a la pagina de edicion
-    navigate(`/communities/help-post/${idPost}`);
+    navigate(`${idPost}`);
     // En la pagina de edicion del State debo leer todas las propiedades que necesito
   };
 

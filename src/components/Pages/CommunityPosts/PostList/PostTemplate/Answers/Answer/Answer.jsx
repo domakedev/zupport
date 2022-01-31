@@ -165,6 +165,7 @@ function Answer({
         <UserPhoto
           userPhoto={state.user.photo}
           userPoints={state.user.points}
+          isOnline={state.user.isOnline}
         />
         <InputComment validated={state.resolved}>
           <InputText

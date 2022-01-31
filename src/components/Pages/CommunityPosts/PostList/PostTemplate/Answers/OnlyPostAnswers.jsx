@@ -1,16 +1,18 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BsX } from 'react-icons/bs';
 import PostTemplate from '../PostTemplate';
 import Answers from './Answers';
+import Header from '../../../../../Layout/Header';
 import {
   getPostTime,
   softNumber,
 } from '../../../../../../controller/CommunityPostCtr/utilities';
-// import action from '../../../../../../store/action';
+
+import action from '../../../../../../store/action';
 
 const PostCont = styled.div`
   display: flex;
@@ -55,51 +57,63 @@ const Line = styled.hr`
   opacity: 0.3;
 `;
 function OnlyPostAnswers() {
-  const [post, setPost] = useState({});
-  const currentPost = useSelector((state) => state.loadOnlyPost);
+  const { idPost } = useParams();
+  // const [post, setPost] = useState({});
+  // const currentPost = useSelector((state) => state.loadOnlyPost);
   // console.log('currentt', currentPost);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    setPost(currentPost);
-  }, [currentPost]);
+  // useEffect(() => {
+  //   setPost(currentPost);
+  // }, [currentPost]);
   // console.log(!post, post);
   const handleClick = () => {
     // regresando a la página anterior
     navigate(-1);
   };
+
+  useEffect(async () => {
+    await dispatch(action.getPost(idPost));
+  }, []);
+  const post = useSelector((state) => state.addPost);
+
   return (
-    <PostCont>
-      <MainTitleContainer>
-        <MainTitle>Ver Detalle</MainTitle>
-        <GoBack type="button" onClick={handleClick}>
-          <BsX />
-        </GoBack>
-      </MainTitleContainer>
+    <>
+      <Header />
+      <PostCont>
+        <MainTitleContainer>
+          <MainTitle>Ver Detalle</MainTitle>
+          <GoBack type="button" onClick={handleClick}>
+            <BsX />
+          </GoBack>
+        </MainTitleContainer>
 
-      <Line />
+        <Line />
 
-      {Object.entries(post).length === 0 ? (
-        <h1>cargando</h1>
-      ) : (
-        <div>
-          <PostTemplate
-            userPhoto={post.user.photo === null ? '' : post.user.photo}
-            userName={post.user.username}
-            timePost={getPostTime(post.timePosted)}
-            postTitle={post.title}
-            postDescription={post.description}
-            points={softNumber(post.points)}
-            userPoints={post.userPoints}
-            resolved={post.resolved}
-            likes={softNumber(post.likes)}
-            urlPost={post.image}
-            idPost={post._id}
-          />
-          <Answers idPost={post._id} postUser={post.user} />
-        </div>
-      )}
-    </PostCont>
+        {Object.entries(post).length === 0 ? (
+          <h1>cargando</h1>
+        ) : (
+          <div>
+            <PostTemplate
+              userPhoto={post.user.photo === null ? '' : post.user.photo}
+              userName={post.user.username}
+              timePost={getPostTime(post.timePosted)}
+              postTitle={post.title}
+              postDescription={post.description}
+              points={softNumber(post.points)}
+              userPoints={post.userPoints}
+              resolved={post.resolved}
+              likes={softNumber(post.likes)}
+              urlPost={post.image}
+              idPost={post._id}
+              isOnline={post.user.isOnline}
+            />
+            <Answers idPost={post._id} postUser={post.user} />
+          </div>
+        )}
+      </PostCont>
+    </>
   );
 }
 

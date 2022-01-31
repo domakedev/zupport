@@ -100,7 +100,7 @@ function PostFooter({ idPost, textComment, likes }) {
     // Si el boton en su name está en Ver Respuestas , llevará a otra pagina con el id del post
     if (e.target.name === 'Ver Respuestas') {
       navigate(`${idPost}`);
-      await dispatch(action.getOnlyPost(idPost));
+      // await dispatch(action.getOnlyPost(idPost));
     } else {
       setResponder(!responder);
     }
@@ -111,7 +111,7 @@ function PostFooter({ idPost, textComment, likes }) {
       action.addAnswerPost(
         {
           answer: answerData,
-          user: currentUser._id,
+          // user: currentUser.username,
           likes: 0,
           post: idPost,
           resolved: false,
