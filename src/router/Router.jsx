@@ -14,6 +14,7 @@ import Login from '../components/Pages/Login/Login';
 import Register from '../components/Pages/Register/Register';
 import Verify from '../components/Pages/Register/Verify';
 import P404 from '../components/Pages/404/P404';
+import UniquePost from '../components/Pages/UniquePost/UniquePost';
 
 function Router() {
   return (
@@ -34,6 +35,7 @@ function Router() {
       />
 
       <Route path="/communities/help-post" element={<HelpPost />} />
+      <Route path="/communities/help-post/:id" element={<UniquePost />} />
 
       <Route path="/communities/edit-help-post" element={<EditHelpPost />} />
 

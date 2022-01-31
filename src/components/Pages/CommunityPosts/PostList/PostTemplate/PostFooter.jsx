@@ -62,7 +62,7 @@ const InputBox = styled.input`
     box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
   }
 `;
-function PostFooter() {
+function PostFooter({ idPost, likes }) {
   const [responder, setResponder] = useState();
   const [answerData, setAnswerData] = useState();
   // const [cleanInput, setCleanInput] = useState(false);
@@ -104,7 +104,7 @@ function PostFooter() {
   return (
     <>
       <PostFooterContainer>
-        <LikeButtonPost />
+        <LikeButtonPost likes={likes} idPost={idPost} />
         <CommentButtonPost responderFn={onClickHandle} />
       </PostFooterContainer>
       <ResponderAnimated>

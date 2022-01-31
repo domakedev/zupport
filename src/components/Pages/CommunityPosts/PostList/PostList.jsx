@@ -1,5 +1,6 @@
 // import { useState, useEffect } from "react";
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import PostTemplate from './PostTemplate/PostTemplate';
 // import axios from "../../../../utils/axios.js"
 
@@ -20,6 +21,7 @@ const PostListCont = styled.div`
 `;
 
 function PostList({ results }) {
+  const currentUser = useSelector((state) => state.currentUserOTokencito);
   return (
     <PostListCont>
       {results?.map(
@@ -45,14 +47,20 @@ function PostList({ results }) {
             userPhoto={user.photo === null ? '' : user.photo}
             userName={user.username}
             timePost={getPostTime(timePosted)}
+            timePosted={timePosted}
             postTitle={title}
             postDescription={description}
             points={softNumber(points)}
             userPoints={userPoints}
             resolved={resolved}
-            likes={softNumber(likes)}
+            likes={likes}
             urlPost={image}
             idPost={_id}
+            authVer={
+              currentUser.username === user.username ||
+              currentUser.role === 'admin'
+            }
+            isOnline={user.isOnline}
           />
         )
       )}

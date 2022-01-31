@@ -1,8 +1,10 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import styled, { css } from 'styled-components';
 import { IconContext } from 'react-icons';
-import { IoHeartCircle } from 'react-icons/io5';
+import { IoHeartCircle, IoHeartDislikeCircle } from 'react-icons/io5';
+import { useDispatch, useSelector } from 'react-redux';
+import actions from '../../../../../../store/action';
 
 const IconHeartContainer = styled('button')(
   () => css`
@@ -20,7 +22,7 @@ const IconHeartContainer = styled('button')(
       width: 2.5rem;
       height: 2.5rem;
       margin-top: 4px;
-      stroke-width: 3rem;
+      stroke-width: 2rem;
       stroke: var(--boring-color);
     }
   `
@@ -34,21 +36,45 @@ const IconText = styled.p`
   margin-left: 2px;
 `;
 
-function LikeButtonPost() {
-  const [count, setCount] = useState(0);
-  const handleOnclick = () => {
-    // eslint-disable-next-line
-    // console.log(count);
-    setCount(count + 1);
+function LikeButtonPost({ idPost, likes }) {
+  const dispatch = useDispatch();
+  const User = useSelector((state) => state.currentUserOTokencito);
+
+  const [liked, setLiked] = useState(likes?.includes(User.username));
+
+  useEffect(() => {}, [liked]);
+
+  const handleOnclick = async () => {
+    if (!likes.includes(User.username)) {
+      likes.push(User.username);
+      await dispatch(actions.likedPost(idPost, { likes }));
+      setLiked(true);
+    }
+  };
+
+  const handleOnClick2 = async () => {
+    if (likes.includes(User.username)) {
+      const i = likes.indexOf(User.username);
+      likes.splice(i, 1);
+      await dispatch(actions.likedPost(idPost, { likes }));
+      setLiked(false);
+    }
   };
   const value = useMemo(() => ({ className: 'icon-heart' }));
   return (
-    <IconHeartContainer onClick={handleOnclick}>
-      <IconContext.Provider value={value}>
-        <IoHeartCircle />
-      </IconContext.Provider>
-      <IconText>Te apoyo</IconText>
-    </IconHeartContainer>
+    <IconContext.Provider value={value}>
+      {liked ? (
+        <IconHeartContainer onClick={handleOnClick2}>
+          <IoHeartDislikeCircle />
+          <IconText>Apoyado</IconText>
+        </IconHeartContainer>
+      ) : (
+        <IconHeartContainer onClick={handleOnclick}>
+          <IoHeartCircle />
+          <IconText>Te Apoyo</IconText>
+        </IconHeartContainer>
+      )}
+    </IconContext.Provider>
   );
 }
 

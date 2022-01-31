@@ -64,7 +64,6 @@ const AlertAuth = styled('p')(
 function Login() {
   const errorAuth = useSelector((state) => state.errorLogin);
   const spinning = useSelector((state) => state.spinningLoading);
-
   return (
     <SuperContainer>
       <Header />
