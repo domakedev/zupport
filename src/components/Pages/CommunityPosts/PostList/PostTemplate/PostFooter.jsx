@@ -64,10 +64,12 @@ const InputBox = styled.input`
     box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
   }
 `;
-function PostFooter({ idPost, textComment }) {
+
+function PostFooter({ idPost, textComment, likes }) {
   const [responder, setResponder] = useState(false);
   const navigate = useNavigate();
   const [answerData, setAnswerData] = useState('');
+
   // const [cleanInput, setCleanInput] = useState(false);
   // obteniendo al usuario actual para crear el comentario
   const currentUser = useSelector((state) => state.currentUserOTokencito);
@@ -125,8 +127,10 @@ function PostFooter({ idPost, textComment }) {
   return (
     <>
       <PostFooterContainer>
-        <LikeButtonPost />
+
+        <LikeButtonPost likes={likes} idPost={idPost} />
         <CommentButtonPost responderFn={onClickHandle} text={textComment} />
+
       </PostFooterContainer>
       <ResponderAnimated>
         {responder ? (

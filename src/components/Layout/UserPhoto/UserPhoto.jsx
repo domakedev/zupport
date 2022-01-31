@@ -59,7 +59,17 @@ const Photo = styled('img')(
     border-radius: 50%;
     object-fit: cover;
     object-position: center center;
-    border: 3px solid var(--sucess-color); //el color cambiara a --alert-color si está activo
+    /* border: 3px solid var(--sucess-color); //el color cambiara a --alert-color si está activo */
+    ${(props) =>
+      props.isOnline === true &&
+      css`
+        outline: 4px solid var(--sucess-color) !important;
+      `}
+    ${(props) =>
+      props.isOnline === false &&
+      css`
+        outline: 2px solid var(--boring-color) !important;
+      `}
   `
 );
 
@@ -84,6 +94,7 @@ function UserPhoto({
   user,
   selected = false,
   deleteUserSelected,
+  isOnline = false,
 }) {
   const value = useMemo(() => ({ className: 'icon-crow' }));
   return (
@@ -94,6 +105,7 @@ function UserPhoto({
 
       <PhotoContainer>
         <Photo
+          isOnline={isOnline}
           src={!userPhoto ? defaultPhoto : userPhoto}
           alt={!user?.fullname ? 'userPhoto' : user?.fullname}
         />

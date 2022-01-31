@@ -12,7 +12,9 @@ import {
   REGISTER_USER,
   VERIFY_USER,
   // AUTHENTICATE_USER,
+  MODIFY_USER,
   OBTENER_USER,
+  GET_USERS,
   ERROR_TOKEN,
   SET_SPINNING,
   LOGOUT,
@@ -76,7 +78,19 @@ const obtainUserType = (user) => ({
   type: OBTENER_USER,
   payload: user,
 });
+const loadUsers = (users) => ({
+  type: GET_USERS,
+  payload: users,
+});
+const updateUser = (user) => ({
+  type: MODIFY_USER,
+  payload: user,
+});
 const verifyUser = (user) => ({
+  type: VERIFY_USER,
+  payload: user,
+});
+const logingUser = (user) => ({
   type: VERIFY_USER,
   payload: user,
 });
@@ -157,10 +171,20 @@ const getAllPosts = (idCom) => async (dispatch) => {
   }
 };
 
+const getPost = (idPost) => async (dispatch) => {
+  try {
+    const response = await axios.get(`/api/post/unique/${idPost}`);
+    const res = response.data;
+    dispatch(addPost(res));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
 const addedPost = (postData) => async (dispatch) => {
   try {
     const response = await axios.post('/api/post', postData);
-    dispatch(addPost(response));
+    dispatch(addPost(response.data));
   } catch (e) {
     // console.log(e);
   }
@@ -169,14 +193,36 @@ const addedPost = (postData) => async (dispatch) => {
 const editedPost = (idPost, postData) => async (dispatch) => {
   try {
     const response = await axios.put(`/api/post/${idPost}`, postData);
-    dispatch(editPost(response));
+    dispatch(editPost(response.data));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const likedPost = (idPost, postData) => async (dispatch) => {
+  try {
+    const response = await axios.put(`/api/post/like/${idPost}`, postData);
+    dispatch(editPost(response.data));
   } catch (e) {
     // console.log(e);
   }
 };
 
 const loadEditedPost =
-  (postTitle, postDescription, points, idPost, urlPost) => async (dispatch) => {
+  (
+    userPhoto,
+    userName,
+    timePosted,
+    postTitle,
+    postDescription,
+    points,
+    userPoints,
+    resolved,
+    likes,
+    urlPost,
+    idPost
+  ) =>
+  async (dispatch) => {
     try {
       dispatch(
         loadEditPost({
@@ -185,6 +231,14 @@ const loadEditedPost =
           points,
           _id: idPost,
           image: urlPost,
+          timePosted,
+          resolved,
+          likes,
+          user: {
+            username: userName,
+            photo: userPhoto,
+            points: userPoints,
+          },
         })
       );
     } catch (e) {
@@ -227,13 +281,32 @@ const obtainUser = () => async (dispatch) => {
   }
 };
 
+const getAllUsers = () => async (dispatch) => {
+  try {
+    const response = await axios.get('/api/users/');
+    const res = response.data;
+    dispatch(loadUsers(res));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const updatedUser = (userName, userData) => async (dispatch) => {
+  try {
+    const response = await axios.put(`/api/users/name/${userName}`, userData);
+    dispatch(updateUser(response));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
 const registerUser = (user) => async (dispatch) => {
   try {
     // Backend
     const response = await axios.post('/api/users', user);
 
     // FrontEnd
-    await dispatch(createUser(response.data.tokencito));
+    await dispatch(createUser(response.data));
 
     // Obtener usuario del token
     // dispatch(obtainUser());
@@ -263,9 +336,8 @@ const setTheSpinner = (spinning) => async (dispatch) => {
 const loginUser = (datos) => async (dispatch) => {
   try {
     const respuesta = await axios.post('/auth/local/login', datos);
-
     // FrontEnd
-    await dispatch(createUser(respuesta.data.token));
+    await dispatch(logingUser(respuesta.data.token));
 
     dispatch(obtainUser());
   } catch (error) {
@@ -273,8 +345,9 @@ const loginUser = (datos) => async (dispatch) => {
   }
 };
 
-const closeSession = () => async (dispatch) => {
+const closeSession = (userName, userData) => async (dispatch) => {
   try {
+    await updatedUser(userName, userData)();
     dispatch(logOut());
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -289,14 +362,18 @@ export default {
   editAnswerPut,
   deletedAnswer,
   getAllPosts,
+  getPost,
   addedPost,
   loadEditedPost,
   editedPost,
+  likedPost,
   deletedPost,
   loginUser,
   registerUser,
   validateUser,
+  updatedUser,
   obtainUser,
+  getAllUsers,
   setTheSpinner,
   closeSession,
 };

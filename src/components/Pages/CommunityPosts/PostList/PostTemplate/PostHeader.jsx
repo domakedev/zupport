@@ -20,7 +20,9 @@ const UserProfileCont = styled.div`
   align-items: center;
 `;
 
-const PostDateCont = styled.div``;
+const PostDateCont = styled.div`
+  padding-left: 10px;
+`;
 const PostUserName = styled.h3`
   color: var(--dark-color);
   font-size: var(--secondarey-font-size);
@@ -66,11 +68,16 @@ function PostHeader({
   points,
   userPoints,
   resolved,
+  isOnline,
 }) {
   return (
     <PostHeaderCont resolved={resolved}>
       <UserProfileCont>
-        <UserPhoto userPhoto={userPhoto} userPoints={userPoints} />
+        <UserPhoto
+          isOnline={isOnline}
+          userPhoto={userPhoto}
+          userPoints={userPoints}
+        />
         <PostDateCont>
           <PostUserName>{userName}</PostUserName>
           <PostTime>{timePost}</PostTime>

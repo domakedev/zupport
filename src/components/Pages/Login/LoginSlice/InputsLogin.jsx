@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import actions from '../../../../store/action';
@@ -26,13 +26,14 @@ function InputsLogin() {
   const navigate = useNavigate();
   const [password, changePassword] = useState({ field: '', check: null });
   const [email, changeEmail] = useState({ field: '', check: null });
+  const isAuth = useSelector((state) => state.userAuthenticated);
 
   const parameters = {
     password: /^.{4,12}$/, // 4 a 12 digitos.
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
   };
 
-  const EnviarDataLogin = (e) => {
+  const EnviarDataLogin = async (e) => {
     e.preventDefault();
     dispatch(actions.setTheSpinner(true));
     const data = {
@@ -41,9 +42,14 @@ function InputsLogin() {
     };
 
     // Enviar data del login en un POST
-    dispatch(actions.loginUser(data));
-    navigate('/communities');
+    await dispatch(actions.loginUser(data));
   };
+
+  useEffect(async () => {
+    if ((await isAuth) === true) {
+      navigate('/communities');
+    }
+  }, [isAuth]);
 
   return (
     <ContainerInputsLogin>

@@ -43,6 +43,7 @@ const PostTitle = styled.h3`
   font-size: 2.5rem;
   font-family: var(--secondary-font);
   font-weight: normal;
+  cursor: pointer;
 `;
 const PostDescription = styled.p`
   color: rgba(0, 0, 0, 0.55);
@@ -61,6 +62,10 @@ const ReactionContainer = styled.div`
   align-items: center;
 `;
 
+const DontShow = styled.div`
+  display: none;
+`;
+
 function PostTemplate({
   ban,
   userPhoto,
@@ -73,19 +78,56 @@ function PostTemplate({
   resolved,
   likes,
   urlPost,
-  authVer = true,
+  authVer = false,
   idPost,
   textComment, // props para el boton comentar (cambiará a Ver Comentarios)
+  timePosted,
+  isOnline,
+
 }) {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
   // dispatch(action.getAllAnswers(idPost));
 
+  const goTo = async () => {
+    // lo primero que haria seria setear un estado en el redux
+    await dispatch(
+      action.loadEditedPost(
+        userPhoto,
+        userName,
+        timePosted,
+        postTitle,
+        postDescription,
+        points,
+        userPoints,
+        resolved,
+        likes,
+        urlPost,
+        idPost
+      )
+    );
+    // Llevarme con navigate a la pagina de edicion
+    navigate(`/communities/help-post/${idPost}`);
+    // En la pagina de edicion del State debo leer todas las propiedades que necesito
+  };
+
   const editPost = async () => {
     // lo primero que haria seria setear un estado en el redux
     await dispatch(
-      action.loadEditedPost(postTitle, postDescription, points, idPost, urlPost)
+      action.loadEditedPost(
+        userPhoto,
+        userName,
+        timePosted,
+        postTitle,
+        postDescription,
+        points,
+        userPoints,
+        resolved,
+        likes,
+        urlPost,
+        idPost
+      )
     );
     // Llevarme con navigate a la pagina de edicion
     navigate('/communities/edit-help-post');
@@ -102,7 +144,10 @@ function PostTemplate({
   };
   return (
     <PostTemplteCont>
+      <DontShow>{timePosted}</DontShow>
       <PostHeader
+        isOnline={isOnline}
+        onClick={goTo}
         userPhoto={userPhoto}
         userName={userName}
         timePost={timePost}
@@ -112,7 +157,7 @@ function PostTemplate({
       />
       <DividingLine />
       <PostContainer>
-        <PostTitle>{postTitle}</PostTitle>
+        <PostTitle onClick={goTo}>{postTitle}</PostTitle>
         <PostDescription>{postDescription}</PostDescription>
       </PostContainer>
       <PostImage ban={ban} urlPost={urlPost} />
@@ -126,8 +171,10 @@ function PostTemplate({
         ) : null}
       </ReactionContainer>
       <DividingLine />
-      <PostFooter idPost={idPost} textComment={textComment} />
+
+      <PostFooter likes={likes} idPost={idPost} textComment={textComment} />
       {/* <Answers idPost={idPost} /> */}
+
     </PostTemplteCont>
   );
 }

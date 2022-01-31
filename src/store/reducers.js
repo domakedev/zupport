@@ -14,7 +14,9 @@ import {
   DELETE_POST,
   AUTHENTICATE_USER,
   VERIFY_USER,
+  MODIFY_USER,
   REGISTER_USER,
+  GET_USERS,
   OBTENER_USER,
   ERROR_TOKEN,
   SET_SPINNING,
@@ -32,6 +34,7 @@ const initialState = {
   editPost: {},
   deletePost: {},
   currentUser: {},
+  users: [],
   userAuthenticated: false,
   currentUserOTokencito: {},
   errorLogin: false,
@@ -66,18 +69,17 @@ const reducer = (state = initialState, action) => {
 
     // Auth: Register and Login
     case REGISTER_USER:
-      localStorage.setItem('tokencitox', newValue);
       return { ...state, currentUser: newValue };
     case VERIFY_USER:
       localStorage.setItem('tokencitox', newValue);
-      return { ...state, currentUser: newValue };
+      return { ...state };
     case AUTHENTICATE_USER:
       localStorage.setItem('tokencitox', newValue);
       return {
         ...state,
         userAuthenticated: true,
       };
-
+    case MODIFY_USER:
     case OBTENER_USER:
       return {
         ...state,
@@ -85,7 +87,8 @@ const reducer = (state = initialState, action) => {
         userAuthenticated: true,
         spinningLoading: false,
       };
-
+    case GET_USERS:
+      return { ...state, users: newValue };
     case ERROR_TOKEN:
       return {
         ...state,

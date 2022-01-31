@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { IconContext } from 'react-icons';
 
@@ -13,7 +13,6 @@ import {
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import actions from '../../../store/action';
-import Profile from '../../../images/ProfileP.png';
 
 const List = styled.ul`
   list-style: none;
@@ -52,8 +51,9 @@ const ListItem = styled.li`
 const ProfileMenuImg = styled.img`
   width: 50px;
   height: 50px;
-  border-radius: 90px;
+  border-radius: 25px;
   margin: 10px;
+  object-fit: cover;
 `;
 
 const Icon = styled.div`
@@ -63,11 +63,12 @@ const Icon = styled.div`
 function ProfileMenu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.currentUserOTokencito);
   const value = useMemo(() => ({ className: 'Iconos' }));
   return (
     <List>
       <ListItem>
-        <ProfileMenuImg src={Profile} alt="Imagen de Perfil" />
+        <ProfileMenuImg src={currentUser.photo} alt="Imagen de Perfil" />
         <a href="/profile"> Perfil</a>
       </ListItem>
       <IconContext.Provider value={value}>
@@ -95,8 +96,10 @@ function ProfileMenu() {
           </Icon>
           <button
             type="button"
-            onClick={() => {
-              dispatch(actions.closeSession());
+            onClick={async () => {
+              await dispatch(
+                actions.closeSession(currentUser.username, { isOnline: false })
+              );
               navigate('/');
             }}
           >
