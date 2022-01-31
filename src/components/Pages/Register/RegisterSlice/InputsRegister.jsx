@@ -121,8 +121,6 @@ function InputsRegister() {
         username: user.field,
         email: email.field,
         password: password.field,
-        photo: password2.field,
-        points: 0,
       };
       // Con redux
       dispatch(actions.registerUser(newUser));

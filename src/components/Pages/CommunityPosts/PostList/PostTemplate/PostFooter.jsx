@@ -1,6 +1,8 @@
-import { useState } from 'react';
+/* eslint-disable no-underscore-dangle */
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { IoSend } from 'react-icons/io5';
 import LikeButtonPost from './AcctioPost/LikeButton';
 import CommentButtonPost from './AcctioPost/CommentButton';
@@ -62,37 +64,59 @@ const InputBox = styled.input`
     box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
   }
 `;
-function PostFooter() {
-  const [responder, setResponder] = useState();
-  const [answerData, setAnswerData] = useState();
+
+function PostFooter({ idPost, textComment, likes }) {
+  const [responder, setResponder] = useState(false);
+  const navigate = useNavigate();
+  const [answerData, setAnswerData] = useState('');
+
   // const [cleanInput, setCleanInput] = useState(false);
+  // obteniendo al usuario actual para crear el comentario
+  const currentUser = useSelector((state) => state.currentUserOTokencito);
+  // console.log(currentUser, idPost, currentUser.points);
+  // console.log(currentUser);
 
+  // Se hace un set de los datos del post
+
+  // const currentPost = useSelector((state) => state);
   const dispatch = useDispatch();
+  // const dataUser = {
+  //   user: {
+  //     photo:
+  //       'https://media.istockphoto.com/photos/machu-picchu-peru-picture-id930824730?k=20&m=930824730&s=612x612&w=0&h=Lvzgs0qL32lHBuvFMVg3hotXpE1t0mJpqqrK-ajDzIc=',
+  //     points: 5430,
+  //     username: 'domakedev',
+  //     id: '61eb5ea6345f4538ebf11cd0',
+  //     post: '61e09c7fb35c71052690ec67',
+  //   },
+  // };
+  useEffect(async () => {
+    // dispatch(action.getOnlyPost(idPost));
+  }, []);
 
-  const dataUser = {
-    user: {
-      photo:
-        'https://media.istockphoto.com/photos/machu-picchu-peru-picture-id930824730?k=20&m=930824730&s=612x612&w=0&h=Lvzgs0qL32lHBuvFMVg3hotXpE1t0mJpqqrK-ajDzIc=',
-      points: 5430,
-      username: 'domakedev',
-      id: '61eb5ea6345f4538ebf11cd0',
-      post: '61e09c7fb35c71052690ec67',
-    },
+  const onClickHandle = async (e) => {
+    e.preventDefault();
+    // dispatch(action.getOnlyPost(idPost))
+    // Si el boton en su name está en Ver Respuestas , llevará a otra pagina con el id del post
+    if (e.target.name === 'Ver Respuestas') {
+      navigate(`${idPost}`);
+      // await dispatch(action.getOnlyPost(idPost));
+    } else {
+      setResponder(!responder);
+    }
   };
-  const onClickHandle = () => {
-    setResponder(!responder);
-  };
+  // console.log('posfooter');
   const handleClick = () => {
     dispatch(
       action.addAnswerPost(
         {
           answer: answerData,
-          user: dataUser.user.id,
+          // user: currentUser.username,
           likes: 0,
-          post: dataUser.user.post,
+          post: idPost,
           resolved: false,
         },
-        '61e09c7fb35c71052690ec67'
+        idPost
       )
     );
     setAnswerData('');
@@ -104,15 +128,15 @@ function PostFooter() {
   return (
     <>
       <PostFooterContainer>
-        <LikeButtonPost />
-        <CommentButtonPost responderFn={onClickHandle} />
+        <LikeButtonPost likes={likes} idPost={idPost} />
+        <CommentButtonPost responderFn={onClickHandle} text={textComment} />
       </PostFooterContainer>
       <ResponderAnimated>
         {responder ? (
           <AddAnswerCont>
             <UserPhoto
-              userPhoto={dataUser.user.photo}
-              userPoints={dataUser.user.points}
+              userPhoto={currentUser.photo}
+              userPoints={currentUser.points}
             />{' '}
             <InputBox
               type="text"
@@ -120,13 +144,6 @@ function PostFooter() {
               value={answerData}
               onChange={onChange}
             />
-            {/* <Answer
-              state={dataUser}
-              textPlaceholder="Escribe tu respuesta aquí..."
-              setAnswerData={setAnswerData}
-              sendButton={responder}
-              cleanInput={cleanInput}
-            /> */}
             <ButtonSend type="button" onClick={handleClick}>
               <IoSend />
             </ButtonSend>

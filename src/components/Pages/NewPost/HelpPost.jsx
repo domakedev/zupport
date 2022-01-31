@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   BsImages,
   BsFolder2Open,
@@ -22,10 +22,12 @@ import {
   BsTable,
 } from 'react-icons/bs';
 // Import redux
-import { useDispatch } from 'react-redux';
+
+import { useDispatch, useSelector } from 'react-redux';
 import action from '../../../store/action';
+import axios from '../../../utils/axios';
 // import Context
-import { useStateAuth } from '../../../context/Auth/AuthContext';
+// import { useStateAuth } from '../../../context/Auth/AuthContext';
 // Import Layout Components
 import Header from '../../Layout/Header';
 import Footer from '../../Layout/Footer';
@@ -33,7 +35,7 @@ import Footer from '../../Layout/Footer';
 import InputTitle from './Components/InputTitle';
 import InputPost from './Components/InputPost';
 import InputPoints from './Components/InputPoints';
-import InputUpload from './Components/InputUpload';
+// import InputUpload from './Components/InputUpload';
 // Import Search and selection components
 import GUsers from './GUsers';
 import UserFoto from '../../Layout/UserPhoto/UserPhoto';
@@ -47,7 +49,7 @@ function HelpPost() {
   // Resultados de la busqueda u orden, luego se imprimen
   // en pantalla
   const [results, setResults] = useState([]);
-  const [imageUrl, setImageUrl] = useState('');
+  const [file, setFile] = useState(null);
   const [uploaderShow, setUploaderShow] = useState(false);
   const [titlest, changeTitle] = useState({ field: '', check: null });
   const [descriptionst, changeDescription] = useState({
@@ -55,7 +57,7 @@ function HelpPost() {
     check: null,
   });
   const [pointsst, changePoints] = useState({ field: '', check: null });
-  const { bringUsers } = useStateAuth();
+  // const { bringUsers } = useStateAuth();
   // Parametros de validacion en frontEnd
   const parameters = {
     title: /^.{10,50}$/, // 10 a 50 caracteres.
@@ -63,27 +65,33 @@ function HelpPost() {
     points: /^[0-9]{1,4}$/, // Maximo 9999 puntos
   };
 
-  useEffect(() => {
-    const allUsers = async () => {
-      try {
-        const resultado = await bringUsers();
-        // eslint-disable-next-line
-        console.log('allforone', resultado.data);
-        setUsers(resultado.data);
-        setResults(resultado.data);
-      } catch (error) {
-        // eslint-disable-next-line
-        console.log(error);
-      }
-    };
-    allUsers();
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const onChangeFile = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  useEffect(async () => {
+    await dispatch(action.getAllUsers());
   }, []);
+
+  const usuarios = useSelector((state) => state.users);
+
+  useEffect(async () => {
+    setUsers(usuarios);
+    setResults(usuarios);
+  }, [usuarios]);
+
+  const [userNames, setUserNames] = useState([]);
 
   const selectUser = (u) => {
     if (usersSelected.includes(u)) {
       return;
     }
     setUsersSelected([...usersSelected, u]);
+    setUserNames([...userNames, u.username]);
   };
 
   const deleteUserSelected = (userToDelete) => {
@@ -93,37 +101,49 @@ function HelpPost() {
       // eslint-disable-next-line
       (u) => u.username !== userToDelete.username
     );
+    const beforeDeleteUN = userNames.filter(
+      // eslint-disable-next-line
+      (u) => u !== userToDelete.username
+    );
+    setUserNames(beforeDeleteUN);
     setUsersSelected(beforeDelete);
   };
 
-  const dispatch = useDispatch();
-
-  const navigate = useNavigate();
-
   const addPost = async () => {
+    let urltemp = '';
+    if (file !== null) {
+      const formData = new FormData();
+      formData.append('file', file);
+      const result = await axios.post('/api/uploads/file', formData);
+      const { url } = result.data;
+      urltemp = url;
+    }
+
     await dispatch(
       action.addedPost({
         title: titlest.field,
         description: descriptionst.field,
-        image: imageUrl,
-        likes: 0,
+        image: urltemp,
+        likes: [],
         points: pointsst.field,
-        user: '61eb5ea6345f4538ebf11cd0',
-        taggedUsers: [],
+        taggedUsers: userNames,
         community: '61e10b9749e4a27d593c6a95',
         resolved: false,
       })
     );
-    navigate('/communities/NodeJs/posts');
+    navigate(-1);
   };
 
+  const goBack = () => {
+    navigate(-1);
+  };
   return (
     <>
       <Header />
 
       <MainTitleContainer>
         <MainTitle>Crear Pregunta</MainTitle>
-        <GoBack to="/communities/community-posts">
+        <GoBack onClick={goBack}>
           <BsX />
         </GoBack>
       </MainTitleContainer>
@@ -169,7 +189,16 @@ function HelpPost() {
           errorText="La descripción debe poseer de 10 a 1300 caracteres."
           inputParameters={parameters.description}
         />
-        {uploaderShow ? <InputUpload setState={setImageUrl} /> : null}
+        {uploaderShow ? (
+          <Input
+            type="file"
+            name="file"
+            id="file"
+            onChange={onChangeFile}
+            accept="image/*"
+            multiple
+          />
+        ) : null}
         <AddContainer>
           <AddSecondaryContainer onClick={() => setUploaderShow(!uploaderShow)}>
             <BsImages /> Añadir imagenes
@@ -192,12 +221,13 @@ function HelpPost() {
             {usersSelected?.map((u) => (
               <UserFoto
                 // eslint-disable-next-line
-                key={u._id}
+                key={`${u.photo}02${u.points}`}
                 user={u}
                 userPhoto={u.photo}
                 userPoints={u.points}
                 selectUser={selectUser}
                 selected
+                isOnline={u.isOnline}
                 deleteUserSelected={deleteUserSelected}
               />
             ))}
@@ -211,12 +241,13 @@ function HelpPost() {
             {results?.map((u) => (
               <UserFoto
                 // eslint-disable-next-line
-                key={u._id}
+                key={`${u.photo}02${u.fullname}`}
                 user={u}
                 userPhoto={u.photo}
                 alt={u.fullname}
                 userPoints={u.points}
                 selectUser={selectUser}
+                isOnline={u.isOnline}
               />
             ))}
           </HelpersContainer>
@@ -252,6 +283,30 @@ function HelpPost() {
   );
 }
 
+const Input = styled.input`
+  width: min-content;
+  font-family: var(--secondary-font);
+  font-size: 1.8rem;
+  margin-top: 20px;
+
+  ::-webkit-file-upload-button {
+    width: 130px;
+    height: 30px;
+    background-color: var(--principal-color);
+    border-radius: 3px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 2px 0 var(--boring-color);
+    text-align: center;
+    font-family: var(--secondary-font);
+    font-size: 1.8rem;
+    color: var(--light-color);
+    text-decoration: none;
+    border: none;
+  }
+`;
+
 const MainTitleContainer = styled.div`
   padding: 2rem 0 1rem 0;
   display: flex;
@@ -267,7 +322,7 @@ const MainTitle = styled.h1`
   font-size: 2.5rem;
 `;
 
-const GoBack = styled(Link)`
+const GoBack = styled.div`
   color: var(--boring-color);
   padding-left: 100px;
   font-size: 3rem;
@@ -342,9 +397,15 @@ const AddHelperContainerTitle = styled.div`
 
 const HelpersContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
   gap: 10px;
   margin-top: 15px;
-  max-height: 150px;
+  padding: 20px;
+  width: 80%;
+  min-height: 60px;
+  max-height: 120px;
   overflow-y: scroll;
 `;
 

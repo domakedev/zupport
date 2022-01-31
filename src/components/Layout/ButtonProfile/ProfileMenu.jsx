@@ -51,7 +51,7 @@ const ListItem = styled.li`
 const ProfileMenuImg = styled.img`
   width: 50px;
   height: 50px;
-  border-radius: 90px;
+  border-radius: 25px;
   margin: 10px;
   object-fit: cover;
   object-position: center center;
@@ -64,6 +64,7 @@ const Icon = styled.div`
 function ProfileMenu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const authenticateUser = useSelector((state) => state.currentUserOTokencito);
 
   const value = useMemo(() => ({ className: 'Iconos' }));
@@ -77,6 +78,7 @@ function ProfileMenu() {
         <ProfileMenuImg src={authenticateUser?.photo} alt="Imagen de Perfil" />
         {/* <Link to="/profile"> Perfil</Link> */}
         <Link to={`/profile/${authenticateUser?.username}`}> Perfil</Link>
+
       </ListItem>
 
       <IconContext.Provider value={value}>
@@ -104,8 +106,10 @@ function ProfileMenu() {
           </Icon>
           <button
             type="button"
-            onClick={() => {
-              dispatch(actions.closeSession());
+            onClick={async () => {
+              await dispatch(
+                actions.closeSession(authenticateUser.username, { isOnline: false })
+              );
               navigate('/');
             }}
           >

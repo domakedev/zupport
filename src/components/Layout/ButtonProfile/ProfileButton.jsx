@@ -34,11 +34,12 @@ const MainButton = styled.button`
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   }
   & img {
-    border-radius: 90px;
+    border-radius: 20px;
     width: 40px;
     height: 40px;
     object-fit: cover;
     object-position: center center;
+
   }
   & span {
     vertical-align: middle;
@@ -88,8 +89,10 @@ function DropdownMenu() {
   return (
     <MainContainer>
       <MainButton onClick={onClick}>
+
         <img src={currentUser?.photo} alt={currentUser?.username} />
         <span>{currentUser?.fullname.split(' ')[0]}</span>
+
         <IconContext.Provider value={value}>
           <MdOutlineKeyboardArrowDown />
         </IconContext.Provider>

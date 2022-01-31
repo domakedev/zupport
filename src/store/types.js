@@ -2,6 +2,8 @@
 export const SHOW_LOADING = 'SHOW_LOADING';
 
 // Answer types
+// se crea un tipo para poder cargar un estado de un post
+export const LOAD_ONLY_POST = 'LOAD_ONLY_POST';
 export const GET_ANSWERS = 'GET_ANSWERS';
 export const ADD_ANSWER = 'ADD_ANSWER';
 export const EDIT_ANSWER = 'EDIT_ANSWER';
@@ -21,8 +23,10 @@ export const DELETE_POST = 'DELETE_POST';
 // User: Register and Login
 export const REGISTER_USER = 'REGISTER_USER';
 export const VERIFY_USER = 'VERIFY_USER';
+export const MODIFY_USER = 'MODIFY_USER';
 export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
 export const OBTENER_USER = 'OBTENER_USER';
+export const GET_USERS = 'GET_USERS';
 export const ERROR_TOKEN = 'ERROR_TOKEN';
 export const SET_SPINNING = 'SET_SPINNING';
 export const LOGOUT = 'LOGOUT';

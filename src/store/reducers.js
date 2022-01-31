@@ -1,5 +1,8 @@
+/* eslint-disable no-console */
+/* eslint-disable no-case-declarations */
 /* eslint-disable default-param-last */
 import {
+  LOAD_ONLY_POST,
   GET_ANSWERS,
   ADD_ANSWER,
   EDIT_ANSWER,
@@ -11,7 +14,9 @@ import {
   DELETE_POST,
   AUTHENTICATE_USER,
   VERIFY_USER,
+  MODIFY_USER,
   REGISTER_USER,
+  GET_USERS,
   OBTENER_USER,
   ERROR_TOKEN,
   SET_SPINNING,
@@ -22,6 +27,7 @@ import {
 } from './types';
 
 const initialState = {
+  loadOnlyPost: {},
   answers: [],
   addAnswer: {},
   editAnswer: {},
@@ -31,6 +37,7 @@ const initialState = {
   editPost: {},
   deletePost: {},
   currentUser: {},
+  users: [],
   userAuthenticated: false,
   currentUserOTokencito: {},
   errorLogin: false,
@@ -41,16 +48,19 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   const newValue = action.payload;
-
   switch (action.type) {
+    case LOAD_ONLY_POST:
+      // console.log(newValue);
+      return { ...state, loadOnlyPost: newValue };
     case GET_ANSWERS:
+      // console.log(newValue);
       return { ...state, answers: newValue };
     case ADD_ANSWER:
       return { ...state, addAnswer: newValue };
     case EDIT_ANSWER:
       return { ...state, editAnswer: newValue };
     case DELETE_ANSWER:
-      return { ...state, addAnswer: newValue };
+      return { ...state, deleteAnswer: newValue };
     case GET_POSTS:
       return { ...state, posts: newValue };
     case ADD_POST:
@@ -64,11 +74,10 @@ const reducer = (state = initialState, action) => {
 
     // Auth: Register and Login
     case REGISTER_USER:
-      localStorage.setItem('tokencitox', newValue);
       return { ...state, currentUser: newValue };
     case VERIFY_USER:
       localStorage.setItem('tokencitox', newValue);
-      return { ...state, currentUser: newValue };
+      return { ...state };
     case AUTHENTICATE_USER:
       localStorage.setItem('tokencitox', newValue);
       return {
@@ -76,12 +85,15 @@ const reducer = (state = initialState, action) => {
         userAuthenticated: true,
       };
 
+
     // User general
     case UPDATE_USER:
       return {
         ...state,
         currentUserOTokencito: newValue,
       };
+
+    case MODIFY_USER:
     case OBTENER_USER:
       return {
         ...state,
@@ -89,7 +101,8 @@ const reducer = (state = initialState, action) => {
         userAuthenticated: true,
         spinningLoading: false,
       };
-
+    case GET_USERS:
+      return { ...state, users: newValue };
     case ERROR_TOKEN:
       return {
         ...state,

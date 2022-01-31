@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { GrLike } from 'react-icons/gr';
 import Answer from './Answer/Answer';
-import accions from '../../../../../../store/action';
+import action from '../../../../../../store/action';
 import Payment from '../../../../Payment/Payment';
 
 // Styleds
@@ -98,8 +98,12 @@ const PaymentCont = styled.div`
   align-items: center;
   margin-top: 10px;
 `;
-function Answers() {
+function Answers({ idPost, postUser }) {
+  const dispatch = useDispatch();
+
   const [viewMore, setViewMore] = useState(false);
+  const [like, setLike] = useState(true);
+  // const [textLike, setTextLike] = useState(true);
 
   const dataValidated = useSelector((state) =>
     state.answers.filter((e) => e.resolved)
@@ -107,57 +111,102 @@ function Answers() {
   const dataNoValidated = useSelector((state) =>
     state.answers.filter((e) => !e.resolved)
   );
+  const answers = useSelector((state) => state.answers);
 
-  const dispatch = useDispatch();
+  // console.log(idPost);
+  useEffect(async () => {
+    dispatch(action.getAllAnswers(idPost));
+  }, [idPost]);
 
-  const supportAnswer = () => {
-    // console.log('Me gusta todo :', comment);
+  const datosAnswer = () => {
+    setViewMore(!viewMore);
   };
 
-  useEffect(async () => {
-    const idPost = '61e09c7fb35c71052690ec67';
-    dispatch(accions.getAllAnswers(idPost));
-  }, []);
+  // Dar like solo una vez
+  const supportAnswer = (e) => {
+    // console.log('Me gusta todo :', e);
+    // like
+    if (like) {
+      // setTextLike(e.likes + 1);
+      dispatch(
+        action.editAnswerPut(
+          e._id,
+          {
+            likes: e.likes + 1,
+          },
+          idPost
+        )
+      );
+    } else {
+      // setTextLike(e.likes - 1);
+      dispatch(
+        action.editAnswerPut(
+          e._id,
+          {
+            likes: e.likes - 1,
+          },
+          idPost
+        )
+      );
+    }
+    setLike(!like);
+  };
+  // console.log(answers);
   return (
     <AnswersContainer>
-      {/* Answers checked co */}
-      {dataValidated.map((e) => (
-        <div key={e._id}>
-          <Answer state={e} stateGeneral={dataValidated} />
-          <PaymentCont>
-            <ValidatedMessage>
-              🎉 🌟 Esta respuesta fue úti, te animas a invitarle un cafecito?
-            </ValidatedMessage>
-            <Payment />
-          </PaymentCont>
-        </div>
-      ))}
-
-      <MoreAnswers onClick={() => setViewMore(!viewMore)}>
-        {viewMore ? (
-          <>
-            <FaAngleUp />
-            <span>Ocultar respuestas</span>
-          </>
-        ) : (
-          <>
-            <FaAngleDown />
-            <span>Ver más respuestas</span>
-          </>
-        )}
-      </MoreAnswers>
-      {viewMore ? (
-        <MoreAnswersList>
-          {dataNoValidated.map((e) => (
+      {answers.length === 0 ? null : (
+        <div>
+          {dataValidated.map((e) => (
             <div key={e._id}>
-              <Answer state={e} />
-              <SupportAnswer onClick={() => supportAnswer(e.answer)}>
-                Apoyar <GrLike />
-              </SupportAnswer>
+              <Answer
+                state={e}
+                stateGeneral={dataValidated}
+                idPost={idPost}
+                postUser={postUser}
+                validatedAnswer={dataValidated}
+              />
+              <PaymentCont>
+                <ValidatedMessage>
+                  🎉 🌟 Esta respuesta fue útil, te animas a invitarle un
+                  cafecito?
+                </ValidatedMessage>
+                <Payment />
+              </PaymentCont>
             </div>
           ))}
-        </MoreAnswersList>
-      ) : null}
+
+          <MoreAnswers onClick={datosAnswer}>
+            {viewMore ? (
+              <>
+                <FaAngleUp />
+                <span>Ocultar respuestas</span>
+              </>
+            ) : (
+              <>
+                <FaAngleDown />
+                <span>Ver más respuestas</span>
+              </>
+            )}
+          </MoreAnswers>
+          {viewMore ? (
+            <MoreAnswersList>
+              {dataNoValidated.map((e) => (
+                <div key={e._id}>
+                  <Answer
+                    state={e}
+                    idPost={idPost}
+                    postUser={postUser}
+                    validatedAnswer={dataValidated}
+                  />
+                  <SupportAnswer onClick={() => supportAnswer(e)}>
+                    Apoyar {e.likes} <GrLike />
+                  </SupportAnswer>
+                </div>
+              ))}
+            </MoreAnswersList>
+          ) : null}
+        </div>
+      )}
     </AnswersContainer>
   );
 }
