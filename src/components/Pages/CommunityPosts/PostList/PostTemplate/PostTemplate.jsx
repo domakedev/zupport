@@ -61,6 +61,7 @@ const ReactionContainer = styled.div`
 `;
 
 function PostTemplate({
+  user,
   ban,
   userPhoto,
   userName,
@@ -94,12 +95,13 @@ function PostTemplate({
     if (confirm('¿Estas seguro de eliminar la publicación?') === true) {
       await dispatch(action.deletedPost(idPost));
       // eslint-disable-next-line
-      location.reload()
+      location.reload();
     }
   };
   return (
     <PostTemplteCont>
       <PostHeader
+        user={user}
         userPhoto={userPhoto}
         userName={userName}
         timePost={timePost}

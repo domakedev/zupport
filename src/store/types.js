@@ -26,3 +26,8 @@ export const OBTENER_USER = 'OBTENER_USER';
 export const ERROR_TOKEN = 'ERROR_TOKEN';
 export const SET_SPINNING = 'SET_SPINNING';
 export const LOGOUT = 'LOGOUT';
+
+// Users
+export const VISIT_USER = 'VISIT_USER';
+export const TOP_LANDING_USERS = 'TOP_LANDING_USERS';
+export const UPDATE_USER = 'UPDATE_USER';

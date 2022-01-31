@@ -42,6 +42,7 @@ function PostList({ results }) {
           <PostTemplate
             key={`${title}0${user.username}`}
             ban={index}
+            user={user}
             userPhoto={user.photo === null ? '' : user.photo}
             userName={user.username}
             timePost={getPostTime(timePosted)}

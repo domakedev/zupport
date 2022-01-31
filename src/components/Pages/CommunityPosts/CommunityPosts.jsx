@@ -47,7 +47,7 @@ function CommunityPosts() {
   const [results, setResults] = useState([]);
 
   useEffect(async () => {
-    const idPost = '61e10b9749e4a27d593c6a95';
+    const idPost = '61e10b9749e4a27d593c6a95'; // idPost es en realidad id de la comunidad
     await dispatch(action.getAllPosts(idPost));
   }, []);
 

@@ -15,6 +15,9 @@ import {
   ERROR_TOKEN,
   SET_SPINNING,
   LOGOUT,
+  VISIT_USER,
+  TOP_LANDING_USERS,
+  UPDATE_USER,
 } from './types';
 import axios from '../utils/axios';
 
@@ -86,6 +89,20 @@ const setSpinning = (spinning) => ({
 const logOut = () => ({
   type: LOGOUT,
   payload: false,
+});
+
+// Users
+const visitTheUser = (user) => ({
+  type: VISIT_USER,
+  payload: user,
+});
+const setTheTopUsersLanding = (topUsers) => ({
+  type: TOP_LANDING_USERS,
+  payload: topUsers,
+});
+const updateUser = (newData) => ({
+  type: UPDATE_USER,
+  payload: newData,
 });
 
 // Answer
@@ -186,7 +203,7 @@ const deletedPost = (idPost) => async (dispatch) => {
 };
 // AUTH
 
-const obtainUser = () => async (dispatch) => {
+const obtainUser = (userUsername) => async (dispatch) => {
   try {
     const tokencito = localStorage.getItem('tokencitox');
 
@@ -206,7 +223,29 @@ const obtainUser = () => async (dispatch) => {
     } else if (!respuesta.data.usuario) {
       dispatch(errorLogin(true));
     }
+
+    if (userUsername) {
+      const respuestaUsername = await axios.get(`/api/users/${userUsername}`);
+
+      if (respuestaUsername.data[0].username.length > 0) {
+        dispatch(visitTheUser(respuesta.data[0].username));
+      }
+    }
   } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('🚀 ~ file: action.js ~ line 232 ~ obtainUser ~ error', error);
+
+    dispatch(errorLogin(true));
+  }
+};
+const obtainUserByUsername = (userUsername) => async (dispatch) => {
+  try {
+    const respuesta = await axios.get(`/api/users/${userUsername}`);
+    dispatch(visitTheUser(respuesta.data[0]));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('🚀 ~ file: action.js ~ line 232 ~ obtainUser ~ error', error);
+
     dispatch(errorLogin(true));
   }
 };
@@ -266,6 +305,64 @@ const closeSession = () => async (dispatch) => {
   }
 };
 
+const setVisitedUser = (userUsername) => async (dispatch) => {
+  try {
+    await dispatch(obtainUserByUsername(userUsername));
+    // userData obtenida de usar el email
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(
+      '🚀 ~ file: action.js ~ line 290 ~ setVisitedUser ~ error',
+      error
+    );
+  }
+};
+
+const getTopUsersLanding = () => async (dispatch) => {
+  try {
+    const respuesta = await axios.get('/api/users');
+
+    const theThree = respuesta.data.sort((a, b) => -a.points + b.points);
+    const the3TopGeneralUsers = theThree.slice(0, 3);
+    dispatch(setTheTopUsersLanding(the3TopGeneralUsers));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(
+      '🚀 ~ file: action.js ~ line 325 ~ getTopUsersLanding ~ error',
+      error
+    );
+  }
+};
+
+const updateTheUser = (userUsername, newData) => async (dispatch) => {
+  dispatch(setSpinning(true));
+
+  try {
+    const tokencito = localStorage.getItem('tokencitox');
+
+    // Funcion para enviar el token por header
+
+    if (tokencito) {
+      axios.defaults.headers.common['x-auth-token'] = tokencito;
+    } else {
+      delete axios.defaults.headers.common['x-auth-token'];
+      return;
+    }
+
+    const respuesta = await axios.put(`/api/users/${userUsername}`, newData);
+
+    dispatch(updateUser(respuesta.data[0]));
+
+    dispatch(setSpinning(false));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(
+      '🚀 ~ file: action.js ~ line 359 ~ updateTheUser ~ error',
+      error
+    );
+  }
+};
+
 export default {
   getAllAnswers,
   addAnswerPost,
@@ -282,4 +379,7 @@ export default {
   obtainUser,
   setTheSpinner,
   closeSession,
+  setVisitedUser,
+  getTopUsersLanding,
+  updateTheUser,
 };

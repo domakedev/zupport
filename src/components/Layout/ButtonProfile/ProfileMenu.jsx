@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { IconContext } from 'react-icons';
 
@@ -11,9 +11,8 @@ import {
 } from 'react-icons/bs';
 
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import actions from '../../../store/action';
-import Profile from '../../../images/ProfileP.png';
 
 const List = styled.ul`
   list-style: none;
@@ -54,6 +53,8 @@ const ProfileMenuImg = styled.img`
   height: 50px;
   border-radius: 90px;
   margin: 10px;
+  object-fit: cover;
+  object-position: center center;
 `;
 
 const Icon = styled.div`
@@ -63,13 +64,21 @@ const Icon = styled.div`
 function ProfileMenu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const authenticateUser = useSelector((state) => state.currentUserOTokencito);
+
   const value = useMemo(() => ({ className: 'Iconos' }));
   return (
     <List>
-      <ListItem>
-        <ProfileMenuImg src={Profile} alt="Imagen de Perfil" />
-        <a href="/profile"> Perfil</a>
+      <ListItem
+        onClick={() =>
+          dispatch(actions.setVisitedUser(authenticateUser.username))
+        }
+      >
+        <ProfileMenuImg src={authenticateUser?.photo} alt="Imagen de Perfil" />
+        {/* <Link to="/profile"> Perfil</Link> */}
+        <Link to={`/profile/${authenticateUser?.username}`}> Perfil</Link>
       </ListItem>
+
       <IconContext.Provider value={value}>
         <ListItem>
           <Icon>
@@ -87,7 +96,7 @@ function ProfileMenu() {
           <Icon>
             <BsFillGearFill />
           </Icon>
-          <a href="/config">Configuración</a>
+          <Link to="/config">Configuración</Link>
         </ListItem>
         <ListItem>
           <Icon>

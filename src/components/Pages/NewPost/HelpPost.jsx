@@ -91,7 +91,7 @@ function HelpPost() {
     console.log(userToDelete);
     const beforeDelete = usersSelected.filter(
       // eslint-disable-next-line
-      (u) => u._id !== userToDelete._id
+      (u) => u.username !== userToDelete.username
     );
     setUsersSelected(beforeDelete);
   };

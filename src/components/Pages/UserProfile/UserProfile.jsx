@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import Header from '../../Layout/Header';
 import Footer from '../../Layout/Footer';
 import UserPhoto from '../../Layout/UserPhoto/UserPhoto';
@@ -15,18 +18,34 @@ import {
   StatSocial,
   AboutMe,
 } from './styleds';
+import actions from '../../../store/action';
 // import CardComunidadShow from '../../Layout/CardComunidadShow/CardComunidadShow';
 
+// Iconos
+import Github from '../../../images/Icon/redes/GitHub.svg';
+import Linkedin from '../../../images/Icon/redes/Linkedin.svg';
+import Twitter from '../../../images/Icon/redes/Twitter.svg';
+
 const UserProfile = function UserProfile() {
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const usernameFromURL = location.pathname.split('/').pop();
+    dispatch(actions.setVisitedUser(usernameFromURL));
+  }, []);
+
+  const user = useSelector((state) => state.visitProfileUser);
   const detectaLogoRed = (red) => {
-    if (red === 'github') {
-      return 'https://cdn-icons-png.flaticon.com/512/25/25231.png';
+    if (red === 'Github') {
+      return Github;
     }
-    if (red === 'linkedin') {
-      return 'https://www.ckmperu.com/wp-content/uploads/2016/10/linkedin-logo.png';
+    if (red === 'Linkedin') {
+      return Linkedin;
     }
-    if (red === 'twitter') {
-      return 'https://i0.wp.com/openvisualfx.com/wp-content/uploads/2019/10/pnglot.com-twitter-bird-logo-png-139932.png?fit=2186%2C2187&ssl=1';
+    if (red === 'Twitter') {
+      return Twitter;
     }
     return '';
   };
@@ -35,10 +54,17 @@ const UserProfile = function UserProfile() {
       <Header />
       <MainContainer>
         <UserPhotoContainer>
-          <UserPhoto photoSize="131px" medalSize="50px" borderSize="9px" />
+          <UserPhoto
+            user={user}
+            userPhoto={user.photo}
+            photoSize="131px"
+            medalSize="50px"
+            borderSize="9px"
+          />
         </UserPhotoContainer>
+
         <NameUser>
-          <p>Cesar Guevara Cabrera</p>
+          <p>{user.fullname}</p>
         </NameUser>
 
         <DataCards>
@@ -46,13 +72,13 @@ const UserProfile = function UserProfile() {
             <p>Mis estadisticas</p>
             <IndividualStatContainer>
               <IndividualStat>
-                <StatBox>45</StatBox>
+                <StatBox>{user.points}</StatBox>
                 <StatName>
                   <p>Nivel</p>
                 </StatName>
               </IndividualStat>
               <IndividualStat>
-                <StatBox>45</StatBox>
+                <StatBox>{user.points}</StatBox>
                 <StatName>
                   <p>Favores</p>
                 </StatName>
@@ -63,38 +89,22 @@ const UserProfile = function UserProfile() {
           <MyDataCard>
             <p>Mis redes</p>
             <IndividualStatContainer>
-              <IndividualStat>
-                {/* Aqui hacer un map de las redes del usuario */}
-                <StatSocial>
-                  <a
-                    href="https://www.google.com"
-                    target="_blank"
-                    without
-                    rel="noreferrer"
-                  >
-                    <img src={detectaLogoRed('github')} alt="github" />
-                  </a>
-                </StatSocial>
-              </IndividualStat>
-              <IndividualStat>
-                {/* Aqui hacer un map de las redes del usuario */}
-                <StatSocial>
-                  <img src={detectaLogoRed('linkedin')} alt="github" />
-                </StatSocial>
-              </IndividualStat>
-              <IndividualStat>
-                {/* Aqui hacer un map de las redes del usuario */}
-                <StatSocial>
-                  <img src={detectaLogoRed('twitter')} alt="github" />
-                </StatSocial>
-              </IndividualStat>
+              {/* Aqui hacer un map de las redes del usuario, sn: social network */}
+              {user.socialNetworks?.map((sn) => (
+                <IndividualStat key={uuidv4()}>
+                  <StatSocial>
+                    <a href={sn.link} target="_blank" rel="noreferrer">
+                      <img src={detectaLogoRed(sn.name)} alt={sn.name} />
+                    </a>
+                  </StatSocial>
+                </IndividualStat>
+              ))}
             </IndividualStatContainer>
           </MyDataCard>
           <MyDataCard>
             <p>Algo sobre mí</p>
             <AboutMe>
-              Soy un gato, que se cree loro. Pero además como croquetas Ricocan.
-              🐈
+              {user?.about || 'Mis puntos espero puedan decir algo de mi 😄'}
             </AboutMe>
           </MyDataCard>
           <MyDataCard>

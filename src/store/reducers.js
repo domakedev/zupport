@@ -16,6 +16,9 @@ import {
   ERROR_TOKEN,
   SET_SPINNING,
   LOGOUT,
+  VISIT_USER,
+  TOP_LANDING_USERS,
+  UPDATE_USER,
 } from './types';
 
 const initialState = {
@@ -32,6 +35,8 @@ const initialState = {
   currentUserOTokencito: {},
   errorLogin: false,
   spinningLoading: false,
+  visitProfileUser: {},
+  topLandingUSers: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -71,6 +76,12 @@ const reducer = (state = initialState, action) => {
         userAuthenticated: true,
       };
 
+    // User general
+    case UPDATE_USER:
+      return {
+        ...state,
+        currentUserOTokencito: newValue,
+      };
     case OBTENER_USER:
       return {
         ...state,
@@ -99,6 +110,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         userAuthenticated: false,
         currentUserOTokencito: {},
+      };
+
+    case VISIT_USER:
+      return {
+        ...state,
+        visitProfileUser: newValue,
+      };
+
+    case TOP_LANDING_USERS:
+      return {
+        ...state,
+        topLandingUSers: newValue,
       };
 
     default:

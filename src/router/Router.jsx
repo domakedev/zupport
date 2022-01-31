@@ -15,6 +15,7 @@ import Register from '../components/Pages/Register/Register';
 import Verify from '../components/Pages/Register/Verify';
 import P404 from '../components/Pages/404/P404';
 import UserProfile from '../components/Pages/UserProfile/UserProfile';
+import UserProfileConfig from '../components/Pages/UserProfileConfig/UserProfileConfig';
 
 function Router() {
   return (
@@ -22,6 +23,10 @@ function Router() {
       <Route path="/" element={<Landing />} />
 
       <Route path="/profile" element={<UserProfile />} />
+
+      <Route path="/profile/:username" element={<UserProfile />} />
+
+      <Route path="/config" element={<UserProfileConfig />} />
 
       <Route path="communities/" element={<Communities />} />
 
