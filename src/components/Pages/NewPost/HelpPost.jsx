@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   BsImages,
   BsFolder2Open,
@@ -131,7 +131,11 @@ function HelpPost() {
         resolved: false,
       })
     );
-    navigate('/communities/NodeJs/posts');
+    navigate(-1);
+  };
+
+  const goBack = () => {
+    navigate(-1);
   };
   return (
     <>
@@ -139,7 +143,7 @@ function HelpPost() {
 
       <MainTitleContainer>
         <MainTitle>Crear Pregunta</MainTitle>
-        <GoBack to="/communities/community-posts">
+        <GoBack onClick={goBack}>
           <BsX />
         </GoBack>
       </MainTitleContainer>
@@ -318,7 +322,7 @@ const MainTitle = styled.h1`
   font-size: 2.5rem;
 `;
 
-const GoBack = styled(Link)`
+const GoBack = styled.div`
   color: var(--boring-color);
   padding-left: 100px;
   font-size: 3rem;
