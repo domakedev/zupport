@@ -93,6 +93,7 @@ function PostFooter({ idPost, textComment, likes }) {
   useEffect(async () => {
     // dispatch(action.getOnlyPost(idPost));
   }, []);
+
   const onClickHandle = async (e) => {
     e.preventDefault();
     // dispatch(action.getOnlyPost(idPost))
