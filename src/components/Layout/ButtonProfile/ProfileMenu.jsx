@@ -78,7 +78,6 @@ function ProfileMenu() {
         <ProfileMenuImg src={authenticateUser?.photo} alt="Imagen de Perfil" />
         {/* <Link to="/profile"> Perfil</Link> */}
         <Link to={`/profile/${authenticateUser?.username}`}> Perfil</Link>
-
       </ListItem>
 
       <IconContext.Provider value={value}>
@@ -108,7 +107,9 @@ function ProfileMenu() {
             type="button"
             onClick={async () => {
               await dispatch(
-                actions.closeSession(authenticateUser.username, { isOnline: false })
+                actions.closeSession(authenticateUser.username, {
+                  isOnline: false,
+                })
               );
               navigate('/');
             }}

@@ -75,11 +75,9 @@ function PostHeader({
     <PostHeaderCont resolved={resolved}>
       <UserProfileCont>
         <UserPhoto
-
           user={user}
           // photo={userPhoto}
-            isOnline={isOnline}
-
+          isOnline={isOnline}
           userPhoto={userPhoto}
           userPoints={userPoints}
         />

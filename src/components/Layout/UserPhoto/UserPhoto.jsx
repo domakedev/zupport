@@ -64,7 +64,7 @@ const Photo = styled('img')(
     border-radius: 50%;
     object-fit: cover;
     object-position: center center;
-    border: ${borderSize} solid var(--sucess-color); //el color cambiara a --alert-color si está activo   
+    border: ${borderSize} solid var(--sucess-color); //el color cambiara a --alert-color si está activo
     ${(props) =>
       props.isOnline === true &&
       css`
@@ -146,7 +146,6 @@ function UserPhoto({
       </IconContext.Provider>
 
       <PhotoContainer>
-
         <Link
           to={{
             pathname: `/profile/${user?.username ? user.username : null}`,
@@ -156,7 +155,7 @@ function UserPhoto({
           // state={{ username: user.username }}
         >
           <Photo
-          isOnline={isOnline}
+            isOnline={isOnline}
             photoSize={photoSize}
             borderSize={borderSize}
             src={!userPhoto ? defaultPhoto : userPhoto}
@@ -164,7 +163,6 @@ function UserPhoto({
             // onClick={onClickPhoto}
           />
         </Link>
-
       </PhotoContainer>
 
       {selected ? (

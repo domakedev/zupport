@@ -149,7 +149,6 @@ function PostTemplate({
         user={user}
         isOnline={isOnline}
         onClick={goTo}
-
         userPhoto={userPhoto}
         userName={userName}
         timePost={timePost}

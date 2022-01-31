@@ -85,7 +85,6 @@ const reducer = (state = initialState, action) => {
         userAuthenticated: true,
       };
 
-
     // User general
     case UPDATE_USER:
       return {

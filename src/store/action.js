@@ -85,7 +85,7 @@ const loadUsers = (users) => ({
   type: GET_USERS,
   payload: users,
 });
-const updateUser = (user) => ({
+const updateUserX = (user) => ({
   type: MODIFY_USER,
   payload: user,
 });
@@ -110,7 +110,6 @@ const logOut = () => ({
   payload: false,
 });
 
-
 // Users
 const visitTheUser = (user) => ({
   type: VISIT_USER,
@@ -126,7 +125,6 @@ const updateUser = (newData) => ({
 });
 
 // Answer
-
 
 // Answer loadOnlyPost
 const getOnlyPost = (idPost) => async (dispatch) => {
@@ -338,7 +336,7 @@ const getAllUsers = () => async (dispatch) => {
 const updatedUser = (userName, userData) => async (dispatch) => {
   try {
     const response = await axios.put(`/api/users/name/${userName}`, userData);
-    dispatch(updateUser(response));
+    dispatch(updateUserX(response));
   } catch (e) {
     // console.log(e);
   }

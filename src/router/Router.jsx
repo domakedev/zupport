@@ -19,7 +19,6 @@ import P404 from '../components/Pages/404/P404';
 import UserProfile from '../components/Pages/UserProfile/UserProfile';
 import UserProfileConfig from '../components/Pages/UserProfileConfig/UserProfileConfig';
 
-
 function Router() {
   return (
     <Routes>
