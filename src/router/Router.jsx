@@ -43,6 +43,12 @@ function Router() {
         path="/communities/:comuTitle/posts"
         element={<CommunityPosts />}
       />
+
+      <Route
+        path="/communities/:comuTitle/posts/:page"
+        element={<CommunityPosts />}
+      />
+
       <Route
         path="/communities/:comuTitle/posts/:idPost"
         element={<OnlyPostAnswers />}

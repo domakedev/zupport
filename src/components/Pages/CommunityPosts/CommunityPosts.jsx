@@ -23,7 +23,7 @@ const CommunityPostCont = styled.div`
     justify-self: center;
     grid-template-areas:
       'welcome  welcome welcome'
-      ' .  topHelpers . '
+      '. . topHelpers'
       '. . gofData'
       '. . createPost'
       '. . postList';

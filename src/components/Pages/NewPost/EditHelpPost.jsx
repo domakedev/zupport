@@ -130,7 +130,7 @@ function EditHelpPost() {
       action.editedPost(dataPost._id, {
         title: titlest.field,
         description: descriptionst.field,
-        image: urltemp,
+        image: urltemp || dataPost.image,
         points: pointsst.field,
         taggedUsers: userNames,
       })
@@ -195,6 +195,8 @@ function EditHelpPost() {
               errorText="La descripción debe poseer de 10 a 1300 caracteres."
               inputParameters={parameters.description}
             />
+            <PreviousImgText>Tu imagen cargada anteriormente</PreviousImgText>
+            <PreviousImg src={dataPost.image} alt="Imagen anterior" />
             {uploaderShow ? (
               <Input
                 type="file"
@@ -209,10 +211,10 @@ function EditHelpPost() {
               <AddSecondaryContainer
                 onClick={() => setUploaderShow(!uploaderShow)}
               >
-                <BsImages /> Añadir imagenes
+                <BsImages /> Cambiar imagen
               </AddSecondaryContainer>
               <AddSecondaryContainer href="#">
-                <BsFolder2Open /> Añadir archivo
+                <BsFolder2Open /> Cambiar archivo
               </AddSecondaryContainer>
             </AddContainer>
 
@@ -294,6 +296,12 @@ function EditHelpPost() {
     </div>
   );
 }
+
+const PreviousImg = styled.img`
+  max-width: 200px;
+  display: flex;
+  margin: auto;
+`;
 
 const Input = styled.input`
   width: min-content;
@@ -431,6 +439,15 @@ const OfferText = styled.div`
   color: var(--dark-color);
 
   padding: 1rem 0;
+  font-size: 1.8rem;
+`;
+
+const PreviousImgText = styled.div`
+  font-family: var(--principal-font);
+  color: var(--boring-color);
+  text-align: center;
+  padding: 1rem 0;
+  font-weight: normal;
   font-size: 1.8rem;
 `;
 
