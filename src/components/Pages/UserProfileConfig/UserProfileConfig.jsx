@@ -33,19 +33,12 @@ const UserProfileConfig = function UserProfileConfig() {
   // const dispatch = useDispatch();
 
   const [userNewData, setUserNewData] = useState();
-  console.log(
-    '🚀 ~ file: UserProfileConfig.jsx ~ line 35 ~ UserProfileConfig ~ userNewData',
-    userNewData
-  );
+
   const [userNewSocialN, setUserNewSocialN] = useState();
   const [userNewOneSN, setUserNewOneSN] = useState([''], ['']);
   const [userNewName, setUserNewName] = useState(userNewData?.fullname);
   const [userNewAbout, setUserNewAbout] = useState();
   const [errorWritingSN, setErrorWritingSN] = useState(false);
-  console.log(
-    '🚀 ~ file: UserProfileConfig.jsx ~ line 45 ~ UserProfileConfig ~ errorWritingSN',
-    errorWritingSN
-  );
 
   // UseSelector
   const user = useSelector((state) => state.currentUserOTokencito);

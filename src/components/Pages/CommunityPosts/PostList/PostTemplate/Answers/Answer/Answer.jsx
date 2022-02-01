@@ -143,11 +143,6 @@ function Answer({
       )
     );
     await dispatch(action.editedPost(idPost, { resolved: true }));
-    console.log(
-      '🚀 ~ file: Answer.jsx ~ line 134 ~ handleValidated ~ eeeeeeeeeeeee',
-      userOfAnswer,
-      pointstFinal
-    );
 
     // editando una respuesta cuando el dueño del post la valida;
     dispatch(

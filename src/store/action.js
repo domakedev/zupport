@@ -294,10 +294,7 @@ const obtainUser = (userUsername) => async (dispatch) => {
     const respuesta = await axios.get('/api/users/tokencitox');
     if (respuesta.data.usuario) {
       dispatch(obtainUserType(respuesta?.data?.usuario));
-      console.log(
-        '🚀 ~ file: action.js ~ line 295 ~ obtainUser ~ respuesta?.data?.usuario',
-        respuesta?.data?.usuario
-      );
+
       dispatch(errorLogin(false));
     } else if (!respuesta.data.usuario) {
       dispatch(errorLogin(true));

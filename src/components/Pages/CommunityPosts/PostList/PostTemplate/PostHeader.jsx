@@ -74,10 +74,6 @@ function PostHeader({
   isOnline,
 }) {
   const nombreCualquiera = useSelector((state) => state.loadOnlyPost);
-  console.log(
-    '🚀 ~ file: PostHeader.jsx ~ line 77 ~ nombreCualquiera',
-    nombreCualquiera
-  );
 
   useEffect(() => {}, [nombreCualquiera]);
 
