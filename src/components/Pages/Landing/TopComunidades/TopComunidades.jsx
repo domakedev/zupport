@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import axios from '../../../../utils/axios';
+import action from '../../../../store/action';
+import { rankingsCommunity } from '../../../../controller/CommunityPostCtr/utilities';
+// import axios from '../../../../utils/axios';
 
 // Componentes
 import CardComunidadShow from '../../../Layout/CardComunidadShow/CardComunidadShow';
@@ -60,20 +63,19 @@ const LinkTo = styled(Link)`
 `;
 
 function TopComunidades() {
+  const dispatch = useDispatch();
   const [comunidades, setComunidades] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get('/api/communities/')
-      .then((response) => {
-        // console.log("Data:", response.data);
-        setComunidades(response.data);
-      })
-      .catch((error) => {
-        // eslint-disable-next-line
-        console.log('Error:', error);
-      });
+  const allCommunities = useSelector((state) => state.communities);
+
+  useEffect(async () => {
+    await dispatch(action.getAllCommunities());
   }, []);
+  useEffect(async () => {
+    const topCommunities = rankingsCommunity(allCommunities, 6); // filtra las 6 comunidades con más usuarios
+    setComunidades(topCommunities);
+    // console.log(topCommunities);
+  }, [allCommunities]);
 
   return (
     <Container>
@@ -84,7 +86,7 @@ function TopComunidades() {
           <CardComunidadShow
             key={uuidv4()}
             users={card.users.length}
-            checks={card.cheks}
+            checks={card.posts}
             title={card.title}
             image={card.image}
           />

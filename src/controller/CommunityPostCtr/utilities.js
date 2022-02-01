@@ -77,3 +77,9 @@ export const rankings = (arr, number) => {
   const fifth = sorted.slice(0, number);
   return fifth;
 };
+
+export const rankingsCommunity = (arr, number) => {
+  const sorted = [...arr].sort((a, b) => b.users.length - a.users.length);
+  const fifth = sorted.slice(0, number);
+  return fifth;
+};

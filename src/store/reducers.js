@@ -24,6 +24,11 @@ import {
   VISIT_USER,
   TOP_LANDING_USERS,
   UPDATE_USER,
+  GET_ID_COMMUNITY,
+  GET_COMMUNITIES,
+  ADD_COMMUNITY,
+  EDIT_COMMUNITY,
+  DELETE_COMMUNITY,
 } from './types';
 
 const initialState = {
@@ -44,6 +49,11 @@ const initialState = {
   spinningLoading: false,
   visitProfileUser: {},
   topLandingUSers: [],
+  getIdCommunity: {},
+  communities: [],
+  addCommunity: {},
+  editCommunity: {},
+  deleteCommunity: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -135,6 +145,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         topLandingUSers: newValue,
       };
+    case GET_ID_COMMUNITY:
+      // console.log(newValue);
+      return { ...state, getIdCommunity: newValue };
+    case GET_COMMUNITIES:
+      console.log(newValue);
+      return { ...state, communities: newValue };
+    case ADD_COMMUNITY:
+      return { ...state, addCommunity: newValue };
+    case EDIT_COMMUNITY:
+      return { ...state, editCommunity: newValue };
+    case DELETE_COMMUNITY:
+      return { ...state, deleteCommunity: newValue };
 
     default:
       return state;

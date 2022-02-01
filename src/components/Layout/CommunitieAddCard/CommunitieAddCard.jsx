@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -14,6 +15,7 @@ import {
   BsFillBookmarkCheckFill,
   BsFillPersonPlusFill as AddPerson,
 } from 'react-icons/bs';
+import action from '../../../store/action';
 
 const Container = styled.div`
   height: 200px;
@@ -155,13 +157,17 @@ const LineaD = styled(Linea)`
   right: 0;
 `;
 
-function CommunitieAddCard({ image, users, checks, title }) {
-  // let params = useParams();
+function CommunitieAddCard({ id, image, users, checks, title }) {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.currentUserOTokencito);
 
   const unirmeA = () => {
     // eslint-disable-next-line
-    console.log('Me uni a la comunidad de:', title);
+    // console.log('Me uni a la comunidad de:', users);
+    users.push(currentUser.username);
+    dispatch(action.editCommunities(id, { users }));
   };
+  const postResolved = checks.filter((e) => e.resolved);
 
   return (
     <Container>
@@ -172,15 +178,15 @@ function CommunitieAddCard({ image, users, checks, title }) {
 
       <ContainerUsers>
         <BsPeopleFill color="#797770" size="30px" />
-        <Number>{users}</Number>
+        <Number>{users.length}</Number>
       </ContainerUsers>
 
       <ContainerChecks>
         <BsFillBookmarkCheckFill color="#797770" size="30px" />
-        <Number>{checks}</Number>
+        <Number>{postResolved.length}</Number>
       </ContainerChecks>
 
-      <LinkTo to={`${title}/posts`} onClick={unirmeA}>
+      <LinkTo to={`${id}/posts`} onClick={unirmeA}>
         <AddPerson size="40px" />
         UNIRME
       </LinkTo>
@@ -193,15 +199,13 @@ function CommunitieAddCard({ image, users, checks, title }) {
 
 CommunitieAddCard.propTypes = {
   title: PropTypes.string,
-  users: PropTypes.number,
-  checks: PropTypes.number,
+  // users: PropTypes.number,
   image: PropTypes.string,
 };
 
 CommunitieAddCard.defaultProps = {
   title: '',
-  users: 0,
-  checks: 0,
+  // users: 0,
   image: '',
 };
 

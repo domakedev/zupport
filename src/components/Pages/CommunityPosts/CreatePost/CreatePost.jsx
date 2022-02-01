@@ -49,7 +49,7 @@ function CreatePost() {
   return (
     <PostContainer>
       <h2>¿En que deseas ayuda?</h2>
-      <LinkTo to="/communities/help-post">Preguntar</LinkTo>
+      <LinkTo to="help-post">Preguntar</LinkTo>
     </PostContainer>
   );
 }
