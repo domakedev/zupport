@@ -81,7 +81,7 @@ const MyDataCard = styled.div`
   width: 360px;
   padding: 17px;
   position: relative;
-  & > p {
+  & > p:first-child {
     width: 100%;
     text-align: left;
     font-family: var(--principal-font);
@@ -245,6 +245,17 @@ const AlertMessage = styled.div`
   padding-top: 150px;
 `;
 
+const ErrorWritingSn = styled.p.attrs({ id: 'errorSN' })`
+  text-align: center;
+  font-family: var(--secondary-font);
+  font-size: var(--secondarey-font-size);
+  background-color: var(--alert-color);
+  color: white;
+  width: 100%;
+  height: fit-content;
+  padding: 12px 23px;
+`;
+
 export {
   MainContainer,
   UserPhotoContainer,
@@ -262,4 +273,5 @@ export {
   LoadingContainer,
   AlertMessage,
   LoadingBlockContainer,
+  ErrorWritingSn,
 };

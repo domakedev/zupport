@@ -37,7 +37,7 @@ function Router() {
         element={<CreateCommunitie />}
       />
 
-      <Route path="communities/community-posts" element={<CommunityPosts />} />
+      {/* <Route path="communities/community-posts" element={<CommunityPosts />} /> */}
 
       <Route
         path="/communities/:comuTitle/posts"
@@ -54,7 +54,11 @@ function Router() {
         element={<OnlyPostAnswers />}
       />
 
-      <Route path="/communities/help-post" element={<HelpPost />} />
+      {/* <Route path="/communities/help-post" element={<HelpPost />} /> */}
+      <Route
+        path="/communities/:comuTitle/posts/help-post"
+        element={<HelpPost />}
+      />
 
       <Route path="/communities/edit-help-post" element={<EditHelpPost />} />
 

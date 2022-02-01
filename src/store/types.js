@@ -35,3 +35,10 @@ export const LOGOUT = 'LOGOUT';
 export const VISIT_USER = 'VISIT_USER';
 export const TOP_LANDING_USERS = 'TOP_LANDING_USERS';
 export const UPDATE_USER = 'UPDATE_USER';
+
+// Communities
+export const GET_ID_COMMUNITY = 'GET_ID_COMMUNITY';
+export const GET_COMMUNITIES = 'GET_COMMUNITIES';
+export const ADD_COMMUNITY = 'ADD_COMMUNITY';
+export const EDIT_COMMUNITY = 'EDIT_COMMUNITY';
+export const DELETE_COMMUNITY = 'DELETE_COMMUNITY';

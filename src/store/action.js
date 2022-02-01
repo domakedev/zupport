@@ -21,6 +21,11 @@ import {
   VISIT_USER,
   TOP_LANDING_USERS,
   UPDATE_USER,
+  GET_ID_COMMUNITY,
+  GET_COMMUNITIES,
+  ADD_COMMUNITY,
+  EDIT_COMMUNITY,
+  DELETE_COMMUNITY,
 } from './types';
 import axios from '../utils/axios';
 
@@ -124,6 +129,28 @@ const updateUser = (newData) => ({
   payload: newData,
 });
 
+// Community
+const loadOnlyCommunity = (community) => ({
+  type: GET_ID_COMMUNITY,
+  payload: community,
+});
+const loadCommunities = (communities) => ({
+  type: GET_COMMUNITIES,
+  payload: communities,
+});
+const addCommunity = (community) => ({
+  type: ADD_COMMUNITY,
+  payload: community,
+});
+const editCommunity = (community) => ({
+  type: EDIT_COMMUNITY,
+  payload: community,
+});
+const deleteCommunity = (community) => ({
+  type: DELETE_COMMUNITY,
+  payload: community,
+});
+
 // Answer
 
 // Answer loadOnlyPost
@@ -213,7 +240,9 @@ const addedPost = (postData) => async (dispatch) => {
 const editedPost = (idPost, postData) => async (dispatch) => {
   try {
     const response = await axios.put(`/api/post/${idPost}`, postData);
+
     dispatch(editPost(response.data));
+    dispatch(getOnlyPost(idPost));
   } catch (e) {
     // console.log(e);
   }
@@ -292,6 +321,7 @@ const obtainUser = (userUsername) => async (dispatch) => {
     const respuesta = await axios.get('/api/users/tokencitox');
     if (respuesta.data.usuario) {
       dispatch(obtainUserType(respuesta?.data?.usuario));
+
       dispatch(errorLogin(false));
     } else if (!respuesta.data.usuario) {
       dispatch(errorLogin(true));
@@ -426,32 +456,92 @@ const getTopUsersLanding = () => async (dispatch) => {
   }
 };
 
-const updateTheUser = (userUsername, newData) => async (dispatch) => {
-  dispatch(setSpinning(true));
+const updateTheUser =
+  (userUsername, newData, fromAnsPoints) => async (dispatch) => {
+    dispatch(setSpinning(true));
 
-  try {
-    const tokencito = localStorage.getItem('tokencitox');
+    try {
+      const tokencito = localStorage.getItem('tokencitox');
 
-    // Funcion para enviar el token por header
+      // Funcion para enviar el token por header
 
-    if (tokencito) {
-      axios.defaults.headers.common['x-auth-token'] = tokencito;
-    } else {
-      delete axios.defaults.headers.common['x-auth-token'];
-      return;
+      if (tokencito) {
+        axios.defaults.headers.common['x-auth-token'] = tokencito;
+      } else {
+        delete axios.defaults.headers.common['x-auth-token'];
+        return;
+      }
+
+      const respuesta = await axios.put(`/api/users/${userUsername}`, newData);
+
+      if (!fromAnsPoints) {
+        dispatch(updateUser(respuesta.data[0]));
+
+        dispatch(setSpinning(false));
+      } else if (fromAnsPoints) {
+        dispatch(setSpinning(false));
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(
+        '🚀 ~ file: action.js ~ line 359 ~ updateTheUser ~ error',
+        error
+      );
     }
+  };
 
-    const respuesta = await axios.put(`/api/users/${userUsername}`, newData);
+// Community
+const getIdCommunity = (idCommunitie) => async (dispatch) => {
+  try {
+    const response = await axios.get(`/api/communities/${idCommunitie}`);
+    const res = response.data;
+    dispatch(loadOnlyCommunity(res));
+    // console.log(res);
+  } catch (e) {
+    // console.log(e);
+  }
+};
 
-    dispatch(updateUser(respuesta.data[0]));
+const getAllCommunities = () => async (dispatch) => {
+  try {
+    const response = await axios.get('/api/communities/');
+    const res = response.data;
+    dispatch(loadCommunities(res));
+  } catch (e) {
+    // console.log(e);
+  }
+};
 
-    dispatch(setSpinning(false));
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(
-      '🚀 ~ file: action.js ~ line 359 ~ updateTheUser ~ error',
-      error
+const addCommunities = (communityData) => async (dispatch) => {
+  try {
+    const response = await axios.post('/api/communities/', communityData);
+    dispatch(addCommunity(response));
+    // console.log(answers);
+    dispatch(getAllCommunities());
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const editCommunities = (idCommunity, communityData) => async (dispatch) => {
+  try {
+    const response = await axios.put(
+      `api/communities/${idCommunity}`,
+      communityData
     );
+    dispatch(editCommunity(response));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const deletedCommunities = (idCommunity) => async (dispatch) => {
+  try {
+    const response = await axios.delete(`/api/communities/${idCommunity}`);
+    dispatch(deleteCommunity(response));
+    dispatch(getAllCommunities());
+  } catch (e) {
+    // console.log(e);
   }
 };
 
@@ -479,4 +569,9 @@ export default {
   setVisitedUser,
   getTopUsersLanding,
   updateTheUser,
+  getIdCommunity,
+  getAllCommunities,
+  addCommunities,
+  editCommunities,
+  deletedCommunities,
 };

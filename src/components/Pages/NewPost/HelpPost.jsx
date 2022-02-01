@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   BsImages,
   BsFolder2Open,
@@ -69,10 +69,13 @@ function HelpPost() {
 
   const navigate = useNavigate();
 
+  const { comuTitle } = useParams();
+
+  // console.log(comuTitle);
+
   const onChangeFile = (e) => {
     setFile(e.target.files[0]);
   };
-
   useEffect(async () => {
     await dispatch(action.getAllUsers());
   }, []);
@@ -127,10 +130,11 @@ function HelpPost() {
         likes: [],
         points: pointsst.field,
         taggedUsers: userNames,
-        community: '61e10b9749e4a27d593c6a95',
+        community: comuTitle, // se agrega el id de la comunidad
         resolved: false,
       })
     );
+    // await dispatch(action.editCommunities(comuTitle, []))
     navigate(-1);
   };
 

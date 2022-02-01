@@ -18,6 +18,7 @@ import {
   AddNewSN,
   LoadingContainer,
   AlertMessage,
+  ErrorWritingSn,
 } from './styleds';
 import actions from '../../../store/action';
 import LoadingIcon from '../../Layout/Loading/Loading';
@@ -32,10 +33,12 @@ const UserProfileConfig = function UserProfileConfig() {
   // const dispatch = useDispatch();
 
   const [userNewData, setUserNewData] = useState();
+
   const [userNewSocialN, setUserNewSocialN] = useState();
   const [userNewOneSN, setUserNewOneSN] = useState([''], ['']);
   const [userNewName, setUserNewName] = useState(userNewData?.fullname);
   const [userNewAbout, setUserNewAbout] = useState();
+  const [errorWritingSN, setErrorWritingSN] = useState(false);
 
   // UseSelector
   const user = useSelector((state) => state.currentUserOTokencito);
@@ -48,6 +51,8 @@ const UserProfileConfig = function UserProfileConfig() {
 
     setUserNewAbout(user?.about);
     setUserNewSocialN(user?.socialNetworks);
+
+    setErrorWritingSN(false);
   }, [user, userNewData]);
 
   const onChangeName = (e) => {
@@ -97,9 +102,13 @@ const UserProfileConfig = function UserProfileConfig() {
   };
 
   const onClickAddSN = () => {
+    // Verificar si ya existe SN
     if (userNewSocialN.filter((e) => e.name === userNewOneSN[0]).length > 0) {
+      setErrorWritingSN('La red ya existe, primero eliminala');
       return;
     }
+
+    // Verificar si los campos estan llenos
     if (
       userNewOneSN[0] === undefined ||
       userNewOneSN[0] === '' ||
@@ -107,8 +116,18 @@ const UserProfileConfig = function UserProfileConfig() {
       userNewOneSN[1] === '' ||
       userNewSocialN.filter((e) => e.name === userNewOneSN[0]).length > 0
     ) {
+      setErrorWritingSN('Campos vacios no permitidos');
       return;
     }
+
+    // Verificar si link ingresado corresponde a la SN
+    if (!userNewOneSN[1].includes(userNewOneSN[0].toLowerCase())) {
+      setErrorWritingSN('El link debe corresponder a la red');
+      return;
+    }
+
+    setErrorWritingSN(false);
+
     const newSN = {
       name: userNewOneSN[0],
       link: userNewOneSN[1],
@@ -228,6 +247,11 @@ const UserProfileConfig = function UserProfileConfig() {
                     </label>
                     <AddIcon onClick={onClickAddSN} />
                   </AddNewSN>
+                  {errorWritingSN ? (
+                    <ErrorMessage>{errorWritingSN}</ErrorMessage>
+                  ) : (
+                    ''
+                  )}
                 </MyDataCard>
 
                 <MyDataCard>
@@ -244,5 +268,9 @@ const UserProfileConfig = function UserProfileConfig() {
     </>
   );
 };
+
+function ErrorMessage({ children }) {
+  return <ErrorWritingSn>{children}</ErrorWritingSn>;
+}
 
 export default UserProfileConfig;
