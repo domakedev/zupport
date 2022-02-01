@@ -66,16 +66,6 @@ const Line = styled.hr`
   opacity: 0.3;
 `;
 
-const PostAndAnswerContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  @media screen and (min-width: 1160px) {
-    gap: 50px;
-    /* min-width: 500px; */
-  }
-`;
-
 function OnlyPostAnswers() {
   const { idPost } = useParams();
   // const [post, setPost] = useState({});
@@ -114,9 +104,7 @@ function OnlyPostAnswers() {
         {Object.entries(post).length === 0 ? (
           <LoadingIcon />
         ) : (
-
           <PostContainer>
-
             <PostTemplate
               userPhoto={post.user.photo === null ? '' : post.user.photo}
               userName={post.user.username}
@@ -137,10 +125,7 @@ function OnlyPostAnswers() {
               postUser={post.user}
               postPoints={softNumber(post.points)}
             />
-
-          
           </PostContainer>
-
         )}
       </PostCont>
     </>

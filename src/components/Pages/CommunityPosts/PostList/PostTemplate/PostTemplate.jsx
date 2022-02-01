@@ -28,7 +28,6 @@ const PostTemplteCont = styled.article`
   margin-top: 3rem;
   max-width: 625px;
 
-
   @media screen and (min-width: 1024px) {
     border: 1px solid #79777052; //--dark-color
     border-radius: 2rem;
