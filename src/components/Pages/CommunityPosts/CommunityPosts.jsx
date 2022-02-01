@@ -121,8 +121,6 @@ function CommunityPosts() {
     //
   }, []);
 
-  const comuPosts = useSelector((state) => state.posts);
-
   useEffect(async () => {
     setResults(comuPosts);
   }, [comuPosts]);
