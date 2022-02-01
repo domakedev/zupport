@@ -31,6 +31,16 @@ const MainTitleContainer = styled.div`
   align-items: center;
   gap: 5rem;
 `;
+
+const PostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    align-items: center;
+  }
+`;
+
 const MainTitle = styled.h1`
   font-family: var(--principal-font);
   color: var(--boring-color);
@@ -104,7 +114,9 @@ function OnlyPostAnswers() {
         {Object.entries(post).length === 0 ? (
           <LoadingIcon />
         ) : (
-          <PostAndAnswerContainer>
+
+          <PostContainer>
+
             <PostTemplate
               userPhoto={post.user.photo === null ? '' : post.user.photo}
               userName={post.user.username}
@@ -119,12 +131,16 @@ function OnlyPostAnswers() {
               idPost={post._id}
               isOnline={post.user.isOnline}
             />
+
             <Answers
               idPost={post._id}
               postUser={post.user}
               postPoints={softNumber(post.points)}
             />
-          </PostAndAnswerContainer>
+
+          
+          </PostContainer>
+
         )}
       </PostCont>
     </>

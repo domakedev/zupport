@@ -201,7 +201,7 @@ function HelpPost() {
         ) : null}
         <AddContainer>
           <AddSecondaryContainer onClick={() => setUploaderShow(!uploaderShow)}>
-            <BsImages /> Añadir imagenes
+            <BsImages /> Añadir imagen
           </AddSecondaryContainer>
           <AddSecondaryContainer href="#">
             <BsFolder2Open /> Añadir archivo

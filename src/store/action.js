@@ -181,9 +181,9 @@ const deletedAnswer = (idAnswer, idPost) => async (dispatch) => {
 };
 
 // Post
-const getAllPosts = (idCom) => async (dispatch) => {
+const getAllPosts = (idCom, page) => async (dispatch) => {
   try {
-    const response = await axios.get(`/api/post/${idCom}`);
+    const response = await axios.get(`/api/post/${idCom}/${page}`);
     const res = response.data;
     dispatch(loadPost(res));
   } catch (e) {
