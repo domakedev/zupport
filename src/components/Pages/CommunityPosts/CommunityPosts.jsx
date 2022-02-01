@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import WelcomeCommunity from './WelcomeCommity/WelcomeCommunity';
 import Header from '../../Layout/Header';
 import DividingLine from '../../Layout/LineStyle/DividingLine';
@@ -42,14 +43,15 @@ const AlertMessage = styled.div`
 
 function CommunityPosts() {
   const dispatch = useDispatch();
+  const { comuTitle } = useParams();
 
   const userAuth = useSelector((state) => state.userAuthenticated);
   const [results, setResults] = useState([]);
 
   useEffect(async () => {
-    const idPost = '61e10b9749e4a27d593c6a95'; // '61e10b9749e4a27d593c6a95 61e1862cd149a9366f8bfe1d ', idPost es en realidad id de la comunidad
-
-    await dispatch(action.getAllPosts(idPost));
+    // busca por el id de la comunidad
+    await dispatch(action.getAllPosts(comuTitle));
+    //
   }, []);
 
   const comuPosts = useSelector((state) => state.posts);

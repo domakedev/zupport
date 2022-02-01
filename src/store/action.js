@@ -21,6 +21,11 @@ import {
   VISIT_USER,
   TOP_LANDING_USERS,
   UPDATE_USER,
+  GET_ID_COMMUNITY,
+  GET_COMMUNITIES,
+  ADD_COMMUNITY,
+  EDIT_COMMUNITY,
+  DELETE_COMMUNITY,
 } from './types';
 import axios from '../utils/axios';
 
@@ -122,6 +127,28 @@ const setTheTopUsersLanding = (topUsers) => ({
 const updateUser = (newData) => ({
   type: UPDATE_USER,
   payload: newData,
+});
+
+// Community
+const loadOnlyCommunity = (community) => ({
+  type: GET_ID_COMMUNITY,
+  payload: community,
+});
+const loadCommunities = (communities) => ({
+  type: GET_COMMUNITIES,
+  payload: communities,
+});
+const addCommunity = (community) => ({
+  type: ADD_COMMUNITY,
+  payload: community,
+});
+const editCommunity = (community) => ({
+  type: EDIT_COMMUNITY,
+  payload: community,
+});
+const deleteCommunity = (community) => ({
+  type: DELETE_COMMUNITY,
+  payload: community,
 });
 
 // Answer
@@ -455,6 +482,61 @@ const updateTheUser = (userUsername, newData) => async (dispatch) => {
   }
 };
 
+// Community
+const getIdCommunity = (idCommunitie) => async (dispatch) => {
+  try {
+    const response = await axios.get(`/api/communities/${idCommunitie}`);
+    const res = response.data;
+    dispatch(loadOnlyCommunity(res));
+    // console.log(res);
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const getAllCommunities = () => async (dispatch) => {
+  try {
+    const response = await axios.get('/api/communities/');
+    const res = response.data;
+    dispatch(loadCommunities(res));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const addCommunities = (communityData) => async (dispatch) => {
+  try {
+    const response = await axios.post('/api/communities/', communityData);
+    dispatch(addCommunity(response));
+    // console.log(answers);
+    dispatch(getAllCommunities());
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const editCommunities = (idCommunity, communityData) => async (dispatch) => {
+  try {
+    const response = await axios.put(
+      `api/communities/${idCommunity}`,
+      communityData
+    );
+    dispatch(editCommunity(response));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const deletedCommunities = (idCommunity) => async (dispatch) => {
+  try {
+    const response = await axios.delete(`/api/communities/${idCommunity}`);
+    dispatch(deleteCommunity(response));
+    dispatch(getAllCommunities());
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
 export default {
   getOnlyPost,
   getAllAnswers,
@@ -479,4 +561,9 @@ export default {
   setVisitedUser,
   getTopUsersLanding,
   updateTheUser,
+  getIdCommunity,
+  getAllCommunities,
+  addCommunities,
+  editCommunities,
+  deletedCommunities,
 };

@@ -116,6 +116,8 @@ const CardName = styled.h3`
 `;
 
 function CardComunidadShow({ image, users, checks, title }) {
+  const postResolved = checks.filter((e) => e.resolved);
+
   return (
     <Container>
       <CardComunidadShowIMG src={image} alt="" />
@@ -127,7 +129,7 @@ function CardComunidadShow({ image, users, checks, title }) {
 
       <CardStatsChecks>
         <CardIcon src={IconCheck} alt="cantidad de problemas resueltos" />
-        <StatsNumber>{checks}</StatsNumber>
+        <StatsNumber>{postResolved.length}</StatsNumber>
       </CardStatsChecks>
 
       <CardName>{title}</CardName>
@@ -139,14 +141,12 @@ function CardComunidadShow({ image, users, checks, title }) {
 CardComunidadShow.propTypes = {
   title: PropTypes.string,
   users: PropTypes.number,
-  checks: PropTypes.number,
   image: PropTypes.string,
 };
 
 CardComunidadShow.defaultProps = {
   title: '',
   users: 0,
-  checks: 0,
   image: '',
 };
 
