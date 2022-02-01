@@ -27,10 +27,11 @@ const PostTemplteCont = styled.article`
   flex-direction: column;
   margin-top: 3rem;
   max-width: 625px;
-  min-width: 625px;
+
   @media screen and (min-width: 1024px) {
     border: 1px solid #79777052; //--dark-color
     border-radius: 2rem;
+    min-width: 625px;
   }
 `;
 

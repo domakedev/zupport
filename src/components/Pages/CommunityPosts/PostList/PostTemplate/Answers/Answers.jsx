@@ -29,7 +29,7 @@ const MoreAnswers = styled.button`
     font-family: Archivo Narrow;
     font-style: normal;
     font-weight: normal;
-    font-size: 13px;
+    font-size: var(--secondarey-font-size);
     line-height: 18px;
     color: rgba(0, 0, 0, 0.55);
   }
@@ -56,6 +56,7 @@ const MoreAnswersList = styled.div`
     }
   }
   @media screen and (min-width: 1024px) {
+    padding-bottom: 10px;
     @keyframes slidein {
       from {
         margin-left: 50%;
@@ -74,7 +75,7 @@ const ValidatedMessage = styled.p`
   font-family: var(--secondary-font);
   font-style: normal;
   font-weight: normal;
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   line-height: 18px;
   text-align: center;
   color: rgba(0, 0, 0, 0.55);
@@ -90,6 +91,15 @@ const SupportAnswer = styled(ValidatedMessage)`
 
 const AnswersContainer = styled.div`
   margin-bottom: 30px;
+  @media screen and (min-width: 1024px) {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #79777052;
+    max-height: 60vh;
+    border-radius: 20px;
+  }
 `;
 
 const PaymentCont = styled.div`
@@ -98,7 +108,7 @@ const PaymentCont = styled.div`
   align-items: center;
   margin-top: 10px;
 `;
-function Answers({ idPost, postUser }) {
+function Answers({ idPost, postUser, postPoints }) {
   const dispatch = useDispatch();
 
   const [viewMore, setViewMore] = useState(false);
@@ -184,7 +194,7 @@ function Answers({ idPost, postUser }) {
             ) : (
               <>
                 <FaAngleDown />
-                <span>Ver más respuestas</span>
+                <span>Ver todas las respuestas</span>
               </>
             )}
           </MoreAnswers>
@@ -197,6 +207,7 @@ function Answers({ idPost, postUser }) {
                     idPost={idPost}
                     postUser={postUser}
                     validatedAnswer={dataValidated}
+                    postPoints={postPoints}
                   />
                   <SupportAnswer onClick={() => supportAnswer(e)}>
                     Apoyar {e.likes} <GrLike />

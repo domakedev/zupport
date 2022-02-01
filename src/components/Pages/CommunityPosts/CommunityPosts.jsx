@@ -24,15 +24,64 @@ const CommunityPostCont = styled.div`
     justify-self: center;
     grid-template-areas:
       'welcome  welcome welcome'
-      ' .  topHelpers . '
+      '. . topHelpers'
       '. . gofData'
       '. . createPost'
-      '. . postList';
+      '. . postList'
+      '. . butPage';
   }
 `;
 const Container = styled.div`
   display: grid;
   justify-content: center;
+`;
+
+const PrevPage = styled.button`
+  padding: 1rem;
+  display: inline-block;
+  border: none;
+  border-radius: 1rem;
+  background: var(--principal-color); //rgba(41, 172, 224, 0.618);
+  color: var(--light-color);
+  font-family: var(--principal-font);
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: normal;
+  cursor: pointer;
+  margin: 10px 0 10px 0;
+  list-style: none;
+  text-decoration: none;
+  margin-top: 10px;
+  width: 100px;
+`;
+
+const NextPage = styled.button`
+  padding: 1rem;
+  display: inline-block;
+  border: none;
+  border-radius: 1rem;
+  background: var(--principal-color); //rgba(41, 172, 224, 0.618);
+  color: var(--light-color);
+  font-family: var(--principal-font);
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: normal;
+  cursor: pointer;
+  margin: 10px 0 10px 0;
+  list-style: none;
+  text-decoration: none;
+  margin-top: 10px;
+  width: 100px;
+`;
+
+const PageContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  @media screen and (min-width: 1024px) {
+    grid-area: butPage;
+  }
 `;
 
 const AlertMessage = styled.div`
@@ -47,6 +96,24 @@ function CommunityPosts() {
 
   const userAuth = useSelector((state) => state.userAuthenticated);
   const [results, setResults] = useState([]);
+
+  const [page, setPage] = useState(1);
+
+  const comuPosts = useSelector((state) => state.posts);
+
+  const nextPage = () => {
+    if (comuPosts.length === 10) {
+      const next = page + 1;
+      setPage(next);
+    }
+  };
+
+  const prevPage = () => {
+    if (page > 1) {
+      const prev = page - 1;
+      setPage(prev);
+    }
+  };
 
   useEffect(async () => {
     // busca por el id de la comunidad
@@ -79,6 +146,14 @@ function CommunityPosts() {
               results={results}
             />
             <PostList results={results} />
+            <PageContainer>
+              <PrevPage type="button" onClick={prevPage}>
+                Previous
+              </PrevPage>
+              <NextPage type="button" onClick={nextPage}>
+                Next
+              </NextPage>
+            </PageContainer>
           </CommunityPostCont>
         )}
       </Container>
