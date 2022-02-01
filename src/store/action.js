@@ -213,7 +213,9 @@ const addedPost = (postData) => async (dispatch) => {
 const editedPost = (idPost, postData) => async (dispatch) => {
   try {
     const response = await axios.put(`/api/post/${idPost}`, postData);
+
     dispatch(editPost(response.data));
+    dispatch(getOnlyPost(idPost));
   } catch (e) {
     // console.log(e);
   }
@@ -292,6 +294,7 @@ const obtainUser = (userUsername) => async (dispatch) => {
     const respuesta = await axios.get('/api/users/tokencitox');
     if (respuesta.data.usuario) {
       dispatch(obtainUserType(respuesta?.data?.usuario));
+
       dispatch(errorLogin(false));
     } else if (!respuesta.data.usuario) {
       dispatch(errorLogin(true));
@@ -426,34 +429,39 @@ const getTopUsersLanding = () => async (dispatch) => {
   }
 };
 
-const updateTheUser = (userUsername, newData) => async (dispatch) => {
-  dispatch(setSpinning(true));
+const updateTheUser =
+  (userUsername, newData, fromAnsPoints) => async (dispatch) => {
+    dispatch(setSpinning(true));
 
-  try {
-    const tokencito = localStorage.getItem('tokencitox');
+    try {
+      const tokencito = localStorage.getItem('tokencitox');
 
-    // Funcion para enviar el token por header
+      // Funcion para enviar el token por header
 
-    if (tokencito) {
-      axios.defaults.headers.common['x-auth-token'] = tokencito;
-    } else {
-      delete axios.defaults.headers.common['x-auth-token'];
-      return;
+      if (tokencito) {
+        axios.defaults.headers.common['x-auth-token'] = tokencito;
+      } else {
+        delete axios.defaults.headers.common['x-auth-token'];
+        return;
+      }
+
+      const respuesta = await axios.put(`/api/users/${userUsername}`, newData);
+
+      if (!fromAnsPoints) {
+        dispatch(updateUser(respuesta.data[0]));
+
+        dispatch(setSpinning(false));
+      } else if (fromAnsPoints) {
+        dispatch(setSpinning(false));
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(
+        '🚀 ~ file: action.js ~ line 359 ~ updateTheUser ~ error',
+        error
+      );
     }
-
-    const respuesta = await axios.put(`/api/users/${userUsername}`, newData);
-
-    dispatch(updateUser(respuesta.data[0]));
-
-    dispatch(setSpinning(false));
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(
-      '🚀 ~ file: action.js ~ line 359 ~ updateTheUser ~ error',
-      error
-    );
-  }
-};
+  };
 
 export default {
   getOnlyPost,

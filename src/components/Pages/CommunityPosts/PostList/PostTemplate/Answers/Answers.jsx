@@ -29,7 +29,7 @@ const MoreAnswers = styled.button`
     font-family: Archivo Narrow;
     font-style: normal;
     font-weight: normal;
-    font-size: 13px;
+    font-size: var(--secondarey-font-size);
     line-height: 18px;
     color: rgba(0, 0, 0, 0.55);
   }
@@ -75,7 +75,7 @@ const ValidatedMessage = styled.p`
   font-family: var(--secondary-font);
   font-style: normal;
   font-weight: normal;
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   line-height: 18px;
   text-align: center;
   color: rgba(0, 0, 0, 0.55);
@@ -108,7 +108,7 @@ const PaymentCont = styled.div`
   align-items: center;
   margin-top: 10px;
 `;
-function Answers({ idPost, postUser }) {
+function Answers({ idPost, postUser, postPoints }) {
   const dispatch = useDispatch();
 
   const [viewMore, setViewMore] = useState(false);
@@ -194,7 +194,7 @@ function Answers({ idPost, postUser }) {
             ) : (
               <>
                 <FaAngleDown />
-                <span>Ver más respuestas</span>
+                <span>Ver todas las respuestas</span>
               </>
             )}
           </MoreAnswers>
@@ -207,6 +207,7 @@ function Answers({ idPost, postUser }) {
                     idPost={idPost}
                     postUser={postUser}
                     validatedAnswer={dataValidated}
+                    postPoints={postPoints}
                   />
                   <SupportAnswer onClick={() => supportAnswer(e)}>
                     Apoyar {e.likes} <GrLike />
