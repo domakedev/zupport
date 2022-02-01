@@ -12,6 +12,7 @@ const GoBackContainer = styled.div`
   font-size: 1.5rem;
   font-family: var(--secondary-font);
   cursor: pointer;
+  font-weight: 700;
 `;
 
 const WelcomeContainer = styled.section`
