@@ -56,6 +56,7 @@ const MoreAnswersList = styled.div`
     }
   }
   @media screen and (min-width: 1024px) {
+    padding-bottom: 10px;
     @keyframes slidein {
       from {
         margin-left: 50%;
@@ -90,6 +91,15 @@ const SupportAnswer = styled(ValidatedMessage)`
 
 const AnswersContainer = styled.div`
   margin-bottom: 30px;
+  @media screen and (min-width: 1024px) {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #79777052;
+    max-height: 60vh;
+    border-radius: 20px;
+  }
 `;
 
 const PaymentCont = styled.div`
