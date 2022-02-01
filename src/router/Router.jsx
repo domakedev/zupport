@@ -44,10 +44,10 @@ function Router() {
         element={<CommunityPosts />}
       />
 
-      <Route
+      {/* <Route
         path="/communities/:comuTitle/posts/:page"
         element={<CommunityPosts />}
-      />
+      /> */}
 
       <Route
         path="/communities/:comuTitle/posts/:idPost"
