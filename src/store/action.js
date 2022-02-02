@@ -239,13 +239,9 @@ const getPost = (idPost) => async (dispatch) => {
 const addedPost = (comuTitle, postData) => async (dispatch) => {
   try {
     const community = await axios.get(`/api/communities/title/${comuTitle}`);
-    console.log(community);
-    console.log('Posts que tenia', community.data.posts);
     const Posts = community.data.posts;
     // eslint-disable-next-line
     const idComu = community.data._id;
-    console.log([...Posts, idComu]);
-    // Make a post
     // eslint-disable-next-line
     const comId = {community: community.data._id};
 
@@ -254,7 +250,6 @@ const addedPost = (comuTitle, postData) => async (dispatch) => {
     // eslint-disable-next-line
     const idPost = response.data._id;
     const newPost = [...Posts, idPost];
-    console.log(newPost);
     await axios.put(`/api/communities/${idComu}`, {
       posts: newPost,
     });
