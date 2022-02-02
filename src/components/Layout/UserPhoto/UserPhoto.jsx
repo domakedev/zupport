@@ -138,11 +138,11 @@ function UserPhoto({
       route={location.pathname}
     >
       <IconContext.Provider
-        userPoints={userPoints}
+        userPoints={user?.levelPoints}
         value={value}
         medalSize={medalSize}
       >
-        <AiTwotonePropertySafety />
+        <AiTwotonePropertySafety color={crownColor(user?.levelPoints)} />
       </IconContext.Provider>
 
       <PhotoContainer>

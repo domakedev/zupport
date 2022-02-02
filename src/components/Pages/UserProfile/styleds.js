@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const MainContainer = styled.div`
   min-height: 100vh;
@@ -72,7 +72,7 @@ const StatName = styled.div`
   }
 `;
 
-const StatBox = styled.p`
+const StatBox = styled.div`
   background: #efefef;
   border-radius: 3px;
   width: 66px;
@@ -127,6 +127,24 @@ const AboutMe = styled.p`
   }
 `;
 
+const ContainerCrown = styled('div')(
+  () => css`
+    position: relative;
+    border-radius: 50%;
+    .icon-crow {
+      height: 60px;
+      width: 60px;
+      left: 3px;
+      top: -2px;
+      bottom: 28px;
+      stroke-width: 1rem;
+      stroke: var(--dark-color);
+      position: absolute;
+      z-index: 2;
+    }
+  `
+);
+
 export {
   MainContainer,
   UserPhotoContainer,
@@ -139,4 +157,5 @@ export {
   IndividualStatContainer,
   StatSocial,
   AboutMe,
+  ContainerCrown,
 };

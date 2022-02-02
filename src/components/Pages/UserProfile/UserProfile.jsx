@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { AiTwotonePropertySafety } from 'react-icons/ai';
+import { IconContext } from 'react-icons';
 import Header from '../../Layout/Header';
 import Footer from '../../Layout/Footer';
 import UserPhoto from '../../Layout/UserPhoto/UserPhoto';
@@ -17,6 +19,7 @@ import {
   IndividualStatContainer,
   StatSocial,
   AboutMe,
+  ContainerCrown,
 } from './styleds';
 import actions from '../../../store/action';
 // import CardComunidadShow from '../../Layout/CardComunidadShow/CardComunidadShow';
@@ -49,6 +52,28 @@ const UserProfile = function UserProfile() {
     }
     return '';
   };
+
+  const crownColor = (points) => {
+    if (points > 100) {
+      return '#FFC107';
+    }
+    if (points > 50) {
+      return '#C0C0C0';
+    }
+    return '#CD7F32';
+  };
+
+  const definirNivel = (points) => {
+    if (points > 100) {
+      return 'Oro';
+    }
+    if (points > 50) {
+      return 'Plata';
+    }
+    return 'Bronce';
+  };
+
+  const value = useMemo(() => ({ className: 'icon-crow' }));
   return (
     <>
       <Header />
@@ -72,9 +97,21 @@ const UserProfile = function UserProfile() {
             <p>Mis estadisticas</p>
             <IndividualStatContainer>
               <IndividualStat>
-                <StatBox>{user.points}</StatBox>
+                {/* <StatBox>{user.levelPoints}</StatBox> */}
+                <StatBox>
+                  <ContainerCrown>
+                    <IconContext.Provider
+                      userPoints={user?.levelPoints}
+                      value={value}
+                    >
+                      <AiTwotonePropertySafety
+                        color={crownColor(user?.levelPoints)}
+                      />
+                    </IconContext.Provider>
+                  </ContainerCrown>
+                </StatBox>
                 <StatName>
-                  <p>Nivel</p>
+                  <p>{definirNivel(user?.levelPoints)}</p>
                 </StatName>
               </IndividualStat>
               <IndividualStat>

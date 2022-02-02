@@ -85,8 +85,6 @@ function Answer({
   validatedAnswer,
   postPoints = 0,
 }) {
-  console.log('🚀 ~ file: Answer.jsx ~ line 88 ~ postUser', postUser);
-
   // const [comment] = useState(state);
   const [disabledInp, setDisabledInp] = useState(false);
   const [editAnswer, setEditAnswer] = useState(state.answer);
@@ -144,14 +142,20 @@ function Answer({
       )
     );
 
+    // Aumentar el nivel del usuario que respondio en +1
     // Asignar puntos del post a la answer
-    const userOfAnswer = state.user.username;
-    const totalPointsToAdd = state.user.points + postPoints;
+    const userWhoComment = state.user;
+
+    const newPoints = userWhoComment.points + postPoints;
+
+    const newLevel = (userWhoComment.levelPoints || 0) + 1;
+
     await dispatch(
       action.updateTheUser(
-        userOfAnswer,
+        userWhoComment.username,
         {
-          points: totalPointsToAdd,
+          points: newPoints,
+          levelPoints: newLevel,
         },
         true
       )
