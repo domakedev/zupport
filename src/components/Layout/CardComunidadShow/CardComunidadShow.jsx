@@ -124,7 +124,7 @@ function CardComunidadShow({ image, users, checks, title }) {
   return (
     <Container
       onClick={() => {
-        navigate(`/communities/${title}`);
+        navigate(`/communities/${title}/posts`);
       }}
     >
       <CardComunidadShowIMG src={image} alt="" />
