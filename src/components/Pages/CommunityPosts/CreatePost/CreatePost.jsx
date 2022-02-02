@@ -48,8 +48,8 @@ const LinkTo = styled(Link)`
 function CreatePost() {
   return (
     <PostContainer>
-      <h2>¿En que deseas ayuda?</h2>
-      <LinkTo to="help-post">Preguntar</LinkTo>
+      <h2>¿Deseas ayuda?</h2>
+      <LinkTo to="create-post">Preguntar</LinkTo>
     </PostContainer>
   );
 }

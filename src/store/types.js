@@ -38,6 +38,7 @@ export const UPDATE_USER = 'UPDATE_USER';
 
 // Communities
 export const GET_ID_COMMUNITY = 'GET_ID_COMMUNITY';
+export const GET_TITLE_COMMUNITY = 'GET_TITLE_COMMUNITY';
 export const GET_COMMUNITIES = 'GET_COMMUNITIES';
 export const ADD_COMMUNITY = 'ADD_COMMUNITY';
 export const EDIT_COMMUNITY = 'EDIT_COMMUNITY';
