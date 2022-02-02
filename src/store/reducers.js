@@ -149,7 +149,7 @@ const reducer = (state = initialState, action) => {
       // console.log(newValue);
       return { ...state, getIdCommunity: newValue };
     case GET_COMMUNITIES:
-      console.log(newValue);
+      // console.log(newValue);
       return { ...state, communities: newValue };
     case ADD_COMMUNITY:
       return { ...state, addCommunity: newValue };
