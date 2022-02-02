@@ -530,6 +530,7 @@ const editCommunities = (idCommunity, communityData) => async (dispatch) => {
       communityData
     );
     dispatch(editCommunity(response));
+    dispatch(getAllCommunities());
   } catch (e) {
     // console.log(e);
   }
@@ -539,7 +540,7 @@ const deletedCommunities = (idCommunity) => async (dispatch) => {
   try {
     const response = await axios.delete(`/api/communities/${idCommunity}`);
     dispatch(deleteCommunity(response));
-    dispatch(getAllCommunities());
+    // dispatch(getAllCommunities());
   } catch (e) {
     // console.log(e);
   }

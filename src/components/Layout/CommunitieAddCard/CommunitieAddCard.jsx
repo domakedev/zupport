@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -16,12 +16,22 @@ import {
   BsFillPersonPlusFill as AddPerson,
   BsCheckLg,
 } from 'react-icons/bs';
+import { AiOutlineEllipsis } from 'react-icons/ai';
 import action from '../../../store/action';
 
+const FirstCont = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const SecondCont = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 const Container = styled.div`
   height: 200px;
   width: 320px;
-  margin: 20px;
+  margin: ${({ buttonText }) =>
+    buttonText === 'UNIRME' ? '20px' : '0 20px 20px 20px'};
 
   position: relative;
 
@@ -158,8 +168,54 @@ const LineaD = styled(Linea)`
   bottom: 30px;
   right: 0;
 `;
+const ActionButtonCont = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-right: 20px;
+  margin-bottom: 7px;
+`;
+const ActionButton = styled.button`
+  border: none;
+  background: none;
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 1.3rem;
+  font-family: var(--secondary-font);
+  font-style: normal;
+  font-weight: normal;
+  line-height: 18px;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  :hover {
+    background: #d3d2ce5b;
+  }
+`;
+const MoreButton = styled.button`
+  border: none;
+  background: none;
+  font-size: 2.5rem;
+  color: var(--boring-color);
+  padding-top: 6px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+  &:hover {
+    background: #d3d2ce5b;
+    border-radius: 3px;
+  }
+`;
+function CommunitieAddCard({
+  id,
+  image,
+  users,
+  checks,
+  title,
+  buttonText,
+  creator,
+}) {
+  const [showButton, setShowButton] = useState(true);
+  const [buttonTextCard, setButtonTextCard] = useState('Editar');
 
-function CommunitieAddCard({ id, image, users, checks, title, buttonText }) {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUserOTokencito);
 
@@ -172,37 +228,83 @@ function CommunitieAddCard({ id, image, users, checks, title, buttonText }) {
     }
   };
   const postResolved = checks.filter((e) => e.resolved);
+  const handleClickMore = () => {
+    setShowButton(!showButton);
+  };
 
+  const handleEdit = () => {
+    setButtonTextCard('Editar');
+  };
+  const handleDelete = () => {
+    setButtonTextCard('Editar');
+    const userDelete = users.filter((e) => e !== currentUser.username);
+    dispatch(
+      action.editCommunities(id, {
+        users: userDelete,
+      })
+    );
+  };
   return (
-    <Container>
-      <DataContainer>
-        <Imagen src={image} alt="" />
-        <Name>{title}</Name>
-      </DataContainer>
+    <FirstCont>
+      {buttonText === 'UNIRME' ? null : (
+        <SecondCont>
+          {currentUser.username ? (
+            <MoreButton
+              type="button"
+              onClick={handleClickMore}
+              aria-label="moreAnswer"
+            >
+              <AiOutlineEllipsis />
+            </MoreButton>
+          ) : null}
+          {showButton ? null : (
+            <ActionButtonCont>
+              {creator === currentUser.username ? (
+                <ActionButton
+                  type="input"
+                  onClick={handleEdit}
+                  name={buttonTextCard}
+                >
+                  {buttonTextCard}
+                </ActionButton>
+              ) : null}
+              <ActionButton type="button" onClick={handleDelete}>
+                Salir de Comunidad
+              </ActionButton>
+            </ActionButtonCont>
+          )}
+        </SecondCont>
+      )}
+      <Container buttonText={buttonText}>
+        <DataContainer>
+          <Imagen src={image} alt="" />
+          <Name>{title}</Name>
+        </DataContainer>
 
-      <ContainerUsers>
-        <BsPeopleFill color="#797770" size="30px" />
-        <Number>{users.length}</Number>
-      </ContainerUsers>
+        <ContainerUsers>
+          <BsPeopleFill color="#797770" size="30px" />
+          <Number>{users.length}</Number>
+        </ContainerUsers>
 
-      <ContainerChecks>
-        <BsFillBookmarkCheckFill color="#797770" size="30px" />
-        <Number>{postResolved.length}</Number>
-      </ContainerChecks>
+        <ContainerChecks>
+          <BsFillBookmarkCheckFill color="#797770" size="30px" />
+          <Number>{postResolved.length}</Number>
+        </ContainerChecks>
 
-      <LinkTo to={`${id}/posts`} onClick={unirmeA}>
-        {buttonText === 'UNIRME' ? (
-          <AddPerson size="40px" />
-        ) : (
-          <BsCheckLg size="25px" />
-        )}
+        <LinkTo to={`${id}/posts`} onClick={unirmeA}>
+          {buttonText === 'UNIRME' ? (
+            <AddPerson size="40px" />
+          ) : (
+            <BsCheckLg size="25px" />
+          )}
 
-        {buttonText}
-      </LinkTo>
+          {buttonText}
+        </LinkTo>
 
-      <LineaI />
-      <LineaD />
-    </Container>
+        <LineaI />
+        <LineaD />
+      </Container>
+    </FirstCont>
   );
 }
 

@@ -54,6 +54,7 @@ const Text = styled.h3`
   font-weight: normal;
   font-size: 2.6rem;
   line-height: 45px;
+  margin: 20px 0;
   color: var(--warning-color);
   text-align: center;
 `;
@@ -93,7 +94,7 @@ function Communities() {
         <hr style={{ marginTop: '100px' }} />
 
         {/* Impresion de resultados de busqueda */}
-        <Text>Mis Comunidades :</Text>
+        {userInCommunity.length !== 0 ? <Text>Mis Comunidades :</Text> : null}
         <Comunidades>
           {userInCommunity?.map((e) => (
             <CommunitieAddCard
@@ -104,6 +105,7 @@ function Communities() {
               checks={e.posts} // se manda el array de post que pertenecen a esa comunidad
               title={e.title}
               buttonText="MI COMUNIDAD"
+              creator={e.creator}
             />
           ))}
         </Comunidades>
