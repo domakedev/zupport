@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { useNavigate } from 'react-router-dom';
+
 // Images and Icons
 import IconUsers from '../../../images/users.svg';
 import IconCheck from '../../../images/check.svg';
@@ -19,6 +21,7 @@ const Container = styled.div`
   font-family: var(--secondary-font);
 
   margin: 20px auto;
+  cursor: pointer;
 `;
 
 const CardComunidadShowIMG = styled.img`
@@ -116,10 +119,14 @@ const CardName = styled.h3`
 `;
 
 function CardComunidadShow({ image, users, checks, title }) {
-  const postResolved = checks.filter((e) => e.resolved);
-
+  const postResolved = checks?.filter((e) => e.resolved);
+  const navigate = useNavigate();
   return (
-    <Container>
+    <Container
+      onClick={() => {
+        navigate(`/communities/${title}/posts`);
+      }}
+    >
       <CardComunidadShowIMG src={image} alt="" />
 
       <CardStatsUsers>
@@ -129,7 +136,7 @@ function CardComunidadShow({ image, users, checks, title }) {
 
       <CardStatsChecks>
         <CardIcon src={IconCheck} alt="cantidad de problemas resueltos" />
-        <StatsNumber>{postResolved.length}</StatsNumber>
+        <StatsNumber>{postResolved?.length || 0}</StatsNumber>
       </CardStatsChecks>
 
       <CardName>{title}</CardName>

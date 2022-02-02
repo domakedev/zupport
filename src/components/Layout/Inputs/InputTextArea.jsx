@@ -3,7 +3,6 @@ import React from 'react';
 import { BsCheckCircleFill, BsFillXCircleFill } from 'react-icons/bs';
 
 import styled, { css } from 'styled-components';
-import '../../../css/index.css';
 
 function InputArea({
   state,
@@ -15,6 +14,7 @@ function InputArea({
   errorText,
   inputParameters,
   functionx,
+  boxHeight,
 }) {
   const onChange = (e) => {
     changeState({ ...state, field: e.target.value });
@@ -49,6 +49,7 @@ function InputArea({
           onKeyUp={checking}
           onBlur={checking}
           check={state.check}
+          size={boxHeight}
         />
         <IconChecking check={state.check}>
           {state.check === 'true' ? (
@@ -84,7 +85,7 @@ const InputBox = styled.textarea`
   max-height: 300px;
   background: rgba(41, 171, 224, 0.08);
   border-radius: 3px;
-  height: 300px;
+  min-height: ${(props) => props.size || '30rem'};
   resize: none;
   line-height: 22px;
   padding: 10px 20px;

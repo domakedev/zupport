@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { FaSearch, FaChevronDown } from 'react-icons/fa';
 
 const BoxActionConatiner = styled.section`
-  margin: 3rem 0 2rem 4rem;
+  margin: 3rem 0 2rem 0rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -17,7 +17,7 @@ const BoxActionConatiner = styled.section`
   flex-direction: column;
   @media screen and (min-width: 1024px) {
     grid-area: gofData;
-    margin: 1rem 0 2rem 1rem;
+    margin: 1rem 1rem 2rem 1rem;
   }
 `;
 
@@ -25,7 +25,7 @@ const SearchInput = styled.input`
   width: 80%;
   height: 40px;
   min-width: 300px;
-  max-width: 700px;
+  max-width: 565px;
   border: 3px solid var(--principal-color);
   border-radius: 10px 0px 0px 10px;
   outline: none;

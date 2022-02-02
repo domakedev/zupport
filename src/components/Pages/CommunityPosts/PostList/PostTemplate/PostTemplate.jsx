@@ -26,12 +26,12 @@ const PostTemplteCont = styled.article`
   display: flex;
   flex-direction: column;
   margin-top: 3rem;
-  max-width: 625px;
+  width: 100vw;
 
   @media screen and (min-width: 1024px) {
     border: 1px solid #79777052; //--dark-color
     border-radius: 2rem;
-    min-width: 625px;
+    max-width: 625px;
   }
 `;
 
@@ -131,7 +131,7 @@ function PostTemplate({
       )
     );
     // Llevarme con navigate a la pagina de edicion
-    navigate('/communities/edit-help-post');
+    navigate('edit-post');
     // En la pagina de edicion del State debo leer todas las propiedades que necesito
   };
 
