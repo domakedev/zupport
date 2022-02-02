@@ -15,6 +15,7 @@ import Login from '../components/Pages/Login/Login';
 import Register from '../components/Pages/Register/Register';
 import Verify from '../components/Pages/Register/Verify';
 import P404 from '../components/Pages/404/P404';
+import SucceedPayment from '../components/Pages/SucceedPayment/SucceedPayment';
 
 import UserProfile from '../components/Pages/UserProfile/UserProfile';
 import UserProfileConfig from '../components/Pages/UserProfileConfig/UserProfileConfig';
@@ -29,6 +30,7 @@ function Router() {
       <Route path="/profile/:username" element={<UserProfile />} />
 
       <Route path="/config" element={<UserProfileConfig />} />
+      <Route path="/succeed-payment" element={<SucceedPayment />} />
 
       <Route path="communities/" element={<Communities />} />
 
