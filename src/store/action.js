@@ -196,6 +196,18 @@ const editAnswerPut = (idAnswer, answerData, idPost) => async (dispatch) => {
     // console.log(e);
   }
 };
+const likedAnswer = (idAnswer, answerData) => async (dispatch) => {
+  try {
+    const response = await axios.put(
+      `/api/answer/likeAnswer/${idAnswer}`,
+      answerData
+    );
+    dispatch(editAnswer(response.data));
+    // dispatch(getAllAnswers(idAnswer));
+  } catch (e) {
+    // console.log(e);
+  }
+};
 
 const deletedAnswer = (idAnswer, idPost) => async (dispatch) => {
   try {
@@ -551,6 +563,7 @@ export default {
   getAllAnswers,
   addAnswerPost,
   editAnswerPut,
+  likedAnswer,
   deletedAnswer,
   getAllPosts,
   getPost,

@@ -112,7 +112,7 @@ function PostFooter({ idPost, textComment, likes }) {
         {
           answer: answerData,
           // user: currentUser.username,
-          likes: 0,
+          likes: [],
           post: idPost,
           resolved: false,
         },

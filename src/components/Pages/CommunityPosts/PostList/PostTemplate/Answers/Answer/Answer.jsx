@@ -88,19 +88,20 @@ function Answer({
   postPoints = 0,
 }) {
   // const [comment] = useState(state);
+  const currentUser = useSelector(
+    (stateUser) => stateUser.currentUserOTokencito
+  );
   const [disabledInp, setDisabledInp] = useState(false);
   const [editAnswer, setEditAnswer] = useState(state.answer);
   const [disableInput, setDisableInput] = useState(true);
   const [showButton, setShowButton] = useState(true);
   const [buttonText, setButtonText] = useState('Editar');
+
   // const [stateResolved, setStateResolved] = useState(true);
   // const [isAutor, setIsAutor] = useState(true);
+
   const focusInput = useRef();
   const dispatch = useDispatch();
-
-  const currentUser = useSelector(
-    (stateUser) => stateUser.currentUserOTokencito
-  );
 
   const handleClickMore = () => {
     setDisabledInp(true);
