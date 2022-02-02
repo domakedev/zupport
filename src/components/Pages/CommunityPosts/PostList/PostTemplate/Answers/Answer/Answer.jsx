@@ -85,6 +85,8 @@ function Answer({
   validatedAnswer,
   postPoints = 0,
 }) {
+  console.log('🚀 ~ file: Answer.jsx ~ line 88 ~ postUser', postUser);
+
   // const [comment] = useState(state);
   const [disabledInp, setDisabledInp] = useState(false);
   const [editAnswer, setEditAnswer] = useState(state.answer);
@@ -129,15 +131,27 @@ function Answer({
     dispatch(action.deletedAnswer(state._id, idPost));
   };
   const handleValidated = async () => {
+    // Quitar puntos al postUser
+    const finalPoinstSubstract = postUser.points - postPoints;
+
+    await dispatch(
+      action.updateTheUser(
+        postUser.username,
+        {
+          points: finalPoinstSubstract,
+        },
+        true
+      )
+    );
+
     // Asignar puntos del post a la answer
-    const pointsToAssign = postPoints;
     const userOfAnswer = state.user.username;
-    const pointstFinal = state.user.points + pointsToAssign;
+    const totalPointsToAdd = state.user.points + postPoints;
     await dispatch(
       action.updateTheUser(
         userOfAnswer,
         {
-          points: pointstFinal,
+          points: totalPointsToAdd,
         },
         true
       )

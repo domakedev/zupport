@@ -80,7 +80,7 @@ const UserProfile = function UserProfile() {
               <IndividualStat>
                 <StatBox>{user.points}</StatBox>
                 <StatName>
-                  <p>Favores</p>
+                  <p>Puntos</p>
                 </StatName>
               </IndividualStat>
             </IndividualStatContainer>
