@@ -119,7 +119,7 @@ const CardName = styled.h3`
 `;
 
 function CardComunidadShow({ image, users, checks, title }) {
-  const postResolved = checks.filter((e) => e.resolved);
+  const postResolved = checks?.filter((e) => e.resolved);
   const navigate = useNavigate();
   return (
     <Container
@@ -136,7 +136,7 @@ function CardComunidadShow({ image, users, checks, title }) {
 
       <CardStatsChecks>
         <CardIcon src={IconCheck} alt="cantidad de problemas resueltos" />
-        <StatsNumber>{postResolved.length}</StatsNumber>
+        <StatsNumber>{postResolved?.length || 0}</StatsNumber>
       </CardStatsChecks>
 
       <CardName>{title}</CardName>

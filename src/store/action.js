@@ -239,10 +239,25 @@ const getPost = (idPost) => async (dispatch) => {
 const addedPost = (comuTitle, postData) => async (dispatch) => {
   try {
     const community = await axios.get(`/api/communities/title/${comuTitle}`);
+    console.log(community);
+    console.log('Posts que tenia', community.data.posts);
+    const Posts = community.data.posts;
     // eslint-disable-next-line
-    const idCom = {community: community.data._id};
-    const post = { ...postData, ...idCom };
+    const idComu = community.data._id;
+    console.log([...Posts, idComu]);
+    // Make a post
+    // eslint-disable-next-line
+    const comId = {community: community.data._id};
+
+    const post = { ...postData, ...comId };
     const response = await axios.post('/api/post', post);
+    // eslint-disable-next-line
+    const idPost = response.data._id;
+    const newPost = [...Posts, idPost];
+    console.log(newPost);
+    await axios.put(`/api/communities/${idComu}`, {
+      posts: newPost,
+    });
     dispatch(addPost(response.data));
   } catch (e) {
     // console.log(e);
@@ -539,7 +554,9 @@ const getAllCommunities = () => async (dispatch) => {
 
 const addCommunities = (communityData) => async (dispatch) => {
   try {
-    const response = await axios.post('/api/communities/', communityData);
+    const created = await axios.post('/api/communities/', communityData);
+    // eslint-disable-next-line
+    const response = await axios.get(`/api/communities/${created.data._id}`);
     dispatch(addCommunity(response));
     // console.log(answers);
     dispatch(getAllCommunities());
