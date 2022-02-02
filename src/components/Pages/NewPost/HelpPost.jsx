@@ -123,14 +123,13 @@ function HelpPost() {
     }
 
     await dispatch(
-      action.addedPost({
+      action.addedPost(comuTitle, {
         title: titlest.field,
         description: descriptionst.field,
         image: urltemp,
         likes: [],
         points: pointsst.field,
         taggedUsers: userNames,
-        community: comuTitle, // se agrega el id de la comunidad
         resolved: false,
       })
     );
@@ -330,6 +329,7 @@ const GoBack = styled.div`
   color: var(--boring-color);
   padding-left: 100px;
   font-size: 3rem;
+  cursor: pointer;
 `;
 
 const Line = styled.hr`

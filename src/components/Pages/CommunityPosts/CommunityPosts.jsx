@@ -84,17 +84,11 @@ const PageContainer = styled.div`
   }
 `;
 
-const AlertMessage = styled.div`
-  margin-top: 50%;
-  font-family: var(--secondary-font);
-  font-size: var(--secondarey-font-size);
-`;
-
 function CommunityPosts() {
   const dispatch = useDispatch();
   const { comuTitle } = useParams();
 
-  const userAuth = useSelector((state) => state.userAuthenticated);
+  // const userAuth = useSelector((state) => state.userAuthenticated);
   const [results, setResults] = useState([]);
 
   const [page, setPage] = useState(1);
@@ -130,30 +124,26 @@ function CommunityPosts() {
     <>
       <Header />
       <Container>
-        {!userAuth ? (
-          <AlertMessage>Que tal si iniciamos sesion primero?</AlertMessage>
-        ) : (
-          <CommunityPostCont>
-            <WelcomeCommunity title="Javascript" />
-            <DividingLine />
-            <TopHelpers />
-            <CreatePost />
-            <GOFData
-              comuPosts={comuPosts}
-              setResults={setResults}
-              results={results}
-            />
-            <PostList results={results} />
-            <PageContainer>
-              <PrevPage type="button" onClick={prevPage}>
-                Previous
-              </PrevPage>
-              <NextPage type="button" onClick={nextPage}>
-                Next
-              </NextPage>
-            </PageContainer>
-          </CommunityPostCont>
-        )}
+        <CommunityPostCont>
+          <WelcomeCommunity title={comuTitle} />
+          <DividingLine />
+          <TopHelpers />
+          <CreatePost />
+          <GOFData
+            comuPosts={comuPosts}
+            setResults={setResults}
+            results={results}
+          />
+          <PostList results={results} />
+          <PageContainer>
+            <PrevPage type="button" onClick={prevPage}>
+              Previous
+            </PrevPage>
+            <NextPage type="button" onClick={nextPage}>
+              Next
+            </NextPage>
+          </PageContainer>
+        </CommunityPostCont>
       </Container>
     </>
   );
