@@ -196,7 +196,11 @@ function EditHelpPost() {
               inputParameters={parameters.description}
             />
             <PreviousImgText>Tu imagen cargada anteriormente</PreviousImgText>
-            <PreviousImg src={dataPost.image} alt="Imagen anterior" />
+            {dataPost.image ? (
+              <PreviousImg src={dataPost.image} alt="Imagen anterior" />
+            ) : (
+              <SinImagen>Sin imagen</SinImagen>
+            )}
             {uploaderShow ? (
               <Input
                 type="file"
@@ -346,6 +350,7 @@ const GoBack = styled.div`
   color: var(--boring-color);
   padding-left: 100px;
   font-size: 3rem;
+  cursor: pointer;
 `;
 
 const Line = styled.hr`
@@ -449,6 +454,15 @@ const PreviousImgText = styled.div`
   padding: 1rem 0;
   font-weight: normal;
   font-size: 1.8rem;
+`;
+
+const SinImagen = styled.div`
+  font-family: var(--principal-font);
+  color: var(--warning-color);
+  text-align: center;
+  padding: 1rem 0;
+  font-weight: normal;
+  font-size: 1.4rem;
 `;
 
 const OfferTitle = styled.div`

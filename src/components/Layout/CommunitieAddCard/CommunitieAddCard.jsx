@@ -186,7 +186,7 @@ function CommunitieAddCard({ id, image, users, checks, title }) {
         <Number>{postResolved.length}</Number>
       </ContainerChecks>
 
-      <LinkTo to={`${id}/posts`} onClick={unirmeA}>
+      <LinkTo to={`${title}/posts`} onClick={unirmeA}>
         <AddPerson size="40px" />
         UNIRME
       </LinkTo>

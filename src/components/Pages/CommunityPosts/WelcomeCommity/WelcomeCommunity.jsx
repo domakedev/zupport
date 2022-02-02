@@ -58,8 +58,8 @@ function WelcomeCommunity({ title }) {
   return (
     <WelcomeContainer>
       <WelcomeCommnityTitle>
-        Bienvenid@ a tu comunidad {title}
-        <p>Conoce a l@s 5 top helpers de tu comunidad</p>
+        Bienvenid@ a la comunidad {title}
+        <p>Conoce l@s 5 top helpers de tu comunidad</p>
       </WelcomeCommnityTitle>
       <GoBackContainer onClick={goBack}>
         <BiArrowBack /> Volver
