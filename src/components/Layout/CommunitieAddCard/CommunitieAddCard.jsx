@@ -14,6 +14,7 @@ import {
   BsPeopleFill,
   BsFillBookmarkCheckFill,
   BsFillPersonPlusFill as AddPerson,
+  BsCheckLg,
 } from 'react-icons/bs';
 import action from '../../../store/action';
 
@@ -137,6 +138,7 @@ const LinkTo = styled(Link)`
   gap: 5px;
 
   border-radius: 3px;
+  text-decoration: none;
 
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
@@ -157,15 +159,17 @@ const LineaD = styled(Linea)`
   right: 0;
 `;
 
-function CommunitieAddCard({ id, image, users, checks, title }) {
+function CommunitieAddCard({ id, image, users, checks, title, buttonText }) {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUserOTokencito);
 
   const unirmeA = () => {
     // eslint-disable-next-line
-    // console.log('Me uni a la comunidad de:', users);
-    users.push(currentUser.username);
-    dispatch(action.editCommunities(id, { users }));
+    const userExists = users.find((e) => e === currentUser.username);
+    if (!userExists) {
+      users.push(currentUser.username);
+      dispatch(action.editCommunities(id, { users }));
+    }
   };
   const postResolved = checks.filter((e) => e.resolved);
 
@@ -187,8 +191,13 @@ function CommunitieAddCard({ id, image, users, checks, title }) {
       </ContainerChecks>
 
       <LinkTo to={`${id}/posts`} onClick={unirmeA}>
-        <AddPerson size="40px" />
-        UNIRME
+        {buttonText === 'UNIRME' ? (
+          <AddPerson size="40px" />
+        ) : (
+          <BsCheckLg size="25px" />
+        )}
+
+        {buttonText}
       </LinkTo>
 
       <LineaI />

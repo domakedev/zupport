@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 export const getPostTime = (fecha) => {
   const months = [
     'Enero',
@@ -82,4 +83,21 @@ export const rankingsCommunity = (arr, number) => {
   const sorted = [...arr].sort((a, b) => b.users.length - a.users.length);
   const fifth = sorted.slice(0, number);
   return fifth;
+};
+export const isUserInCommu = (arr, filter, currentUser) => {
+  const userInCommun = [];
+  const userInNotCommun = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    const resp = arr[i].users.find((e) => e === currentUser);
+    if (resp) {
+      userInCommun.push(arr[i]);
+    } else {
+      userInNotCommun.push(arr[i]);
+    }
+  }
+  if (filter === 'userInCommunity') {
+    return userInCommun;
+  }
+  return userInNotCommun;
 };
