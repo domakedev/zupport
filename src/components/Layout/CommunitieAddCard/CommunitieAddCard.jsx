@@ -291,14 +291,12 @@ function CommunitieAddCard({
           <Number>{postResolved.length}</Number>
         </ContainerChecks>
 
-        <LinkTo to={`${id}/posts`} onClick={unirmeA}>
+        <LinkTo to={`${title}/posts`} onClick={unirmeA}>
           {buttonText === 'UNIRME' ? (
             <AddPerson size="40px" />
           ) : (
             <BsCheckLg size="25px" />
           )}
-
-          {buttonText}
         </LinkTo>
 
         <LineaI />

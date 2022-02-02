@@ -22,6 +22,7 @@ import {
   TOP_LANDING_USERS,
   UPDATE_USER,
   GET_ID_COMMUNITY,
+  GET_TITLE_COMMUNITY,
   GET_COMMUNITIES,
   ADD_COMMUNITY,
   EDIT_COMMUNITY,
@@ -134,6 +135,10 @@ const loadOnlyCommunity = (community) => ({
   type: GET_ID_COMMUNITY,
   payload: community,
 });
+const loadTitleCommunity = (community) => ({
+  type: GET_TITLE_COMMUNITY,
+  payload: community,
+});
 const loadCommunities = (communities) => ({
   type: GET_COMMUNITIES,
   payload: communities,
@@ -220,8 +225,11 @@ const deletedAnswer = (idAnswer, idPost) => async (dispatch) => {
 };
 
 // Post
-const getAllPosts = (idCom, page) => async (dispatch) => {
+const getAllPosts = (comuTitle, page) => async (dispatch) => {
   try {
+    const community = await axios.get(`/api/communities/title/${comuTitle}`);
+    // eslint-disable-next-line
+    const idCom = community.data._id;
     const response = await axios.get(`/api/post/${idCom}/${page}`);
     const res = response.data;
     dispatch(loadPost(res));
@@ -240,9 +248,23 @@ const getPost = (idPost) => async (dispatch) => {
   }
 };
 
-const addedPost = (postData) => async (dispatch) => {
+const addedPost = (comuTitle, postData) => async (dispatch) => {
   try {
-    const response = await axios.post('/api/post', postData);
+    const community = await axios.get(`/api/communities/title/${comuTitle}`);
+    const Posts = community.data.posts;
+    // eslint-disable-next-line
+    const idComu = community.data._id;
+    // eslint-disable-next-line
+    const comId = {community: community.data._id};
+
+    const post = { ...postData, ...comId };
+    const response = await axios.post('/api/post', post);
+    // eslint-disable-next-line
+    const idPost = response.data._id;
+    const newPost = [...Posts, idPost];
+    await axios.put(`/api/communities/${idComu}`, {
+      posts: newPost,
+    });
     dispatch(addPost(response.data));
   } catch (e) {
     // console.log(e);
@@ -503,11 +525,24 @@ const updateTheUser =
   };
 
 // Community
-const getIdCommunity = (idCommunitie) => async (dispatch) => {
+const getIdCommunity = (idCommunity) => async (dispatch) => {
   try {
-    const response = await axios.get(`/api/communities/${idCommunitie}`);
+    const response = await axios.get(`/api/communities/${idCommunity}`);
     const res = response.data;
     dispatch(loadOnlyCommunity(res));
+    // console.log(res);
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
+const getCommunityByTitle = (CommunityTitle) => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `/api/communities/title/${CommunityTitle}`
+    );
+    const res = response.data;
+    dispatch(loadTitleCommunity(res));
     // console.log(res);
   } catch (e) {
     // console.log(e);
@@ -526,7 +561,9 @@ const getAllCommunities = () => async (dispatch) => {
 
 const addCommunities = (communityData) => async (dispatch) => {
   try {
-    const response = await axios.post('/api/communities/', communityData);
+    const created = await axios.post('/api/communities/', communityData);
+    // eslint-disable-next-line
+    const response = await axios.get(`/api/communities/${created.data._id}`);
     dispatch(addCommunity(response));
     // console.log(answers);
     dispatch(getAllCommunities());
@@ -584,6 +621,7 @@ export default {
   getTopUsersLanding,
   updateTheUser,
   getIdCommunity,
+  getCommunityByTitle,
   getAllCommunities,
   addCommunities,
   editCommunities,

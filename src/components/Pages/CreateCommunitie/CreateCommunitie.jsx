@@ -4,11 +4,16 @@ import styled, { css } from 'styled-components';
 
 // Components
 import { BiImageAdd } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+// import AddPhotoIcon from '../../../images/Icon/AddPhotoIcon.svg';
 import Header from '../../Layout/Header';
 import Footer from '../../Layout/Footer';
 import Input from '../../Layout/Inputs/InputText';
+import InputArea from '../../Layout/Inputs/InputTextArea';
 import CardComunidadShow from '../../Layout/CardComunidadShow/CardComunidadShow';
-
+import action from '../../../store/action';
+import axios from '../../../utils/axios';
 // icons
 
 // Styled Components
@@ -33,20 +38,16 @@ const MainContainer = styled.div`
 const Form = styled.form`
   width: 100%;
   max-width: 350px;
-`;
-
-const TextArea = styled.textarea`
-  padding: 1rem 0 0 2rem;
-  border-radius: 3px;
-  border: 0;
-  font-family: var(--secondary-font);
-  font-size: var(--secondarey-font-size);
-  background: rgba(41, 171, 224, 0.08);
-  width: 100%;
-  resize: none;
-
-  ::placeholder {
-    color: var(--boring-color);
+  & input[id='comPhoto'] {
+    display: none;
+  }
+  & label[for='comPhoto'] {
+    min-width: 300px;
+    height: 50px;
+    display: flex;
+    padding: 6px 0px;
+    cursor: pointer;
+    margin-top: 10px;
   }
 `;
 
@@ -69,7 +70,7 @@ const AddImage = styled.p`
 
 const VistaPrevia = styled(SubTitle)`
   text-align: center;
-  margin-top: 40px;
+  margin-top: 20px;
   font-weight: bold;
 
   margin-bottom: -20px;
@@ -100,28 +101,50 @@ const Buttons = styled.div`
 `;
 
 function CreateCommunitie() {
-  const [comu, setComu] = useState({});
-
-  const addImage = () => {
-    // eslint-disable-next-line
-    console.log('Añadir imageeeen');
-  };
-
-  const onChangeCe = (e) => {
-    const title = e.target.value;
-    const { name } = e.target;
-
-    // eslint-disable-next-line
-    console.log(name, title);
-
-    setComu({
-      ...comu,
-      [name]: title,
-    });
-  };
-
-  const [name, changeName] = useState({ field: '', check: null });
+  const [title, changeTitle] = useState({ field: '', check: null });
+  const [description, changeDescription] = useState({ field: '', check: null });
   const [image, changeImage] = useState({ field: '', check: null });
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const createCom = async () => {
+    await dispatch(
+      action.addCommunities({
+        title: title.field,
+        description: description.field,
+        image: image.field,
+      })
+    );
+    navigate(`/communities/${title.field}/posts`);
+  };
+
+  // const addImage = () => {
+  //   // eslint-disable-next-line
+  //   console.log('Añadir imageeeen');
+  //   changeImage({ ...image, field: '' });
+  // };
+
+  const onChangeFile = async (e) => {
+    e.preventDefault();
+    if (image.field !== '') {
+      const prevUrl = image.field?.split('/').pop().split('.')[0];
+      await axios.post('/api/uploads/deletefile', { prevId: prevUrl });
+    }
+    const formData = new FormData();
+    formData.append('file', e.target.files[0]);
+    const result = await axios.post('/api/uploads/file', formData);
+    const { url } = await result.data;
+    changeImage({ ...image, field: await url });
+  };
+
+  const goBack = async () => {
+    if (image.field !== '') {
+      const prevUrl = image.field?.split('/').pop().split('.')[0];
+      await axios.post('/api/uploads/deletefile', { prevId: prevUrl });
+    }
+    navigate(-1);
+  };
 
   return (
     <PageContainer>
@@ -132,25 +155,26 @@ function CreateCommunitie() {
           <TitleOrange>Crear Comunidad</TitleOrange>
 
           {/* Inputs */}
-          <Label htmlFor="Nombre">Nombre</Label>
+          <Label htmlFor="Titulo">Título</Label>
           <Input
-            state={name}
-            name="nombre"
-            changeState={changeName}
+            state={title}
+            name="title"
+            changeState={changeTitle}
             inputType="text"
-            inputName="nombre"
-            label="Nombre"
+            inputName="title"
+            label="Titulo"
             textPlaceholder="Comida Latina..."
-            onChangeCe={onChangeCe}
-            value={comu.name}
           />
 
-          <Label htmlFor="Descripcion">Descripcion</Label>
-          <TextArea
-            name="descripcion"
-            rows="3"
-            placeholder="Recetas y tips..."
-            onChange={onChangeCe}
+          <Label htmlFor="Descripcion">Descripción</Label>
+          <InputArea
+            state={description}
+            changeState={changeDescription}
+            inputType="text"
+            label="Descripcion"
+            textPlaceholder="Recetas y tips..."
+            inputName="descripcion"
+            boxHeight="100px"
           />
 
           {/* Añadir imagen */}
@@ -164,23 +188,32 @@ function CreateCommunitie() {
             inputName="imagen"
             label="imagen"
             textPlaceholder="Añade la URL de la imagen: http://..."
-            onChangeCe={onChangeCe}
+            value={image.field}
           />
-          <AddImage onClick={addImage}>
-            <BiImageAdd />
-            Añadir imagen
-          </AddImage>
+          <label htmlFor="comPhoto" onChange={onChangeFile}>
+            <input
+              type="file"
+              name="comPhoto"
+              id="comPhoto"
+              accept="image/*"
+              multiple
+            />
+            <AddImage>
+              <BiImageAdd />
+              Añadir imagen
+            </AddImage>
+          </label>
 
           {/* Vista Previa */}
           <VistaPrevia>Vista Previa</VistaPrevia>
-          <CardComunidadShow image={comu.imagen} title={comu.nombre} />
+          <CardComunidadShow image={image.field} title={title.field} />
 
           {/* Botones */}
           <Buttons>
-            <Button type="button" danger>
+            <Button type="button" onClick={goBack} danger>
               CANCELAR
             </Button>
-            <Button type="button" primary>
+            <Button type="button" onClick={createCom} primary>
               CREAR
             </Button>
           </Buttons>

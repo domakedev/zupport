@@ -25,6 +25,7 @@ import {
   TOP_LANDING_USERS,
   UPDATE_USER,
   GET_ID_COMMUNITY,
+  GET_TITLE_COMMUNITY,
   GET_COMMUNITIES,
   ADD_COMMUNITY,
   EDIT_COMMUNITY,
@@ -50,6 +51,7 @@ const initialState = {
   visitProfileUser: {},
   topLandingUSers: [],
   getIdCommunity: {},
+  getTitleCommunity: {},
   communities: [],
   addCommunity: {},
   editCommunity: {},
@@ -148,6 +150,9 @@ const reducer = (state = initialState, action) => {
     case GET_ID_COMMUNITY:
       // console.log(newValue);
       return { ...state, getIdCommunity: newValue };
+    case GET_TITLE_COMMUNITY:
+      // console.log(newValue);
+      return { ...state, getTitleCommunity: newValue };
     case GET_COMMUNITIES:
       // console.log(newValue);
       return { ...state, communities: newValue };

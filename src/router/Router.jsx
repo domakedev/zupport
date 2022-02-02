@@ -51,18 +51,21 @@ function Router() {
         element={<CommunityPosts />}
       /> */}
 
+      {/* <Route path="/communities/help-post" element={<HelpPost />} /> */}
+      <Route
+        path="/communities/:comuTitle/posts/create-post"
+        element={<HelpPost />}
+      />
+
+      <Route
+        path="/communities/:comuTitle/posts/edit-post"
+        element={<EditHelpPost />}
+      />
+
       <Route
         path="/communities/:comuTitle/posts/:idPost"
         element={<OnlyPostAnswers />}
       />
-
-      {/* <Route path="/communities/help-post" element={<HelpPost />} /> */}
-      <Route
-        path="/communities/:comuTitle/posts/help-post"
-        element={<HelpPost />}
-      />
-
-      <Route path="/communities/edit-help-post" element={<EditHelpPost />} />
 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
