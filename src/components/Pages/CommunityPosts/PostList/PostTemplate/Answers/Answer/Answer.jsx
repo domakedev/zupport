@@ -83,6 +83,7 @@ function Answer({
   idPost,
   postUser,
   validatedAnswer,
+  postPoints = 0,
 }) {
   // const [comment] = useState(state);
   const [disabledInp, setDisabledInp] = useState(false);
@@ -127,7 +128,22 @@ function Answer({
   const handleDelete = () => {
     dispatch(action.deletedAnswer(state._id, idPost));
   };
-  const handleValidated = () => {
+  const handleValidated = async () => {
+    // Asignar puntos del post a la answer
+    const pointsToAssign = postPoints;
+    const userOfAnswer = state.user.username;
+    const pointstFinal = state.user.points + pointsToAssign;
+    await dispatch(
+      action.updateTheUser(
+        userOfAnswer,
+        {
+          points: pointstFinal,
+        },
+        true
+      )
+    );
+    await dispatch(action.editedPost(idPost, { resolved: true }));
+
     // editando una respuesta cuando el dueño del post la valida;
     dispatch(
       action.editAnswerPut(
@@ -163,6 +179,7 @@ function Answer({
 
       <Comment>
         <UserPhoto
+          user={state.user}
           userPhoto={state.user.photo}
           userPoints={state.user.points}
           isOnline={state.user.isOnline}

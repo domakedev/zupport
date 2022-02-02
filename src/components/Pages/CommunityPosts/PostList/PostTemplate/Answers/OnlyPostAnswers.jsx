@@ -11,7 +11,7 @@ import {
   getPostTime,
   softNumber,
 } from '../../../../../../controller/CommunityPostCtr/utilities';
-
+import LoadingIcon from '../../../../../Layout/Loading/Loading';
 import action from '../../../../../../store/action';
 
 const PostCont = styled.div`
@@ -22,7 +22,6 @@ const PostCont = styled.div`
   @media screen and (min-width: 1024px) {
     background: none;
     grid-area: postList;
-    margin: 0 14rem 0 14rem;
   }
 `;
 const MainTitleContainer = styled.div`
@@ -32,6 +31,16 @@ const MainTitleContainer = styled.div`
   align-items: center;
   gap: 5rem;
 `;
+
+const PostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    align-items: center;
+  }
+`;
+
 const MainTitle = styled.h1`
   font-family: var(--principal-font);
   color: var(--boring-color);
@@ -56,6 +65,7 @@ const Line = styled.hr`
   border-top: 0.1rem solid var(--boring-color);
   opacity: 0.3;
 `;
+
 function OnlyPostAnswers() {
   const { idPost } = useParams();
   // const [post, setPost] = useState({});
@@ -92,9 +102,9 @@ function OnlyPostAnswers() {
         <Line />
 
         {Object.entries(post).length === 0 ? (
-          <h1>cargando</h1>
+          <LoadingIcon />
         ) : (
-          <div>
+          <PostContainer>
             <PostTemplate
               userPhoto={post.user.photo === null ? '' : post.user.photo}
               userName={post.user.username}
@@ -109,8 +119,13 @@ function OnlyPostAnswers() {
               idPost={post._id}
               isOnline={post.user.isOnline}
             />
-            <Answers idPost={post._id} postUser={post.user} />
-          </div>
+
+            <Answers
+              idPost={post._id}
+              postUser={post.user}
+              postPoints={softNumber(post.points)}
+            />
+          </PostContainer>
         )}
       </PostCont>
     </>

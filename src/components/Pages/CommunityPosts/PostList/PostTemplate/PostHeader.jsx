@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import UserPhoto from '../../../../Layout/UserPhoto/UserPhoto';
@@ -71,8 +73,12 @@ function PostHeader({
   resolved,
   isOnline,
 }) {
+  const nombreCualquiera = useSelector((state) => state.loadOnlyPost);
+
+  useEffect(() => {}, [nombreCualquiera]);
+
   return (
-    <PostHeaderCont resolved={resolved}>
+    <PostHeaderCont resolved={nombreCualquiera.resolved || resolved}>
       <UserProfileCont>
         <UserPhoto
           user={user}
@@ -90,7 +96,7 @@ function PostHeader({
       <PostPointsCont>
         <TextPoints>Gana pts</TextPoints>
         <PostPoints className="textColor">{points}</PostPoints>
-        {resolved ? <LineCont /> : null}
+        {nombreCualquiera.resolved || resolved ? <LineCont /> : null}
       </PostPointsCont>
     </PostHeaderCont>
   );

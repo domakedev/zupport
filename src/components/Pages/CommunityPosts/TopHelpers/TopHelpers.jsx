@@ -9,7 +9,7 @@ import actions from '../../../../store/action';
 
 const TopHelpersCont = styled.section`
   display: flex;
-  padding: 0.7rem 2rem 2.5rem 2rem;
+  padding: 2rem;
   gap: 1rem;
   justify-content: center;
   align-items: center;
