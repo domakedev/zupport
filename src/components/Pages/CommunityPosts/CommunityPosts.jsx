@@ -117,9 +117,9 @@ function CommunityPosts() {
 
   useEffect(async () => {
     // busca por el id de la comunidad
-    await dispatch(action.getAllPosts(comuTitle));
+    await dispatch(action.getAllPosts(comuTitle, page));
     //
-  }, []);
+  }, [page]);
 
   useEffect(async () => {
     setResults(comuPosts);
