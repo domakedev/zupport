@@ -233,7 +233,7 @@ function CommunitieAddCard({
     const userExists = users.find((e) => e === currentUser.username);
     if (!userExists) {
       users.push(currentUser.username);
-      dispatch(action.editCommunities(id, { users }));
+      dispatch(action.editedCommunity(id, { users }));
     }
   };
   const postResolved = checks.filter((e) => e.resolved);
@@ -274,7 +274,7 @@ function CommunitieAddCard({
         // Asignar puntos del post a la answer
         const userDelete = users.filter((e) => e !== currentUser.username);
         dispatch(
-          action.editCommunities(id, {
+          action.editedCommunity(id, {
             users: userDelete,
           })
         );

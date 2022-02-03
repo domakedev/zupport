@@ -139,10 +139,10 @@ function CreateCommunitie() {
   };
 
   const goBack = async () => {
-    // if (image.field !== '') {
-    //   const prevUrl = image.field?.split('/').pop().split('.')[0];
-    //   await axios.post('/api/uploads/deletefile', { prevId: prevUrl });
-    // }
+    if (image.field !== '') {
+      const prevUrl = image.field?.split('/').pop().split('.')[0];
+      await axios.post('/api/uploads/deletefile', { prevId: prevUrl });
+    }
     navigate(-1);
   };
 

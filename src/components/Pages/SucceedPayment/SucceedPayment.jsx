@@ -74,7 +74,7 @@ function SucceedPayment() {
       <MainContainer>
         <ContainerCoffe src={coffe} alt="coffe" />
         <Container>
-          <Titulo>Tu donación fue excitosa!</Titulo>
+          <Titulo>Tu donación fue exitosa!</Titulo>
           <Link Style="text-decoration: none" to="/">
             <Button>VOLVER</Button>
           </Link>

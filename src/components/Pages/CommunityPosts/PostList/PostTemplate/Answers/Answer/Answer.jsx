@@ -147,8 +147,8 @@ function Answer({
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire(
-          'Donaste!',
-          'Gracias por recompensar a la persona que te ayudó',
+          'Validaste!',
+          'Con tu validación ayudas a tu comunidad',
           'success'
         );
         // Asignar puntos del post a la answer
