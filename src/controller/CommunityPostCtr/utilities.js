@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-plusplus */
 export const getPostTime = (fecha) => {
   const months = [
     'Enero',
@@ -78,8 +81,47 @@ export const rankings = (arr, number) => {
   return fifth;
 };
 
+// export const rankingsCommunity = (arr, number) => {
+//   const postResolved = arr.filter((e) => e.resolved);
+//   const sorted = [...arr].sort((a, b) => b.pots.length - a.users.length);
+//   const fifth = sorted.slice(0, number);
+//   return fifth;
+// };
 export const rankingsCommunity = (arr, number) => {
-  const sorted = [...arr].sort((a, b) => b.users.length - a.users.length);
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].posts.length > 0) {
+      const resolvedPosts = arr[i].posts.filter((e) => e.resolved);
+      // console.log(resolvedPosts);
+      arr[i].postsResol = resolvedPosts; // (resolvedPosts.length / arr[i].posts.length) * 100;
+    } else {
+      arr[i].postsResol = []; // 0;
+      count += 1;
+    }
+  }
+  // console.log(count);
+  const sorted = [...arr].sort(
+    (a, b) => b.postsResol.length - a.postsResol.length
+  );
+  // console.log(sorted);
+  // const fifth = count > 0 ? sorted.slice(0, 1) : sorted.slice(0, number);
   const fifth = sorted.slice(0, number);
   return fifth;
+};
+export const isUserInCommu = (arr, filter, currentUser) => {
+  const userInCommun = [];
+  const userInNotCommun = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    const resp = arr[i].users.find((e) => e === currentUser);
+    if (resp) {
+      userInCommun.push(arr[i]);
+    } else {
+      userInNotCommun.push(arr[i]);
+    }
+  }
+  if (filter === 'userInCommunity') {
+    return userInCommun;
+  }
+  return userInNotCommun;
 };

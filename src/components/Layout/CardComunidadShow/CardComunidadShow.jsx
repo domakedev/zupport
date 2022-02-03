@@ -118,8 +118,9 @@ const CardName = styled.h3`
   font-size: 1.8rem;
 `;
 
-function CardComunidadShow({ image, users, checks, title }) {
-  const postResolved = checks?.filter((e) => e.resolved);
+function CardComunidadShow({ image, users, checks = [], title, postsResol }) {
+  // const postResolved = checks?.filter((e) => e.resolved);
+  // console.log(checks);
   const navigate = useNavigate();
   return (
     <Container
@@ -136,7 +137,11 @@ function CardComunidadShow({ image, users, checks, title }) {
 
       <CardStatsChecks>
         <CardIcon src={IconCheck} alt="cantidad de problemas resueltos" />
-        <StatsNumber>{postResolved?.length || 0}</StatsNumber>
+        <StatsNumber>
+          {checks.length > 0
+            ? `${Math.round((postsResol.length / checks.length) * 100)}%`
+            : ''}
+        </StatsNumber>
       </CardStatsChecks>
 
       <CardName>{title}</CardName>

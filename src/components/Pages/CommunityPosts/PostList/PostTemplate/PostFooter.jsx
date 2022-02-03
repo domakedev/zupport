@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-underscore-dangle */
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
@@ -9,6 +10,7 @@ import CommentButtonPost from './AcctioPost/CommentButton';
 // import Answer from './Answers/Answer/Answer';
 import action from '../../../../../store/action';
 import UserPhoto from '../../../../Layout/UserPhoto/UserPhoto';
+import err from '../../../../../images/err.gif';
 
 const PostFooterContainer = styled.section`
   display: flex;
@@ -64,32 +66,46 @@ const InputBox = styled.input`
     box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
   }
 `;
+const MessCont = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const P = styled.p`
+  font-family: Archivo Narrow;
+  font-style: normal;
+  font-weight: normal;
+  font-size: var(--secondarey-font-size);
+  line-height: 18px;
+  color: var(--alert-color);
+  text-align: center;
+`;
+const Figure = styled.figure`
+  width: 200px;
+`;
+const Image = styled.img`
+  object-fit: cover;
+  object-position: center center;
+  width: 100%;
+`;
 
-function PostFooter({ idPost, textComment, likes }) {
+function PostFooter({ idPost, textComment, likes, community }) {
+  // console.log(community);
   const [responder, setResponder] = useState(false);
   const navigate = useNavigate();
   const [answerData, setAnswerData] = useState('');
+  // const [err, setErr] = useState(false);
 
-  // const [cleanInput, setCleanInput] = useState(false);
   // obteniendo al usuario actual para crear el comentario
   const currentUser = useSelector((state) => state.currentUserOTokencito);
-  // console.log(currentUser, idPost, currentUser.points);
-  // console.log(currentUser);
+  // const reqError = useSelector((state) => state.reqErr);
 
   // Se hace un set de los datos del post
 
   // const currentPost = useSelector((state) => state);
+  // console.log(reqError, currentUser);
   const dispatch = useDispatch();
-  // const dataUser = {
-  //   user: {
-  //     photo:
-  //       'https://media.istockphoto.com/photos/machu-picchu-peru-picture-id930824730?k=20&m=930824730&s=612x612&w=0&h=Lvzgs0qL32lHBuvFMVg3hotXpE1t0mJpqqrK-ajDzIc=',
-  //     points: 5430,
-  //     username: 'domakedev',
-  //     id: '61eb5ea6345f4538ebf11cd0',
-  //     post: '61e09c7fb35c71052690ec67',
-  //   },
-  // };
   useEffect(async () => {
     // dispatch(action.getOnlyPost(idPost));
   }, []);
@@ -112,9 +128,10 @@ function PostFooter({ idPost, textComment, likes }) {
         {
           answer: answerData,
           // user: currentUser.username,
-          likes: 0,
+          likes: [],
           post: idPost,
           resolved: false,
+          community,
         },
         idPost
       )
@@ -133,21 +150,30 @@ function PostFooter({ idPost, textComment, likes }) {
       </PostFooterContainer>
       <ResponderAnimated>
         {responder ? (
-          <AddAnswerCont>
-            <UserPhoto
-              userPhoto={currentUser.photo}
-              userPoints={currentUser.points}
-            />{' '}
-            <InputBox
-              type="text"
-              placeholder="Escribe tu respuesta aquí..."
-              value={answerData}
-              onChange={onChange}
-            />
-            <ButtonSend type="button" onClick={handleClick}>
-              <IoSend />
-            </ButtonSend>
-          </AddAnswerCont>
+          Object.entries(currentUser).length === 0 ? (
+            <MessCont>
+              <Figure>
+                <Image src={err} alt="error" />
+              </Figure>
+              <P>Para ayudar a esta persona deberas iniciar sesión</P>
+            </MessCont>
+          ) : (
+            <AddAnswerCont>
+              <UserPhoto
+                userPhoto={currentUser.photo}
+                userPoints={currentUser.points}
+              />{' '}
+              <InputBox
+                type="text"
+                placeholder="Escribe tu respuesta aquí..."
+                value={answerData}
+                onChange={onChange}
+              />
+              <ButtonSend type="button" onClick={handleClick}>
+                <IoSend />
+              </ButtonSend>
+            </AddAnswerCont>
+          )
         ) : null}
       </ResponderAnimated>
     </>
@@ -155,3 +181,4 @@ function PostFooter({ idPost, textComment, likes }) {
 }
 
 export default PostFooter;
+// {reqError ? <p>Si, mejor iniciamos sesión</p> : null}

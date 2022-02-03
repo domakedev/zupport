@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,6 +15,10 @@ import NewCommunitie from './NewCommunitie/NewCommunitie';
 import GOFData from './GOFData/GOFData';
 import CommunitieAddCard from '../../Layout/CommunitieAddCard/CommunitieAddCard';
 import action from '../../../store/action';
+import {
+  isUserInCommu,
+  // rankingsCommunity,
+} from '../../../controller/CommunityPostCtr/utilities';
 
 // General Styled
 import {
@@ -46,83 +51,84 @@ const Comunidades = styled.div`
   justify-content: center;
   flex-wrap: wrap;
 `;
+const Text = styled.h3`
+  font-family: var(--principal-font);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2.6rem;
+  line-height: 45px;
+  margin: 20px 0;
+  color: var(--warning-color);
+  text-align: center;
+`;
 
 function Communities() {
   const dispatch = useDispatch();
-  // const { userAuthenticated } = useSelector((state) => state);
-
-  // const [comunidades, setComunidades] = useState([]);
-
   const [results, setResults] = useState([]);
-  // const [check, setCheck] = useState([]);
 
-  // const userAuth = useSelector((state) => state.userAuthenticated);
   const allCommunities = useSelector((state) => state.communities);
-  // cuántas posts resueltos existen
-  // const postResolved = results.filter(e => e.)
+  const currentUser = useSelector((state) => state.currentUserOTokencito);
+  const userInCommunity = useSelector((state) =>
+    isUserInCommu(state.communities, 'userInCommunity', currentUser.username)
+  );
+  const userInNotCommunity = useSelector((state) =>
+    isUserInCommu(state.communities, 'userInNotCommunity', currentUser.username)
+  );
 
   useEffect(async () => {
     await dispatch(action.getAllCommunities());
-    // axios
-    //   .get('/api/communities/')
-    //   .then((response) => {
-    //     // console.log("dataaa",response.data)
-    //     setComunidades(response.data);
-    //     setResults(response.data);
-    //   })
-    // eslint-disable-next-line
-      // .catch((error) => console.log('Errorrrrrr', error));
-    // setResults(allCommunities);
   }, []);
 
-  useEffect(async () => {
-    // const postResolved = [];
-    setResults(allCommunities);
-    // if (results.length !== 0) {
-    //   for (let i = 0; i < results.length; i++) {
-    //     const resp = results[i].filter((e) => e.resolved);
-    //     postResolved.push(...resp);
-    //   }
-    //   setCheck(postResolved);
-    // }
-    // console.log('resp filtradas', postResolved);
-  }, [allCommunities]);
-
-  // console.log(allCommunities);
+  // console.log('hola', userInNotCommunity, userInCommunity);
   return (
     <PageContainer>
       <Header />
-      {results.length === 0 ? (
-        <h1>cargando</h1>
-      ) : (
-        <Container>
-          <TitleOrange>¿Qué te interesa ahora? </TitleOrange>
-          <SubTitle>Sé parte de una comunidad o crea una.</SubTitle>
+      <Container>
+        <TitleOrange>¿Qué te interesa ahora? </TitleOrange>
+        <SubTitle>Sé parte de una comunidad o crea una.</SubTitle>
 
-          <NewCommunitie />
+        <NewCommunitie />
 
-          <GOFData
-            setResults={setResults}
-            results={results}
-            comunidades={allCommunities}
-          />
-          <hr style={{ marginTop: '100px' }} />
+        <GOFData
+          setResults={setResults}
+          results={results}
+          comunidades={allCommunities}
+        />
+        <hr style={{ marginTop: '100px' }} />
 
-          {/* Impresion de resultados de busqueda */}
-          <Comunidades>
-            {results?.map((e) => (
-              <CommunitieAddCard
-                key={uuidv4()}
-                id={e._id}
-                image={e.image}
-                users={e.users} // se manda el array de post que pertenecen a esa users
-                checks={e.posts} // se manda el array de post que pertenecen a esa comunidad
-                title={e.title}
-              />
-            ))}
-          </Comunidades>
-        </Container>
-      )}
+        {/* Impresion de resultados de busqueda */}
+        {userInCommunity.length !== 0 ? <Text>Mis Comunidades :</Text> : null}
+        <Comunidades>
+          {userInCommunity?.map((e) => (
+            <CommunitieAddCard
+              key={uuidv4()}
+              id={e._id}
+              image={e.image}
+              users={e.users} // se manda el array de post que pertenecen a esa users
+              checks={e.posts} // se manda el array de post que pertenecen a esa comunidad
+              title={e.title}
+              description={e.description}
+              buttonText="MI COMUNIDAD"
+              creator={e.creator}
+            />
+          ))}
+        </Comunidades>
+        <Text>Únete a las siguientes comunidades :</Text>
+        <Comunidades>
+          {userInNotCommunity?.map((e) => (
+            <CommunitieAddCard
+              key={uuidv4()}
+              id={e._id}
+              image={e.image}
+              users={e.users} // se manda el array de post que pertenecen a esa users
+              checks={e.posts} // se manda el array de post que pertenecen a esa comunidad
+              title={e.title}
+              description={e.description}
+              buttonText="UNIRME"
+            />
+          ))}
+        </Comunidades>
+      </Container>
 
       <Footer />
     </PageContainer>

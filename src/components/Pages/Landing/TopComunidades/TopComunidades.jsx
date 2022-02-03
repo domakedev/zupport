@@ -76,7 +76,6 @@ function TopComunidades() {
     setComunidades(topCommunities);
     // console.log(topCommunities);
   }, [allCommunities]);
-
   return (
     <Container>
       <Titulo>TOP COMUNIDADES</Titulo>
@@ -89,6 +88,7 @@ function TopComunidades() {
             checks={card.posts}
             title={card.title}
             image={card.image}
+            postsResol={card.postsResol}
           />
         ))}
       </Cards>

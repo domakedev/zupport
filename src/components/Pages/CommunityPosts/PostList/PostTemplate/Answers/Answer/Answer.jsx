@@ -2,6 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 
 import styled from 'styled-components';
 import { AiFillCheckSquare, AiOutlineEllipsis } from 'react-icons/ai';
@@ -9,6 +10,7 @@ import PropTypes from 'prop-types';
 import InputText from './InputText';
 import UserPhoto from '../../../../../../Layout/UserPhoto/UserPhoto';
 import action from '../../../../../../../store/action';
+import alert from '../../../../../../../images/alert.gif';
 
 const Comment = styled.div`
   display: flex;
@@ -86,19 +88,20 @@ function Answer({
   postPoints = 0,
 }) {
   // const [comment] = useState(state);
+  const currentUser = useSelector(
+    (stateUser) => stateUser.currentUserOTokencito
+  );
   const [disabledInp, setDisabledInp] = useState(false);
   const [editAnswer, setEditAnswer] = useState(state.answer);
   const [disableInput, setDisableInput] = useState(true);
   const [showButton, setShowButton] = useState(true);
   const [buttonText, setButtonText] = useState('Editar');
+
   // const [stateResolved, setStateResolved] = useState(true);
   // const [isAutor, setIsAutor] = useState(true);
+
   const focusInput = useRef();
   const dispatch = useDispatch();
-
-  const currentUser = useSelector(
-    (stateUser) => stateUser.currentUserOTokencito
-  );
 
   const handleClickMore = () => {
     setDisabledInp(true);
@@ -129,32 +132,53 @@ function Answer({
     dispatch(action.deletedAnswer(state._id, idPost));
   };
   const handleValidated = async () => {
-    // Asignar puntos del post a la answer
-    const pointsToAssign = postPoints;
-    const userOfAnswer = state.user.username;
-    const pointstFinal = state.user.points + pointsToAssign;
-    await dispatch(
-      action.updateTheUser(
-        userOfAnswer,
-        {
-          points: pointstFinal,
-        },
-        true
-      )
-    );
-    await dispatch(action.editedPost(idPost, { resolved: true }));
+    // alerta para verifivar si el uario quiere validar respuesta
+    Swal.fire({
+      title: 'Validar Respuesta',
+      text: 'Recuerda que las respuestas se pueden validar solo una véz',
+      imageUrl: `${alert}`,
+      showCancelButton: true,
+      confirmButtonColor: '#29ABE0',
+      cancelButtonColor: '#D9534F',
+      confirmButtonText: 'Sí, esta respuesta me sirvió',
+      imageWidth: 300,
+      imageHeight: 250,
+      imageAlt: 'Custom image',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Validaste!',
+          'Con tu validación ayudas a tu comunidad',
+          'success'
+        );
+        // Asignar puntos del post a la answer
+        const pointsToAssign = postPoints;
+        const userOfAnswer = state.user.username;
+        const pointstFinal = state.user.points + pointsToAssign;
+        dispatch(
+          action.updateTheUser(
+            userOfAnswer,
+            {
+              points: pointstFinal,
+            },
+            true
+          )
+        );
+        dispatch(action.editedPost(idPost, { resolved: true }));
 
-    // editando una respuesta cuando el dueño del post la valida;
-    dispatch(
-      action.editAnswerPut(
-        state._id,
-        {
-          resolved: true,
-        },
-        idPost
-      )
-    );
-    // setStateResolved()
+        // editando una respuesta cuando el dueño del post la valida;
+        dispatch(
+          action.editAnswerPut(
+            state._id,
+            {
+              resolved: true,
+            },
+            idPost
+          )
+        );
+        // setStateResolved()
+      }
+    });
   };
   const handleCancel = () => {
     setDisableInput(true);
@@ -208,7 +232,8 @@ function Answer({
           ) : null}
         </Validated>
         {/* )} */}
-        {currentUser.username === state.user.username ? (
+        {currentUser.username === state.user.username ||
+        currentUser.role === 'admin' ? (
           <MoreButton
             type="button"
             onClick={handleClickMore}

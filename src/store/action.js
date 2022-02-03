@@ -1,4 +1,5 @@
 import {
+  REQ_ERROR,
   LOAD_ONLY_POST,
   GET_ANSWERS,
   ADD_ANSWER,
@@ -26,12 +27,16 @@ import {
   GET_COMMUNITIES,
   ADD_COMMUNITY,
   EDIT_COMMUNITY,
+  LOAD_EDIT_COMMUNITY,
   DELETE_COMMUNITY,
 } from './types';
 import axios from '../utils/axios';
 
-// action creators
-
+// action creators REQ_ERROR
+const errRequest = (data) => ({
+  type: REQ_ERROR,
+  payload: data,
+});
 // Answer
 const loadOnlyPost = (post) => ({
   type: LOAD_ONLY_POST,
@@ -151,6 +156,10 @@ const editCommunity = (community) => ({
   type: EDIT_COMMUNITY,
   payload: community,
 });
+const loadEditCommunity = (post) => ({
+  type: LOAD_EDIT_COMMUNITY,
+  payload: post,
+});
 const deleteCommunity = (community) => ({
   type: DELETE_COMMUNITY,
   payload: community,
@@ -187,8 +196,10 @@ const addAnswerPost = (answerData, idPost) => async (dispatch) => {
     dispatch(addAnswer(response));
     // console.log(answers);
     dispatch(getAllAnswers(idPost));
+    dispatch(errRequest(false));
   } catch (e) {
     // console.log(e);
+    dispatch(errRequest(true));
   }
 };
 
@@ -197,6 +208,18 @@ const editAnswerPut = (idAnswer, answerData, idPost) => async (dispatch) => {
     const response = await axios.put(`/api/answer/${idAnswer}`, answerData);
     dispatch(editAnswer(response));
     dispatch(getAllAnswers(idPost));
+  } catch (e) {
+    // console.log(e);
+  }
+};
+const likedAnswer = (idAnswer, answerData) => async (dispatch) => {
+  try {
+    const response = await axios.put(
+      `/api/answer/likeAnswer/${idAnswer}`,
+      answerData
+    );
+    dispatch(editAnswer(response.data));
+    // dispatch(getAllAnswers(idAnswer));
   } catch (e) {
     // console.log(e);
   }
@@ -243,7 +266,7 @@ const addedPost = (comuTitle, postData) => async (dispatch) => {
     // eslint-disable-next-line
     const idComu = community.data._id;
     // eslint-disable-next-line
-    const comId = {community: community.data._id};
+    const comId = { community: community.data._id };
 
     const post = { ...postData, ...comId };
     const response = await axios.post('/api/post', post);
@@ -560,13 +583,21 @@ const addCommunities = (communityData) => async (dispatch) => {
   }
 };
 
-const editCommunities = (idCommunity, communityData) => async (dispatch) => {
+const editedCommunity = (idCommunity, communityData) => async (dispatch) => {
   try {
     const response = await axios.put(
       `api/communities/${idCommunity}`,
       communityData
     );
     dispatch(editCommunity(response));
+    dispatch(getAllCommunities());
+  } catch (e) {
+    // console.log(e);
+  }
+};
+const loadEditedCommunity = (data) => async (dispatch) => {
+  try {
+    dispatch(loadEditCommunity(data));
   } catch (e) {
     // console.log(e);
   }
@@ -574,7 +605,11 @@ const editCommunities = (idCommunity, communityData) => async (dispatch) => {
 
 const deletedCommunities = (idCommunity) => async (dispatch) => {
   try {
-    const response = await axios.delete(`/api/communities/${idCommunity}`);
+    // const response = await axios.delete(`/api/communities/${idCommunity}`);
+    const response = await axios.delete(
+      `/api/communities/allDelete/${idCommunity}`
+    );
+    // console.log(response);
     dispatch(deleteCommunity(response));
     dispatch(getAllCommunities());
   } catch (e) {
@@ -587,6 +622,7 @@ export default {
   getAllAnswers,
   addAnswerPost,
   editAnswerPut,
+  likedAnswer,
   deletedAnswer,
   getAllPosts,
   getPost,
@@ -610,6 +646,7 @@ export default {
   getCommunityByTitle,
   getAllCommunities,
   addCommunities,
-  editCommunities,
+  editedCommunity,
+  loadEditedCommunity,
   deletedCommunities,
 };
