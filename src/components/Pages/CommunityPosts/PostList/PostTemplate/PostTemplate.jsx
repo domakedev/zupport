@@ -161,11 +161,6 @@ function PostTemplate({
         // setStateResolved()
       }
     });
-    // if (confirm('¿Estas seguro de eliminar la publicación?') === true) {
-    //   await dispatch(action.deletedPost(idPost));
-    //   // eslint-disable-next-line
-    //   location.reload();
-    // }
   };
   return (
     <PostTemplteCont>

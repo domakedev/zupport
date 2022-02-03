@@ -6,8 +6,6 @@ import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 // import axios from '../../../utils/axios';
 
-// import { Link, Outlet } from "react-router-dom";
-
 // Components
 import Header from '../../Layout/Header';
 import Footer from '../../Layout/Footer';
@@ -30,7 +28,6 @@ import {
 // Mock, NO BORRAR AUNQUE NO SE USE!
 // import mock from "../../../mocks/generalMock"
 
-// const PageContainer = styled.div`
 //   display: flex;
 //   flex-direction: column;
 //   min-height: 100vh;

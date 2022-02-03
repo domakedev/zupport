@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IoSend } from 'react-icons/io5';
 import LikeButtonPost from './AcctioPost/LikeButton';
 import CommentButtonPost from './AcctioPost/CommentButton';
-// import Answer from './Answers/Answer/Answer';
 import action from '../../../../../store/action';
 import UserPhoto from '../../../../Layout/UserPhoto/UserPhoto';
 import err from '../../../../../images/err.gif';
