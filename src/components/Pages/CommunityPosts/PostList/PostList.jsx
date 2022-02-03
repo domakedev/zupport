@@ -21,6 +21,7 @@ const PostListCont = styled.div`
 `;
 
 function PostList({ results }) {
+  // console.log(results);
   const currentUser = useSelector((state) => state.currentUserOTokencito);
   return (
     <PostListCont>
@@ -38,6 +39,7 @@ function PostList({ results }) {
             image,
             userPoints,
             _id,
+            community,
           },
           index
         ) => (
@@ -63,6 +65,7 @@ function PostList({ results }) {
               currentUser.role === 'admin'
             }
             isOnline={user.isOnline}
+            community={community}
           />
         )
       )}

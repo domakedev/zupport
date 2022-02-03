@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import { GrLike } from 'react-icons/gr';
+import { GrLike } from 'react-icons/gr'; // GrDislike
 import Answer from './Answer/Answer';
 import action from '../../../../../../store/action';
 import Payment from '../../../../Payment/Payment';
@@ -110,10 +110,10 @@ const PaymentCont = styled.div`
 `;
 function Answers({ idPost, postUser, postPoints }) {
   const dispatch = useDispatch();
-
+  const currentUser = useSelector(
+    (stateUser) => stateUser.currentUserOTokencito
+  );
   const [viewMore, setViewMore] = useState(false);
-  const [like, setLike] = useState(true);
-  // const [textLike, setTextLike] = useState(true);
 
   const dataValidated = useSelector((state) =>
     state.answers.filter((e) => e.resolved)
@@ -128,40 +128,24 @@ function Answers({ idPost, postUser, postPoints }) {
     dispatch(action.getAllAnswers(idPost));
   }, [idPost]);
 
+  // useEffect(() => {}, [liked]);
+
   const datosAnswer = () => {
     setViewMore(!viewMore);
   };
 
-  // Dar like solo una vez
-  const supportAnswer = (e) => {
-    // console.log('Me gusta todo :', e);
-    // like
-    if (like) {
-      // setTextLike(e.likes + 1);
-      dispatch(
-        action.editAnswerPut(
-          e._id,
-          {
-            likes: e.likes + 1,
-          },
-          idPost
-        )
-      );
-    } else {
-      // setTextLike(e.likes - 1);
-      dispatch(
-        action.editAnswerPut(
-          e._id,
-          {
-            likes: e.likes - 1,
-          },
-          idPost
-        )
-      );
+  const handleOnclick = async (e) => {
+    if (!e.likes.includes(currentUser.username)) {
+      e.likes.push(currentUser.username);
+      await dispatch(action.likedAnswer(e._id, { likes: e.likes }));
+    } else if (e.likes.includes(currentUser.username)) {
+      const i = e.likes.indexOf(currentUser.username);
+      e.likes.splice(i, 1);
+      await dispatch(action.likedAnswer(e._id, { likes: e.likes }));
     }
-    setLike(!like);
+    // console.log('like', e);
   };
-  // console.log(answers);
+
   return (
     <AnswersContainer>
       {answers.length === 0 ? null : (
@@ -209,8 +193,8 @@ function Answers({ idPost, postUser, postPoints }) {
                     validatedAnswer={dataValidated}
                     postPoints={postPoints}
                   />
-                  <SupportAnswer onClick={() => supportAnswer(e)}>
-                    Apoyar {e.likes} <GrLike />
+                  <SupportAnswer onClick={() => handleOnclick(e)}>
+                    Apoyo {e.likes?.length} <GrLike />
                   </SupportAnswer>
                 </div>
               ))}

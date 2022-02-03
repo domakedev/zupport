@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import Landing from '../components/Pages/Landing/Landing';
 import Communities from '../components/Pages/Communities/Communities';
 import CreateCommunitie from '../components/Pages/CreateCommunitie/CreateCommunitie';
+import EditCommunity from '../components/Pages/CreateCommunitie/EditCommunity';
 import CommunityPosts from '../components/Pages/CommunityPosts/CommunityPosts';
 import HelpPost from '../components/Pages/NewPost/HelpPost';
 import EditHelpPost from '../components/Pages/NewPost/EditHelpPost';
@@ -15,6 +16,7 @@ import Login from '../components/Pages/Login/Login';
 import Register from '../components/Pages/Register/Register';
 import Verify from '../components/Pages/Register/Verify';
 import P404 from '../components/Pages/404/P404';
+import SucceedPayment from '../components/Pages/SucceedPayment/SucceedPayment';
 
 import UserProfile from '../components/Pages/UserProfile/UserProfile';
 import UserProfileConfig from '../components/Pages/UserProfileConfig/UserProfileConfig';
@@ -29,6 +31,7 @@ function Router() {
       <Route path="/profile/:username" element={<UserProfile />} />
 
       <Route path="/config" element={<UserProfileConfig />} />
+      <Route path="/succeed-payment" element={<SucceedPayment />} />
 
       <Route path="communities/" element={<Communities />} />
 
@@ -36,6 +39,7 @@ function Router() {
         path="communities/create-communitie"
         element={<CreateCommunitie />}
       />
+      <Route path="communities/edit-community" element={<EditCommunity />} />
 
       {/* <Route path="communities/community-posts" element={<CommunityPosts />} /> */}
 
