@@ -32,9 +32,11 @@ const NameUser = styled.div`
 
 const DataCards = styled.div`
   margin-top: 58px;
+  margin-bottom: 58px;
   display: flex;
   justify-content: space-between;
   gap: 37px;
+  align-items: flex-start;
   flex-wrap: wrap;
 `;
 
@@ -44,6 +46,7 @@ const MyDataCard = styled.div`
   margin: 0 auto;
   width: 360px;
   padding: 17px;
+  min-height: 200px;
   & > p {
     width: 100%;
     text-align: left;

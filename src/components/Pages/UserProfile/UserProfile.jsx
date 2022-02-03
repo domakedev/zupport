@@ -22,7 +22,7 @@ import {
   ContainerCrown,
 } from './styleds';
 import actions from '../../../store/action';
-// import CardComunidadShow from '../../Layout/CardComunidadShow/CardComunidadShow';
+import CardComunidadShow from '../../Layout/CardComunidadShow/CardComunidadShow';
 
 // Iconos
 import Github from '../../../images/Icon/redes/GitHub.svg';
@@ -33,13 +33,18 @@ const UserProfile = function UserProfile() {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  const user = useSelector((state) => state.visitProfileUser);
+  console.log(
+    '🚀 ~ file: UserProfile.jsx ~ line 43 ~ UserProfile ~ user',
+    user
+  );
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const usernameFromURL = location.pathname.split('/').pop();
     dispatch(actions.setVisitedUser(usernameFromURL));
   }, []);
 
-  const user = useSelector((state) => state.visitProfileUser);
   const detectaLogoRed = (red) => {
     if (red === 'Github') {
       return Github;
@@ -147,6 +152,15 @@ const UserProfile = function UserProfile() {
           <MyDataCard>
             <p>Mis comunidades</p>
             {/* Map de array de comunidades del user */}
+            {user?.myCommunities?.map((comu) => (
+              <CardComunidadShow
+                key={uuidv4()}
+                image={comu.image}
+                users={comu.users.length}
+                // checks, esto lo tiene Nayruth
+                title={comu.title}
+              />
+            ))}
             {/* <CardComunidadShow image  users checks title/> */}
           </MyDataCard>
         </DataCards>
