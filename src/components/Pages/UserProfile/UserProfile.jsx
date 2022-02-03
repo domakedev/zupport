@@ -34,10 +34,6 @@ const UserProfile = function UserProfile() {
   const location = useLocation();
 
   const user = useSelector((state) => state.visitProfileUser);
-  console.log(
-    '🚀 ~ file: UserProfile.jsx ~ line 43 ~ UserProfile ~ user',
-    user
-  );
 
   useEffect(() => {
     window.scrollTo(0, 0);

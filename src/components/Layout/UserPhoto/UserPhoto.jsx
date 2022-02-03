@@ -104,6 +104,8 @@ function UserPhoto({
   borderSize = '0px',
   isOnline = false,
 }) {
+  console.log('🚀 ~ user', user);
+
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -122,14 +124,6 @@ function UserPhoto({
 
   const value = useMemo(() => ({ className: 'icon-crow' }));
 
-  // const onClickPhoto = async () => {
-  //   await dispatch(
-  //     actions.setVisitedUser(user.username ? user.username : null)
-  //   );
-  //   console.log('Click en la foto');
-  //   // navigate('/profile');
-  //   window.open('/profile');
-  // };
   return (
     <Container
       userPoints={userPoints}

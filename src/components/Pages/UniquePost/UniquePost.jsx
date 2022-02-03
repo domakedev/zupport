@@ -74,6 +74,7 @@ function UniquePost() {
 
   const userAuth = useSelector((state) => state.userAuthenticated);
   const currentUser = useSelector((state) => state.currentUserOTokencito);
+  console.log('🚀 ~ file: UniquePost.jsx ~ line 77 ~ currentUser', currentUser);
 
   useEffect(async () => {
     await dispatch(action.getPost(idPost));
@@ -97,6 +98,7 @@ function UniquePost() {
 
             <Line />
             <PostTemplate
+              user={currentPost?.user}
               key={`${currentPost.title}0${currentPost.user?.username}`}
               // ban={index}
               userPhoto={currentPost.user?.photo}

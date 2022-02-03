@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import Caracteristica from './Caracteristica';
 
-import ImageVoice from '../../../../images/voice.svg';
+import ImageMeetPeople from '../../../../images/meetPeople.svg';
 import ImageChat from '../../../../images/Chat.svg';
 import ImagePoints from '../../../../images/points.svg';
 
@@ -31,8 +31,8 @@ const CardsContainer = styled.div`
 
 const fakeData = [
   {
-    description: 'Dentro de tu comunidad únete a canales de voz',
-    image: ImageVoice,
+    description: 'Descubre gente increíble de tu comunidad',
+    image: ImageMeetPeople,
   },
   {
     description: 'Gana puntos, sube de rango mientras ayudas a tu comunidad',

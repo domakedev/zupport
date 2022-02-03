@@ -466,10 +466,6 @@ const setVisitedUser = (userUsername) => async (dispatch) => {
 };
 
 const getMyComs = (userUsername) => async (dispatch) => {
-  console.log(
-    '🚀 ~ file: action.js ~ line 469 ~ getMyComs ~ userUsername',
-    userUsername
-  );
   try {
     await dispatch(getMyCommunities(userUsername));
   } catch (error) {
