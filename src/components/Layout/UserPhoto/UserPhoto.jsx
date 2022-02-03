@@ -104,8 +104,6 @@ function UserPhoto({
   borderSize = '0px',
   isOnline = false,
 }) {
-  console.log('🚀 ~ user', user);
-
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
