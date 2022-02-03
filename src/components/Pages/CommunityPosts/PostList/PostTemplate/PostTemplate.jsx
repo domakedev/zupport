@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import DividingLine from '../../../../Layout/LineStyle/DividingLine';
 import IconHeart from './IconHeart';
 import PostFooter from './PostFooter';
@@ -9,6 +10,7 @@ import PostHeader from './PostHeader';
 import PostImage from './PostImage';
 // import Answers from './Answers/Answers';
 import action from '../../../../../store/action';
+import alert from '../../../../../images/alert.gif';
 
 const Option = styled.span`
   color: rgba(0, 0, 0, 0.55);
@@ -85,7 +87,9 @@ function PostTemplate({
   textComment, // props para el boton comentar (cambiará a Ver Comentarios)
   timePosted,
   isOnline,
+  community,
 }) {
+  // console.log(community);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -137,11 +141,31 @@ function PostTemplate({
 
   const onClick = async () => {
     // eslint-disable-next-line
-    if (confirm('¿Estas seguro de eliminar la publicación?') === true) {
-      await dispatch(action.deletedPost(idPost));
-      // eslint-disable-next-line
-      location.reload();
-    }
+    Swal.fire({
+      title: 'Eliminar Publicación',
+      text: 'Se eliminará esta publicación',
+      imageUrl: `${alert}`,
+      showCancelButton: true,
+      confirmButtonColor: '#29ABE0',
+      cancelButtonColor: '#D9534F',
+      confirmButtonText: 'Sí, esta respuesta me sirvió',
+      imageWidth: 300,
+      imageHeight: 250,
+      imageAlt: 'Custom image',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Se Eliminó!', '', 'success');
+        dispatch(action.deletedPost(idPost));
+        // eslint-disable-next-line
+        location.reload();
+        // setStateResolved()
+      }
+    });
+    // if (confirm('¿Estas seguro de eliminar la publicación?') === true) {
+    //   await dispatch(action.deletedPost(idPost));
+    //   // eslint-disable-next-line
+    //   location.reload();
+    // }
   };
   return (
     <PostTemplteCont>
@@ -174,7 +198,12 @@ function PostTemplate({
       </ReactionContainer>
       <DividingLine />
 
-      <PostFooter likes={likes} idPost={idPost} textComment={textComment} />
+      <PostFooter
+        likes={likes}
+        idPost={idPost}
+        textComment={textComment}
+        community={community}
+      />
       {/* <Answers idPost={idPost} /> */}
     </PostTemplteCont>
   );

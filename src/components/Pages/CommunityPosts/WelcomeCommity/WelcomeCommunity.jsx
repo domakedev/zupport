@@ -53,7 +53,7 @@ const WelcomeCommnityTitle = styled.h2`
 function WelcomeCommunity({ title }) {
   const navigate = useNavigate();
   const goBack = () => {
-    navigate(-1);
+    navigate('/communities');
   };
   return (
     <WelcomeContainer>

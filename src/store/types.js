@@ -1,5 +1,6 @@
 // General Types
 export const SHOW_LOADING = 'SHOW_LOADING';
+export const REQ_ERROR = 'REQ_ERROR';
 
 // Answer types
 // se crea un tipo para poder cargar un estado de un post
@@ -44,3 +45,4 @@ export const ADD_COMMUNITY = 'ADD_COMMUNITY';
 export const EDIT_COMMUNITY = 'EDIT_COMMUNITY';
 export const DELETE_COMMUNITY = 'DELETE_COMMUNITY';
 export const GET_MY_COMMUNITIES = 'DELETE_COMMUNITY';
+export const LOAD_EDIT_COMMUNITY = 'LOAD_EDIT_COMMUNITY';

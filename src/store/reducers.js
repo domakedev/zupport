@@ -2,6 +2,7 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable default-param-last */
 import {
+  REQ_ERROR,
   LOAD_ONLY_POST,
   GET_ANSWERS,
   ADD_ANSWER,
@@ -29,11 +30,13 @@ import {
   GET_COMMUNITIES,
   ADD_COMMUNITY,
   EDIT_COMMUNITY,
+  LOAD_EDIT_COMMUNITY,
   DELETE_COMMUNITY,
   GET_MY_COMMUNITIES,
 } from './types';
 
 const initialState = {
+  reqErr: false,
   loadOnlyPost: {},
   answers: [],
   addAnswer: {},
@@ -62,6 +65,9 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   const newValue = action.payload;
   switch (action.type) {
+    case REQ_ERROR:
+      // console.log(newValue);
+      return { ...state, reqErr: newValue };
     case LOAD_ONLY_POST:
       // console.log(newValue);
       return { ...state, loadOnlyPost: newValue };
@@ -170,10 +176,13 @@ const reducer = (state = initialState, action) => {
       return { ...state, getTitleCommunity: newValue };
     case GET_COMMUNITIES:
       console.log('Todas las commus?', newValue);
+      // console.log(newValue);
       return { ...state, communities: newValue };
     case ADD_COMMUNITY:
       return { ...state, addCommunity: newValue };
     case EDIT_COMMUNITY:
+      return { ...state, editCommunity: newValue };
+    case LOAD_EDIT_COMMUNITY:
       return { ...state, editCommunity: newValue };
     case DELETE_COMMUNITY:
       return { ...state, deleteCommunity: newValue };

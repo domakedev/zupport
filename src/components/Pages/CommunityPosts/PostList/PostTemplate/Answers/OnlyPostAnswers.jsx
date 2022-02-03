@@ -68,16 +68,9 @@ const Line = styled.hr`
 
 function OnlyPostAnswers() {
   const { idPost } = useParams();
-  // const [post, setPost] = useState({});
-  // const currentPost = useSelector((state) => state.loadOnlyPost);
-  // console.log('currentt', currentPost);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   setPost(currentPost);
-  // }, [currentPost]);
-  // console.log(!post, post);
   const handleClick = () => {
     // regresando a la página anterior
     navigate(-1);
@@ -107,8 +100,8 @@ function OnlyPostAnswers() {
           <PostContainer>
             <PostTemplate
               user={post.user}
-              userPhoto={post.user.photo === null ? '' : post.user.photo}
-              userName={post.user.username}
+              userPhoto={post?.user.photo === null ? '' : post.user.photo}
+              userName={post?.user.username}
               timePost={getPostTime(post.timePosted)}
               postTitle={post.title}
               postDescription={post.description}
@@ -119,6 +112,7 @@ function OnlyPostAnswers() {
               urlPost={post.image}
               idPost={post._id}
               isOnline={post.user.isOnline}
+              community={post.community}
             />
 
             <Answers
