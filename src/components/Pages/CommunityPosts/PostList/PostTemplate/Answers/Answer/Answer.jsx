@@ -154,7 +154,7 @@ function Answer({
         // Quitar puntos al postUser
         const finalPoinstSubstract = postUser.points - postPoints;
 
-        await dispatch(
+        dispatch(
           action.updateTheUser(
             postUser.username,
             {
@@ -172,7 +172,7 @@ function Answer({
 
         const newLevel = (userWhoComment.levelPoints || 0) + 1;
 
-        await dispatch(
+        dispatch(
           action.updateTheUser(
             userWhoComment.username,
             {
@@ -182,7 +182,7 @@ function Answer({
             true
           )
         );
-        await dispatch(action.editedPost(idPost, { resolved: true }));
+        dispatch(action.editedPost(idPost, { resolved: true }));
 
         // editando una respuesta cuando el dueño del post la valida;
         dispatch(
