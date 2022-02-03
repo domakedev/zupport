@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 // Components
 import { BiImageAdd } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import AddPhotoIcon from '../../../images/Icon/AddPhotoIcon.svg';
 import Header from '../../Layout/Header';
 import Footer from '../../Layout/Footer';
@@ -100,30 +100,35 @@ const Buttons = styled.div`
   margin-top: 50px;
 `;
 
-function CreateCommunitie() {
-  const [title, changeTitle] = useState({ field: '', check: null });
-  const [description, changeDescription] = useState({ field: '', check: null });
-  const [image, changeImage] = useState({ field: '', check: null });
+function EditCommunity() {
+  const dataCommunity = useSelector((state) => state.editCommunity);
+
+  const [title, changeTitle] = useState({
+    field: dataCommunity.title,
+    check: null,
+  });
+  const [description, changeDescription] = useState({
+    field: dataCommunity.description,
+    check: null,
+  });
+  const [image, changeImage] = useState({
+    field: dataCommunity.image,
+    check: null,
+  });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const createCom = async () => {
+  const editCom = async () => {
     await dispatch(
-      action.addCommunities({
+      action.editedCommunity(dataCommunity.id, {
         title: title.field,
         description: description.field,
         image: image.field,
       })
     );
-    navigate(`/communities/${title.field}/posts`);
+    navigate(-1);
   };
-
-  // const addImage = () => {
-  //   // eslint-disable-next-line
-  //   console.log('Añadir imageeeen');
-  //   changeImage({ ...image, field: '' });
-  // };
 
   const onChangeFile = async (e) => {
     e.preventDefault();
@@ -152,7 +157,7 @@ function CreateCommunitie() {
       <MainContainer>
         <Form>
           {/* Titulo */}
-          <TitleOrange>Crear Comunidad</TitleOrange>
+          <TitleOrange>Editar Comunidad</TitleOrange>
 
           {/* Inputs */}
           <Label htmlFor="Titulo">Título</Label>
@@ -200,7 +205,7 @@ function CreateCommunitie() {
             />
             <AddImage>
               <BiImageAdd />
-              Añadir imagen
+              Cambiar imagen
             </AddImage>
           </label>
 
@@ -213,8 +218,8 @@ function CreateCommunitie() {
             <Button type="button" onClick={goBack} danger>
               CANCELAR
             </Button>
-            <Button type="button" onClick={createCom} primary>
-              CREAR
+            <Button type="button" onClick={editCom} primary>
+              Editar
             </Button>
           </Buttons>
         </Form>
@@ -224,6 +229,6 @@ function CreateCommunitie() {
   );
 }
 
-CreateCommunitie.propTypes = {};
+EditCommunity.propTypes = {};
 
-export default CreateCommunitie;
+export default EditCommunity;

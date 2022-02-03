@@ -118,6 +118,7 @@ function OnlyPostAnswers() {
               urlPost={post.image}
               idPost={post._id}
               isOnline={post.user.isOnline}
+              community={post.community}
             />
 
             <Answers

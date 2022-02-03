@@ -29,6 +29,7 @@ import {
   GET_COMMUNITIES,
   ADD_COMMUNITY,
   EDIT_COMMUNITY,
+  LOAD_EDIT_COMMUNITY,
   DELETE_COMMUNITY,
 } from './types';
 
@@ -159,6 +160,8 @@ const reducer = (state = initialState, action) => {
     case ADD_COMMUNITY:
       return { ...state, addCommunity: newValue };
     case EDIT_COMMUNITY:
+      return { ...state, editCommunity: newValue };
+    case LOAD_EDIT_COMMUNITY:
       return { ...state, editCommunity: newValue };
     case DELETE_COMMUNITY:
       return { ...state, deleteCommunity: newValue };

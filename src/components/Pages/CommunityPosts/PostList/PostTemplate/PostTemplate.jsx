@@ -85,7 +85,9 @@ function PostTemplate({
   textComment, // props para el boton comentar (cambiará a Ver Comentarios)
   timePosted,
   isOnline,
+  community,
 }) {
+  // console.log(community);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -174,7 +176,12 @@ function PostTemplate({
       </ReactionContainer>
       <DividingLine />
 
-      <PostFooter likes={likes} idPost={idPost} textComment={textComment} />
+      <PostFooter
+        likes={likes}
+        idPost={idPost}
+        textComment={textComment}
+        community={community}
+      />
       {/* <Answers idPost={idPost} /> */}
     </PostTemplteCont>
   );

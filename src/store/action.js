@@ -26,6 +26,7 @@ import {
   GET_COMMUNITIES,
   ADD_COMMUNITY,
   EDIT_COMMUNITY,
+  LOAD_EDIT_COMMUNITY,
   DELETE_COMMUNITY,
 } from './types';
 import axios from '../utils/axios';
@@ -151,6 +152,10 @@ const editCommunity = (community) => ({
   type: EDIT_COMMUNITY,
   payload: community,
 });
+const loadEditCommunity = (post) => ({
+  type: LOAD_EDIT_COMMUNITY,
+  payload: post,
+});
 const deleteCommunity = (community) => ({
   type: DELETE_COMMUNITY,
   payload: community,
@@ -255,7 +260,7 @@ const addedPost = (comuTitle, postData) => async (dispatch) => {
     // eslint-disable-next-line
     const idComu = community.data._id;
     // eslint-disable-next-line
-    const comId = {community: community.data._id};
+    const comId = { community: community.data._id };
 
     const post = { ...postData, ...comId };
     const response = await axios.post('/api/post', post);
@@ -572,7 +577,7 @@ const addCommunities = (communityData) => async (dispatch) => {
   }
 };
 
-const editCommunities = (idCommunity, communityData) => async (dispatch) => {
+const editedCommunity = (idCommunity, communityData) => async (dispatch) => {
   try {
     const response = await axios.put(
       `api/communities/${idCommunity}`,
@@ -584,12 +589,23 @@ const editCommunities = (idCommunity, communityData) => async (dispatch) => {
     // console.log(e);
   }
 };
+const loadEditedCommunity = (data) => async (dispatch) => {
+  try {
+    dispatch(loadEditCommunity(data));
+  } catch (e) {
+    // console.log(e);
+  }
+};
 
 const deletedCommunities = (idCommunity) => async (dispatch) => {
   try {
-    const response = await axios.delete(`/api/communities/${idCommunity}`);
+    // const response = await axios.delete(`/api/communities/${idCommunity}`);
+    const response = await axios.delete(
+      `/api/communities/allDelete/${idCommunity}`
+    );
+    // console.log(response);
     dispatch(deleteCommunity(response));
-    // dispatch(getAllCommunities());
+    dispatch(getAllCommunities());
   } catch (e) {
     // console.log(e);
   }
@@ -624,6 +640,7 @@ export default {
   getCommunityByTitle,
   getAllCommunities,
   addCommunities,
-  editCommunities,
+  editedCommunity,
+  loadEditedCommunity,
   deletedCommunities,
 };

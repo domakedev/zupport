@@ -15,7 +15,10 @@ import NewCommunitie from './NewCommunitie/NewCommunitie';
 import GOFData from './GOFData/GOFData';
 import CommunitieAddCard from '../../Layout/CommunitieAddCard/CommunitieAddCard';
 import action from '../../../store/action';
-import { isUserInCommu } from '../../../controller/CommunityPostCtr/utilities';
+import {
+  isUserInCommu,
+  // rankingsCommunity,
+} from '../../../controller/CommunityPostCtr/utilities';
 
 // General Styled
 import {
@@ -104,6 +107,7 @@ function Communities() {
               users={e.users} // se manda el array de post que pertenecen a esa users
               checks={e.posts} // se manda el array de post que pertenecen a esa comunidad
               title={e.title}
+              description={e.description}
               buttonText="MI COMUNIDAD"
               creator={e.creator}
             />
@@ -119,6 +123,7 @@ function Communities() {
               users={e.users} // se manda el array de post que pertenecen a esa users
               checks={e.posts} // se manda el array de post que pertenecen a esa comunidad
               title={e.title}
+              description={e.description}
               buttonText="UNIRME"
             />
           ))}

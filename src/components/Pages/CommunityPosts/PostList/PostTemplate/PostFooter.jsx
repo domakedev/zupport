@@ -65,7 +65,8 @@ const InputBox = styled.input`
   }
 `;
 
-function PostFooter({ idPost, textComment, likes }) {
+function PostFooter({ idPost, textComment, likes, community }) {
+  // console.log(community);
   const [responder, setResponder] = useState(false);
   const navigate = useNavigate();
   const [answerData, setAnswerData] = useState('');
@@ -115,6 +116,7 @@ function PostFooter({ idPost, textComment, likes }) {
           likes: [],
           post: idPost,
           resolved: false,
+          community,
         },
         idPost
       )

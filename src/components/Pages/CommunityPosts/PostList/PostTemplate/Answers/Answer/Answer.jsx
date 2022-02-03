@@ -146,7 +146,11 @@ function Answer({
       imageAlt: 'Custom image',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+        Swal.fire(
+          'Donaste!',
+          'Gracias por recompensar a la persona que te ayudó',
+          'success'
+        );
         // Asignar puntos del post a la answer
         const pointsToAssign = postPoints;
         const userOfAnswer = state.user.username;
