@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const MainContainer = styled.div`
   min-height: 100vh;
@@ -32,9 +32,11 @@ const NameUser = styled.div`
 
 const DataCards = styled.div`
   margin-top: 58px;
+  margin-bottom: 58px;
   display: flex;
   justify-content: space-between;
   gap: 37px;
+  align-items: flex-start;
   flex-wrap: wrap;
 `;
 
@@ -44,6 +46,7 @@ const MyDataCard = styled.div`
   margin: 0 auto;
   width: 360px;
   padding: 17px;
+  min-height: 200px;
   & > p {
     width: 100%;
     text-align: left;
@@ -72,7 +75,7 @@ const StatName = styled.div`
   }
 `;
 
-const StatBox = styled.p`
+const StatBox = styled.div`
   background: #efefef;
   border-radius: 3px;
   width: 66px;
@@ -127,6 +130,24 @@ const AboutMe = styled.p`
   }
 `;
 
+const ContainerCrown = styled('div')(
+  () => css`
+    position: relative;
+    border-radius: 50%;
+    .icon-crow {
+      height: 60px;
+      width: 60px;
+      left: 3px;
+      top: -2px;
+      bottom: 28px;
+      stroke-width: 1rem;
+      stroke: var(--dark-color);
+      position: absolute;
+      z-index: 2;
+    }
+  `
+);
+
 export {
   MainContainer,
   UserPhotoContainer,
@@ -139,4 +160,5 @@ export {
   IndividualStatContainer,
   StatSocial,
   AboutMe,
+  ContainerCrown,
 };

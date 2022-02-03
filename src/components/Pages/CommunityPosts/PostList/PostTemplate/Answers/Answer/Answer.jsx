@@ -151,15 +151,33 @@ function Answer({
           'Con tu validación ayudas a tu comunidad',
           'success'
         );
-        // Asignar puntos del post a la answer
-        const pointsToAssign = postPoints;
-        const userOfAnswer = state.user.username;
-        const pointstFinal = state.user.points + pointsToAssign;
+        // Quitar puntos al postUser
+        const finalPoinstSubstract = postUser.points - postPoints;
+
         dispatch(
           action.updateTheUser(
-            userOfAnswer,
+            postUser.username,
             {
-              points: pointstFinal,
+              points: finalPoinstSubstract,
+            },
+            true
+          )
+        );
+
+        // Aumentar el nivel del usuario que respondio en +1
+        // Asignar puntos del post a la answer
+        const userWhoComment = state.user;
+
+        const newPoints = userWhoComment.points + postPoints;
+
+        const newLevel = (userWhoComment.levelPoints || 0) + 1;
+
+        dispatch(
+          action.updateTheUser(
+            userWhoComment.username,
+            {
+              points: newPoints,
+              levelPoints: newLevel,
             },
             true
           )
@@ -176,7 +194,6 @@ function Answer({
             idPost
           )
         );
-        // setStateResolved()
       }
     });
   };

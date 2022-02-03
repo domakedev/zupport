@@ -27,6 +27,7 @@ import {
   GET_COMMUNITIES,
   ADD_COMMUNITY,
   EDIT_COMMUNITY,
+  GET_MY_COMMUNITIES,
   LOAD_EDIT_COMMUNITY,
   DELETE_COMMUNITY,
 } from './types';
@@ -81,8 +82,6 @@ const deletePost = (post) => ({
   payload: post,
 });
 
-// actions
-
 // Auth
 const createUser = (user) => ({
   type: REGISTER_USER,
@@ -132,6 +131,10 @@ const setTheTopUsersLanding = (topUsers) => ({
 });
 const updateUser = (newData) => ({
   type: UPDATE_USER,
+  payload: newData,
+});
+const getMyCommunities = (newData) => ({
+  type: GET_MY_COMMUNITIES,
   payload: newData,
 });
 
@@ -485,6 +488,18 @@ const setVisitedUser = (userUsername) => async (dispatch) => {
   }
 };
 
+const getMyComs = (userUsername) => async (dispatch) => {
+  try {
+    await dispatch(getMyCommunities(userUsername));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(
+      '🚀 ~ file: action.js ~ line 290 ~ setVisitedUser ~ error',
+      error
+    );
+  }
+};
+
 const getTopUsersLanding = () => async (dispatch) => {
   try {
     const respuesta = await axios.get('/api/users');
@@ -649,4 +664,5 @@ export default {
   editedCommunity,
   loadEditedCommunity,
   deletedCommunities,
+  getMyComs,
 };

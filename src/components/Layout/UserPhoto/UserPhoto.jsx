@@ -11,10 +11,10 @@ import defaultPhoto from '../../../images/Icon/user.png';
 // --alert-color : #D9534F; FaUserCircle
 // oro #FFC107; bronce : #CD7F32; plata: #C0C0C
 const crownColor = (points) => {
-  if (points > 30000) {
+  if (points > 100) {
     return '#FFC107';
   }
-  if (points > 15000) {
+  if (points > 50) {
     return '#C0C0C0';
   }
   return '#CD7F32';
@@ -108,7 +108,7 @@ function UserPhoto({
   const location = useLocation();
   const navigate = useNavigate();
   const onClickHandler = () => {
-    if (location.pathname === '/communities/help-post') {
+    if (location.pathname.includes('help-post')) {
       selectUser(user);
     } else if (location.pathname === '/profile') {
       // nothing no borrar
@@ -122,14 +122,6 @@ function UserPhoto({
 
   const value = useMemo(() => ({ className: 'icon-crow' }));
 
-  // const onClickPhoto = async () => {
-  //   await dispatch(
-  //     actions.setVisitedUser(user.username ? user.username : null)
-  //   );
-  //   console.log('Click en la foto');
-  //   // navigate('/profile');
-  //   window.open('/profile');
-  // };
   return (
     <Container
       userPoints={userPoints}
@@ -138,11 +130,11 @@ function UserPhoto({
       route={location.pathname}
     >
       <IconContext.Provider
-        userPoints={userPoints}
+        userPoints={user?.levelPoints}
         value={value}
         medalSize={medalSize}
       >
-        <AiTwotonePropertySafety />
+        <AiTwotonePropertySafety color={crownColor(user?.levelPoints)} />
       </IconContext.Provider>
 
       <PhotoContainer>

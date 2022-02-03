@@ -22,6 +22,7 @@ import {
 } from './styleds';
 import actions from '../../../store/action';
 import LoadingIcon from '../../Layout/Loading/Loading';
+import CardComunidadShow from '../../Layout/CardComunidadShow/CardComunidadShow';
 
 // Icons
 import { ReactComponent as PencilIcon } from '../../../images/Icon/PencilIcon.svg';
@@ -30,7 +31,6 @@ import { ReactComponent as DeleteIcon } from '../../../images/Icon/DeleteIcon.sv
 
 const UserProfileConfig = function UserProfileConfig() {
   const dispatch = useDispatch();
-  // const dispatch = useDispatch();
 
   const [userNewData, setUserNewData] = useState();
 
@@ -39,21 +39,34 @@ const UserProfileConfig = function UserProfileConfig() {
   const [userNewName, setUserNewName] = useState(userNewData?.fullname);
   const [userNewAbout, setUserNewAbout] = useState();
   const [errorWritingSN, setErrorWritingSN] = useState(false);
+  // const [myComus, setMyComus] = useState([]);
 
   // UseSelector
   const user = useSelector((state) => state.currentUserOTokencito);
+
+  const allComus = useSelector((state) => state.communities);
+
+  const myComus = allComus.filter((e) => e.users.includes(user?.username));
+
   const loading = useSelector((state) => state.spinningLoading);
   const userAuth = useSelector((state) => state.userAuthenticated);
 
   useEffect(() => {
+    dispatch(actions.getAllCommunities());
+  }, []);
+
+  useEffect(() => {
     setUserNewData(user);
-    setUserNewName(userNewData?.fullname);
 
     setUserNewAbout(user?.about);
     setUserNewSocialN(user?.socialNetworks);
 
     setErrorWritingSN(false);
-  }, [user, userNewData]);
+  }, [user]);
+
+  useEffect(() => {
+    setUserNewName(userNewData?.fullname);
+  }, [userNewData]);
 
   const onChangeName = (e) => {
     e.preventDefault();
@@ -257,6 +270,15 @@ const UserProfileConfig = function UserProfileConfig() {
                 <MyDataCard>
                   <p>Mis comunidades</p>
                   {/* Map de array de comunidades del user */}
+                  {myComus?.map((comu) => (
+                    <CardComunidadShow
+                      key={uuidv4()}
+                      image={comu.image}
+                      users={comu.users.length}
+                      // checks, esto lo tiene Nayruth
+                      title={comu.title}
+                    />
+                  ))}
                   {/* <CardComunidadShow image  users checks title/> */}
                 </MyDataCard>
               </DataCards>

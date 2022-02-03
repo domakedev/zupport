@@ -99,7 +99,8 @@ function OnlyPostAnswers() {
         ) : (
           <PostContainer>
             <PostTemplate
-              userPhoto={post?.user.photo === null ? '' : post?.user.photo}
+              user={post.user}
+              userPhoto={post?.user.photo === null ? '' : post.user.photo}
               userName={post?.user.username}
               timePost={getPostTime(post.timePosted)}
               postTitle={post.title}

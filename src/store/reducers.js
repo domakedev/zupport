@@ -32,6 +32,7 @@ import {
   EDIT_COMMUNITY,
   LOAD_EDIT_COMMUNITY,
   DELETE_COMMUNITY,
+  GET_MY_COMMUNITIES,
 } from './types';
 
 const initialState = {
@@ -148,6 +149,20 @@ const reducer = (state = initialState, action) => {
         visitProfileUser: newValue,
       };
 
+    case GET_MY_COMMUNITIES:
+      console.log(
+        '🚀 ~ file: reducers.js ~ line 152 ~ reducer ~ state.visitProfileUser',
+        state.visitProfileUser
+      );
+      console.log('147', newValue);
+      return {
+        ...state,
+        visitProfileUser: {
+          ...state.visitProfileUser,
+          myCommunities: newValue,
+        },
+      };
+
     case TOP_LANDING_USERS:
       return {
         ...state,
@@ -160,6 +175,7 @@ const reducer = (state = initialState, action) => {
       // console.log(newValue);
       return { ...state, getTitleCommunity: newValue };
     case GET_COMMUNITIES:
+      console.log('Todas las commus?', newValue);
       // console.log(newValue);
       return { ...state, communities: newValue };
     case ADD_COMMUNITY:
