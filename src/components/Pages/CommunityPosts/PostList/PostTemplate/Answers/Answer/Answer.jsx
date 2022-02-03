@@ -232,7 +232,8 @@ function Answer({
           ) : null}
         </Validated>
         {/* )} */}
-        {currentUser.username === state.user.username ? (
+        {currentUser.username === state.user.username ||
+        currentUser.role === 'admin' ? (
           <MoreButton
             type="button"
             onClick={handleClickMore}

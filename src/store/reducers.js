@@ -2,6 +2,7 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable default-param-last */
 import {
+  REQ_ERROR,
   LOAD_ONLY_POST,
   GET_ANSWERS,
   ADD_ANSWER,
@@ -34,6 +35,7 @@ import {
 } from './types';
 
 const initialState = {
+  reqErr: false,
   loadOnlyPost: {},
   answers: [],
   addAnswer: {},
@@ -62,6 +64,9 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   const newValue = action.payload;
   switch (action.type) {
+    case REQ_ERROR:
+      // console.log(newValue);
+      return { ...state, reqErr: newValue };
     case LOAD_ONLY_POST:
       // console.log(newValue);
       return { ...state, loadOnlyPost: newValue };

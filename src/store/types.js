@@ -1,5 +1,6 @@
 // General Types
 export const SHOW_LOADING = 'SHOW_LOADING';
+export const REQ_ERROR = 'REQ_ERROR';
 
 // Answer types
 // se crea un tipo para poder cargar un estado de un post

@@ -1,4 +1,5 @@
 import {
+  REQ_ERROR,
   LOAD_ONLY_POST,
   GET_ANSWERS,
   ADD_ANSWER,
@@ -31,8 +32,11 @@ import {
 } from './types';
 import axios from '../utils/axios';
 
-// action creators
-
+// action creators REQ_ERROR
+const errRequest = (data) => ({
+  type: REQ_ERROR,
+  payload: data,
+});
 // Answer
 const loadOnlyPost = (post) => ({
   type: LOAD_ONLY_POST,
@@ -192,8 +196,10 @@ const addAnswerPost = (answerData, idPost) => async (dispatch) => {
     dispatch(addAnswer(response));
     // console.log(answers);
     dispatch(getAllAnswers(idPost));
+    dispatch(errRequest(false));
   } catch (e) {
     // console.log(e);
+    dispatch(errRequest(true));
   }
 };
 
