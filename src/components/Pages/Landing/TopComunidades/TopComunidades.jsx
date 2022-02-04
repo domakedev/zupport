@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import action from '../../../../store/action';
 import { rankingsCommunity } from '../../../../controller/CommunityPostCtr/utilities';
@@ -76,6 +76,9 @@ function TopComunidades() {
     setComunidades(topCommunities);
     // console.log(topCommunities);
   }, [allCommunities]);
+
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Titulo>TOP COMUNIDADES</Titulo>
@@ -89,6 +92,7 @@ function TopComunidades() {
             title={card.title}
             image={card.image}
             postsResol={card.postsResol}
+            goTo={() => navigate(`/communities/${card.title}/posts`)}
           />
         ))}
       </Cards>

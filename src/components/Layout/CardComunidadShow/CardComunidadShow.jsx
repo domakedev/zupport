@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { useNavigate } from 'react-router-dom';
-
 // Images and Icons
 import IconUsers from '../../../images/users.svg';
 import IconCheck from '../../../images/check.svg';
@@ -118,16 +116,19 @@ const CardName = styled.h3`
   font-size: 1.8rem;
 `;
 
-function CardComunidadShow({ image, users, checks = [], title, postsResol }) {
+function CardComunidadShow({
+  image,
+  users,
+  checks = [],
+  title,
+  postsResol,
+  goTo,
+}) {
   // const postResolved = checks?.filter((e) => e.resolved);
   // console.log(checks);
-  const navigate = useNavigate();
+
   return (
-    <Container
-      onClick={() => {
-        navigate(`/communities/${title}/posts`);
-      }}
-    >
+    <Container onClick={goTo}>
       <CardComunidadShowIMG src={image} alt="" />
 
       <CardStatsUsers>
