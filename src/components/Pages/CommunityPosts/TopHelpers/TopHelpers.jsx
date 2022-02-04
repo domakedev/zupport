@@ -41,6 +41,7 @@ function TopHelpers() {
             goTo={() => {
               navigate(`/profile/${user?.username ? user.username : null}`);
             }}
+            isOnline={user.isOnline}
           />
         )
       )}
