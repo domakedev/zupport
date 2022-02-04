@@ -99,14 +99,11 @@ function Footer() {
             <FooterLink href="https://www.linkedin.com/in/nayruth-calla/">
               <BsLinkedin /> Nayruth
             </FooterLink>
-            <FooterLink href="https://www.linkedin.com/in/c%C3%A9sar-guevara-cabrera-4890b2140/">
+            <FooterLink href="https://www.linkedin.com/in/domakedev/">
               <BsLinkedin /> Cesar
             </FooterLink>
             <FooterLink href="https://www.linkedin.com/in/danieloch/">
               <BsLinkedin /> Daniel
-            </FooterLink>
-            <FooterLink href="https://www.linkedin.com/in/juan-bernal-50a680190/">
-              <BsLinkedin /> Juan
             </FooterLink>
           </LinkedInContainer>
         </ContactContainer>
