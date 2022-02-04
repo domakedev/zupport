@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+
 import PropTypes from 'prop-types';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { AiTwotonePropertySafety, AiFillMinusCircle } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
-import actions from '../../../store/action';
 import defaultPhoto from '../../../images/Icon/user.png';
 
 // --alert-color : #D9534F; FaUserCircle
@@ -103,21 +102,12 @@ function UserPhoto({
   medalSize,
   borderSize = '0px',
   isOnline = false,
+  goTo,
 }) {
-  const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
+  //  const navigate = useNavigate();
   const onClickHandler = () => {
-    if (location.pathname.includes('help-post')) {
-      selectUser(user);
-    } else if (location.pathname === '/profile') {
-      // nothing no borrar
-    } else if (location.pathname.includes('posts')) {
-      // nothing no borrar
-    } else {
-      dispatch(actions.setVisitedUser(user.username ? user.username : null));
-      navigate('/profile');
-    }
+    selectUser(user);
   };
 
   const value = useMemo(() => ({ className: 'icon-crow' }));
@@ -137,24 +127,15 @@ function UserPhoto({
         <AiTwotonePropertySafety color={crownColor(user?.levelPoints)} />
       </IconContext.Provider>
 
-      <PhotoContainer>
-        <Link
-          to={{
-            pathname: `/profile/${user?.username ? user.username : null}`,
-          }}
-          target="_blank"
-          rel="noopener noreferrer"
-          // state={{ username: user.username }}
-        >
-          <Photo
-            isOnline={isOnline}
-            photoSize={photoSize}
-            borderSize={borderSize}
-            src={!userPhoto ? defaultPhoto : userPhoto}
-            alt={!user?.username ? 'userPhoto' : user?.username}
-            // onClick={onClickPhoto}
-          />
-        </Link>
+      <PhotoContainer onClick={goTo}>
+        <Photo
+          isOnline={isOnline}
+          photoSize={photoSize}
+          borderSize={borderSize}
+          src={!userPhoto ? defaultPhoto : userPhoto}
+          alt={!user?.username ? 'userPhoto' : user?.username}
+          // onClick={onClickPhoto}
+        />
       </PhotoContainer>
 
       {selected ? (

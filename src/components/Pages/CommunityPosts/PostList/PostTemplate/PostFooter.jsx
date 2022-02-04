@@ -162,6 +162,13 @@ function PostFooter({ idPost, textComment, likes, community }) {
               <UserPhoto
                 userPhoto={currentUser.photo}
                 userPoints={currentUser.points}
+                goTo={() =>
+                  navigate(
+                    `/profile/${
+                      currentUser?.username ? currentUser.username : null
+                    }`
+                  )
+                }
               />{' '}
               <InputBox
                 type="text"

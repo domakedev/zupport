@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 // Components
 import { BiImageAdd } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import AddPhotoIcon from '../../../images/Icon/AddPhotoIcon.svg';
 import Header from '../../Layout/Header';
 import Footer from '../../Layout/Footer';
@@ -23,6 +23,35 @@ import {
   Label,
   SubTitle,
 } from '../../../css/generalStyled';
+
+const AuthTitle = styled.div`
+  display: flex;
+  width: max-content;
+  margin: 120px auto;
+  font-family: var(--principal-font);
+  color: var(--boring-color);
+  text-align: center;
+  font-weight: normal;
+  font-size: 3.6rem;
+  padding: 2rem 0;
+`;
+
+const AuthSubTitle = styled.div`
+  display: flex;
+  margin: 120px auto;
+  text-decoration: underline;
+  width: max-content;
+  font-family: var(--principal-font);
+  color: var(--boring-color);
+  text-align: center;
+  font-weight: normal;
+  font-size: 3.6rem;
+  padding: 2rem 0;
+  cursor: pointer;
+  :hover {
+    color: var(--secondary-color);
+  }
+`;
 
 const MainContainer = styled.div`
   flex-grow: 1;
@@ -146,81 +175,100 @@ function CreateCommunitie() {
     navigate(-1);
   };
 
+  const userAuth = useSelector((state) => state.userAuthenticated);
+
   return (
-    <PageContainer>
-      <Header />
-      <MainContainer>
-        <Form>
-          {/* Titulo */}
-          <TitleOrange>Crear Comunidad</TitleOrange>
+    <div>
+      {!userAuth ? (
+        <div>
+          <Header />
+          <AuthTitle>¿Qué tal si iniciamos sesión primero</AuthTitle>
+          <AuthSubTitle
+            onClick={() => {
+              navigate('/login');
+            }}
+          >
+            Inicia sesión aquí
+          </AuthSubTitle>
+          <Footer />
+        </div>
+      ) : (
+        <PageContainer>
+          <Header />
+          <MainContainer>
+            <Form>
+              {/* Titulo */}
+              <TitleOrange>Crear Comunidad</TitleOrange>
 
-          {/* Inputs */}
-          <Label htmlFor="Titulo">Título</Label>
-          <Input
-            state={title}
-            name="title"
-            changeState={changeTitle}
-            inputType="text"
-            inputName="title"
-            label="Titulo"
-            textPlaceholder="Comida Latina..."
-          />
+              {/* Inputs */}
+              <Label htmlFor="Titulo">Título</Label>
+              <Input
+                state={title}
+                name="title"
+                changeState={changeTitle}
+                inputType="text"
+                inputName="title"
+                label="Titulo"
+                textPlaceholder="Comida Latina..."
+              />
 
-          <Label htmlFor="Descripcion">Descripción</Label>
-          <InputArea
-            state={description}
-            changeState={changeDescription}
-            inputType="text"
-            label="Descripcion"
-            textPlaceholder="Recetas y tips..."
-            inputName="descripcion"
-            boxHeight="100px"
-          />
+              <Label htmlFor="Descripcion">Descripción</Label>
+              <InputArea
+                state={description}
+                changeState={changeDescription}
+                inputType="text"
+                label="Descripcion"
+                textPlaceholder="Recetas y tips..."
+                inputName="descripcion"
+                boxHeight="100px"
+              />
 
-          {/* Añadir imagen */}
+              {/* Añadir imagen */}
 
-          <Label htmlFor="imagen">Imagen URL</Label>
-          <Input
-            state={image}
-            name="imagen"
-            changeState={changeImage}
-            inputType="text"
-            inputName="imagen"
-            label="imagen"
-            textPlaceholder="Añade la URL de la imagen: http://..."
-            value={image.field}
-          />
-          <label htmlFor="comPhoto" onChange={onChangeFile}>
-            <input
-              type="file"
-              name="comPhoto"
-              id="comPhoto"
-              accept="image/*"
-              multiple
-            />
-            <AddImage>
-              <BiImageAdd />
-              Añadir imagen
-            </AddImage>
-          </label>
+              <Label htmlFor="imagen">Imagen URL</Label>
+              <Input
+                state={image}
+                name="imagen"
+                changeState={changeImage}
+                inputType="text"
+                inputName="imagen"
+                label="imagen"
+                textPlaceholder="Añade la URL de la imagen: http://..."
+                value={image.field}
+              />
+              <label htmlFor="comPhoto" onChange={onChangeFile}>
+                <input
+                  type="file"
+                  name="comPhoto"
+                  id="comPhoto"
+                  accept="image/*"
+                  multiple
+                />
+                <AddImage>
+                  <BiImageAdd />
+                  Añadir imagen
+                </AddImage>
+              </label>
 
-          {/* Vista Previa */}
-          <VistaPrevia>Vista Previa</VistaPrevia>
-          <CardComunidadShow image={image.field} title={title.field} />
+              {/* Vista Previa */}
+              <VistaPrevia>Vista Previa</VistaPrevia>
+              <CardComunidadShow image={image.field} title={title.field} />
 
-          {/* Botones */}
-          <Buttons>
-            <Button type="button" onClick={goBack} danger>
-              CANCELAR
-            </Button>
-            <Button type="button" onClick={createCom} primary>
-              CREAR
-            </Button>
-          </Buttons>
-        </Form>
-      </MainContainer>
-      <Footer />
-    </PageContainer>
+              {/* Botones */}
+              <Buttons>
+                <Button type="button" onClick={goBack} danger>
+                  CANCELAR
+                </Button>
+                <Button type="button" onClick={createCom} primary>
+                  CREAR
+                </Button>
+              </Buttons>
+            </Form>
+          </MainContainer>
+          <Footer />
+        </PageContainer>
+      )}
+    </div>
   );
 }
 

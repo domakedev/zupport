@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import styled from 'styled-components';
 import { AiFillCheckSquare, AiOutlineEllipsis } from 'react-icons/ai';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import InputText from './InputText';
 import UserPhoto from '../../../../../../Layout/UserPhoto/UserPhoto';
 import action from '../../../../../../../store/action';
@@ -201,6 +202,7 @@ function Answer({
     setDisableInput(true);
     setButtonText('Editar');
   };
+  const navigate = useNavigate();
   // console.log('porque', validatedAnswer);
   return (
     <CommentCont>
@@ -224,6 +226,11 @@ function Answer({
           userPhoto={state.user.photo}
           userPoints={state.user.points}
           isOnline={state.user.isOnline}
+          goTo={() =>
+            navigate(
+              `/profile/${state.user?.username ? state.user.username : null}`
+            )
+          }
         />
         <InputComment validated={state.resolved}>
           <InputText

@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 // import {rankings} from "../../../../controller/CommunityPostCtr/utilities";
+import { useNavigate } from 'react-router-dom';
 import UserPhoto from '../../../Layout/UserPhoto/UserPhoto';
 // import axios from "../../../../utils/axios.js";
 import actions from '../../../../store/action';
@@ -24,6 +25,8 @@ function TopHelpers() {
   useEffect(() => {
     dispatch(actions.getTopUsersLanding());
   }, []);
+
+  const navigate = useNavigate();
   return (
     <TopHelpersCont>
       {usersDePrueba?.map(
@@ -35,6 +38,9 @@ function TopHelpers() {
             key={uuidv4()}
             userPhoto={user.photo}
             userPoints={user.points}
+            goTo={() => {
+              navigate(`/profile/${user?.username ? user.username : null}`);
+            }}
           />
         )
       )}

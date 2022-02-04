@@ -140,149 +140,171 @@ function HelpPost() {
   const goBack = () => {
     navigate(-1);
   };
+
+  const userAuth = useSelector((state) => state.userAuthenticated);
+
   return (
-    <>
-      <Header />
+    <div>
+      {!userAuth ? (
+        <div>
+          <Header />
+          <AuthTitle>¿Qué tal si iniciamos sesión primero</AuthTitle>
+          <AuthSubTitle
+            onClick={() => {
+              navigate('/login');
+            }}
+          >
+            Inicia sesión aquí
+          </AuthSubTitle>
+          <Footer />
+        </div>
+      ) : (
+        <div>
+          <Header />
 
-      <MainTitleContainer>
-        <MainTitle>Crear Pregunta</MainTitle>
-        <GoBack onClick={goBack}>
-          <BsX />
-        </GoBack>
-      </MainTitleContainer>
+          <MainTitleContainer>
+            <MainTitle>Crear Pregunta</MainTitle>
+            <GoBack onClick={goBack}>
+              <BsX />
+            </GoBack>
+          </MainTitleContainer>
 
-      <Line />
+          <Line />
 
-      <PageContainer>
-        <PostTitle>¿En que deseas ayuda?</PostTitle>
-        <InputTitle
-          state={titlest}
-          changeState={changeTitle}
-          inputType="text"
-          label="Titulo"
-          textPlaceholder="Título del problema"
-          inputName="titulo"
-          errorText="El título debe poseer de 10 a 50 caracteres."
-          inputParameters={parameters.title}
-        />
-        <InputStyle>
-          <BsTypeBold />
-          <BsTypeItalic />
-          <BsTypeUnderline />
-          <BsListUl />
-          <BsListOl />
-          <BsJustifyLeft />
-          <BsTextCenter />
-          <BsJustifyRight />
-          <BsJustify />
-          <BsTextIndentLeft />
-          <BsTextIndentRight />
-          <BsTable />
-          <BsCode />
-          <BsLink45Deg />
-          <BsEmojiSmile />
-        </InputStyle>
-        <InputPost
-          state={descriptionst}
-          changeState={changeDescription}
-          inputType="text"
-          label="Descripcion"
-          textPlaceholder="Ingresa aquí una breve descripción de tu problema..."
-          inputName="descripcion"
-          errorText="La descripción debe poseer de 10 a 1300 caracteres."
-          inputParameters={parameters.description}
-        />
-        {uploaderShow ? (
-          <Input
-            type="file"
-            name="file"
-            id="file"
-            onChange={onChangeFile}
-            accept="image/*"
-            multiple
-          />
-        ) : null}
-        <AddContainer>
-          <AddSecondaryContainer onClick={() => setUploaderShow(!uploaderShow)}>
-            <BsImages /> Añadir imagen
-          </AddSecondaryContainer>
-          <AddSecondaryContainer href="#">
-            <BsFolder2Open /> Añadir archivo
-          </AddSecondaryContainer>
-        </AddContainer>
-
-        <Line />
-
-        <HelpersText>
-          Escoge a quienes quisieras que te ayuden{' '}
-          <strong>solo si es necesario</strong> y si lo hacen no dudes en
-          invitarles un cafecito 🙌 ☕
-        </HelpersText>
-        <AddHelperContainerTitle>
-          Helpers
-          <SelectedUsersStyle>
-            {usersSelected?.map((u) => (
-              <UserFoto
-                // eslint-disable-next-line
-                key={`${u.photo}02${u.points}`}
-                user={u}
-                userPhoto={u.photo}
-                userPoints={u.points}
-                selectUser={selectUser}
-                selected
-                isOnline={u.isOnline}
-                deleteUserSelected={deleteUserSelected}
-              />
-            ))}
-          </SelectedUsersStyle>
-        </AddHelperContainerTitle>
-
-        <HelpersMainContainer>
-          <GUsers setResults={setResults} results={results} users={users} />
-
-          <HelpersContainer>
-            {results?.map((u) => (
-              <UserFoto
-                // eslint-disable-next-line
-                key={`${u.photo}02${u.fullname}`}
-                user={u}
-                userPhoto={u.photo}
-                alt={u.fullname}
-                userPoints={u.points}
-                selectUser={selectUser}
-                isOnline={u.isOnline}
-              />
-            ))}
-          </HelpersContainer>
-        </HelpersMainContainer>
-
-        <Line />
-
-        <OfferText>¿Que tan difícil consideras tu problema?</OfferText>
-        <OfferMainContainer>
-          <OfferTitle>OFRECER</OfferTitle>
-          <OfferPointsContainer>
-            <InputPoints
-              state={pointsst}
-              changeState={changePoints}
-              inputType="number"
-              label="Puntos"
-              textPlaceholder="0"
-              inputName="puntos"
-              errorText="Entre 0 y 9999"
-              inputParameters={parameters.points}
+          <PageContainer>
+            <PostTitle>¿En que deseas ayuda?</PostTitle>
+            <InputTitle
+              state={titlest}
+              changeState={changeTitle}
+              inputType="text"
+              label="Titulo"
+              textPlaceholder="Título del problema"
+              inputName="titulo"
+              errorText="El título debe poseer de 10 a 50 caracteres."
+              inputParameters={parameters.title}
             />
-            <OfferPointsText>Puntos</OfferPointsText>
-          </OfferPointsContainer>
-        </OfferMainContainer>
+            <InputStyle>
+              <BsTypeBold />
+              <BsTypeItalic />
+              <BsTypeUnderline />
+              <BsListUl />
+              <BsListOl />
+              <BsJustifyLeft />
+              <BsTextCenter />
+              <BsJustifyRight />
+              <BsJustify />
+              <BsTextIndentLeft />
+              <BsTextIndentRight />
+              <BsTable />
+              <BsCode />
+              <BsLink45Deg />
+              <BsEmojiSmile />
+            </InputStyle>
+            <InputPost
+              state={descriptionst}
+              changeState={changeDescription}
+              inputType="text"
+              label="Descripcion"
+              textPlaceholder="Ingresa aquí una breve descripción de tu problema..."
+              inputName="descripcion"
+              errorText="La descripción debe poseer de 10 a 1300 caracteres."
+              inputParameters={parameters.description}
+            />
+            {uploaderShow ? (
+              <Input
+                type="file"
+                name="file"
+                id="file"
+                onChange={onChangeFile}
+                accept="image/*"
+                multiple
+              />
+            ) : null}
+            <AddContainer>
+              <AddSecondaryContainer
+                onClick={() => setUploaderShow(!uploaderShow)}
+              >
+                <BsImages /> Añadir imagen
+              </AddSecondaryContainer>
+              <AddSecondaryContainer href="#">
+                <BsFolder2Open /> Añadir archivo
+              </AddSecondaryContainer>
+            </AddContainer>
 
-        <Line />
+            <Line />
 
-        <RequestButton onClick={addPost}>PEDIR AYUDA</RequestButton>
-      </PageContainer>
+            <HelpersText>
+              Escoge a quienes quisieras que te ayuden{' '}
+              <strong>solo si es necesario</strong> y si lo hacen no dudes en
+              invitarles un cafecito 🙌 ☕
+            </HelpersText>
+            <AddHelperContainerTitle>
+              Helpers
+              <SelectedUsersStyle>
+                {usersSelected?.map((u) => (
+                  <UserFoto
+                    // eslint-disable-next-line
+                key={`${u.photo}02${u.points}`}
+                    user={u}
+                    userPhoto={u.photo}
+                    userPoints={u.points}
+                    selectUser={selectUser}
+                    selected
+                    isOnline={u.isOnline}
+                    deleteUserSelected={deleteUserSelected}
+                  />
+                ))}
+              </SelectedUsersStyle>
+            </AddHelperContainerTitle>
 
-      <Footer />
-    </>
+            <HelpersMainContainer>
+              <GUsers setResults={setResults} results={results} users={users} />
+
+              <HelpersContainer>
+                {results?.map((u) => (
+                  <UserFoto
+                    // eslint-disable-next-line
+                key={`${u.photo}02${u.fullname}`}
+                    user={u}
+                    userPhoto={u.photo}
+                    alt={u.fullname}
+                    userPoints={u.points}
+                    selectUser={selectUser}
+                    isOnline={u.isOnline}
+                  />
+                ))}
+              </HelpersContainer>
+            </HelpersMainContainer>
+
+            <Line />
+
+            <OfferText>¿Que tan difícil consideras tu problema?</OfferText>
+            <OfferMainContainer>
+              <OfferTitle>OFRECER</OfferTitle>
+              <OfferPointsContainer>
+                <InputPoints
+                  state={pointsst}
+                  changeState={changePoints}
+                  inputType="number"
+                  label="Puntos"
+                  textPlaceholder="0"
+                  inputName="puntos"
+                  errorText="Entre 0 y 9999"
+                  inputParameters={parameters.points}
+                />
+                <OfferPointsText>Puntos</OfferPointsText>
+              </OfferPointsContainer>
+            </OfferMainContainer>
+
+            <Line />
+
+            <RequestButton onClick={addPost}>PEDIR AYUDA</RequestButton>
+          </PageContainer>
+
+          <Footer />
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -357,6 +379,35 @@ const PostTitle = styled.h1`
   font-weight: normal;
   font-size: 3.6rem;
   padding: 2rem 0;
+`;
+
+const AuthTitle = styled.div`
+  display: flex;
+  width: max-content;
+  margin: 120px auto;
+  font-family: var(--principal-font);
+  color: var(--boring-color);
+  text-align: center;
+  font-weight: normal;
+  font-size: 3.6rem;
+  padding: 2rem 0;
+`;
+
+const AuthSubTitle = styled.div`
+  display: flex;
+  margin: 120px auto;
+  text-decoration: underline;
+  width: max-content;
+  font-family: var(--principal-font);
+  color: var(--boring-color);
+  text-align: center;
+  font-weight: normal;
+  font-size: 3.6rem;
+  padding: 2rem 0;
+  cursor: pointer;
+  :hover {
+    color: var(--secondary-color);
+  }
 `;
 
 const AddContainer = styled.div`
