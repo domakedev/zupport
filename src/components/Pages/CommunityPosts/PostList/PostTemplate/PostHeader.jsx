@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import UserPhoto from '../../../../Layout/UserPhoto/UserPhoto';
 
 const PostHeaderCont = styled.header`
@@ -77,6 +78,8 @@ function PostHeader({
 
   useEffect(() => {}, [nombreCualquiera]);
 
+  const navigate = useNavigate();
+
   return (
     <PostHeaderCont resolved={nombreCualquiera.resolved || resolved}>
       <UserProfileCont>
@@ -86,6 +89,9 @@ function PostHeader({
           isOnline={isOnline}
           userPhoto={userPhoto}
           userPoints={userPoints}
+          goTo={() => {
+            navigate(`/profile/${userName || null}`);
+          }}
         />
         <PostDateCont>
           <PostUserName>{userName}</PostUserName>

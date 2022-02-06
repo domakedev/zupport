@@ -8,7 +8,7 @@ import IconHeart from './IconHeart';
 import PostFooter from './PostFooter';
 import PostHeader from './PostHeader';
 import PostImage from './PostImage';
-// import Answers from './Answers/Answers';
+
 import action from '../../../../../store/action';
 import alert from '../../../../../images/alert.gif';
 

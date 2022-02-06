@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import { useSelector } from 'react-redux';
+// import {rankings} from "../../../../controller/CommunityPostCtr/utilities";
+import { useNavigate } from 'react-router-dom';
 import UserPhoto from '../../../Layout/UserPhoto/UserPhoto';
 
 const TopHelpersCont = styled.section`
@@ -12,7 +15,9 @@ const TopHelpersCont = styled.section`
     grid-area: topHelpers;
   }
 `;
+
 function TopHelpers({ top5Users }) {
+  const navigate = useNavigate();
   return (
     <TopHelpersCont>
       {top5Users?.map(
@@ -24,6 +29,10 @@ function TopHelpers({ top5Users }) {
             key={uuidv4()}
             userPhoto={user.photo}
             userPoints={user.levelPoints}
+            goTo={() => {
+              navigate(`/profile/${user?.username ? user.username : null}`);
+            }}
+            isOnline={user.isOnline}
           />
         )
       )}
