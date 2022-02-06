@@ -28,7 +28,7 @@ function TopHelpers() {
     <TopHelpersCont>
       {usersDePrueba?.map(
         (
-          user // Aquii debe ir un array de usuarios, los 10 primeros en puntos
+          user // Aquii debe ir un array de usuarios, los 10 primeros en levelPoints
         ) => (
           <UserPhoto
             user={user}

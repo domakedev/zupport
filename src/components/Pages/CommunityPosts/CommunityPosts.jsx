@@ -87,13 +87,19 @@ const PageContainer = styled.div`
 function CommunityPosts() {
   const dispatch = useDispatch();
   const { comuTitle } = useParams();
+  console.log('🚀 ~ file: CommunityPosts.jsx ~ line 90 ~ comuTitle', comuTitle);
 
-  // const userAuth = useSelector((state) => state.userAuthenticated);
   const [results, setResults] = useState([]);
 
   const [page, setPage] = useState(1);
 
   const comuPosts = useSelector((state) => state.posts);
+
+  const communityUsers = useSelector((state) => state.getTitleCommunity.users);
+  console.log(
+    '🚀 ~ file: CommunityPosts.jsx ~ line 99 ~ communityUsers',
+    communityUsers
+  );
 
   const nextPage = () => {
     if (comuPosts.length === 10) {
@@ -112,13 +118,12 @@ function CommunityPosts() {
   useEffect(async () => {
     // busca por el id de la comunidad
     await dispatch(action.getAllPosts(comuTitle, page));
-    //
+    await dispatch(action.getCommunityByTitle(comuTitle));
   }, [page]);
 
   useEffect(async () => {
     setResults(comuPosts);
   }, [comuPosts]);
-  // console.log(comuPosts);
 
   return (
     <>

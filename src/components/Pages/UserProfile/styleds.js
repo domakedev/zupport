@@ -47,6 +47,7 @@ const MyDataCard = styled.div`
   width: 360px;
   padding: 17px;
   min-height: 200px;
+  align-self: start;
   & > p {
     width: 100%;
     text-align: left;

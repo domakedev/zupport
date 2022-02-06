@@ -19,6 +19,7 @@ import {
   LoadingContainer,
   AlertMessage,
   ErrorWritingSn,
+  LinkTo,
 } from './styleds';
 import actions from '../../../store/action';
 import LoadingIcon from '../../Layout/Loading/Loading';
@@ -269,7 +270,6 @@ const UserProfileConfig = function UserProfileConfig() {
 
                 <MyDataCard>
                   <p>Mis comunidades</p>
-                  {/* Map de array de comunidades del user */}
                   {myComus?.map((comu) => (
                     <CardComunidadShow
                       key={uuidv4()}
@@ -279,7 +279,7 @@ const UserProfileConfig = function UserProfileConfig() {
                       title={comu.title}
                     />
                   ))}
-                  {/* <CardComunidadShow image  users checks title/> */}
+                  <LinkTo to="/communities">Editar mis comunidades</LinkTo>
                 </MyDataCard>
               </DataCards>
             </MainContainer>
