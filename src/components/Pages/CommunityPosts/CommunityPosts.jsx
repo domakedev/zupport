@@ -88,12 +88,17 @@ function CommunityPosts() {
   const dispatch = useDispatch();
   const { comuTitle } = useParams();
 
-  // const userAuth = useSelector((state) => state.userAuthenticated);
   const [results, setResults] = useState([]);
+
+  const [top5Users, setTop5Users] = useState([]);
 
   const [page, setPage] = useState(1);
 
   const comuPosts = useSelector((state) => state.posts);
+
+  const usersCommunity = useSelector((state) => state.usersCommunity);
+
+  const communityUsers = useSelector((state) => state.getTitleCommunity.users);
 
   const nextPage = () => {
     if (comuPosts.length === 10) {
@@ -112,13 +117,36 @@ function CommunityPosts() {
   useEffect(async () => {
     // busca por el id de la comunidad
     await dispatch(action.getAllPosts(comuTitle, page));
-    //
+    await dispatch(action.getCommunityByTitle(comuTitle));
   }, [page]);
 
   useEffect(async () => {
     setResults(comuPosts);
   }, [comuPosts]);
-  // console.log(comuPosts);
+
+  useEffect(async () => {
+    dispatch(action.cleanUsersCommunity());
+
+    if (communityUsers !== undefined && communityUsers !== null) {
+      const esperaesto = () => {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const [, username] of Object.entries(communityUsers)) {
+          dispatch(action.getUserForCommunity(username));
+        }
+      };
+
+      await esperaesto();
+    }
+  }, [communityUsers]);
+
+  useEffect(() => {
+    if (communityUsers?.length === usersCommunity?.length) {
+      const top5UsersTemp = usersCommunity.sort(
+        (a, b) => b.levelPoints - a.levelPoints
+      );
+      setTop5Users(top5UsersTemp);
+    }
+  }, [usersCommunity]);
 
   return (
     <>
@@ -127,7 +155,7 @@ function CommunityPosts() {
         <CommunityPostCont>
           <WelcomeCommunity title={comuTitle} />
           <DividingLine />
-          <TopHelpers />
+          <TopHelpers top5Users={top5Users} />
           <CreatePost />
           <GOFData
             comuPosts={comuPosts}
