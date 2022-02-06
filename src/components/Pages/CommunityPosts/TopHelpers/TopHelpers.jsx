@@ -1,11 +1,6 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { useSelector, useDispatch } from 'react-redux';
-// import {rankings} from "../../../../controller/CommunityPostCtr/utilities";
 import UserPhoto from '../../../Layout/UserPhoto/UserPhoto';
-// import axios from "../../../../utils/axios.js";
-import actions from '../../../../store/action';
 
 const TopHelpersCont = styled.section`
   display: flex;
@@ -17,16 +12,10 @@ const TopHelpersCont = styled.section`
     grid-area: topHelpers;
   }
 `;
-function TopHelpers() {
-  const dispatch = useDispatch();
-  const usersDePrueba = useSelector((state) => state.topLandingUSers);
-
-  useEffect(() => {
-    dispatch(actions.getTopUsersLanding());
-  }, []);
+function TopHelpers({ top5Users }) {
   return (
     <TopHelpersCont>
-      {usersDePrueba?.map(
+      {top5Users?.map(
         (
           user // Aquii debe ir un array de usuarios, los 10 primeros en levelPoints
         ) => (
@@ -34,7 +23,7 @@ function TopHelpers() {
             user={user}
             key={uuidv4()}
             userPhoto={user.photo}
-            userPoints={user.points}
+            userPoints={user.levelPoints}
           />
         )
       )}

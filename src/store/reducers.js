@@ -33,6 +33,8 @@ import {
   LOAD_EDIT_COMMUNITY,
   DELETE_COMMUNITY,
   GET_MY_COMMUNITIES,
+  USERS_COMMUNITY,
+  CLEAN_USERS_COMMUNITY,
 } from './types';
 
 const initialState = {
@@ -60,6 +62,7 @@ const initialState = {
   addCommunity: {},
   editCommunity: {},
   deleteCommunity: {},
+  usersCommunity: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -186,6 +189,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, editCommunity: newValue };
     case DELETE_COMMUNITY:
       return { ...state, deleteCommunity: newValue };
+    case USERS_COMMUNITY:
+      return { ...state, usersCommunity: [...state.usersCommunity, newValue] };
+    case CLEAN_USERS_COMMUNITY:
+      return { ...state, usersCommunity: [] };
 
     default:
       return state;

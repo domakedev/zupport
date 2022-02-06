@@ -30,6 +30,8 @@ import {
   GET_MY_COMMUNITIES,
   LOAD_EDIT_COMMUNITY,
   DELETE_COMMUNITY,
+  USERS_COMMUNITY,
+  CLEAN_USERS_COMMUNITY,
 } from './types';
 import axios from '../utils/axios';
 
@@ -166,6 +168,10 @@ const loadEditCommunity = (post) => ({
 const deleteCommunity = (community) => ({
   type: DELETE_COMMUNITY,
   payload: community,
+});
+const putUserInCommunity = (user) => ({
+  type: USERS_COMMUNITY,
+  payload: user,
 });
 
 // Answer
@@ -632,6 +638,27 @@ const deletedCommunities = (idCommunity) => async (dispatch) => {
   }
 };
 
+const getUserForCommunity = (userUsername) => async (dispatch) => {
+  try {
+    const respuesta = await axios.get(`/api/users/${userUsername}`);
+    dispatch(putUserInCommunity(respuesta.data[0]));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('🚀 ~ file: action.js ~ line 645 ~ error', error);
+  }
+};
+
+const cleanUsersCommunity = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: CLEAN_USERS_COMMUNITY,
+    });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('🚀 ~ file: action.js ~ line 645 ~ error', error);
+  }
+};
+
 export default {
   getOnlyPost,
   getAllAnswers,
@@ -665,4 +692,6 @@ export default {
   loadEditedCommunity,
   deletedCommunities,
   getMyComs,
+  getUserForCommunity,
+  cleanUsersCommunity,
 };

@@ -87,19 +87,18 @@ const PageContainer = styled.div`
 function CommunityPosts() {
   const dispatch = useDispatch();
   const { comuTitle } = useParams();
-  console.log('🚀 ~ file: CommunityPosts.jsx ~ line 90 ~ comuTitle', comuTitle);
 
   const [results, setResults] = useState([]);
+
+  const [top5Users, setTop5Users] = useState([]);
 
   const [page, setPage] = useState(1);
 
   const comuPosts = useSelector((state) => state.posts);
 
+  const usersCommunity = useSelector((state) => state.usersCommunity);
+
   const communityUsers = useSelector((state) => state.getTitleCommunity.users);
-  console.log(
-    '🚀 ~ file: CommunityPosts.jsx ~ line 99 ~ communityUsers',
-    communityUsers
-  );
 
   const nextPage = () => {
     if (comuPosts.length === 10) {
@@ -125,6 +124,30 @@ function CommunityPosts() {
     setResults(comuPosts);
   }, [comuPosts]);
 
+  useEffect(async () => {
+    dispatch(action.cleanUsersCommunity());
+
+    if (communityUsers !== undefined && communityUsers !== null) {
+      const esperaesto = () => {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const [, username] of Object.entries(communityUsers)) {
+          dispatch(action.getUserForCommunity(username));
+        }
+      };
+
+      await esperaesto();
+    }
+  }, [communityUsers]);
+
+  useEffect(() => {
+    if (communityUsers?.length === usersCommunity?.length) {
+      const top5UsersTemp = usersCommunity.sort(
+        (a, b) => b.levelPoints - a.levelPoints
+      );
+      setTop5Users(top5UsersTemp);
+    }
+  }, [usersCommunity]);
+
   return (
     <>
       <Header />
@@ -132,7 +155,7 @@ function CommunityPosts() {
         <CommunityPostCont>
           <WelcomeCommunity title={comuTitle} />
           <DividingLine />
-          <TopHelpers />
+          <TopHelpers top5Users={top5Users} />
           <CreatePost />
           <GOFData
             comuPosts={comuPosts}
