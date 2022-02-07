@@ -90,6 +90,14 @@ const Image = styled.img`
   width: 100%;
 `;
 
+const Linked = styled.span`
+  text-decoration: underline;
+  cursor: pointer;
+  :hover {
+    color: var(--secondary-color);
+  }
+`;
+
 function PostFooter({ idPost, textComment, likes, community }) {
   // console.log(community);
   const [responder, setResponder] = useState(false);
@@ -159,7 +167,13 @@ function PostFooter({ idPost, textComment, likes, community }) {
               </Figure>
               <P>
                 Para ayudar a esta persona deberas{' '}
-                <a href="/login">iniciar sesión</a>
+                <Linked
+                  onClick={() => {
+                    navigate('/login');
+                  }}
+                >
+                  iniciar sesión
+                </Linked>
               </P>
             </MessCont>
           ) : (
