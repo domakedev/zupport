@@ -38,6 +38,7 @@ const UserProfile = function UserProfile() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
     const usernameFromURL = location.pathname.split('/').pop();
     dispatch(actions.setVisitedUser(usernameFromURL));
   }, []);
