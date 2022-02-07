@@ -82,6 +82,8 @@ const MyDataCard = styled.div`
   width: 360px;
   padding: 17px;
   position: relative;
+  align-self: start;
+  margin-bottom: 30px;
   & > p:first-child {
     width: 100%;
     text-align: left;
