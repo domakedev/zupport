@@ -25,7 +25,7 @@ const MainButton = styled.button`
   margin-left: auto;
   width: 140px;
   height: 55px;
-  margin-top: 10px;
+  margin-top: 0px;
   margin-right: 0px;
   &:hover {
     background-color: var(--light-color);

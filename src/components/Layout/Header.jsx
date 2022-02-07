@@ -30,6 +30,10 @@ const Line = styled.hr`
   box-shadow: 0 4px 4px 0 #b0afab;
 `;
 
+const LogoP = styled.img`
+  width: 180px;
+`;
+
 function Navigation() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -43,7 +47,7 @@ function Navigation() {
     <nav>
       <NavContainer>
         <Link to="/">
-          <img src={Logo} alt="Imagen Logo" />
+          <LogoP src={Logo} alt="Imagen Logo" />
         </Link>
         {userAuth ? (
           <ProfileButton currentUser={currentUser} />

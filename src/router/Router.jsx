@@ -72,6 +72,11 @@ function Router() {
         element={<OnlyPostAnswers />}
       />
 
+      <Route
+        path="/communities/:comuTitle/posts/:idPost/edit-post"
+        element={<EditHelpPost />}
+      />
+
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/activate/:hash" element={<Verify />} />

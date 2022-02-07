@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import {
   BsImages,
@@ -116,6 +117,8 @@ function EditHelpPost() {
     setUsersSelected(beforeDelete);
   };
 
+  const user = useSelector((state) => state.currentUserOTokencito);
+
   const editPost = async () => {
     let urltemp = '';
     if (file !== null) {
@@ -125,17 +128,21 @@ function EditHelpPost() {
       const { url } = result.data;
       urltemp = url;
     }
-    await dispatch(
-      // eslint-disable-next-line
+    if (user.points > pointsst.field) {
+      await dispatch(
+        // eslint-disable-next-line
       action.editedPost(dataPost._id, {
-        title: titlest.field,
-        description: descriptionst.field,
-        image: urltemp || dataPost.image,
-        points: pointsst.field,
-        taggedUsers: userNames,
-      })
-    );
-    navigate(-1);
+          title: titlest.field,
+          description: descriptionst.field,
+          image: urltemp || dataPost.image,
+          points: pointsst.field,
+          taggedUsers: userNames,
+        })
+      );
+      navigate(-1);
+    } else {
+      Swal.fire('Lo sentimos!', 'No posees suficientes puntos', 'error');
+    }
   };
 
   const goBack = () => {
