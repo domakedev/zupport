@@ -17,7 +17,7 @@ const NavContainer = styled.div`
   padding: 20px;
 
   @media screen and (max-width: 375px) {
-    img {
+    div > img {
       width: 100px;
     }
   }
@@ -42,7 +42,9 @@ function Navigation() {
     <nav>
       <NavContainer>
         <Link to="/">
-          <img src={Logo} alt="Imagen Logo" />
+          <div>
+            <img src={Logo} alt="Imagen Logo" />
+          </div>
         </Link>
         {userAuth ? <ProfileButton /> : <NavButton titulo="login" />}
       </NavContainer>
