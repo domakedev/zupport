@@ -70,7 +70,6 @@ const TextBusqueda = styled.h3`
 function Communities() {
   const dispatch = useDispatch();
   const [results, setResults] = useState([]);
-  console.log('🚀 ~ file: Communities.jsx ~ line 68 ~ results', results);
 
   const allCommunities = useSelector((state) => state.communities);
   const currentUser = useSelector((state) => state.currentUserOTokencito);

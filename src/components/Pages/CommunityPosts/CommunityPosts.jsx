@@ -95,7 +95,6 @@ function CommunityPosts() {
   const [page, setPage] = useState(1);
 
   const comuPosts = useSelector((state) => state.posts);
-  console.log('🚀 ~ file: CommunityPosts.jsx ~ line 98 ~ comuPosts', comuPosts);
 
   const usersCommunity = useSelector((state) => state.usersCommunity);
 
