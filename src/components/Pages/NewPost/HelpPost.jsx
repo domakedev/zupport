@@ -122,8 +122,11 @@ function HelpPost() {
       urltemp = url;
     }
 
+    const fecha = Date.now();
+
     await dispatch(
       action.addedPost(comuTitle, {
+        timePosted: fecha,
         title: titlest.field,
         description: descriptionst.field,
         image: urltemp,

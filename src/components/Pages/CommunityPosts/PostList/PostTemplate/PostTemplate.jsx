@@ -148,13 +148,13 @@ function PostTemplate({
       showCancelButton: true,
       confirmButtonColor: '#29ABE0',
       cancelButtonColor: '#D9534F',
-      confirmButtonText: 'Sí, esta respuesta me sirvió',
+      confirmButtonText: 'Sí, eliminar',
       imageWidth: 300,
       imageHeight: 250,
       imageAlt: 'Custom image',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire('Se Eliminó!', '', 'success');
+        Swal.fire('Se eliminó la publicación!', '', 'success');
         dispatch(action.deletedPost(idPost));
         // eslint-disable-next-line
         location.reload();

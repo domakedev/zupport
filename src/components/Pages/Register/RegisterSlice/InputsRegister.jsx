@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { BsFillExclamationTriangleFill } from 'react-icons/bs';
+import Swal from 'sweetalert2';
 import Input from '../../../Layout/Inputs/InputText';
 import InputBtn from '../../../Layout/Inputs/InputBtn';
 
@@ -59,7 +60,7 @@ const ErrorMsg = styled.div`
   height: 45px;
   line-height: 45px;
   background: #f66060;
-  padding: 0px 1px;
+  padding: 0px 10px;
   border-radius: 3px;
   p {
     margin: 0;
@@ -132,6 +133,7 @@ function InputsRegister() {
       changePassword({ field: '', check: null });
       changePassword2({ field: '', check: null });
       changeEmail({ field: '', check: null });
+      Swal.fire('Registrado con exito!', 'Verifica tu correo', 'success');
     } else {
       changeFormOk(false);
     }
@@ -214,7 +216,9 @@ function InputsRegister() {
       <BtnContainer>
         <InputBtn valueBtn="REGISTRARME" />
         {formOk === true && (
-          <SuccessMsg>Formulario enviado con éxito!</SuccessMsg>
+          <SuccessMsg>
+            Formulario enviado con éxito! Verifica tu correo
+          </SuccessMsg>
         )}
       </BtnContainer>
     </ContainerInputsRegister>

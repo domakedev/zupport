@@ -23,6 +23,23 @@ const ContainerForm = styled.div`
   }
 `;
 
+const Registered = styled.div`
+  font-family: var(--secondary-font);
+  color: var(--dark-color);
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+`;
+
+const Link = styled.a`
+  color: var(--dark-color);
+  padding-left: 10px;
+  :hover {
+    color: var(--secondary-color);
+  }
+`;
+
 function Register() {
   return (
     <>
@@ -33,6 +50,9 @@ function Register() {
         <InputsRegister />
         <SeparatorLine />
         <BtnRss />
+        <Registered>
+          ¿Ya estas registrado? <Link href="/login"> Accede Aqui</Link>
+        </Registered>
       </ContainerForm>
 
       <Footer />

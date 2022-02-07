@@ -122,12 +122,14 @@ function PostFooter({ idPost, textComment, likes, community }) {
     }
   };
   // console.log('posfooter');
+
+  const fecha = Date.now();
   const handleClick = () => {
     dispatch(
       action.addAnswerPost(
         {
           answer: answerData,
-          // user: currentUser.username,
+          date: fecha,
           likes: [],
           post: idPost,
           resolved: false,
