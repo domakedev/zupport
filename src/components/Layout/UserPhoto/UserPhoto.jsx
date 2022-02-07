@@ -69,6 +69,7 @@ const Photo = styled('img')(
       css`
         border: 4px solid var(--sucess-color) !important;
       `}
+
     ${(props) =>
       props.isOnline === false &&
       css`
