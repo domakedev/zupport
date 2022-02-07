@@ -34,9 +34,11 @@ const Registered = styled.div`
   padding: 10px 0;
 `;
 
-const Link = styled.a`
+const Linked = styled.span`
   color: var(--dark-color);
   padding-left: 10px;
+  text-decoration: underline;
+  cursor: pointer;
   :hover {
     color: var(--secondary-color);
   }
@@ -61,7 +63,15 @@ function Register() {
         <SeparatorLine />
         <BtnRss />
         <Registered>
-          ¿Ya estas registrado? <Link href="/login"> Accede Aqui</Link>
+          ¿Ya estas registrado?{' '}
+          <Linked
+            onClick={() => {
+              navigate('/login');
+            }}
+          >
+            {' '}
+            Accede Aqui
+          </Linked>
         </Registered>
       </ContainerForm>
 
