@@ -138,7 +138,7 @@ function GOFData({ setResults, results, comunidades }) {
   useEffect(() => {
     // Ir a la base de datos y buscar en los nombres de comunidades, de forma asincrona
     const filteredComu = comunidades?.filter((comu) =>
-      comu.title?.toLowerCase().includes(search.trim())
+      comu.title?.toLowerCase().includes(search?.trim())
     );
 
     // Enviar resultados a estado de resultados

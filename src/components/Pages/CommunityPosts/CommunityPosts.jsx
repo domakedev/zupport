@@ -24,11 +24,11 @@ const CommunityPostCont = styled.div`
     justify-self: center;
     grid-template-areas:
       'welcome  welcome welcome'
-      '. . topHelpers'
-      '. . gofData'
-      '. . createPost'
-      '. . postList'
-      '. . butPage';
+      'topHelpers topHelpers topHelpers'
+      'gofData gofData gofData'
+      'createPost createPost createPost'
+      'postList postList postList'
+      'butPage butPage butPage';
   }
 `;
 const Container = styled.div`

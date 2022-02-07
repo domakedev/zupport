@@ -6,13 +6,14 @@ const InputBox = styled.textarea`
   font-family: var(--secondary-font);
   font-size: 1.8rem;
   width: 100%;
+  height: fit-content;
   background: rgba(41, 171, 224, 0.08);
   border-radius: 3px;
   padding-left: 20px;
-  padding-right: 40px;
-  transition: 0.3s ease all;
+  padding-right: 20px;
+  // transition: 0.3s ease all;
   border: 3px solid transparent;
-  resize: none;
+  resize: vertical;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,6 +38,7 @@ function Input({
   const onChange = (e) => {
     onChangeCe(e.target.value);
   };
+
   return (
     <InputBox
       name={name}

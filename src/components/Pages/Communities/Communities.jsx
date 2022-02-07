@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import { FaLevelUpAlt } from 'react-icons/fa';
 // import axios from '../../../utils/axios';
 
 // import { Link, Outlet } from "react-router-dom";
@@ -26,15 +27,6 @@ import {
   TitleOrange,
   PageContainer,
 } from '../../../css/generalStyled';
-
-// Mock, NO BORRAR AUNQUE NO SE USE!
-// import mock from "../../../mocks/generalMock"
-
-// const PageContainer = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   min-height: 100vh;
-// `;
 
 const Container = styled.div`
   max-width: 1200px;
@@ -60,6 +52,19 @@ const Text = styled.h3`
   margin: 20px 0;
   color: var(--warning-color);
   text-align: center;
+`;
+
+const TextBusqueda = styled.h3`
+  font-family: var(--principal-font);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2.6rem;
+  line-height: 45px;
+  margin: 20px 0;
+  color: var(--principal-color);
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid var(--principal-color);
 `;
 
 function Communities() {
@@ -94,10 +99,32 @@ function Communities() {
           results={results}
           comunidades={allCommunities}
         />
-        <hr style={{ marginTop: '100px' }} />
+        <hr style={{ marginTop: '30px' }} />
 
         {/* Impresion de resultados de busqueda */}
+        <Comunidades>
+          {results.length !== allCommunities.length
+            ? results?.map((e) => (
+                <CommunitieAddCard
+                  key={uuidv4()}
+                  id={e._id}
+                  image={e.image}
+                  users={e.users} // se manda el array de post que pertenecen a esa users
+                  checks={e.posts} // se manda el array de post que pertenecen a esa comunidad
+                  title={e.title}
+                  description={e.description}
+                  buttonText="UNIRME"
+                />
+              ))
+            : null}
+          {}
+        </Comunidades>
+        <TextBusqueda>
+          Resultados de Busqueda <FaLevelUpAlt />
+        </TextBusqueda>
+
         {userInCommunity.length !== 0 ? <Text>Mis Comunidades :</Text> : null}
+
         <Comunidades>
           {userInCommunity?.map((e) => (
             <CommunitieAddCard

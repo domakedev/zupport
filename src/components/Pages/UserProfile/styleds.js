@@ -114,21 +114,20 @@ const StatSocial = styled.div`
   }
 `;
 
-const AboutMe = styled.p`
+const AboutMe = styled.h4`
   background: white;
   border-radius: 3px;
   margin: 0 auto;
   width: fit-content;
   padding: 11px 13px;
   margin-top: 13px;
-  & p {
-    font-family: var(--secondary-font);
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 24px;
-    text-align: center;
-  }
+
+  font-family: var(--secondary-font);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: left;
 `;
 
 const ContainerCrown = styled('div')(

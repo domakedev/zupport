@@ -30,6 +30,7 @@ const WelcomeContainer = styled.section`
   }
 `;
 const WelcomeCommnityTitle = styled.h2`
+  padding: 0px 20px;
   display: flex;
   flex-direction: column;
 
