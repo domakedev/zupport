@@ -70,10 +70,10 @@ function PostHeader({
   userName,
   timePost,
   points,
-  userPoints,
   resolved,
   isOnline,
 }) {
+  console.log('🚀 ~ file: PostHeader.jsx ~ line 76 ~ user', user);
   const nombreCualquiera = useSelector((state) => state.loadOnlyPost);
 
   useEffect(() => {}, [nombreCualquiera]);
@@ -88,7 +88,7 @@ function PostHeader({
           // photo={userPhoto}
           isOnline={isOnline}
           userPhoto={userPhoto}
-          userPoints={userPoints}
+          userPoints={user.levelPoints}
           goTo={() => {
             navigate(`/profile/${userName || null}`);
           }}
