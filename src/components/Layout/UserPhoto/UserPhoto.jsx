@@ -67,12 +67,13 @@ const Photo = styled('img')(
     ${(props) =>
       props.isOnline === true &&
       css`
-        outline: 4px solid var(--sucess-color) !important;
+        border: 4px solid var(--sucess-color) !important;
       `}
+
     ${(props) =>
       props.isOnline === false &&
       css`
-        outline: 2px solid var(--boring-color) !important;
+        border: 2px solid var(--boring-color) !important;
       `}
   `
 );
