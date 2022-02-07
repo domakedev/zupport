@@ -82,14 +82,14 @@ const InputBox = styled.textarea`
   font-size: 1.8rem;
   width: 100%;
   max-width: 100%;
-  max-height: 300px;
+  max-height: 400px;
   background: rgba(41, 171, 224, 0.08);
   border-radius: 3px;
   min-height: ${(props) => props.size || '30rem'};
   resize: none;
   line-height: 22px;
   padding: 10px 20px;
-  transition: 0.3s ease all;
+  // transition: 0.3s ease all;
   border: 3px solid transparent;
   &:focus {
     border: 2px solid var(--secondary-color);

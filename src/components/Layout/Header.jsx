@@ -17,7 +17,7 @@ const NavContainer = styled.div`
   padding: 20px;
 
   @media screen and (max-width: 375px) {
-    img {
+    div > img {
       width: 100px;
     }
   }

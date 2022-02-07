@@ -30,6 +30,7 @@ const WelcomeContainer = styled.section`
   }
 `;
 const WelcomeCommnityTitle = styled.h2`
+  padding: 0px 20px;
   display: flex;
   flex-direction: column;
 
@@ -58,7 +59,7 @@ function WelcomeCommunity({ title }) {
   return (
     <WelcomeContainer>
       <WelcomeCommnityTitle>
-        Bienvenid@ a la comunidad {title}
+        Bienvenid@ a la comunidad de: {title}
         <p>Conoce l@s 5 top helpers de tu comunidad</p>
       </WelcomeCommnityTitle>
       <GoBackContainer onClick={goBack}>

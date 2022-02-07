@@ -27,10 +27,12 @@ const PostTemplteCont = styled.article`
   background: #fff;
   display: flex;
   flex-direction: column;
-  margin-top: 3rem;
+  margin-top: 20px;
   width: 100vw;
+  padding-left: 20px;
+  padding-right: 20px;
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 625px) {
     border: 1px solid #79777052; //--dark-color
     border-radius: 2rem;
     max-width: 625px;

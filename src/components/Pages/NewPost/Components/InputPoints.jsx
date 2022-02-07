@@ -102,7 +102,7 @@ const InputBox = styled.input`
   line-height: 45px;
   padding: 0 10px;
   margin-right: 10px;
-  transition: 0.3s ease all;
+  // transition: 0.3s ease all;
   border: 3px solid transparent;
   border-radius: 3px;
   &:focus {

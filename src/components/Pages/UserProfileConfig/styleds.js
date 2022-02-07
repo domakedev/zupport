@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import AddPhotoIcon from '../../../images/Icon/AddPhotoIcon.svg';
 
@@ -81,6 +82,8 @@ const MyDataCard = styled.div`
   width: 360px;
   padding: 17px;
   position: relative;
+  align-self: start;
+  margin-bottom: 30px;
   & > p:first-child {
     width: 100%;
     text-align: left;
@@ -256,6 +259,28 @@ const ErrorWritingSn = styled.p.attrs({ id: 'errorSN' })`
   padding: 12px 23px;
 `;
 
+const LinkTo = styled(Link)`
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+
+  display: block;
+  border: none;
+
+  padding: 13px 22px;
+  margin: 0 auto;
+
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 3px;
+
+  font-weight: bold;
+  font-size: 1.8rem;
+
+  font-family: var(--secondary-font);
+`;
+
 export {
   MainContainer,
   UserPhotoContainer,
@@ -274,4 +299,5 @@ export {
   AlertMessage,
   LoadingBlockContainer,
   ErrorWritingSn,
+  LinkTo,
 };

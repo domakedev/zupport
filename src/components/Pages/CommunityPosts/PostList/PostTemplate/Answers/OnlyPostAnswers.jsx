@@ -35,9 +35,9 @@ const MainTitleContainer = styled.div`
 const PostContainer = styled.div`
   display: flex;
   flex-direction: column;
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1200px) {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
   }
 `;
 

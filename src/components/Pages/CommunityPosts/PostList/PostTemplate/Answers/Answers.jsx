@@ -36,12 +36,12 @@ const MoreAnswers = styled.button`
 `;
 
 const MoreAnswersList = styled.div`
-  max-height: 300px;
+  max-height: 60vh;
   overflow: scroll;
   overflow-x: hidden;
 
   animation-duration: 3s;
-  animation-name: slidein;
+  // animation-name: slidein;
   animation-direction: alternate;
 
   @keyframes slidein {
@@ -71,7 +71,7 @@ const MoreAnswersList = styled.div`
   }
 `;
 
-const ValidatedMessage = styled.p`
+const ValidatedMessage = styled.div`
   font-family: var(--secondary-font);
   font-style: normal;
   font-weight: normal;
@@ -89,15 +89,22 @@ const SupportAnswer = styled(ValidatedMessage)`
   margin-left: 94px;
 `;
 
+const MiniAnswerContainer = styled(ValidatedMessage)`
+  width: 100%;
+  margin-left: 10px;
+  margin-bottom: 10px;
+`;
+
 const AnswersContainer = styled.div`
   margin-bottom: 30px;
-  @media screen and (min-width: 1024px) {
+
+  @media screen and (min-width: 625px) {
     display: flex;
     align-items: center;
     margin: 20px;
     padding: 10px;
     border: 1px solid #79777052;
-    max-height: 60vh;
+    // max-height: 60vh;
     border-radius: 20px;
   }
 `;
@@ -113,7 +120,7 @@ function Answers({ idPost, postUser, postPoints }) {
   const currentUser = useSelector(
     (stateUser) => stateUser.currentUserOTokencito
   );
-  const [viewMore, setViewMore] = useState(false);
+  const [viewMore, setViewMore] = useState(true);
 
   const dataValidated = useSelector((state) =>
     state.answers.filter((e) => e.resolved)
@@ -149,7 +156,7 @@ function Answers({ idPost, postUser, postPoints }) {
   return (
     <AnswersContainer>
       {answers.length === 0 ? null : (
-        <div>
+        <MiniAnswerContainer>
           {dataValidated.map((e) => (
             <div key={e._id}>
               <Answer
@@ -200,7 +207,7 @@ function Answers({ idPost, postUser, postPoints }) {
               ))}
             </MoreAnswersList>
           ) : null}
-        </div>
+        </MiniAnswerContainer>
       )}
     </AnswersContainer>
   );
