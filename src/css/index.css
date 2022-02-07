@@ -58,6 +58,11 @@ html {
 
 }
 
+body {
+  font-family: var(--secondary-font);
+  font-size: var(--secondarey-font-size);
+}
+
 #root{
   min-height: 100vh;
 }

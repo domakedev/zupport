@@ -54,6 +54,7 @@ function InputsLogin() {
   return (
     <ContainerInputsLogin>
       <Input
+        datatest="email"
         state={email}
         changeState={changeEmail}
         inputType="email"
@@ -64,6 +65,7 @@ function InputsLogin() {
         inputParameters={parameters.email}
       />
       <Input
+        datatest="password"
         state={password}
         changeState={changePassword}
         inputType="password"

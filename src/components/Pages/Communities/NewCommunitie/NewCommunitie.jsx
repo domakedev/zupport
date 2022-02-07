@@ -44,7 +44,7 @@ function NewCommunitie() {
 
   return (
     <Container>
-      <LinkTo to="create-communitie" onClick={AddNewComu}>
+      <LinkTo data-test="createbtn" to="create-communitie" onClick={AddNewComu}>
         <FaPlus size="6rem" color="white" />
       </LinkTo>
       <SubTitle>Crear nueva Comunidad</SubTitle>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { BsFillExclamationTriangleFill } from 'react-icons/bs';
+import Swal from 'sweetalert2';
 import Input from '../../../Layout/Inputs/InputText';
 import InputBtn from '../../../Layout/Inputs/InputBtn';
 
@@ -59,7 +60,7 @@ const ErrorMsg = styled.div`
   height: 45px;
   line-height: 45px;
   background: #f66060;
-  padding: 0px 1px;
+  padding: 0px 10px;
   border-radius: 3px;
   p {
     margin: 0;
@@ -132,6 +133,7 @@ function InputsRegister() {
       changePassword({ field: '', check: null });
       changePassword2({ field: '', check: null });
       changeEmail({ field: '', check: null });
+      Swal.fire('Registrado con exito!', 'Verifica tu correo', 'success');
     } else {
       changeFormOk(false);
     }
@@ -140,6 +142,7 @@ function InputsRegister() {
   return (
     <ContainerInputsRegister action="" onSubmit={onSubmit}>
       <Input
+        datatest="username"
         state={user}
         changeState={changeUser}
         inputType="text"
@@ -150,6 +153,7 @@ function InputsRegister() {
         inputParameters={parameters.user}
       />
       <Input
+        datatest="fullname"
         state={name}
         changeState={changeName}
         inputType="text"
@@ -160,6 +164,7 @@ function InputsRegister() {
         inputParameters={parameters.name}
       />
       <Input
+        datatest="password1"
         state={password}
         changeState={changePassword}
         inputType="password"
@@ -170,6 +175,7 @@ function InputsRegister() {
         inputParameters={parameters.password}
       />
       <Input
+        datatest="password2"
         state={password2}
         changeState={changePassword2}
         inputType="password"
@@ -180,6 +186,7 @@ function InputsRegister() {
         functionx={checkPassword2}
       />
       <Input
+        datatest="email"
         state={email}
         changeState={changeEmail}
         inputType="email"
@@ -214,7 +221,9 @@ function InputsRegister() {
       <BtnContainer>
         <InputBtn valueBtn="REGISTRARME" />
         {formOk === true && (
-          <SuccessMsg>Formulario enviado con éxito!</SuccessMsg>
+          <SuccessMsg>
+            Formulario enviado con éxito! Verifica tu correo
+          </SuccessMsg>
         )}
       </BtnContainer>
     </ContainerInputsRegister>

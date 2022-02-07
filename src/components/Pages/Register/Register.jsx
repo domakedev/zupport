@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import InputsRegister from './RegisterSlice/InputsRegister';
 import WelcomeRegister from './RegisterSlice/WelcomeRegister';
 import BtnRss from '../../Layout/Inputs/InputSocialMediaButton';
@@ -23,7 +25,34 @@ const ContainerForm = styled.div`
   }
 `;
 
+const Registered = styled.div`
+  font-family: var(--secondary-font);
+  color: var(--dark-color);
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+`;
+
+const Linked = styled.span`
+  color: var(--dark-color);
+  padding-left: 10px;
+  text-decoration: underline;
+  cursor: pointer;
+  :hover {
+    color: var(--secondary-color);
+  }
+`;
+
 function Register() {
+  const userAuth = useSelector((state) => state.userAuthenticated);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userAuth) {
+      navigate('/');
+    }
+  }, []);
   return (
     <>
       <Header />
@@ -33,6 +62,17 @@ function Register() {
         <InputsRegister />
         <SeparatorLine />
         <BtnRss />
+        <Registered>
+          ¿Ya estas registrado?{' '}
+          <Linked
+            onClick={() => {
+              navigate('/login');
+            }}
+          >
+            {' '}
+            Accede Aqui
+          </Linked>
+        </Registered>
       </ContainerForm>
 
       <Footer />

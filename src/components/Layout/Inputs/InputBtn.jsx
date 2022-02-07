@@ -17,7 +17,11 @@ const InputBtnStyle = styled.button`
   }
 `;
 function InputBtn({ valueBtn, EnviarDataLogin }) {
-  return <InputBtnStyle onClick={EnviarDataLogin}>{valueBtn}</InputBtnStyle>;
+  return (
+    <InputBtnStyle data-test="regbtn" onClick={EnviarDataLogin}>
+      {valueBtn}
+    </InputBtnStyle>
+  );
 }
 
 export default InputBtn;

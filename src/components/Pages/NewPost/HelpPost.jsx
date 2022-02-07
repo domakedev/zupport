@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Swal from 'sweetalert2';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   BsImages,
@@ -112,6 +113,8 @@ function HelpPost() {
     setUsersSelected(beforeDelete);
   };
 
+  const user = useSelector((state) => state.currentUserOTokencito);
+
   const addPost = async () => {
     let urltemp = '';
     if (file !== null) {
@@ -122,19 +125,25 @@ function HelpPost() {
       urltemp = url;
     }
 
-    await dispatch(
-      action.addedPost(comuTitle, {
-        title: titlest.field,
-        description: descriptionst.field,
-        image: urltemp,
-        likes: [],
-        points: pointsst.field,
-        taggedUsers: userNames,
-        resolved: false,
-      })
-    );
+    const fecha = Date.now();
+    if (user.points > pointsst.field) {
+      await dispatch(
+        action.addedPost(comuTitle, {
+          timePosted: fecha,
+          title: titlest.field,
+          description: descriptionst.field,
+          image: urltemp,
+          likes: [],
+          points: pointsst.field,
+          taggedUsers: userNames,
+          resolved: false,
+        })
+      );
+      navigate(-1);
+    } else {
+      Swal.fire('Lo sentimos!', 'No posees suficientes puntos', 'error');
+    }
     // await dispatch(action.editCommunities(comuTitle, []))
-    navigate(-1);
   };
 
   const goBack = () => {

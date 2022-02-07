@@ -81,6 +81,8 @@ function OnlyPostAnswers() {
   }, []);
   const post = useSelector((state) => state.addPost);
 
+  const userAuth = useSelector((state) => state.userAuthenticated);
+
   return (
     <>
       <Header />
@@ -113,6 +115,7 @@ function OnlyPostAnswers() {
               idPost={post._id}
               isOnline={post.user.isOnline}
               community={post.community}
+              authVer={userAuth}
             />
 
             <Answers

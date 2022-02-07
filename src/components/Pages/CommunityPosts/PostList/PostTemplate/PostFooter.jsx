@@ -90,6 +90,14 @@ const Image = styled.img`
   width: 100%;
 `;
 
+const Linked = styled.span`
+  text-decoration: underline;
+  cursor: pointer;
+  :hover {
+    color: var(--secondary-color);
+  }
+`;
+
 function PostFooter({ idPost, textComment, likes, community }) {
   // console.log(community);
   const [responder, setResponder] = useState(false);
@@ -122,12 +130,14 @@ function PostFooter({ idPost, textComment, likes, community }) {
     }
   };
   // console.log('posfooter');
+
+  const fecha = Date.now();
   const handleClick = () => {
     dispatch(
       action.addAnswerPost(
         {
           answer: answerData,
-          // user: currentUser.username,
+          date: fecha,
           likes: [],
           post: idPost,
           resolved: false,
@@ -155,7 +165,16 @@ function PostFooter({ idPost, textComment, likes, community }) {
               <Figure>
                 <Image src={err} alt="error" />
               </Figure>
-              <P>Para ayudar a esta persona deberas iniciar sesión</P>
+              <P>
+                Para ayudar a esta persona deberas{' '}
+                <Linked
+                  onClick={() => {
+                    navigate('/login');
+                  }}
+                >
+                  iniciar sesión
+                </Linked>
+              </P>
             </MessCont>
           ) : (
             <AddAnswerCont>
