@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { AiTwotonePropertySafety } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
@@ -32,6 +32,7 @@ import Twitter from '../../../images/Icon/redes/Twitter.svg';
 const UserProfile = function UserProfile() {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const user = useSelector((state) => state.visitProfileUser);
 
@@ -155,6 +156,7 @@ const UserProfile = function UserProfile() {
                 users={comu.users.length}
                 // checks, esto lo tiene Nayruth
                 title={comu.title}
+                goTo={() => navigate(`/communities/${comu.title}/posts`)}
               />
             ))}
             {/* <CardComunidadShow image  users checks title/> */}
