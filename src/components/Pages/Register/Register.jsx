@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import InputsRegister from './RegisterSlice/InputsRegister';
 import WelcomeRegister from './RegisterSlice/WelcomeRegister';
 import BtnRss from '../../Layout/Inputs/InputSocialMediaButton';
@@ -41,6 +43,14 @@ const Link = styled.a`
 `;
 
 function Register() {
+  const userAuth = useSelector((state) => state.userAuthenticated);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userAuth) {
+      navigate('/');
+    }
+  }, []);
   return (
     <>
       <Header />

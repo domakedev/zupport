@@ -157,7 +157,10 @@ function PostFooter({ idPost, textComment, likes, community }) {
               <Figure>
                 <Image src={err} alt="error" />
               </Figure>
-              <P>Para ayudar a esta persona deberas iniciar sesión</P>
+              <P>
+                Para ayudar a esta persona deberas{' '}
+                <a href="/login">iniciar sesión</a>
+              </P>
             </MessCont>
           ) : (
             <AddAnswerCont>

@@ -142,6 +142,7 @@ function InputsRegister() {
   return (
     <ContainerInputsRegister action="" onSubmit={onSubmit}>
       <Input
+        datatest="username"
         state={user}
         changeState={changeUser}
         inputType="text"
@@ -152,6 +153,7 @@ function InputsRegister() {
         inputParameters={parameters.user}
       />
       <Input
+        datatest="fullname"
         state={name}
         changeState={changeName}
         inputType="text"
@@ -162,6 +164,7 @@ function InputsRegister() {
         inputParameters={parameters.name}
       />
       <Input
+        datatest="password1"
         state={password}
         changeState={changePassword}
         inputType="password"
@@ -172,6 +175,7 @@ function InputsRegister() {
         inputParameters={parameters.password}
       />
       <Input
+        datatest="password2"
         state={password2}
         changeState={changePassword2}
         inputType="password"
@@ -182,6 +186,7 @@ function InputsRegister() {
         functionx={checkPassword2}
       />
       <Input
+        datatest="email"
         state={email}
         changeState={changeEmail}
         inputType="email"

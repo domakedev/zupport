@@ -18,6 +18,7 @@ function Input({
   onChangeCe = () => {},
   name = '',
   disabled = false,
+  datatest,
 }) {
   const onChange = (e) => {
     changeState({ ...state, field: e.target.value });
@@ -45,6 +46,7 @@ function Input({
       </Label>
       <InputGroup>
         <InputBox
+          data-test={`${datatest}`}
           name={name}
           type={inputType}
           placeholder={textPlaceholder}

@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // Actions Redux
+import { useEffect } from 'react';
 import WelcomeLogin from './LoginSlice/WelcomeLogin';
 import InputsLogin from './LoginSlice/InputsLogin';
 import BtnRss from '../../Layout/Inputs/InputSocialMediaButton';
@@ -64,6 +65,14 @@ const AlertAuth = styled('p')(
 function Login() {
   const errorAuth = useSelector((state) => state.errorLogin);
   const spinning = useSelector((state) => state.spinningLoading);
+  const userAuth = useSelector((state) => state.userAuthenticated);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userAuth) {
+      navigate('/');
+    }
+  }, []);
   return (
     <SuperContainer>
       <Header />
@@ -82,7 +91,7 @@ function Login() {
 
           <OptionRegister>
             ¿No tienes una cuenta?
-            <LinkTo to="/register"> Regístrate aquí</LinkTo>
+            <LinkTo to="/register"> Registrate aquí</LinkTo>
           </OptionRegister>
         </FormLogin>
       </FormContainer>

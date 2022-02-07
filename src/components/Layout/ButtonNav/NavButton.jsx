@@ -28,7 +28,11 @@ function NavButton({ titulo }) {
   const onClick = () => {
     navigate(`/${titulo}`);
   };
-  return <ButtonContainer onClick={onClick}>{titulo}</ButtonContainer>;
+  return (
+    <ButtonContainer data-test="loginbtn" onClick={onClick}>
+      {titulo}
+    </ButtonContainer>
+  );
 }
 
 NavButton.propTypes = {

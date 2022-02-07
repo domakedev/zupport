@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Container = styled.div`
   justify-items: flex-end;
@@ -53,7 +54,13 @@ const LinkTo = styled(Link)`
   width: fit-content;
 `;
 
+const Space = styled.div`
+  height: 123px;
+`;
+
 function TextAndButton() {
+  const userAuth = useSelector((state) => state.userAuthenticated);
+
   return (
     <Container>
       <Title>
@@ -66,7 +73,13 @@ function TextAndButton() {
         dispuestas a ayudarte al instante.
       </Description>
 
-      <LinkTo to="/register">REGISTRARME</LinkTo>
+      {!userAuth ? (
+        <LinkTo data-test="registerbtn" to="/register">
+          REGISTRARME
+        </LinkTo>
+      ) : (
+        <Space />
+      )}
     </Container>
   );
 }
