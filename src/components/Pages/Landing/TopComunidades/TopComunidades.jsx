@@ -83,7 +83,7 @@ function TopComunidades() {
     <Container>
       <Titulo>TOP COMUNIDADES</Titulo>
 
-      <Cards>
+      <Cards data-test="top-comu">
         {comunidades.map((card) => (
           <CardComunidadShow
             key={uuidv4()}

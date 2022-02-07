@@ -37,6 +37,7 @@ function Navigation() {
   }, []);
 
   const userAuth = useSelector((state) => state.userAuthenticated);
+  const currentUser = useSelector((state) => state.currentUserOTokencito);
 
   return (
     <nav>
@@ -44,7 +45,11 @@ function Navigation() {
         <Link to="/">
           <img src={Logo} alt="Imagen Logo" />
         </Link>
-        {userAuth ? <ProfileButton /> : <NavButton titulo="login" />}
+        {userAuth ? (
+          <ProfileButton currentUser={currentUser} />
+        ) : (
+          <NavButton titulo="login" />
+        )}
       </NavContainer>
 
       <Line />

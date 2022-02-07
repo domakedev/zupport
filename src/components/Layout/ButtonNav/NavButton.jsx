@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const ButtonContainer = styled(Link)`
+const ButtonContainer = styled.button`
   margin-left: auto;
-  padding-top: 9px;
   width: 170px;
   height: 48px;
   border: 2px solid var(--principal-color);
@@ -24,7 +24,19 @@ const ButtonContainer = styled(Link)`
 `;
 
 function NavButton({ titulo }) {
-  return <ButtonContainer to="/login">{titulo}</ButtonContainer>;
+  const navigate = useNavigate();
+  const onClick = () => {
+    navigate(`/${titulo}`);
+  };
+  return <ButtonContainer onClick={onClick}>{titulo}</ButtonContainer>;
 }
+
+NavButton.propTypes = {
+  titulo: PropTypes.string,
+};
+
+NavButton.defaultProps = {
+  titulo: 'Login',
+};
 
 export default NavButton;
