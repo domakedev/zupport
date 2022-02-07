@@ -1,13 +1,11 @@
 import { useState, useRef, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-
-// import { useDetectOutsideClick } from "react-detect-click-outside";
 
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { IconContext } from 'react-icons';
 
 import styled from 'styled-components';
 
+import PropTypes from 'prop-types';
 import ProfileMenu from './ProfileMenu';
 
 const MainContainer = styled.div`
@@ -75,8 +73,7 @@ const Deploy = styled.nav`
   }
 `;
 
-function DropdownMenu() {
-  const currentUser = useSelector((state) => state.currentUserOTokencito);
+function DropdownMenu({ currentUser }) {
   const dropdownRef = useRef(null);
 
   const [isActive, setIsActive] = useState(false);
@@ -89,7 +86,7 @@ function DropdownMenu() {
     <MainContainer>
       <MainButton onClick={onClick}>
         <img src={currentUser?.photo} alt={currentUser?.username} />
-        <span>{currentUser?.fullname.split(' ')[0]}</span>
+        <span>{currentUser?.fullname?.split(' ')[0]}</span>
 
         <IconContext.Provider value={value}>
           <MdOutlineKeyboardArrowDown />
@@ -102,5 +99,13 @@ function DropdownMenu() {
     </MainContainer>
   );
 }
+
+DropdownMenu.propTypes = {
+  currentUser: PropTypes.oneOfType([PropTypes.object]),
+};
+
+DropdownMenu.defaultProps = {
+  currentUser: {},
+};
 
 export default DropdownMenu;

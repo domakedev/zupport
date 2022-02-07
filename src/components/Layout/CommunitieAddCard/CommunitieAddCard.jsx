@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { Link, useNavigate } from 'react-router-dom';
-// import { useParams } from "react-router-dom";
 
 // Icons
 import {
@@ -210,20 +209,17 @@ function CommunitieAddCard({
   id,
   image,
   users,
-  checks = [],
+  checks,
   title,
   description,
   buttonText,
   creator,
 }) {
   const [showButton, setShowButton] = useState(true);
-  // const [buttonTextCard, setButtonTextCard] = useState('Editar');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.currentUserOTokencito);
-  // const postResolved = checks.filter((e) => e.resolved);
-  // console.log(currentUser);
 
   const unirmeA = () => {
     // eslint-disable-next-line
@@ -234,13 +230,12 @@ function CommunitieAddCard({
     }
   };
   const postResolved = checks.filter((e) => e.resolved);
-  // console.log(checks);
+
   const handleClickMore = () => {
     setShowButton(!showButton);
   };
 
   const handleEdit = async () => {
-    // lo primero que haria seria setear un estado en el redux
     await dispatch(
       action.loadEditedCommunity({
         id,
@@ -249,9 +244,7 @@ function CommunitieAddCard({
         description,
       })
     );
-    // Llevarme con navigate a la pagina de edicion
     navigate('edit-community');
-    // En la pagina de edicion del State debo leer todas las propiedades que necesito
   };
   const handleDelete = () => {
     Swal.fire({
@@ -275,13 +268,12 @@ function CommunitieAddCard({
             users: userDelete,
           })
         );
-        // setStateResolved()
       }
     });
   };
   const allDeleteHandle = () => {
     if (currentUser.role === 'admin') {
-      // alerta para verifivar si el uario quiere validar respuesta
+      // alerta para verificar si el usuario quiere validar respuesta
       Swal.fire({
         title: 'Eliminar comunidad',
         text: 'Recuerda que se eliminaran todos las publicaciones y respuestas',
@@ -377,14 +369,34 @@ function CommunitieAddCard({
 }
 
 CommunitieAddCard.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string,
-  // users: PropTypes.number,
+  description: PropTypes.string,
+  creator: PropTypes.string,
+  buttonText: PropTypes.string,
+  users: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.array,
+  ]),
+  checks: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.array,
+  ]),
   image: PropTypes.string,
 };
 
 CommunitieAddCard.defaultProps = {
+  id: '',
   title: '',
-  // users: 0,
+  description: '',
+  creator: '',
+  buttonText: '',
+  users: [],
+  checks: [],
   image: '',
 };
 

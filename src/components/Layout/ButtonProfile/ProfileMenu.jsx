@@ -76,7 +76,7 @@ function ProfileMenu() {
         }
       >
         <ProfileMenuImg src={authenticateUser?.photo} alt="Imagen de Perfil" />
-        {/* <Link to="/profile"> Perfil</Link> */}
+
         <Link to={`/profile/${authenticateUser?.username}`}> Perfil</Link>
       </ListItem>
 

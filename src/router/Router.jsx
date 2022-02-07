@@ -17,6 +17,7 @@ import Register from '../components/Pages/Register/Register';
 import Verify from '../components/Pages/Register/Verify';
 import P404 from '../components/Pages/404/P404';
 import SucceedPayment from '../components/Pages/SucceedPayment/SucceedPayment';
+import AuthReadirect from '../components/Pages/AuthRedirect/AuthReadirect';
 
 import UserProfile from '../components/Pages/UserProfile/UserProfile';
 import UserProfileConfig from '../components/Pages/UserProfileConfig/UserProfileConfig';
@@ -25,6 +26,8 @@ function Router() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
+
+      <Route path="/auth" element={<AuthReadirect />} />
 
       <Route path="/profile" element={<UserProfile />} />
 

@@ -136,6 +136,7 @@ function Hero({ topUsers = [] }) {
       <Description>Top Helpers en sus comunidades</Description>
 
       <HeroCard1
+        data-test="top-helpers"
         image={topUsers[0]?.photo || Capitan}
         onClick={() => visitUser(topUsers[0] ? topUsers[0] : null)}
       >
@@ -143,6 +144,7 @@ function Hero({ topUsers = [] }) {
       </HeroCard1>
 
       <HeroCard2
+        data-test="top-helpers"
         image={topUsers[1]?.photo || Capitan}
         onClick={() => visitUser(topUsers[1] ? topUsers[1] : null)}
       >
@@ -150,6 +152,7 @@ function Hero({ topUsers = [] }) {
       </HeroCard2>
 
       <HeroCard3
+        data-test="top-helpers"
         image={topUsers[2]?.photo || Capitan}
         onClick={() => visitUser(topUsers[2] ? topUsers[2] : null)}
       >

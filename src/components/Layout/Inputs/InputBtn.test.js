@@ -1,34 +1,29 @@
-import { fireEvent } from '@testing-library/react';
 // Providers
 import { MemoryRouter } from 'react-router-dom';
+import { fireEvent } from '@testing-library/react';
 import { render } from '../../../__test__/test-utils';
+import '@testing-library/jest-dom/extend-expect';
 
 // Component
-import CardComunidadShow from './CardComunidadShow';
+import InputBtn from './InputBtn';
 
 test('render content', () => {
-  const title = 'Hola desde Test';
-  const users = 100;
-  const checks = 12;
-  const image = 'ruta de imagen';
+  const valueBtn = 'Test text';
 
   const component = render(
-    <CardComunidadShow
-      title={title}
-      users={users}
-      checks={checks}
-      image={image}
-    />
+    <MemoryRouter>
+      <InputBtn valueBtn={valueBtn} />
+    </MemoryRouter>
   );
-  component.getByText('Hola desde Test');
+  expect(component.getByText('Test text')).toBeInTheDocument();
 });
 
 test('clicking the button calls event handler', () => {
-  const title = 'Action';
+  const valueBtn = 'Action';
   const mockHandler = jest.fn();
   const component = render(
     <MemoryRouter>
-      <CardComunidadShow title={title} goTo={mockHandler} />
+      <InputBtn valueBtn={valueBtn} EnviarDataLogin={mockHandler} />
     </MemoryRouter>
   );
 

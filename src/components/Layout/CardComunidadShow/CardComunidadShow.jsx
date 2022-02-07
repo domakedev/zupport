@@ -116,19 +116,9 @@ const CardName = styled.h3`
   font-size: 1.8rem;
 `;
 
-function CardComunidadShow({
-  image,
-  users,
-  checks = [],
-  title,
-  postsResol,
-  goTo,
-}) {
-  // const postResolved = checks?.filter((e) => e.resolved);
-  // console.log(checks);
-
+function CardComunidadShow({ image, users, checks, title, postsResol, goTo }) {
   return (
-    <Container onClick={goTo}>
+    <Container onClick={goTo} data-test="top-comus">
       <CardComunidadShowIMG src={image} alt="" />
 
       <CardStatsUsers>
@@ -155,12 +145,28 @@ CardComunidadShow.propTypes = {
   title: PropTypes.string,
   users: PropTypes.number,
   image: PropTypes.string,
+  checks: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.array,
+  ]),
+  postsResol: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.array,
+  ]),
+  goTo: PropTypes.func,
 };
 
 CardComunidadShow.defaultProps = {
   title: '',
   users: 0,
   image: '',
+  checks: [],
+  postsResol: [],
+  goTo: () => {},
 };
 
 export default CardComunidadShow;
