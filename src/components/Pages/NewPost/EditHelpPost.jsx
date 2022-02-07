@@ -131,7 +131,7 @@ function EditHelpPost() {
     if (user.points > pointsst.field) {
       await dispatch(
         // eslint-disable-next-line
-      action.editedPost(dataPost._id, {
+        action.editedPost(dataPost._id, {
           title: titlest.field,
           description: descriptionst.field,
           image: urltemp || dataPost.image,
@@ -228,9 +228,7 @@ function EditHelpPost() {
                 <BsFolder2Open /> Cambiar archivo
               </AddSecondaryContainer>
             </AddContainer>
-
             <Line />
-
             <HelpersText>
               Escoge a quienes quisieras que te ayuden{' '}
               <strong>solo si es necesario</strong> y si lo hacen no dudes en
@@ -254,7 +252,6 @@ function EditHelpPost() {
                 ))}
               </SelectedUsersStyle>
             </AddHelperContainerTitle>
-
             <HelpersMainContainer>
               <GUsers setResults={setResults} results={results} users={users} />
 
@@ -273,10 +270,12 @@ function EditHelpPost() {
                 ))}
               </HelpersContainer>
             </HelpersMainContainer>
-
             <Line />
-
-            <OfferText>¿Que tan difícil consideras tu problema?</OfferText>
+            <OfferText>
+              <strong> ¿Que tan difícil consideras tu problema? </strong>
+              <br /> Gana puntos por ayudar y/o usalos para preguntar! <br />{' '}
+              <br /> Aún te quedan <strong> {user.points} puntos</strong>{' '}
+            </OfferText>{' '}
             <OfferMainContainer>
               <OfferTitle>OFRECER</OfferTitle>
               <OfferPointsContainer>
@@ -293,9 +292,7 @@ function EditHelpPost() {
                 <OfferPointsText>Puntos</OfferPointsText>
               </OfferPointsContainer>
             </OfferMainContainer>
-
             <Line />
-
             <RequestButton onClick={editPost}>GUARDAR CAMBIOS</RequestButton>
           </PageContainer>
 

@@ -276,7 +276,11 @@ function HelpPost() {
 
         <Line />
 
-        <OfferText>¿Que tan difícil consideras tu problema?</OfferText>
+        <OfferText>
+          <strong> ¿Que tan difícil consideras tu problema? </strong>
+          <br /> Gana puntos por ayudar y/o usalos para preguntar! <br /> <br />{' '}
+          Aún te quedan <strong> {user.points} puntos</strong>{' '}
+        </OfferText>
         <OfferMainContainer>
           <OfferTitle>OFRECER</OfferTitle>
           <OfferPointsContainer>
