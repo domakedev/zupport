@@ -98,7 +98,7 @@ const Linked = styled.span`
   }
 `;
 
-function PostFooter({ idPost, textComment, likes, community }) {
+function PostFooter({ idPost, textComment, likes, community, title }) {
   // console.log(community);
   const [responder, setResponder] = useState(false);
   const navigate = useNavigate();
@@ -156,7 +156,11 @@ function PostFooter({ idPost, textComment, likes, community }) {
     <>
       <PostFooterContainer>
         <LikeButtonPost likes={likes} idPost={idPost} />
-        <CommentButtonPost responderFn={onClickHandle} text={textComment} />
+        <CommentButtonPost
+          title={title}
+          responderFn={onClickHandle}
+          text={textComment}
+        />
       </PostFooterContainer>
       <ResponderAnimated>
         {responder ? (
@@ -190,12 +194,17 @@ function PostFooter({ idPost, textComment, likes, community }) {
                 }
               />{' '}
               <InputBox
+                data-test="answerbox"
                 type="text"
                 placeholder="Escribe tu respuesta aquí..."
                 value={answerData}
                 onChange={onChange}
               />
-              <ButtonSend type="button" onClick={handleClick}>
+              <ButtonSend
+                data-test="sendbtn"
+                type="button"
+                onClick={handleClick}
+              >
                 <IoSend />
               </ButtonSend>
             </AddAnswerCont>

@@ -220,6 +220,7 @@ function EditHelpPost() {
             ) : null}
             <AddContainer>
               <AddSecondaryContainer
+                data-test="imagepost"
                 onClick={() => setUploaderShow(!uploaderShow)}
               >
                 <BsImages /> Cambiar imagen
@@ -259,6 +260,7 @@ function EditHelpPost() {
                 {results?.map((u) => (
                   <UserFoto
                     // eslint-disable-next-line
+                    data-test={`${u.username}01`}
                     key={`${u.photo}02${u.fullname}`}
                     user={u}
                     userPhoto={u.photo}

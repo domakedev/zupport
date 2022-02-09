@@ -221,7 +221,10 @@ function HelpPost() {
           />
         ) : null}
         <AddContainer>
-          <AddSecondaryContainer onClick={() => setUploaderShow(!uploaderShow)}>
+          <AddSecondaryContainer
+            data-test="imagepost"
+            onClick={() => setUploaderShow(!uploaderShow)}
+          >
             <BsImages /> Añadir imagen
           </AddSecondaryContainer>
           <AddSecondaryContainer href="#">

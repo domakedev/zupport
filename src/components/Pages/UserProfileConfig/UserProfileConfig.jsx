@@ -198,13 +198,14 @@ const UserProfileConfig = function UserProfileConfig() {
 
               <NameUserContainer>
                 <NameUser
+                  data-test="fullname"
                   name="fullname"
                   value={userNewName || ''}
                   onChange={(e) => {
                     onChangeName(e);
                   }}
                 />
-                <PencilIcon onClick={onClickNameEdit} />
+                <PencilIcon data-test="editname" onClick={onClickNameEdit} />
               </NameUserContainer>
 
               <DataCards>
@@ -212,15 +213,13 @@ const UserProfileConfig = function UserProfileConfig() {
                 <MyDataCard>
                   <p>Algo sobre mí</p>
                   <AboutMe
-                    value={
-                      userNewAbout ||
-                      'Mis puntos espero puedan decir algo de mi 😄'
-                    }
+                    data-test="description"
+                    value={userNewAbout || ''}
                     onChange={(e) => {
                       onChangeAbout(e);
                     }}
                   />
-                  <PencilIcon onClick={onClickAboutEdit} />
+                  <PencilIcon data-test="editdesc" onClick={onClickAboutEdit} />
                 </MyDataCard>
 
                 <MyDataCard>
@@ -243,7 +242,12 @@ const UserProfileConfig = function UserProfileConfig() {
                   </IndividualStatContainer>
                   <AddNewSN>
                     <label htmlFor="newSN">
-                      <select name="newSN" id="newSN" onChange={onSelectNew}>
+                      <select
+                        data-test="github"
+                        name="newSN"
+                        id="newSN"
+                        onChange={onSelectNew}
+                      >
                         <option>--Selecciona--</option>
                         <option value="Github">Github</option>
                         <option value="Linkedin">Linkedin</option>
@@ -257,9 +261,10 @@ const UserProfileConfig = function UserProfileConfig() {
                         id="sn-url"
                         value={userNewOneSN[1]}
                         onChange={onLinkNew}
+                        data-test="network"
                       />
                     </label>
-                    <AddIcon onClick={onClickAddSN} />
+                    <AddIcon data-test="addnetwork" onClick={onClickAddSN} />
                   </AddNewSN>
                   {errorWritingSN ? (
                     <ErrorMessage>{errorWritingSN}</ErrorMessage>

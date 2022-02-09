@@ -305,6 +305,7 @@ function CommunitieAddCard({
               type="button"
               onClick={handleClickMore}
               aria-label="moreAnswer"
+              data-test={`${title}01`}
             >
               <AiOutlineEllipsis />
             </MoreButton>
@@ -352,7 +353,11 @@ function CommunitieAddCard({
           </Number>
         </ContainerChecks>
 
-        <LinkTo to={`${title}/posts`} onClick={unirmeA}>
+        <LinkTo
+          data-test={`${title}un`}
+          to={`${title}/posts`}
+          onClick={unirmeA}
+        >
           {buttonText === 'UNIRME' ? (
             <AddPerson size="40px" />
           ) : (

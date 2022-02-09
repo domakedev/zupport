@@ -193,8 +193,12 @@ function PostTemplate({
         <IconHeart likes={likes} />
         {authVer ? (
           <Options>
-            <Option onClick={editPost}>Editar</Option>
-            <Option onClick={onClick}>Eliminar</Option>
+            <Option data-test={`${postTitle}00`} onClick={editPost}>
+              Editar
+            </Option>
+            <Option data-test={`${postTitle}01`} onClick={onClick}>
+              Eliminar
+            </Option>
           </Options>
         ) : null}
       </ReactionContainer>
@@ -205,6 +209,7 @@ function PostTemplate({
         idPost={idPost}
         textComment={textComment}
         community={community}
+        title={postTitle}
       />
       {/* <Answers idPost={idPost} /> */}
     </PostTemplteCont>

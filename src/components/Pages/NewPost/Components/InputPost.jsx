@@ -35,6 +35,7 @@ function InputPoints({
       </Label>
       <InputGroup>
         <InputBox
+          data-test="postin"
           type={inputType}
           placeholder={textPlaceholder}
           id={inputName}

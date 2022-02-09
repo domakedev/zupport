@@ -119,6 +119,7 @@ function UserPhoto({
       medalSize={medalSize}
       onClick={onClickHandler}
       route={location.pathname}
+      data-test="picture"
     >
       <IconContext.Provider
         userPoints={user?.levelPoints}
@@ -130,6 +131,7 @@ function UserPhoto({
 
       <PhotoContainer onClick={goTo}>
         <Photo
+          data-test={`${user?.username}01`}
           isOnline={isOnline}
           photoSize={photoSize}
           borderSize={borderSize}

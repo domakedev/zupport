@@ -161,6 +161,7 @@ function CreateCommunitie() {
             {/* Inputs */}
             <Label htmlFor="Titulo">Título</Label>
             <Input
+              datatest="titlecom"
               state={title}
               name="title"
               changeState={changeTitle}
@@ -194,7 +195,11 @@ function CreateCommunitie() {
               textPlaceholder="Añade la URL de la imagen: http://..."
               value={image.field}
             />
-            <label htmlFor="comPhoto" onChange={onChangeFile}>
+            <label
+              data-test="imagecom"
+              htmlFor="comPhoto"
+              onChange={onChangeFile}
+            >
               <input
                 type="file"
                 name="comPhoto"

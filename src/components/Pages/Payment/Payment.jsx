@@ -42,7 +42,7 @@ function Payment() {
       {message ? (
         <Message>{message}</Message>
       ) : (
-        <Form action={action} method="POST">
+        <Form data-test="donate" action={action} method="POST">
           <Button type="submit">
             <GiCoffeeCup />
           </Button>
