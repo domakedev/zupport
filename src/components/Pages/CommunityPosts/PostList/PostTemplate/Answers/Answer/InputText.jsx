@@ -34,6 +34,7 @@ function Input({
   disabled = false,
   textEdit = '',
   flag,
+  datatest,
 }) {
   const onChange = (e) => {
     onChangeCe(e.target.value);
@@ -41,6 +42,7 @@ function Input({
 
   return (
     <InputBox
+      data-test={datatest}
       name={name}
       type={inputType}
       placeholder={textPlaceholder}

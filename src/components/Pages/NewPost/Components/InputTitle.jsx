@@ -35,6 +35,7 @@ function InputTitle({
       </Label>
       <InputGroup>
         <InputBox
+          data-test="titlein"
           type={inputType}
           placeholder={textPlaceholder}
           id={inputName}

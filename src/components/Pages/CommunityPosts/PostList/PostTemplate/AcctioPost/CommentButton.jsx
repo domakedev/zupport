@@ -30,10 +30,15 @@ const CommentButton = styled.button`
     background: #d3d2ce5b;
   }
 `;
-function CommentButtonPost({ responderFn, text = 'Responder' }) {
+function CommentButtonPost({ title, responderFn, text = 'Responder' }) {
   const value = useMemo(() => ({ className: 'icon-comments' }));
   return (
-    <CommentButton type="button" onClick={responderFn} name={text}>
+    <CommentButton
+      data-test={`${title}03`}
+      type="button"
+      onClick={responderFn}
+      name={text}
+    >
       <IconContext.Provider value={value}>
         <IoChatbubbleEllipsesOutline />
       </IconContext.Provider>

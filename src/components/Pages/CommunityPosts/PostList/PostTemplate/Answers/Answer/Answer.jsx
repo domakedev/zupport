@@ -211,10 +211,19 @@ function Answer({
           <ActionButton type="input" onClick={handleCancel} name={buttonText}>
             Cancelar
           </ActionButton>
-          <ActionButton type="input" onClick={handleEdit} name={buttonText}>
+          <ActionButton
+            data-test={`edit${currentUser.username}`}
+            type="input"
+            onClick={handleEdit}
+            name={buttonText}
+          >
             {buttonText}
           </ActionButton>
-          <ActionButton type="button" onClick={handleDelete}>
+          <ActionButton
+            data-test={`delete${currentUser.username}`}
+            type="button"
+            onClick={handleDelete}
+          >
             Eliminar
           </ActionButton>
         </ActionButtonCont>
@@ -234,6 +243,7 @@ function Answer({
         />
         <InputComment validated={state.resolved}>
           <InputText
+            datatest={`${state.user?.username}ans`}
             state={state}
             disabled={disableInput}
             textPlaceholder={textPlaceholder}
@@ -245,6 +255,7 @@ function Answer({
         </InputComment>
         {/* {validatedAnswer.length !== 0 ? null : ( */}
         <Validated
+          data-test={`val${state.user.username}`}
           validated={state.resolved}
           onClick={handleValidated}
           disabled={validatedAnswer.length !== 0}
@@ -262,6 +273,7 @@ function Answer({
             type="button"
             onClick={handleClickMore}
             aria-label="moreAnswer"
+            data-test={`more${currentUser.username}`}
           >
             <AiOutlineEllipsis />
           </MoreButton>
