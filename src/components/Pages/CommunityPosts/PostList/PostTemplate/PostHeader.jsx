@@ -87,7 +87,7 @@ function PostHeader({
           // photo={userPhoto}
           isOnline={isOnline}
           userPhoto={userPhoto}
-          userPoints={user.levelPoints}
+          userPoints={user?.levelPoints}
           goTo={() => {
             navigate(`/profile/${userName || null}`);
           }}

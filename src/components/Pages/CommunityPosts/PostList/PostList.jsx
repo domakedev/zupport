@@ -44,11 +44,11 @@ function PostList({ results }) {
           index
         ) => (
           <PostTemplate
-            key={`${title}0${user.username}`}
+            key={`${title}0${user?.username}`}
             ban={index}
             user={user}
-            userPhoto={user.photo === null ? '' : user.photo}
-            userName={user.username}
+            userPhoto={user?.photo === null ? '' : user?.photo}
+            userName={user?.username}
             timePost={getPostTime(timePosted)}
             timePosted={timePosted}
             postTitle={title}
@@ -61,10 +61,10 @@ function PostList({ results }) {
             idPost={_id}
             textComment="Ver Respuestas" // boton para ver Comentarios de Answers
             authVer={
-              currentUser.username === user.username ||
-              currentUser.role === 'admin'
+              currentUser?.username === user?.username ||
+              currentUser?.role === 'admin'
             }
-            isOnline={user.isOnline}
+            isOnline={user?.isOnline}
             community={community}
           />
         )
