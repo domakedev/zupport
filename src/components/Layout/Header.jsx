@@ -54,6 +54,16 @@ function Navigation() {
         ) : (
           <NavButton titulo="login" />
         )}
+        <div
+          style={{
+            padding: '10px',
+            backgroundColor: 'red',
+            marginLeft: '10px',
+            color: 'white',
+          }}
+        >
+          Iniciar sesión o registrarte se encuentra DESHABILITADO
+        </div>
       </NavContainer>
 
       <Line />
