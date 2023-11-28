@@ -108,8 +108,8 @@ function PostHeader({
 }
 
 PostHeader.propTypes = {
-  userPhoto: PropTypes.string.isRequired, // Si no tiene foto cómo se podria validar?
-  userName: PropTypes.string.isRequired,
+  // userPhoto: PropTypes.string.isRequired, // Si no tiene foto cómo se podria validar?
+  // userName: PropTypes.string.isRequired,
   timePost: PropTypes.string.isRequired,
   // points: PropTypes.number,
   resolved: PropTypes.bool.isRequired,

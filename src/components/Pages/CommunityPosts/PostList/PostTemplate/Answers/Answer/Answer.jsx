@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useRef } from 'react';
@@ -212,7 +213,7 @@ function Answer({
             Cancelar
           </ActionButton>
           <ActionButton
-            data-test={`edit${currentUser.username}`}
+            data-test={`edit${currentUser?.username}`}
             type="input"
             onClick={handleEdit}
             name={buttonText}
@@ -220,7 +221,7 @@ function Answer({
             {buttonText}
           </ActionButton>
           <ActionButton
-            data-test={`delete${currentUser.username}`}
+            data-test={`delete${currentUser?.username}`}
             type="button"
             onClick={handleDelete}
           >
@@ -231,13 +232,13 @@ function Answer({
 
       <Comment>
         <UserPhoto
-          user={state.user}
-          userPhoto={state.user.photo}
-          userPoints={state.user.points}
-          isOnline={state.user.isOnline}
+          user={state?.user}
+          userPhoto={state?.user?.photo}
+          userPoints={state?.user?.points}
+          isOnline={state?.user?.isOnline}
           goTo={() =>
             navigate(
-              `/profile/${state.user?.username ? state.user.username : null}`
+              `/profile/${state.user?.username ? state?.user?.username : null}`
             )
           }
         />
@@ -254,20 +255,20 @@ function Answer({
           />
         </InputComment>
         {/* {validatedAnswer.length !== 0 ? null : ( */}
-        <Validated
-          data-test={`val${state.user.username}`}
+        {/* <Validated
+          data-test={`val${state?.user?.username || 'Mario'}`}
           validated={state.resolved}
           onClick={handleValidated}
           disabled={validatedAnswer.length !== 0}
         >
           {currentUser.username === postUser.username ? (
-            currentUser.username === state.user.username ? null : (
+            currentUser.username === state.user?.username ? null : (
               <AiFillCheckSquare />
             )
           ) : null}
-        </Validated>
+        </Validated> */}
         {/* )} */}
-        {currentUser.username === state.user.username ||
+        {currentUser.username === state.user?.username ||
         currentUser.role === 'admin' ? (
           <MoreButton
             type="button"

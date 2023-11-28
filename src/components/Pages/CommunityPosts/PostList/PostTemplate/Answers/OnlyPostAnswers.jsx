@@ -102,8 +102,8 @@ function OnlyPostAnswers() {
           <PostContainer>
             <PostTemplate
               user={post.user}
-              userPhoto={post?.user.photo === null ? '' : post.user.photo}
-              userName={post?.user.username}
+              userPhoto={post?.user?.photo === null ? '' : post?.user?.photo}
+              userName={post?.user?.username}
               timePost={getPostTime(post.timePosted)}
               postTitle={post.title}
               postDescription={post.description}
@@ -113,7 +113,7 @@ function OnlyPostAnswers() {
               likes={softNumber(post.likes)}
               urlPost={post.image}
               idPost={post._id}
-              isOnline={post.user.isOnline}
+              isOnline={post.user?.isOnline}
               community={post.community}
               authVer={userAuth}
             />
